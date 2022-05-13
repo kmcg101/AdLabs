@@ -1,0 +1,44 @@
+.dropZone {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: fill;
+  }
+  .droppedImageHolder{
+    object-fit: fill;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .dropzoneImageGrandParent{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+
+  .dropzoneImageParent{
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      
+  }
+
+  .uploadButton {
+    /* width: 70%; */
+    /* max-width: 100px; */
+    /* height: 7%; */
+    /* max-height: 100px; */
+    border-radius: 10px;
+   
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    /* background: blue;
+    color: white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

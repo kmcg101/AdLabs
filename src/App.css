@@ -1,0 +1,151 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 20px;
+}
+:root {
+  --primary: #d81e5b;
+  --secondary: #8c38ff;
+  --dark:#131a26;
+  --light: #eee;
+  --neutral: #e4e4ee;
+
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+}
+
+.appContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.appTitle{
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+
+.pageAndMenuContainer{
+  width: 600px;
+  height: 600px;
+  position: relative;
+  background-color: var(--light);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0px 2px 64px rgba(0, 0, 0, 0.2);
+  padding: 0;
+}
+
+.menuConainer{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  
+}
+.menuButton{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+  background-color: var(--neutral);
+  cursor: pointer; 
+}
+.menuButton:hover{
+  background-color: var(--secondary);
+}
+.menuButtonActive{
+  background-color: var(--light);
+  cursor:default; 
+  pointer-events: none;
+}
+.menuButtonDisabled{
+  cursor:default; 
+  pointer-events: none;
+  opacity: .5;
+}
+a{
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.pageContainer{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 20px;
+}
+.tableContainer{
+  width: 100%;
+  height: 20%;
+}
+
+.page{
+  display: none;
+  height: 100%;
+  
+}
+.active-page{
+  display: block;
+}
+
+.productPage{
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.productPageActive{
+  display: block;
+}
+
+.elevatorPage{
+  width: 524px;
+  height: 393px;
+}
+
+input[type=text] {
+  font-size: 45px;
+  width:320px;
+  padding:10px;
+  border: none;
+  background-color: var(--light);
+}
+input[name=campaign] {
+  padding-left: 60px;
+  margin-top: -30px;
+  font-size: 28px;
+}
+input:focus {
+  outline-width: 0;
+}
+.errorMessage{
+  color: red;
+  margin-left: 20px;
+  font-size: 25px;
+}
+select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.0rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}

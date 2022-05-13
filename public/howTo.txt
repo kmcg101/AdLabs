@@ -1,0 +1,38 @@
+upload to AWS using presigned URLs
+https://www.youtube.com/watch?v=_khupEk42zs&t=1231s
+
+
+the S3 bucket:
+mcgurn-twoway-bucket
+create
+give public access
+CORS - paste in policy
+
+LAMBDA
+create function getPresignedImage
+mcgurn-twoway-lambda
+create
+paste from ???
+add upload bucket variable and point to bucket name
+change Bucket: to above variable
+also has a content type
+
+role name, clicking brings you to IAM
+attach policies
+    s3 full access policy
+
+endpoint
+
+https://vmqol5cpr5.execute-api.us-east-1.amazonaws.com/default/mcgurn-twoway-lambda
+
+mcgurn-twoway-lambda-API
+API: api-gateway/vmqol5cpr5/*/*/mcgurn-twoway-lambda
+API name: mcgurn-twoway-lambda-API
+API type: HTTP
+Authorization: NONE
+Cross-origin resource sharing (CORS): Yes
+Enable detailed metrics: No
+Method: ANY
+Resource path: /mcgurn-twoway-lambda
+Security: NONE
+Stage: default

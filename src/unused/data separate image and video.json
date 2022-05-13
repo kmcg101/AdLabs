@@ -1,0 +1,305 @@
+{
+    "products": [
+        {
+            "keyindex": 0,
+            "product": "e-bint-image",
+            "productShortName": "bint",
+            "eOrL": "e",
+            "isVideo": false,
+            "htmlTemplateName": "e-bint-image.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 130,
+            "eHeight": 457,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": false
+        },
+        {
+            "keyindex": 1,
+            "product": "e-bint-video",
+            "productShortName": "bint",
+            "eOrL": "e",
+            "isVideo": true,
+            "htmlTemplateName": "e-bint-video.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 130,
+            "eHeight": 457,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": false
+        },
+        {
+            "keyindex": 2,
+            "product": "e-fsa-image",
+            "productShortName": "fsa",
+            "eOrL": "e",
+            "isVideo": false,
+            "htmlTemplateName": "e-fsa-image.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 640,
+            "eHeight": 480,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": true,
+            "isElevator": true,
+            "requiresBlankFile": false
+        },
+        {
+            "keyindex": 3,
+            "product": "e-fsa-video",
+            "productShortName": "fsa",
+            "eOrL": "e",
+            "isVideo": true,
+            "htmlTemplateName": "e-fsa-video.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 640,
+            "eHeight": 480,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": true,
+            "isElevator": true,
+            "requiresBlankFile": false
+            
+        },
+        {
+            "keyindex": 4,
+            "product": "e-hfsp-image",
+            "productShortName": "hfsp",
+            "eOrL": "e",
+            "isVideo": false,
+            "htmlTemplateName": "e-hfsp-image.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 982,
+            "eHeight": 433,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": true
+        },
+        {
+            "keyindex": 5,
+            "product": "e-hfsp-video",
+            "productShortName": "hfsp",
+            "eOrL": "e",
+            "isVideo": true,
+            "htmlTemplateName": "e-hfsp-video.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 982,
+            "eHeight": 433,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": true
+        },
+        {
+            "keyindex": 6,
+            "product": "e-vsa-image",
+            "productShortName": "vsa",
+            "eOrL": "e",
+            "isVideo": false,
+            "htmlTemplateName": "e-vsa-image.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 234,
+            "eHeight": 416,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": true
+        },
+        {
+            "keyindex": 7,
+            "product": "e-vsa-video",
+            "productShortName": "vsa",
+            "eOrL": "e",
+            "isVideo": true,
+            "htmlTemplateName": "e-vsa-video.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 234,
+            "eHeight": 416,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": false,
+            "isElevator": true,
+            "requiresBlankFile": true
+        },
+        {
+            "keyindex": 8,
+            "product": "e-fsbi-image",
+            "productShortName": "fsbi",
+            "eOrL": "e",
+            "isVideo": false,
+            "htmlTemplateName": "e-fsbi-image.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 640,
+            "eHeight": 480,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": true,
+            "isElevator": true,
+            "requiresBlankFile": true
+        },
+        {
+            "keyindex": 9,
+            "product": "e-fsbi-video",
+            "productShortName": "fsbi",
+            "eOrL": "e",
+            "isVideo": true,
+            "htmlTemplateName": "e-fsbi-video.html",
+            "manifestTemplateName": "one-asset.manifest",
+            "eWidth": 640,
+            "eHeight": 480,
+            "numberAssets": 1,
+            "maxFileSize": 3000,
+            "isFullScreen": true,
+            "isElevator": true,
+            "requiresBlankFile": true
+        }
+
+    ],
+    "durationOptions": [
+        {
+            "keyindex":  0,
+            "value": "15",
+            "label": ":15"
+        },
+        {
+            "keyindex":  1,
+            "value": "30",
+            "label": ":30"
+        }
+    ],
+    "mediaOptions": [
+        {
+            "keyindex":  0,
+            "value": "video",
+            "label": "MP4 video"
+        },
+        {
+            "keyindex":  1,
+            "value": "image",
+            "label": "PNG or JPG"
+        }
+    ],
+    "countryCodeOptions": [
+        {
+            "keyindex":  0,
+            "value": "us",
+            "label": "US"
+        },
+        {
+            "keyindex":  1,
+            "value": "ca",
+            "label": "CA"
+        },
+        {
+            "keyindex":  2,
+            "value": "fr",
+            "label": "FR"
+        }
+    ],
+    "eOrLOptions": [
+        {
+            "keyindex":  0,
+            "value": "e",
+            "label": "Elevator"
+        },
+        {
+            "keyindex":  1,
+            "value": "l",
+            "label": "Lobby"
+        }
+    ],
+    "productOptions": [
+        {
+            "keyindex":  0,
+            "screen": "Elevator",
+            "value": "e-bint",
+            "label": "E-BINT",
+            "format": "E",
+            "imageURL": "images/e_bint.jpg" 
+
+        },
+        {
+            "keyindex":  1,
+            "screen": "Elevator",
+            "value": "e-fsa",
+            "label": "E-FSA",
+            "format": "E",
+            "imageURL": "images/e_fsa.jpg" 
+        },
+       
+        {
+            "keyindex":  2,
+            "screen": "Elevator",
+            "value": "e-hfsp",
+            "label": "E-HFSP",
+            "format": "E",
+            "imageURL": "images/e_hfsp.jpg" 
+        },
+        {
+            "keyindex":  3,
+            "screen": "Elevator",
+            "value": "e-vsa",
+            "label": "E-VSA",
+            "format": "E",
+            "imageURL": "images/e_vsa.jpg" 
+        },
+        {
+            "keyindex":  4,
+            "screen": "Elevator",
+            "value": "e-fsbi",
+            "label": "E-FSBI",
+            "format": "E",
+            "imageURL": "images/e_fsbi.jpg" 
+        },
+        {
+            "keyindex":  5,
+            "screen": "Lobby",
+            "value": "l-bint",
+            "label": "L-BINT",
+            "format": "L",
+            "imageURL": "images/l_bint.jpg"
+        },
+        {
+            "keyindex":  6,
+            "screen": "Lobby",
+            "value": "l-fsa",
+            "label": "L-FSA",
+            "format": "L",
+            "imageURL": "images/l_fsa.jpg"
+        },
+       
+        {
+            "keyindex":  7,
+            "screen": "Lobby",
+            "value": "l-hfsp",
+            "label": "L-HFSP",
+            "format": "L",
+            "imageURL": "images/l_hfsp.jpg"
+        },
+        {
+            "keyindex":  8,
+            "screen": "Lobby",
+            "value": "l-vsa",
+            "label": "L-VSA",
+            "format": "L",
+            "imageURL": "images/l_vsa.jpg"
+        },
+        {
+            "keyindex":  9,
+            "screen": "Lobby",
+            "value": "l-fsbi",
+            "label": "L-FSBI",
+            "format": "L",
+            "imageURL": "images/l_fsbi.jpg"
+        }
+    ]
+   
+}

@@ -1,0 +1,33 @@
+// * React performs get:
+const response = await axios({
+    method: 'GET',
+    url: API_ENDPOINT
+})
+
+
+// * Lambda receives GET
+const getUploadURL = async function (event) {
+    const randomID = parseInt(Math.random() * 10000000)
+    const Key = `${randomID}.jpg`
+}
+const s3Params = {
+    Bucket: uploadBucket,
+    Key
+}
+const uploadURL = await
+    s3.getSignedUrlPromise('putObject', s3Params)
+
+// * Lambda returns the signed URL
+return JSON.stringify({
+    uploadURL: uploadURL,
+    Key
+})
+
+
+// very important.  the uploadURL that Lambda sends back is related to the file name in it.
+// changing any characters in the file name results in a failed post
+// * React posts using what Lambda returned
+const result = await fetch(response.data.uploadURL, {
+    method: 'PUT',
+    body: f,
+})

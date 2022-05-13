@@ -381,7 +381,7 @@ function Template_Creator(props) {
                 
             </style>
             <div class='${filename} media_frame1'>
-               <video id="media_video_e" class="media" muted src="/advertising/${filename}.${mediaExtension}" type="video/mp4"></video>
+               <video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtension}" type="video/mp4"></video>
             </div>
     
         <script>
@@ -611,8 +611,9 @@ function Template_Creator(props) {
     return (
         <div>
             <button
-                disabled={!inputComplete}
-                disabledx={!inputComplete || Object.keys(elevatorFile).length === 0} onClick={handleDownloadButtonPress}>
+                //disabled={!inputComplete}
+                disabled={!inputComplete || Object.keys(elevatorFile).length === 0} 
+                onClick={handleDownloadButtonPress}>
                 Create Files
             </button>
         </div>

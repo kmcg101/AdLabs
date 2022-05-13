@@ -4,17 +4,19 @@
 // git commit -m 'after splitting table to bottom'
 // git push origin main
 
+
+// TO DO
+// 
+// why is red outline always showing on dropzone drag over?
+// conditional file type accepted dropzone
+// only turn on download button when elevator file exists
+
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Data from "./data.json";
 import TemplateCreator from "./templates/Template_Creator.js";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-
-
-// pages
 
 import PageLogin from './pages/PageLogin';
 import PageElevator from './pages/PageElevator';
@@ -209,9 +211,9 @@ function App() {
     const fsValue = isFullScreen ? `_fs` : ``;
     const finalFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
     const finalBlankFileName = `${inputValues.client}_${inputValues.duration}_${Data.products[productIndex].productShortName}blank_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
-    const fileTypePrefix = ext === "mp4" ? "video/" : "image/";
+    //const fileTypePrefix = ext === "mp4" ? "video/" : "image/";
     const fileTypePrefixNoSlash = ext === "mp4" ? "video" : "image";
-    const fileTypeSuffix = ext;
+    //const fileTypeSuffix = ext;
     //const finalFileType = fileTypePrefix + fileTypeSuffix;
 
     // will eventually need a variable for e l or p.
@@ -302,8 +304,6 @@ function App() {
 
   return (
 
-    <Router>
-
       <div className="appContainer">
         <div className="appTitle">Captivate Ad Creator 3600x</div>
         
@@ -389,8 +389,7 @@ function App() {
           </div>
         </div>
       </div>
-
-    </Router>
+   
   );
 }
 

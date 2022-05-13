@@ -34,15 +34,13 @@ function Dropzone(props) {
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({
       maxFiles: 1,
-      accept: 'image/png'
+      accept: ['image/jpeg', 'image/png', 'video/mp4', "image/svg+xml"]
        ,
      
        
         
       onDrop: (acceptedFiles) => {
-        console.log("props.isSVG = ",props.isSVG )
-        console.log("props.assetType = ", props.assetType)
-        console.log("", )
+      
         setFiles(
           acceptedFiles.map((file) =>
             Object.assign(file, {

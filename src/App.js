@@ -1,14 +1,18 @@
 
 // git add .
-// git remote add origin git@github.com:kmcg101/app3.git
+// git remote add origin git@github.com:kmcg101/app4.git
 // git commit -m 'after splitting table to bottom'
 // git push origin main
+// git remote set-url origin https://git@github.com:kmcg101/app4.git
 
 
 // TO DO
 // 
-// why is red outline always showing on dropzone drag over?
-// conditional file type accepted dropzone
+// dropzone: why is red outline always showing on dropzone drag over?
+// dropzone: conditional file type accepted dropzone
+//
+// multiple files: accept standard ad on bint
+// include lobby files
 
 
 import React, { useEffect, useState } from "react";

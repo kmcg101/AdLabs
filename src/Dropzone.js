@@ -2,10 +2,6 @@ import React, { useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 
-
-//import UploadToAWS from "./UploadToAWS";
-//import Data from "./data.json";
-
 const baseStyle = {
   borderWidth: 1,
   borderRadius: 2,
@@ -34,11 +30,8 @@ function Dropzone(props) {
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({
       maxFiles: 1,
-      accept: ['image/jpeg', 'image/png', 'video/mp4', "image/svg+xml"]
-       ,
+      accept: ['image/jpeg', 'image/png', 'video/mp4', "image/svg+xml"],
      
-       
-        
       onDrop: (acceptedFiles) => {
       
         setFiles(
@@ -98,8 +91,7 @@ function Dropzone(props) {
       },
     });
 
-  const style = useMemo(
-    () => ({
+  const style = useMemo(() => ({
       ...baseStyle,
       ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {}),
@@ -126,8 +118,6 @@ function Dropzone(props) {
     </div>
 
   ));
-
-
 
   return (
     <div>

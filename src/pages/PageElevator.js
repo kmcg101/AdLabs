@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import EBint from "../productPages/EBint";
 import EFsa from "../productPages/EFsa";
 import EVsa from "../productPages/EVsa";

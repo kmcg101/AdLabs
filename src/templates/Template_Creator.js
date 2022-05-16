@@ -22,13 +22,23 @@ function Template_Creator(props) {
     const filenameString = filename ? filename.toString() : ""
     const svgManifestEntry = filenameString.includes("-fsbi") ? `advertising/${filename}.svg` : ""
 
+    const imageTag =  `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtension}"></img>`;
+                      
+    const videoTag = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtension}" type="video/mp4"></video>`
+
+    const playContentVideo = 
+        `var myThis = this;
+        let vid_e = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
+        if (vid_e) {
+            vid_e.play();   
+        }`
+
     const handleDownloadButtonPress = () => {
         props.handleDownloadButtonPress();
     }
 
     // pressing the button sets the filename
     function deliverTemplateFiles() {
-
         props.deliverTemplateFiles(productArray[productIndex], E_MANIFEST, mediaExtension, BLANK_HTML, BLANK_MANIFEST)
     }
 
@@ -108,19 +118,15 @@ function Template_Creator(props) {
                     0% {
                         opacity: 1;
                     }
-        
                     100% {
                         opacity: 0;
                     }
                 }
-                    
-        
                     @keyframes fadeInScale {
                     0% {
                         opacity: 0;
                         transform: scale(.80);
                     }
-        
                     100% {
                         opacity: 1;
                         transform: scale(1);
@@ -142,17 +148,13 @@ function Template_Creator(props) {
                         bottom:0%;
                     }
                 }
-                    
                 </style>
                 <div id="bint_background" class='${filename} background'>
                 </div>
                 
                 <div id="mediaframe_1" class='${filename} media_frame1'>
-                
-                   <img class='media' src="/advertising/${filename}_eimage.${mediaExtension}">
-                
+                   ${imageTag}
                 </div>
-        
             <script>
         
                 common.methods.registerAdScript('${filename}',
@@ -162,51 +164,51 @@ function Template_Creator(props) {
                         }
                         
                         playContent() {
-                        var slotduration = this.scheduleItem.slot.duration;
-                        var transitionTime = slotduration * 1000 - 350;
-                        
-                        let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
-                        let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
-                        let bintbackground = this.scheduleItem.template.element.querySelector('#bint_background');
-                        let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
-                        
-                        if(common.edu700Service.isEdu700()){
-                            //do nothing
-                        }else{
-                            mediaframe_1.style.animationName = "fadeInScale";
-                            mediaframe_1.style.animationDuration = ".25s";
+                            var slotduration = this.scheduleItem.slot.duration;
+                            var transitionTime = slotduration * 1000 - 350;
                             
-                            bintbackground.style.animationName = "fadeInSwipeContent";
-                            bintbackground.style.animationDuration = ".2s";
-                        }
-                        
-                        infobar.style.animationName = "infobarHide";
-                        infobar.style.animationDuration = ".4s";
-                        
-                        setTimeout(function () {
+                            let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
+                            let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
+                            let bintbackground = this.scheduleItem.template.element.querySelector('#bint_background');
+                            let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
                             
                             if(common.edu700Service.isEdu700()){
-                                mediaframe_1.style.animationName = "fadeOut";
-                                mediaframe_1.style.animationDuration = "0s";
-                                bintbackground.style.animationDelay = "0s";
-                                
-                                bintbackground.style.animationName = "fadeOut";
-                                bintbackground.style.animationDuration = "0s";
-                                bintbackground.style.animationDelay = "0s";
+                                //do nothing
                             }else{
-                                mediaframe_1.style.animationName = "fadeOut";
-                                mediaframe_1.style.animationDuration = ".3s";
-                                bintbackground.style.animationDelay = ".25s";
+                                mediaframe_1.style.animationName = "fadeInScale";
+                                mediaframe_1.style.animationDuration = ".25s";
                                 
-                                bintbackground.style.animationName = "fadeOut";
-                                bintbackground.style.animationDuration = ".3s";
-                                bintbackground.style.animationDelay = ".2s";
+                                bintbackground.style.animationName = "fadeInSwipeContent";
+                                bintbackground.style.animationDuration = ".2s";
                             }
-                            
-                            infobar.style.animationName = "infobarShow";
-                            infobar.style.animationDuration = ".3s";
-        
-                        }, transitionTime);
+                        
+                            infobar.style.animationName = "infobarHide";
+                            infobar.style.animationDuration = ".4s";
+                        
+                            setTimeout(function () {
+                                
+                                if(common.edu700Service.isEdu700()){
+                                    mediaframe_1.style.animationName = "fadeOut";
+                                    mediaframe_1.style.animationDuration = "0s";
+                                    bintbackground.style.animationDelay = "0s";
+                                    
+                                    bintbackground.style.animationName = "fadeOut";
+                                    bintbackground.style.animationDuration = "0s";
+                                    bintbackground.style.animationDelay = "0s";
+                                }else{
+                                    mediaframe_1.style.animationName = "fadeOut";
+                                    mediaframe_1.style.animationDuration = ".3s";
+                                    bintbackground.style.animationDelay = ".25s";
+                                    
+                                    bintbackground.style.animationName = "fadeOut";
+                                    bintbackground.style.animationDuration = ".3s";
+                                    bintbackground.style.animationDelay = ".2s";
+                                }
+                                
+                                infobar.style.animationName = "infobarShow";
+                                infobar.style.animationDuration = ".3s";
+            
+                            }, transitionTime);
         
                         }
                     });
@@ -255,7 +257,7 @@ function Template_Creator(props) {
                 </style>
         
                 <div class='media_frame1'>
-                   <img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtension}">
+                   ${mediaExtension === 'mp4' ? videoTag : imageTag}
                 </div>
             <script>
         
@@ -263,6 +265,9 @@ function Template_Creator(props) {
                     class extends baseAdTemplate {
                         constructor(parentElement) {
                             super(parentElement);
+                        }
+                        playContent() {
+                            ${mediaExtension === 'mp4' ? playContentVideo : ""}
                         }
                     });
             </script>
@@ -381,7 +386,7 @@ function Template_Creator(props) {
                 
             </style>
             <div class='${filename} media_frame1'>
-               <video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtension}" type="video/mp4"></video>
+               ${videoTag}
             </div>
     
         <script>
@@ -392,11 +397,7 @@ function Template_Creator(props) {
                     }
                     playContent() {
                     
-                        let vid_e = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
-                        var myThis = this;
-                        if (vid_e) {
-                            vid_e.play();   
-                        }
+                       ${playContentVideo}
                     }
                 });
         </script>
@@ -492,7 +493,7 @@ function Template_Creator(props) {
             </style>
     
             <div id="mediaframe_1" class='media_frame1'>
-                <img class='media' src="/advertising/${filename}_eimage.${mediaExtension}">
+                ${imageTag}
             </div>
     
             <div id="sponsor_logo_e" class="sponsor_logo_e">
@@ -548,16 +549,6 @@ function Template_Creator(props) {
    
 
 
-
-    const E_FSA_VIDEO = (`
-               <video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtension}" type="video/mp4"></video>
-                    playContent() {
-                        var myThis = this;
-                        let vid_e = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
-                        if (vid_e) {
-                            vid_e.play();   
-                        }
-                    }`)
 
     const E_MANIFEST = (`
         {

@@ -9,7 +9,7 @@
 // 
 // why is red outline always showing on dropzone drag over?
 // conditional file type accepted dropzone
-// only turn on download button when elevator file exists
+
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
@@ -81,6 +81,7 @@ function App() {
         }
       });
     }
+   
   };
 
   useEffect(() => {
@@ -285,6 +286,7 @@ function App() {
       if (obj.file.payload) {
         return obj.fn
       }
+      
 
     })
 

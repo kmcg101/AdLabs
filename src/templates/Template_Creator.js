@@ -20,6 +20,7 @@ function Template_Creator(props) {
     const mediaManifestEntry = { isElevator } ? `"advertising/${filename}_e${videoOrImage}.${mediaExtension}"` : `"advertising/${filename}_l${videoOrImage}.${mediaExtension}" ,"advertising/${filename}_p${videoOrImage}.${mediaExtension}"`
 
     const filenameString = filename ? filename.toString() : ""
+    // if this is an fsbi, ...  seems like there's an easier way to do this.  data[productIndex].?requiresSVG
     const svgManifestEntry = filenameString.includes("-fsbi") ? `advertising/${filename}.svg` : ""
 
     const imageTag =  `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtension}"></img>`;

@@ -8,6 +8,11 @@
     width: 75%;
     height: 56.25%;
     border: solid black 1px;
+    position: relative;
+    overflow: hidden;
+}
+video{
+    object-fit: scale-down;
 }
 .eHSContentNarrow  {
     width: 75%;

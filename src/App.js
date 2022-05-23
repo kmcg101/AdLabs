@@ -2,16 +2,25 @@
 // git add .
 // git remote add origin git@github.com:kmcg101/app4.git
 // git commit -m 'after splitting table to bottom'
-// git push origin main
-// git remote set-url origin https://git@github.com:kmcg101/app4.git
+// git push origin master
+// git remote set-url origin git@github.com:kmcg101/app4.git
+
+// video or image contain
+// vid or image 100% x 100%, object fit contain or scale down
+// container w and h needs to be set pixels.
 
 
 // TO DO
-// 
+// notes:
+    // should I directly reference the data file or set a variable to its value?
+    // in zip function, is ext the same as mediaExtension?
+    // dropzone is currently using a passed down inputValues.mediaType to determine
+    //    how to render the preview.  If it is a video or image.  Should use the actual
+    //    file's file type for this.
 // dropzone: why is red outline always showing on dropzone drag over?
-// dropzone: conditional file type accepted dropzone
+// dropzone: conditional file type accepted and reflext in dotted outline
 //
-// multiple files: accept standard ad on bint
+// 
 // include lobby files
 
 
@@ -54,10 +63,11 @@ function App() {
 
   const [filename, setFilename] = useState();
   const [blankFilename, setBlankFilename] = useState();
+
+  // dropped images and video files
   const [elevatorFile, setElevatorFile] = useState({});
   const [lfdFile, setLfdFile] = useState({});
   const [pfdFile, setPfdFile] = useState({});
-
   const [svgFile, setSvgFile] = useState({});
   const [standardAdFile, setStandardAdFile] = useState({});
 
@@ -101,7 +111,6 @@ function App() {
   const handleDownloadButtonPress = () => {
    
     const fsValue = isFullScreen ? `_fs` : ``;
-    console.log("returning filename and FS = " , isFullScreen)
 
     //heineken_15_dryjanuary22_us_fs_l-fsa
     setFilename(
@@ -155,8 +164,8 @@ function App() {
     setMenuButtonIndex(ind);
   };
 
+  // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
-
     setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
@@ -171,7 +180,13 @@ function App() {
         ...prevState,
         [name]: value,
       }));
-
+    }
+    else if (droppedFileType === 'standardAd') {
+      console.log("setting standard ad")
+      setStandardAdFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
     else {
       setElevatorFile((prevState) => ({
@@ -212,14 +227,17 @@ function App() {
 
 
   // * zip 'em up
+
+  // is ext the same as mediaExtension?
   const deliverTemplateFiles = ((valH, valM, ext, blankHTML, blankManifest) => {
     const fsValue = isFullScreen ? `_fs` : ``;
-    const finalFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
-    const finalBlankFileName = `${inputValues.client}_${inputValues.duration}_${Data.products[productIndex].productShortName}blank_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
-    //const fileTypePrefix = ext === "mp4" ? "video/" : "image/";
+    // const finalFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
+    const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}`;
+    // const finalBlankFileName = `${inputValues.client}_${inputValues.duration}_${Data.products[productIndex].productShortName}blank_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
+    // const fileTypePrefix = ext === "mp4" ? "video/" : "image/";
     const fileTypePrefixNoSlash = ext === "mp4" ? "video" : "image";
-    //const fileTypeSuffix = ext;
-    //const finalFileType = fileTypePrefix + fileTypeSuffix;
+    // const fileTypeSuffix = ext;
+    // const finalFileType = fileTypePrefix + fileTypeSuffix;
 
     // will eventually need a variable for e l or p.
     const eORl = isElevator ? "e" : "l";
@@ -261,13 +279,13 @@ function App() {
     // do the async stuff like loading images and videos
 
     let newZip = new JSZip();
-    newZip.file(`${finalFilename}.html`, blobH);
-    newZip.file(`${finalFilename}.manifest`, blobM);
+    newZip.file(`${filename}.html`, blobH);
+    newZip.file(`${filename}.manifest`, blobM);
 
     const loadElevator = elevatorFile.payload ? elevatorFile.payload.arrayBuffer()
       .then((result) => {
         newZip.file(
-          `${finalFilename}_${eORl}${fileTypePrefixNoSlash}.${mediaExtension}`,
+          `${filename}_${eORl}${fileTypePrefixNoSlash}.${mediaExtension}`,
           result
         );
       })
@@ -276,15 +294,25 @@ function App() {
     const loadSVG = svgFile.payload ? svgFile.payload.arrayBuffer()
       .then((result) => {
         newZip.file(
-          `${finalFilename}.svg`,
+          `${filename}.svg`,
           result
         );
       })
       : "";
+    
+    const loadStandardAd = standardAdFile.payload ? standardAdFile.payload.arrayBuffer()
+    .then((result) => {
+      newZip.file(
+        `${finalStandardAdFilename}.mp4`,
+        result
+      );
+    })
+    : "";
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
-      { file: svgFile, fn: loadSVG }
+      { file: svgFile, fn: loadSVG },
+      { file: standardAdFile, fn: loadStandardAd }
     ]
     const promiseArray = loadObject.map(obj => {
       if (obj.file.payload) {
@@ -297,12 +325,12 @@ function App() {
     Promise.all(promiseArray).then((e) => {
 
       if (requiresBlankFile) {
-        newZip.file(`${finalBlankFileName}.html`, blobBH);
-        newZip.file(`${finalBlankFileName}.manifest`, blobBM);
+        newZip.file(`${blankFilename}.html`, blobBH);
+        newZip.file(`${blankFilename}.manifest`, blobBM);
       }
 
       newZip.generateAsync({ type: "blob" }).then(function (content) {
-        saveAs(content, `${finalFilename}.zip`)
+        saveAs(content, `${filename}.zip`)
       });
     })
   })
@@ -311,7 +339,7 @@ function App() {
   return (
 
       <div className="appContainer">
-        <div className="appTitle">Captivate Ad Creator 3600x</div>
+        {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
         
         <TemplateCreator
         elevatorFile={elevatorFile}

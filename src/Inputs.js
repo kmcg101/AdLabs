@@ -32,7 +32,6 @@ const Inputs = (props) => {
     }) : []
 
     const handleAnyInputsChange = (name, value) => {
-        
         props.handleAnyInputsChange(name, value);
     };
     return (

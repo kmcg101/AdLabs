@@ -22,8 +22,16 @@
       overflow: hidden;
       width: 100%;
       height: 100%;
-      
   }
+  .dropzoneImageParent video{
+    width: 100%;
+    height: 100%;
+}
+  .eStandardAd .dropzoneImageParent{
+    overflow: hidden;
+    width: 393px;
+    height: 221px;
+}
 
   .uploadButton {
     /* width: 70%; */

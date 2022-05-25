@@ -26,7 +26,7 @@ function SelectBox(props) {
       fontSize: "15px",
       color: "white",
       "&:hover": {
-        background: "#009bdb"
+        background: "rgba(0,155,219,.5)"
       }
     }),
     singleValue: (provided, state) => ({
@@ -94,7 +94,7 @@ function SelectBox(props) {
           colors: {
             ...theme.colors,
             primary25: 'rgba(0,0,0,0)',
-            
+
           },
         })}
       ></Select>

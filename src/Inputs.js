@@ -25,7 +25,7 @@ const Inputs = (props) => {
 
                     <TextBox
                         value={props.inputValues.client}
-                        label="CLIENT NAME:"
+                        label="CLIENT NAME: v1.5"
                         varID="client"
                     />
                     <TextBox

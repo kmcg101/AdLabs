@@ -9,24 +9,6 @@ function SelectBox(props) {
 
   const styles = {
 
-
-
-    option: (provided, state) => ({
-      ...provided,
-      fontSize: "15px",
-      color: "white",
-      "&:hover": {
-        background: "black"
-      }
-
-    }),
-    input: (provided, state) => ({
-      ...provided,
-      height: "30px",
-      color: "white",
-      background: "black"
-
-    }),
     control: (provided, state) => ({
       ...provided,
       color: "white",
@@ -38,11 +20,37 @@ function SelectBox(props) {
       boxShadow: 'none'
 
     }),
+
+    option: (provided, state) => ({
+      ...provided,
+      fontSize: "15px",
+      color: "white",
+      "&:hover": {
+        background: "#009bdb"
+      }
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+
+      "&:hover": {
+        background: "black"
+      }
+    }),
+
+    input: (provided, state) => ({
+      ...provided,
+      height: "30px",
+      color: "white",
+      background: "black"
+
+    }),
+
     menu: (provided, state) => ({
       ...provided,
       background: "linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
       marginTop: "-10px",
       marginBottom: 0,
+
     }),
 
     menuList: (provided, state) => ({
@@ -50,7 +58,8 @@ function SelectBox(props) {
       marginTop: 0,
       marginBottom: 0,
       backdropFilter: "blur(3px)"
-   }),
+
+    }),
 
     container: (provided, state) => ({
       ...provided,
@@ -79,6 +88,15 @@ function SelectBox(props) {
         name={props.varID}
         options={props.options}
         isSearchable={false}
+        theme={(theme) => ({
+          ...theme,
+          borderRadius: 0,
+          colors: {
+            ...theme.colors,
+            primary25: 'rgba(0,0,0,0)',
+            
+          },
+        })}
       ></Select>
     </div>
   );

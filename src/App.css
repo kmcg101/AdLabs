@@ -1,8 +1,34 @@
+@font-face {
+  font-family: "Avenir-Roman";
+  src: local("Avenir-Roman"),
+   url("./assets/fonts/Avenir-Roman-12.ttf") format("truetype");
+  /* font-weight:400 ; */
+  }
+  @font-face {
+    font-family: "Avenir-Heavy";
+    src: local("Avenir-Heavy"),
+     url("./assets/fonts/Avenir-Heavy-05.ttf") format("truetype");
+    /* font-weight:400 ; */
+    }
+
+  .titleText{
+    font-family: "Avenir-Heavy";
+    font-size: 15px;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .standardText{
+    font-family: "Avenir-Roman";
+    font-size: 18px;
+    color: white;
+  }
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:  "Avenir-Roman";
 }
 
 body {
@@ -20,81 +46,29 @@ body {
   --select-arrow: var(--select-border);
 }
 
+
+
 .appContainer{
   width: 1280px;
   height: 720px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: relative;
   background-image: url('./assets/bg.png');
   background-repeat: no-repeat;
-}
-.appTitle{
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 40px;
-}
-
-.pageAndMenuContainer{
-  /* width: 600px;
-  height: 600px;
-  position: relative;
-  background-color: var(--light);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0px 2px 64px rgba(0, 0, 0, 0.2);
-  padding: 0; */
-}
-
-.menuConainer{
-  width: 100%;
-  height: 10%;
-  display: flex;
-  position: absolute;
-  bottom: 0px;
-  
-}
-.menuButton{
-  width: 20%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .4s;
-  background-color: var(--neutral);
-  cursor: pointer; 
-}
-.menuButton:hover{
-  background-color: var(--secondary);
-}
-.menuButtonActive{
-  background-color: var(--light);
-  cursor:default; 
-  pointer-events: none;
-}
-.menuButtonDisabled{
-  cursor:default; 
-  pointer-events: none;
-  opacity: .5;
-}
-a{
-  text-decoration: none;
-  color: var(--dark);
+  font-family: "Avenir-Roman";
 }
 
 .pageContainer{
-  width: 100%;
-  height: 70%;
+  width: 68%;
+  height: 51%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 20px;
-}
-.tableContainer{
-  width: 100%;
-  height: 20%;
+  /* border: 1px white dotted; */
 }
 
 .page{
@@ -104,6 +78,8 @@ a{
 }
 .active-page{
   display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .productPage{
@@ -121,17 +97,32 @@ a{
 }
 
 input[type=text] {
-  font-size: 45px;
-  width:320px;
-  padding:10px;
-  border: none;
-  background-color: var(--light);
+  font-size: 18px;
+  width:390px;
+  height: 37px;
+  padding-left: 10px;
+  border: none; 
+  background: linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%);
+  color: white;
+  display:block;
 }
-input[name=campaign] {
-  padding-left: 60px;
-  margin-top: -30px;
-  font-size: 28px;
+input, label {
+  margin-bottom: 10px;
 }
+
+.inputsFullPage{
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+}
+.inputsLeftColumn{
+  width: 62%;
+}
+.inputsRightColumn{
+  width: 38%
+}
+
 input:focus {
   outline-width: 0;
 }
@@ -140,16 +131,5 @@ input:focus {
   margin-left: 20px;
   font-size: 25px;
 }
-select {
-  width: 100%;
-  min-width: 15ch;
-  max-width: 30ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.0rem;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-}
+
+

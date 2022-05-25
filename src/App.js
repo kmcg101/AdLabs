@@ -12,16 +12,18 @@
 
 // TO DO
 // notes:
-    // should I directly reference the data file or set a variable to its value?
-    // in zip function, is ext the same as mediaExtension?
-    // dropzone is currently using a passed down inputValues.mediaType to determine
-    //    how to render the preview.  If it is a video or image.  Should use the actual
-    //    file's file type for this.
+// should I directly reference the data file or set a variable to its value?
+// in zip function, is ext the same as mediaExtension?
+// dropzone is currently using a passed down inputValues.mediaType to determine
+//    how to render the preview.  If it is a video or image.  Should use the actual
+//    file's file type for this.
 // dropzone: why is red outline always showing on dropzone drag over?
 // dropzone: conditional file type accepted and reflext in dotted outline
 //
 // 
 // include lobby files
+
+import './assets/fonts/Avenir-Roman-12.ttf';
 
 
 import React, { useEffect, useState } from "react";
@@ -50,8 +52,8 @@ function App() {
 
 
   const [inputValues, setInputValues] = useState({
-    client: "ca",
-    campaign: "new",
+    // client: "ca",
+    // campaign: "new",
     //product: 'e-bint'
     //duration: 15,
     //country: 'us'
@@ -95,7 +97,7 @@ function App() {
         }
       });
     }
-   
+
   };
 
   useEffect(() => {
@@ -105,11 +107,11 @@ function App() {
 
 
   ////////////////////////////////////////////////////////
- 
+
 
   // this sets the filename.  On filename change (useEffect) the file creation starts
   const handleDownloadButtonPress = () => {
-   
+
     const fsValue = isFullScreen ? `_fs` : ``;
 
     //heineken_15_dryjanuary22_us_fs_l-fsa
@@ -127,11 +129,11 @@ function App() {
     }
   }
 
-////////////////////////////////////////////////////////
-// check if all inputs entered. this runs when any input changes
+  ////////////////////////////////////////////////////////
+  // check if all inputs entered. this runs when any input changes
 
   const checkIfInputComplete = () => {
-    
+
     if (
       inputValues.client &&
       inputValues.campaign &&
@@ -299,15 +301,15 @@ function App() {
         );
       })
       : "";
-    
+
     const loadStandardAd = standardAdFile.payload ? standardAdFile.payload.arrayBuffer()
-    .then((result) => {
-      newZip.file(
-        `${finalStandardAdFilename}.mp4`,
-        result
-      );
-    })
-    : "";
+      .then((result) => {
+        newZip.file(
+          `${finalStandardAdFilename}.mp4`,
+          result
+        );
+      })
+      : "";
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
@@ -318,7 +320,7 @@ function App() {
       if (obj.file.payload) {
         return obj.fn
       }
-      
+
 
     })
 
@@ -338,10 +340,10 @@ function App() {
 
   return (
 
-      <div className="appContainer">
-        {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
-        
-        <TemplateCreator
+    <div className="appContainer">
+      {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
+
+      {/* <TemplateCreator
         elevatorFile={elevatorFile}
         inputComplete={inputComplete}
         isElevator={isElevator}
@@ -351,79 +353,37 @@ function App() {
         blankFilename={blankFilename}
         mediaExtension={mediaExtension}
         handleDownloadButtonPress={handleDownloadButtonPress}
-      />
+      /> */}
 
+      <div className="pageContainer">
 
-        <div className="pageAndMenuContainer">
-          <div className="pageContainer">
-            <div className={`page ${menuButtonIndex === 0 ? "active-page" : ""}`}>
-              <PageLogin />
-            </div>
-            <div className={`page ${menuButtonIndex === 1 ? "active-page" : ""}`}>
-              <Inputs
-                productIndex={productIndex}
-                inputValues={inputValues}
-                handleAnyInputsChange={handleAnyInputsChange}
-              />
-            </div>
-            <div className={`elevatorPage page ${menuButtonIndex === 2 ? "active-page" : ""}`}>
-              <PageElevator
-                productIndex={productIndex}
-                inputValues={inputValues}
-                handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
-              />
-            </div>
-            <div className={`page ${menuButtonIndex === 3 ? "active-page" : ""}`}>
-              <PageLFD />
-            </div>
-            <div className={`page ${menuButtonIndex === 4 ? "active-page" : ""}`}>
-              <PagePFD />
-            </div>
-
-          </div>
-          <div className="menuConainer">
-
-            <div
-              onClick={() => handleTabClick()}
-              className={`menuButton ${menuButtonIndex === 0 ? "menuButtonActive" : ""
-                } } ${inputComplete && isElevator ? "" : "menuButtonDisabled"}`}
-            >
-              Login
-            </div>
-            <div
-              onClick={() => handleTabClick(1)}
-              className={`menuButton ${menuButtonIndex === 1 ? "menuButtonActive" : ""
-                }`}
-            >
-              Input
-            </div>
-            <div
-              onClick={() => handleTabClick(2)}
-              className={`menuButton ${menuButtonIndex === 2 ? "menuButtonActive" : ""
-                } ${inputComplete && isElevator ? "" : "menuButtonDisabled"}`}
-            >
-              Elevator
-            </div>
-            <div
-              onClick={() => handleTabClick(3)}
-              className={`menuButton ${menuButtonIndex === 3 ? "menuButtonActive" : ""
-                } ${inputComplete && isElevator === false ? "" : "menuButtonDisabled"
-                }`}
-            >
-              LFD
-            </div>
-            <div
-              onClick={() => handleTabClick(4)}
-              className={`menuButton ${menuButtonIndex === 4 ? "menuButtonActive" : ""
-                } ${inputComplete && isElevator === false ? "" : "menuButtonDisabled"
-                }`}
-            >
-              PFD
-            </div>
-          </div>
+        <div className={`page ${menuButtonIndex === 1 ? "active-page" : ""}`}>
+          <Inputs
+            productIndex={productIndex}
+            inputValues={inputValues}
+            handleAnyInputsChange={handleAnyInputsChange}
+          />
         </div>
+        <div className={`elevatorPage page ${menuButtonIndex === 2 ? "active-page" : ""}`}>
+          <PageElevator
+            productIndex={productIndex}
+            inputValues={inputValues}
+            handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
+          />
+        </div>
+        <div className={`page ${menuButtonIndex === 3 ? "active-page" : ""}`}>
+          <PageLFD />
+        </div>
+        <div className={`page ${menuButtonIndex === 4 ? "active-page" : ""}`}>
+          <PagePFD />
+        </div>
+
+
+
       </div>
-   
+    </div>
+
+
   );
 }
 

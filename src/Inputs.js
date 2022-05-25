@@ -7,7 +7,7 @@ import DATA_COUNTRY_CODE from "./DATA_COUNTRY_CODE";
 import DATA_MEDAI_TYPE from "./DATA_MEDIA_TYPE";
 
 const Inputs = (props) => {
-   
+
     let DATA_PRODUCTS_ARRAY = DATA_PRODUCTS.data;
     let DATA_DURATION_ARRAY = DATA_DURATION.data;
     let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
@@ -18,14 +18,14 @@ const Inputs = (props) => {
         container.keyindex = item.keyindex;
         container.value = item.value;
         container.label = item.label;
-       
-        if(DATA_PRODUCTS_ARRAY[props.productIndex].allowImage && item.value === 'image'){
+
+        if (DATA_PRODUCTS_ARRAY[props.productIndex].allowImage && item.value === 'image') {
             container.isDisabled = false;
         }
-        else if(DATA_PRODUCTS_ARRAY[props.productIndex].allowVideo && item.value === 'video'){
+        else if (DATA_PRODUCTS_ARRAY[props.productIndex].allowVideo && item.value === 'video') {
             container.isDisabled = false;
         }
-        else{
+        else {
             container.isDisabled = true;
         }
         return container;
@@ -35,57 +35,54 @@ const Inputs = (props) => {
         props.handleAnyInputsChange(name, value);
     };
     return (
-        <div >
-            
-            <TextBox
-                value={props.inputValues.client}
-                className="clientName"
-                label="Client:"
-                validid="clientIsValid"
-                varID="client"
-                onTextChange={handleAnyInputsChange}
-            />
-            <TextBox
-                value={props.inputValues.campaign}
-                className="campaignName"
-                label="campaign:"
-                validid="campaignIsValid"
-                varID="campaign"
-                onTextChange={handleAnyInputsChange}
-            />
-            {/* // you want the source of the select box to be a function
-// that function gets a parameter which is the value of the product
-// the function does a filter which only returns the elements that
-// contain the name of the product in their 'isEnabled' value */}
+        <div>
+            <div className='inputsFullPage'>
+                <div className='inputsLeftColumn'>
 
-            <SelectBox
-                options={DATA_PRODUCTS_ARRAY}
-                label="Product:"
-                varID="product"
-                onSelectOption={handleAnyInputsChange}
-                
-            />
-            
-            <SelectBox
-                options={DATA_COUNTRY_CODE_ARRAY}
-                label="Country:"
-                varID="countryCode"
-                onSelectOption={handleAnyInputsChange}
-            />
-            <SelectBox
-                options={MEDIA_TYPE_FILTER_PLUS_isEnabled}
-                label="Media:"
-                varID="mediaType"
-                onSelectOption={handleAnyInputsChange}
-            />
-            <SelectBox
-                options={DATA_DURATION_ARRAY}
-                label="Duration:"
-                varID="duration"
-                onSelectOption={handleAnyInputsChange}
-            /> 
-            
+                    <TextBox
+                        value={props.inputValues.client}
+                        label="CLIENT NAME:"
+                        varID="client"
+                    />
+                    <TextBox
+                        value={props.inputValues.campaign}
+                        label="DESCRIPTION:"
+                        varID="campaign"
+                    />
+
+                    <SelectBox
+                        options={DATA_PRODUCTS_ARRAY}
+                        label="PRODUCT:"
+                        varID="product"
+
+                    />
+                </div>
+
+                <div className='inputsRightColumn'>
+                <SelectBox
+                        options={DATA_DURATION_ARRAY}
+                        label="DURATION:"
+                        varID="duration"
+                        onSelectOption={handleAnyInputsChange}
+                    />
+                    <SelectBox
+                        options={DATA_COUNTRY_CODE_ARRAY}
+                        label="COUNTRY:"
+                        varID="countryCode"
+                        onSelectOption={handleAnyInputsChange}
+                    />
+                    <SelectBox
+                        options={MEDIA_TYPE_FILTER_PLUS_isEnabled}
+                        label="PLATFORM:"
+                        varID="mediaType"
+                        onSelectOption={handleAnyInputsChange}
+                    />
+                   
+                </div>
+
+            </div>
         </div>
+
     );
 };
 

@@ -2,17 +2,17 @@ const COUNTRY_CODE =  [
     {
         keyindex:  0,
         value: "us",
-        label: "US"
+        label: "us"
     },
     {
         keyindex:  1,
         value: "ca",
-        label: "CA"
+        label: "ca"
     },
     {
         keyindex:  2,
         value: "fr",
-        label: "FR"
+        label: "fr"
     }
 ]
 

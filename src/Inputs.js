@@ -13,6 +13,9 @@ const Inputs = (props) => {
     let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
     let DATA_PLATFORM_ARRAY = DATA_PLATFORM.data;
 
+    const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
+    const inputValues = props.inputValues;
+
    
 
     const handleAnyInputsChange = (name, value) => {
@@ -23,43 +26,58 @@ const Inputs = (props) => {
             <div className='inputsFullPage'>
                 <div className='inputsLeftColumn'>
 
-                    <TextBox
+                    <TextBox 
+                        isError={false}
                         value={props.inputValues.client}
-                        label="CLIENT NAME: v1.5"
+                        label="CLIENT NAME: v1.6"
                         varID="client"
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
-                    <TextBox
+                    <TextBox  
+                        isError={false}
                         value={props.inputValues.campaign}
                         label="DESCRIPTION:"
                         varID="campaign"
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
 
                     <SelectBox
+                        isError={false}
                         options={DATA_PRODUCTS_ARRAY}
                         label="PRODUCT:"
                         varID="product"
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
 
                     />
                 </div>
 
                 <div className='inputsRightColumn'>
                 <SelectBox
+                        isError={false}
                         options={DATA_DURATION_ARRAY}
                         label="DURATION:"
                         varID="duration"
-                        onSelectOption={handleAnyInputsChange}
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
                     <SelectBox
+                        isError={false}
                         options={DATA_COUNTRY_CODE_ARRAY}
                         label="COUNTRY:"
                         varID="countryCode"
-                        onSelectOption={handleAnyInputsChange}
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
                     <SelectBox
+                        isError={false}
                         options={DATA_PLATFORM_ARRAY}
                         label="PLATFORM:"
                         varID="platform"
-                        onSelectOption={handleAnyInputsChange}
+                        handleAnyInputsChange={handleAnyInputsChange}
+                        inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
                    
                 </div>

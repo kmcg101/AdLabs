@@ -42,6 +42,7 @@ import Inputs from "./Inputs";
 function App() {
 
   const [productIndex, setProductIndex] = useState();
+  const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
 
   const [menuButtonIndex, setMenuButtonIndex] = useState(1);
   const [inputComplete, setInputComplete] = useState(false);
@@ -52,8 +53,8 @@ function App() {
 
 
   const [inputValues, setInputValues] = useState({
-    // client: "ca",
-    // campaign: "new",
+     client: "",
+     campaign: "",
     //product: 'e-bint'
     //duration: 15,
     //country: 'us'
@@ -79,6 +80,29 @@ function App() {
   // those children pass the data up to the handleAnyInputChange() function
 
   ////////////////////////////////////////////////////////
+
+  const continueFromStepOne = () => {
+    // check if all values filled in
+    if (
+      inputValues.client &&
+      inputValues.campaign &&
+      inputValues.product &&
+      inputValues.countryCode &&
+      inputValues.platform &&
+      inputValues.duration
+    ) {
+      setInputComplete(true);
+      console.log("complete")
+      setInputsCheckButtonPressed(false);
+    } else {
+      setInputComplete(false);
+      console.log("not complete")
+      setInputsCheckButtonPressed(true);
+    }
+  };
+
+
+
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
     if (inputValues.product) {
@@ -341,27 +365,16 @@ function App() {
   return (
 
     <div className="appContainer">
-      {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
+      <div className='topSub'></div>
+      <div className='contentSub'>
 
-      {/* <TemplateCreator
-        elevatorFile={elevatorFile}
-        inputComplete={inputComplete}
-        isElevator={isElevator}
-        deliverTemplateFiles={deliverTemplateFiles}
-        productIndex={productIndex}
-        filename={filename}
-        blankFilename={blankFilename}
-        mediaExtension={mediaExtension}
-        handleDownloadButtonPress={handleDownloadButtonPress}
-      /> */}
-
-      <div className="pageContainer">
 
         <div className={`page ${menuButtonIndex === 1 ? "active-page" : ""}`}>
           <Inputs
             productIndex={productIndex}
             inputValues={inputValues}
             handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed = {inputsCheckButtonPressed}
           />
         </div>
         <div className={`elevatorPage page ${menuButtonIndex === 2 ? "active-page" : ""}`}>
@@ -380,7 +393,33 @@ function App() {
 
 
 
+
+
       </div>
+      <div className='navSub'>
+        <div className='buttonsHolder'>
+          <div className='circleButton circleButtonEnabled' id='b1'>1</div>
+          <div className='circleButton' id='b1'>2</div>
+          <div className='circleButton' id='b1'>3</div>
+        </div>
+        <div className='continueButton' onClick={continueFromStepOne}>CONTINUE</div>
+      </div>
+      {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
+
+      {/* <TemplateCreator
+        elevatorFile={elevatorFile}
+        inputComplete={inputComplete}
+        isElevator={isElevator}
+        deliverTemplateFiles={deliverTemplateFiles}
+        productIndex={productIndex}
+        filename={filename}
+        blankFilename={blankFilename}
+        mediaExtension={mediaExtension}
+        handleDownloadButtonPress={handleDownloadButtonPress}
+      /> */}
+
+
+
     </div>
 
 

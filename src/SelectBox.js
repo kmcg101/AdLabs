@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import './App.css'
 
@@ -6,6 +6,10 @@ import './App.css'
 
 
 function SelectBox(props) {
+  const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
+  const inputValues = props.inputValues;
+
+  const [isValueSelected, setIsValueSelected] = useState(false)
 
   const styles = {
 
@@ -14,10 +18,15 @@ function SelectBox(props) {
       color: "white",
       height: "28px",
       background: "linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
-      border: "none",
+      
       borderRadius: "0px",
-      border: 0,
-      boxShadow: 'none'
+      boxShadow: 'none',
+      
+      
+      // need to create a true false to make this work
+      border: inputsCheckButtonPressed && isValueSelected === false ? 0 : '1px',
+      border: inputsCheckButtonPressed && isValueSelected === false ? "1px red solid" : "none",
+
 
     }),
 
@@ -75,10 +84,12 @@ function SelectBox(props) {
       color: "white"
     }),
 
-
-
   };
 
+  const handleAnyInputsChange = (e, action) =>{
+    setIsValueSelected(true)
+    props.handleAnyInputsChange(action.name, e.value)
+  }
   return (
     <div id={props.varID}>
       <label className='titleText'>{props.label}</label>
@@ -87,6 +98,7 @@ function SelectBox(props) {
         placeholder="select..."
         name={props.varID}
         options={props.options}
+        onChange={handleAnyInputsChange}
         isSearchable={false}
         theme={(theme) => ({
           ...theme,
@@ -96,6 +108,7 @@ function SelectBox(props) {
             primary25: 'rgba(0,0,0,0)',
 
           },
+        
         })}
       ></Select>
     </div>

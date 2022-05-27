@@ -23,6 +23,9 @@
     font-size: 18px;
     color: white;
   }
+  .standardTextError{
+    border: 1px red solid;
+  }
 
 *,
 *::before,
@@ -60,15 +63,30 @@ body {
   background-repeat: no-repeat;
   font-family: "Avenir-Roman";
 }
+.topSub{
+  width: 100%;
+  height: 25%;
+}
 
-.pageContainer{
-  width: 68%;
-  height: 51%;
+.contentSub{
+  width: 100%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  padding-left: 20%;
+  padding-right: 20%;
   /* border: 1px white dotted; */
+}
+.navSub{
+  width: 100%;
+  height: 25%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1.5%;
+  flex-direction: column;
 }
 
 .page{
@@ -96,6 +114,7 @@ body {
   height: 393px;
 }
 
+
 input[type=text] {
   font-size: 18px;
   width:390px;
@@ -106,6 +125,11 @@ input[type=text] {
   color: white;
   display:block;
 }
+input[type=text].textInputError {
+  border: 1px red solid;
+}
+
+
 input, label {
   margin-bottom: 10px;
 }
@@ -130,6 +154,52 @@ input:focus {
   color: red;
   margin-left: 20px;
   font-size: 25px;
+}
+
+.buttonsHolder{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  font-family: 'Avenir-Roman;';
+}
+
+.circleButton{
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1%;
+  cursor:pointer;
+  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+}
+.circleButtonEnabled{
+  border: 3px solid #009bdb;
+}
+
+.continueButton{
+  position: relative;
+  width: 21.5%;
+  height: 27%;
+  background-color: transparent;
+  border: 2px white solid;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor:pointer;
+  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+}
+
+.continueButton:hover{
+  border: 2px #009bdb solid;
 }
 
 

@@ -1,9 +1,10 @@
 import React from 'react';
-import './elevatorProductStyle.css'
+import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
+import background from "../assets/efsbi.png";
 
 const E_fsbi =  (props) => {
-
+   
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)
     }
@@ -17,8 +18,11 @@ const E_fsbi =  (props) => {
     }
     return (
         <div className='elevatorProductContainer'>
-            <div className='eFullScreen'>   <Dropzone               handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} assetType={props.assetType} droppedFileType='elevator'/></div>
-            <div style={eFSBILogo}>         <Dropzone isSVG="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} assetType={props.assetType} droppedFileType='svg'/></div>
+            <div className='backgroundImageContainer'>
+                <img alt='' className='backgroundImage' src={background}></img>
+            </div>
+            <div className='eFullScreen'>   <Dropzone               handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
+            <div style={eFSBILogo}>         <Dropzone isSVG="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='svg'/></div>
         </div>
     );
 };

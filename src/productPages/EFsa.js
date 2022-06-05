@@ -1,16 +1,22 @@
 import React from 'react';
-import './elevatorProductStyle.css'
+import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
+import background from "../assets/efsa.png";
 
 const E_fsa = (props) => {
+ 
 
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)
     }
     return (
         <div className='elevatorProductContainer'>
+            
             <div className='eFullScreen'>
-                <Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} assetType={props.assetType} droppedFileType='elevator'/>
+                <Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
+            </div>
+            <div className='backgroundImageContainer'>
+                <img alt='' className='backgroundImage' src={background}></img>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
-import './elevatorProductStyle.css'
+import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
+import background from "../assets/evsa.png";
 
 const vsaImage = {
     width: "36.5%",
@@ -27,7 +28,10 @@ const E_vsa = (props) => {
     
     return (
         <div className='elevatorProductContainer'>
-            <div style={vsaImage}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} assetType={props.assetType} droppedFileType='elevator'/></div>
+            <div className='backgroundImageContainer'>
+                <img alt='' className='backgroundImage' src={background}></img>
+            </div>
+            <div style={vsaImage}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
             <div style={vsaContent}></div>
         </div>
     )

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import './App.css'
+import './pages/inputs.css'
+// import './App.css'
 
 
 
@@ -17,10 +18,14 @@ function SelectBox(props) {
       ...provided,
       color: "white",
       height: "28px",
-      background: "linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
+      background: "linear-gradient(0deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
       
       borderRadius: "0px",
       boxShadow: 'none',
+      "&:hover": {
+        border: '1px #009bdb solid'
+      },
+      
       
       
       // need to create a true false to make this work
@@ -56,7 +61,7 @@ function SelectBox(props) {
 
     menu: (provided, state) => ({
       ...provided,
-      background: "linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
+      background: "linear-gradient(0deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
       marginTop: "-10px",
       marginBottom: 0,
 

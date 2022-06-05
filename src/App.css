@@ -1,46 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 @font-face {
   font-family: "Avenir-Roman";
   src: local("Avenir-Roman"),
-   url("./assets/fonts/Avenir-Roman-12.ttf") format("truetype");
+    url("./assets/fonts/Avenir-Roman-12.ttf") format("truetype");
   /* font-weight:400 ; */
-  }
-  @font-face {
-    font-family: "Avenir-Heavy";
-    src: local("Avenir-Heavy"),
-     url("./assets/fonts/Avenir-Heavy-05.ttf") format("truetype");
-    /* font-weight:400 ; */
-    }
+}
 
-  .titleText{
-    font-family: "Avenir-Heavy";
-    font-size: 15px;
-    color: white;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
-  .standardText{
-    font-family: "Avenir-Roman";
-    font-size: 18px;
-    color: white;
-  }
-  .standardTextError{
-    border: 1px red solid;
-  }
+@font-face {
+  font-family: "Avenir-Heavy";
+  src: local("Avenir-Heavy"),
+    url("./assets/fonts/Avenir-Heavy-05.ttf") format("truetype");
+  /* font-weight:400 ; */
+}
+
+.titleText {
+  font-family: "Avenir-Heavy";
+  font-size: 15px;
+  color: white;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.standardText {
+  font-family: "Avenir-Roman";
+  font-size: 18px;
+  color: white;
+}
+.standardTextError {
+  border: 1px red solid;
+}
+
+.resultsTitleText {
+  font-family: "Avenir-Heavy";
+  font-size: 15px;
+  color: white;
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+
+.resultsTextHolder {
+  font-family: "Avenir-Roman";
+  padding-left: 10px;
+  font-size: 18px;
+  line-height: 2.1;
+  color: white;
+  width: 388px;
+  height: 37px;
+  border-radius: 1px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  margin-bottom: 20px;
+}
+
+
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family:  "Avenir-Roman";
+  font-family: "Avenir-Roman";
 }
 
-body {
-  margin: 20px;
-}
 :root {
   --primary: #d81e5b;
   --secondary: #8c38ff;
-  --dark:#131a26;
+  --dark: #131a26;
   --light: #eee;
   --neutral: #e4e4ee;
 
@@ -51,7 +79,7 @@ body {
 
 
 
-.appContainer{
+.appContainer {
   width: 1280px;
   height: 720px;
   display: flex;
@@ -59,27 +87,41 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  background-image: url('./assets/bg.png');
-  background-repeat: no-repeat;
+
+
   font-family: "Avenir-Roman";
 }
-.topSub{
-  width: 100%;
-  height: 25%;
+
+.bgImageContainer {
+
+  background-image: url('./assets/bg3.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: auto;
 }
 
-.contentSub{
+.topSub {
   width: 100%;
-  height: 50%;
+  height: 20%;
+}
+
+.contentSub {
+  width: 100%;
+  height: 55%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.inputsPage,
+.resultsPage {
   padding-left: 20%;
   padding-right: 20%;
-  /* border: 1px white dotted; */
 }
-.navSub{
+
+.navSub {
   width: 100%;
   height: 25%;
   display: flex;
@@ -89,117 +131,133 @@ body {
   flex-direction: column;
 }
 
-.page{
-  display: none;
-  height: 100%;
-  
-}
-.active-page{
+
+
+.active-page {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.productPage{
+.productPage {
   display: none;
   width: 100%;
   height: 100%;
 }
-.productPageActive{
+
+.productPageActive {
   display: block;
 }
 
-.elevatorPage{
+.elevatorPage {
   width: 524px;
   height: 393px;
 }
 
 
-input[type=text] {
-  font-size: 18px;
-  width:390px;
-  height: 37px;
-  padding-left: 10px;
-  border: none; 
-  background: linear-gradient(90deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%);
-  color: white;
-  display:block;
-}
-input[type=text].textInputError {
-  border: 1px red solid;
-}
-
-
-input, label {
-  margin-bottom: 10px;
-}
-
-.inputsFullPage{
-  width: 100%;
-  height: 100%;
-  display: flex;
-
-}
-.inputsLeftColumn{
-  width: 62%;
-}
-.inputsRightColumn{
-  width: 38%
-}
-
-input:focus {
-  outline-width: 0;
-}
-.errorMessage{
+.errorMessage {
   color: red;
   margin-left: 20px;
   font-size: 25px;
 }
 
-.buttonsHolder{
+.adBuildingPage {
   width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
+.adBuildingPage.elevator{
+  padding-left: 26.4%;
+  padding-right: 26.4%;
+}
+.adBuildingPage.landscape{
+  padding-left: 19.5%;
+  padding-right: 19.5%;
+}
+.adBuildingPage.portrait{
+  padding-left: 37.3%;
+  padding-right: 37.3%;
+}
+
+.adBuildingPage .platformButtonContainer {
+  width: 89px;
+  height: 100%;
+}
+
+.adBuildingPage .adBuildingPageContent {
+  width: 515px;
+  height: 100%;
+  border-radius: 5px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  padding: 10px;
+}
+.adBuildingPage .adBuildingPageContent.elevator {
+  width: 515px;
+}
+.adBuildingPage .adBuildingPageContent.landscape {
+  width: 693px;
+}
+.adBuildingPage .adBuildingPageContent.portrait {
+  width: 237px;
+}
+
+.adBuildingPageInner {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  color: white;
+}
+
+.adBuildingPageInnerInactive {
+  display: none;
+}
+
+.adBuildingPageInnerActive {
+  display: flex;
+  justify-content: center;
+}
+
+
+.platformButton {
+  border-radius: 5px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  width: 100%;
+  height: 54px;
+  font-family: "Avenir-Heavy";
   font-size: 16px;
-  font-family: 'Avenir-Roman;';
-}
-
-.circleButton{
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  padding: 6px;
-  border: 2px solid #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1%;
-  cursor:pointer;
-  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
-}
-.circleButtonEnabled{
-  border: 3px solid #009bdb;
-}
-
-.continueButton{
-  position: relative;
-  width: 21.5%;
-  height: 27%;
-  background-color: transparent;
-  border: 2px white solid;
-  border-radius: 4px;
   color: white;
-  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.platformButtonOn {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+}
+
+.platformButtonDisabled {
+  display: none;
+}
+
+.page {
+  display: none;
+  height: 100%;
+}
+
+.active-page {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.active-page-flex {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor:pointer;
-  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  width: 100%;
+  height: 100%;
 }
-
-.continueButton:hover{
-  border: 2px #009bdb solid;
-}
-
-

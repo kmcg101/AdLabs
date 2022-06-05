@@ -1,10 +1,10 @@
 import React from "react";
-import SelectBox from "./SelectBox";
-import TextBox from "./TextBox";
-import DATA_PRODUCTS from "./DATA_PRODUCTS";
-import DATA_DURATION from "./DATA_DURATION";
-import DATA_COUNTRY_CODE from "./DATA_COUNTRY_CODE";
-import DATA_PLATFORM from "./DATA_PLATFORM";
+import SelectBox from "../SelectBox";
+import TextBox from "../TextBox";
+import DATA_PRODUCTS from "../DATA_PRODUCTS";
+import DATA_DURATION from "../DATA_DURATION";
+import DATA_COUNTRY_CODE from "../DATA_COUNTRY_CODE";
+import DATA_PLATFORM from "../DATA_PLATFORM";
 
 const Inputs = (props) => {
 
@@ -23,9 +23,27 @@ const Inputs = (props) => {
     };
     return (
         <div>
+            <form>
             <div className='inputsFullPage'>
                 <div className='inputsLeftColumn'>
-
+                    
+                    {/* <label>CLIENT NAME:</label>
+                    <input
+                        type='text'
+                        value={inputValues.company}
+                        onChange={handleAnyInputsChange}
+                        name='client'
+                        >
+                    </input>
+                    <label>CAMPAIGN:</label>
+                    <input
+                        type='text'
+                        value={inputValues.company}
+                        onChange={handleAnyInputsChange}
+                        name=
+                        >
+                    </input> */}
+                    
                     <TextBox 
                         isError={false}
                         value={props.inputValues.client}
@@ -42,6 +60,8 @@ const Inputs = (props) => {
                         handleAnyInputsChange={handleAnyInputsChange}
                         inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
+
+                    
 
                     <SelectBox
                         isError={false}
@@ -83,7 +103,9 @@ const Inputs = (props) => {
                 </div>
 
             </div>
+            </form>
         </div>
+        
 
     );
 };

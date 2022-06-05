@@ -2,30 +2,30 @@ const labels = [
    
         {
             keyindex: 0,
-            value: "bint",
+            value: 0,
             label: "bint"
         },
         {
             keyindex: 1,
-            value: "fsa",
+            value: 1,
             label: 'fsa'
             
         },
         {
             keyindex: 2,
-            value: "hfsp",
+            value: 2,
             label: "hfsp",
             
         },
         {
             keyindex: 3,
-            value: "vsa",
+            value: 3,
             label: "vsa",
            
         },
         {
             keyindex: 4,
-            value: "fsbi",
+            value: 4,
             label: "fsbi",
         }
    ]

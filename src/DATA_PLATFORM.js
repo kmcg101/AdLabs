@@ -1,11 +1,11 @@
 const PLATFORM =  [
     {
-        keyindex:  0,
+        keyindex:  1,
         value: "elevator",
         label: "elevator",
     },
     {
-        keyindex:  1,
+        keyindex:  2,
         value: "lobby",
         label: "lobby",
     }

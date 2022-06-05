@@ -1,6 +1,8 @@
 import React from 'react';
-import './elevatorProductStyle.css'
+import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
+import background from "../assets/ehfsp.png";
+
 
 
 const hfspMedia = {
@@ -24,7 +26,10 @@ const E_hfsp = (props) => {
     }
     return (
         <div className='elevatorProductContainer'>
-            <div style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} assetType={props.assetType} droppedFileType='elevator'/></div>
+            <div className='backgroundImageContainer'>
+                <img alt='' className='backgroundImage' src={background}></img>
+            </div>
+            <div style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
             <div style={hfspContent}></div>
         </div>
     )

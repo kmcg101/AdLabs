@@ -1,0 +1,61 @@
+
+.buttonsHolder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-family: 'Avenir-Roman;';
+  }
+  
+  .circleButton {
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+    cursor: pointer;
+    box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  }
+  
+  .circleButton.enabled {
+    border: 3px solid #009bdb;
+    background-color: #009bdb;
+  }
+  .circleButton.current {
+    pointer-events: none;
+  }
+  .circleButton.disabled {
+    border: 3px solid #ffffff;
+    pointer-events: none;
+    opacity: .5;
+  }
+  .circleButton:hover {
+    border: 3px solid #ffffff;
+  }
+  
+  .continueButton {
+    position: relative;
+    width: 21.5%;
+    height: 27%;
+    background-color: transparent;
+    border: 2px white solid;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+    user-select: none;
+  }
+  
+  .continueButton:hover {
+    border: 2px #009bdb solid;
+  }
+  

@@ -5,7 +5,7 @@ import EVsa from "../productPages/EVsa";
 import EHfsp from "../productPages/EHfsp";
 import EFsbi from "../productPages/EFsbi";
 
-import '../productPages/elevatorProductStyle.css'
+import '../productPages/pageAndProductStyle.css'
 
 const PageElevator = (props) => {
   const handleElevatorDropzoneChanges = (name, value, droppedFileType) => {

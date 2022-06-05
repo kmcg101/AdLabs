@@ -28,20 +28,25 @@ import './assets/fonts/Avenir-Roman-12.ttf';
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import './nav.css'
 import Data from "./data.json";
 import TemplateCreator from "./templates/Template_Creator.js";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
-import PageLogin from './pages/PageLogin';
 import PageElevator from './pages/PageElevator';
 import PageLFD from './pages/PageLFD';
 import PagePFD from './pages/PagePFD';
-import Inputs from "./Inputs";
+import Inputs from "./pages/Inputs";
+import Results from "./pages/Results";
+import PRODUCT_DATA from "./DATA_PRODUCTS_FULL"
 
 function App() {
 
-  const [productIndex, setProductIndex] = useState();
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [currentAdBuildingPageNumber, setCurrentAdBuildingPageNumber] = useState(1);
+
+  const [productIndex, setProductIndex] = useState(4);
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
 
   const [menuButtonIndex, setMenuButtonIndex] = useState(1);
@@ -51,10 +56,12 @@ function App() {
   const [isFullScreen, setIsFullScreen] = useState();
   const [requiresBlankFile, setRequiresBlankFile] = useState();
 
-
+  // these are all the values in the current product's data file
+  const [productValues, setProductValues] = useState({})
   const [inputValues, setInputValues] = useState({
-     client: "",
-     campaign: "",
+    client: "",
+    campaign: "",
+    //mediaType: 'image'
     //product: 'e-bint'
     //duration: 15,
     //country: 'us'
@@ -81,30 +88,101 @@ function App() {
 
   ////////////////////////////////////////////////////////
 
-  const continueFromStepOne = () => {
-    // check if all values filled in
-    if (
-      inputValues.client &&
-      inputValues.campaign &&
-      inputValues.product &&
-      inputValues.countryCode &&
-      inputValues.platform &&
-      inputValues.duration
-    ) {
-      setInputComplete(true);
-      console.log("complete")
-      setInputsCheckButtonPressed(false);
-    } else {
-      setInputComplete(false);
-      console.log("not complete")
-      setInputsCheckButtonPressed(true);
+  const circleButtonClickHandler = (e) => {
+    const numberValue = parseInt(e.target.attributes.dataindex.value)
+    console.log("num value = ", numberValue)
+    setCurrentPageNumber(numberValue);
+
+  }
+
+  const handleContinueButtonPressed = () => {
+    if (currentPageNumber === 1) {
+      // check if all values filled in
+      if (
+        inputValues.client &&
+        inputValues.campaign &&
+        inputValues.product !== undefined &&
+        inputValues.countryCode &&
+        inputValues.platform &&
+        inputValues.duration
+      ) {
+        setInputComplete(true);
+        console.log("complete")
+        setInputsCheckButtonPressed(false);
+        setCurrentPageNumber(2);
+      } else {
+        setInputComplete(false);
+        console.log("not complete")
+        setInputsCheckButtonPressed(true);
+      }
+    }
+    else if (currentPageNumber === 2) {
+      // check if all dropboxes have been filled
+      /*
+      HOLD WHEN MISSING:
+        elevator bint
+          bint image
+        lobby bint
+          l and p image
+        
+        elevator fsa
+          1 image or video
+        lobby fsa
+          1 L image or video
+
+        elevator vsa
+          1 video
+        lobby vsa
+          1 video (used in 2 places.  require it dropped in both l and p?)
+
+        elevator HFSP
+          1 image or video?
+        lobby HFSP
+          l and p image or video
+
+        elevator FSBI
+          image file and SVG
+        lobby FSBI
+          l image, p image, 1 svg
+        
+
+
+
+      */
+      // moving from ad builder to results page:
+      // set file name
+      // set blank file name
+      // set fsValue
+      // fileTypePrefixNoSlash
+      // eORlORp
+      // mediaExtension
+
+      // 
+      setCurrentPageNumber(3);
     }
   };
+
+  const handleAdBuildingNavClick = (e) => {
+    const numberValue = parseInt(e.target.attributes.dataindex.value)
+    console.log(numberValue)
+    setCurrentAdBuildingPageNumber(numberValue)
+  }
 
 
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
+    setProductIndex(inputValues.product)
+
+    // now set all values in inputValues for all values in the data element of current product
+
+    //PRODUCT_DATA[inputValues.product]
+    //Object.keys(courses);
+    //const keys = Object.keys(PRODUCT_DATA.data[inputValues.product]);
+    //console.log('keys = ', keys);
+
+
+    /*
     if (inputValues.product) {
       const searchValue = `${inputValues.product}`;
       var filteredObj = Data.products.find(function (item, i) {
@@ -121,7 +199,7 @@ function App() {
         }
       });
     }
-
+    */
   };
 
   useEffect(() => {
@@ -163,7 +241,6 @@ function App() {
       inputValues.campaign &&
       inputValues.product &&
       inputValues.countryCode &&
-      inputValues.mediaType &&
       inputValues.duration
     ) {
       setInputComplete(true);
@@ -179,7 +256,6 @@ function App() {
     inputValues.campaign,
     inputValues.countryCode,
     inputValues.duration,
-    inputValues.mediaType,
     inputValues.product,
   ]);
 
@@ -192,6 +268,15 @@ function App() {
 
   // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
+    // if this is setting elevator or lobby, change currentAdBuildingPageNumber to show either elev or lfp
+    if (name === 'platform') {
+      if (value === 'elevator') {
+        setCurrentAdBuildingPageNumber(1)
+      }
+      else {
+        setCurrentAdBuildingPageNumber(2)
+      }
+    }
     setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
@@ -363,46 +448,73 @@ function App() {
 
 
   return (
+    <div className='bgImageContainer'>
+      <div className="appContainer">
+        <div className='topSub'></div>
+        <div className='contentSub'>
 
-    <div className="appContainer">
-      <div className='topSub'></div>
-      <div className='contentSub'>
+
+          <div className={`inputsPage page ${currentPageNumber === 1 ? "active-page" : ""}`}>
+            <Inputs
+              productIndex={productIndex}
+              inputValues={inputValues}
+              handleAnyInputsChange={handleAnyInputsChange}
+              inputsCheckButtonPressed={inputsCheckButtonPressed}
+            />
+          </div>
+          <div className={`adBuildingPage page ${currentPageNumber === 2 ? "active-page-flex" : ""} ${currentAdBuildingPageNumber === 1 ? "elevator" : currentAdBuildingPageNumber === 2 ? "landscape" : "portrait"}`}>
+            <div className='platformButtonContainer'>
+              <div onClick={handleAdBuildingNavClick} dataindex={1} className={`platformButton ${currentAdBuildingPageNumber === 1 ? "platformButtonOn" : ""} ${inputValues.platform === 'elevator' ? "" : "platformButtonDisabled"}`}>EDU</div>
+              <div onClick={handleAdBuildingNavClick} dataindex={2} className={`platformButton ${currentAdBuildingPageNumber === 2 ? "platformButtonOn" : ""} ${inputValues.platform === 'lobby' ? "" : "platformButtonDisabled"}`}>LFD</div>
+              <div onClick={handleAdBuildingNavClick} dataindex={3} className={`platformButton ${currentAdBuildingPageNumber === 3 ? "platformButtonOn" : ""} ${inputValues.platform === 'lobby' ? "" : "platformButtonDisabled"}`}>PFD</div>
+            </div>
+
+            <div className={`adBuildingPageContent ${currentAdBuildingPageNumber === 1 ? "elevator" : currentAdBuildingPageNumber === 2 ? "landscape" : "portrait"}`}>
+
+              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 1 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+                <PageElevator
+                  productIndex={productIndex}
+                  inputValues={inputValues}
+                  handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
+                />
+              </div>
+
+              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 2 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+                <PageLFD
+                  productIndex={productIndex}
+                  inputValues={inputValues}
+                  handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
+                />
+              </div>
+
+              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 3 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+                <PagePFD
+                  productIndex={productIndex}
+                  inputValues={inputValues}
+                  handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
+              </div>
 
 
-        <div className={`page ${menuButtonIndex === 1 ? "active-page" : ""}`}>
-          <Inputs
-            productIndex={productIndex}
-            inputValues={inputValues}
-            handleAnyInputsChange={handleAnyInputsChange}
-            inputsCheckButtonPressed = {inputsCheckButtonPressed}
-          />
+            </div>
+
+          </div>
+
+
+          <div className={`resultsPage page ${currentPageNumber === 3 ? "active-page" : ""}`}>
+            <Results />
+          </div>
         </div>
-        <div className={`elevatorPage page ${menuButtonIndex === 2 ? "active-page" : ""}`}>
-          <PageElevator
-            productIndex={productIndex}
-            inputValues={inputValues}
-            handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
-          />
+
+
+
+        <div className='navSub'>
+          <div className='buttonsHolder'>
+            <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : currentPageNumber === 2 ? "enabled" : currentPageNumber === 3 ? "enabled" : "disabled"}`} id='b1'>1</div>
+            <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber === 3 ? "enabled" : "disabled"}`} id='b1'>2</div>
+            <div onClick={circleButtonClickHandler} dataindex={3} className='circleButton disabled' id='b1'>3</div>
+          </div>
+          <div className='continueButton' onClick={handleContinueButtonPressed}>CONTINUE</div>
         </div>
-        <div className={`page ${menuButtonIndex === 3 ? "active-page" : ""}`}>
-          <PageLFD />
-        </div>
-        <div className={`page ${menuButtonIndex === 4 ? "active-page" : ""}`}>
-          <PagePFD />
-        </div>
-
-
-
-
-
-      </div>
-      <div className='navSub'>
-        <div className='buttonsHolder'>
-          <div className='circleButton circleButtonEnabled' id='b1'>1</div>
-          <div className='circleButton' id='b1'>2</div>
-          <div className='circleButton' id='b1'>3</div>
-        </div>
-        <div className='continueButton' onClick={continueFromStepOne}>CONTINUE</div>
       </div>
       {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
 

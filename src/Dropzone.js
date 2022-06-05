@@ -21,7 +21,10 @@ const rejectStyle = {
   borderWidth: 4,
 };
 
+
 function Dropzone(props) {
+
+  const [mediaType, setMediaType] = useState("image")
   const [files, setFiles] = useState([]);
   const handleDropzoneChange = (name, value) => {
     props.handleAllDropzoneChanges(name, value, props.droppedFileType);
@@ -31,9 +34,10 @@ function Dropzone(props) {
     useDropzone({
       maxFiles: 1,
       accept: ['image/jpeg', 'image/png', 'video/mp4', "image/svg+xml"],
-     
+
       onDrop: (acceptedFiles) => {
-      
+        
+
         setFiles(
           acceptedFiles.map((file) =>
             Object.assign(file, {
@@ -45,7 +49,16 @@ function Dropzone(props) {
         const newFile = acceptedFiles[0];
         handleDropzoneChange("payload", newFile);
 
-        if (props.assetType !== "video") {
+        console.log("dropped and name is ", newFile.name)
+        const nameArray = newFile.name.split(".");
+        const ext = nameArray[1];
+        
+        if(ext === 'mp4'){
+          setMediaType("video");
+        }
+
+        if (mediaType !== "video") {
+          console.log("dropped and image")
           const i = new Image();
           i.onload = () => {
             let reader = new FileReader();
@@ -61,7 +74,7 @@ function Dropzone(props) {
               //setExpectedType(expectedFileTypeInner);
 
               //setExpectedSize(Data.products[props.productIndex].maxFileSize);
-              
+
               handleDropzoneChange("width", i.width);
               handleDropzoneChange("height", i.height);
               handleDropzoneChange("type", newFile.type);
@@ -74,6 +87,7 @@ function Dropzone(props) {
             i.src = newFile.preview;
           }
         } else {
+          console.log("dropped and video")
           // need to interrogate video for its secrets
           const video = document.createElement("video");
           video.addEventListener("canplay", (event) => {
@@ -87,15 +101,15 @@ function Dropzone(props) {
           video.src = URL.createObjectURL(newFile);
 
         }
-       
+
       },
     });
 
   const style = useMemo(() => ({
-      ...baseStyle,
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
+    ...baseStyle,
+    ...(isDragAccept ? acceptStyle : {}),
+    ...(isDragReject ? rejectStyle : {}),
+  }),
     [isDragAccept, isDragReject]
   );
 
@@ -125,8 +139,8 @@ function Dropzone(props) {
         <div {...getRootProps({ style })} className="dropZone">
           <input {...getInputProps()} />
         </div>
-        <div className="droppedImageHolder">{props.assetType === 'image' ? imagePreview : videoPreview}</div>
-       
+        <div className="droppedImageHolder">{mediaType === 'image' ? imagePreview : videoPreview}</div>
+
       </div>
     </div>
   );

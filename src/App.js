@@ -39,11 +39,14 @@ import PageLFD from './pages/PageLFD';
 import PagePFD from './pages/PagePFD';
 import Inputs from "./pages/Inputs";
 import Results from "./pages/Results";
-import PRODUCT_DATA from "./DATA_PRODUCTS_FULL"
+import DATA_PRODUCTS from "./DATA_PRODUCTS"
 
 function App() {
 
+  // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+
+  // elevator, lfd, pfd
   const [currentAdBuildingPageNumber, setCurrentAdBuildingPageNumber] = useState(1);
 
   const [productIndex, setProductIndex] = useState(4);
@@ -75,17 +78,92 @@ function App() {
   const [blankFilename, setBlankFilename] = useState();
 
   // dropped images and video files
-  const [elevatorFile, setElevatorFile] = useState({});
+  const [elevatorFile, setElevatorFile] = useState({});  //14
   const [lfdFile, setLfdFile] = useState({});
   const [pfdFile, setPfdFile] = useState({});
-  const [svgFile, setSvgFile] = useState({});
-  const [standardAdFile, setStandardAdFile] = useState({});
+  const [svgFile, setSvgFile] = useState({}); // 17
+  const [standardAdFile, setStandardAdFile] = useState({}); //18
+
+  const [allDroppedFilenames, setAllDroppedFilenames] = useState([])
+  const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([])
 
   const [mediaExtension, setMediaExtension] = useState();
 
   // inputValues is passed to Input which is then passed to each select and text box
   // those children pass the data up to the handleAnyInputChange() function
 
+  const getFilename = () => {
+    //refreshtest_15_widget1_us_e-bint
+    //refreshtest_15_fsastatic_us_fs_e-fsa 
+
+    const productNumber = parseInt(inputValues.product)
+
+    const clientName = inputValues.client;
+    const duration = inputValues.duration;
+    const desc = inputValues.campaign;
+    const countryCode = inputValues.countryCode;
+    const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
+    const fsValue = DATA_PRODUCTS.data[productNumber].isFS ? "_fs" : ""
+    const product = DATA_PRODUCTS.data[productNumber].label;
+
+    return (`${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`)
+
+  }
+
+  const getDroppedFileName = (filenameString, typeString) => {
+    /*
+    heineken_15_dryjanuary22_us_fs_e-fsa_video
+
+    filename + (elp) + videoORImage . same extension
+
+    elevator file
+    lfd file
+    pfd file
+    svg file
+    standard ad
+    */
+    
+    console.log("trying to split ", filenameString)
+    
+    const baseFilename = getFilename();
+    const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
+    const nameSplit = filenameString.split(".");
+    const ext = nameSplit[1];
+    const videoOrImageString = ext === "mp4" ? "video" : 'image'
+    let returnValue = '';
+
+    if (typeString === 'svg') {
+      returnValue = (`${baseFilename}.${ext}`)
+    }
+    else if (typeString === 'stdandardAd') {
+      returnValue = (`${baseFilename}.${ext}`)
+    }
+    else {
+      returnValue = (`${baseFilename}_${eORl}${videoOrImageString}.${ext}`)
+    }
+
+    return returnValue
+
+  }
+
+  const getAllDroppedNewFilenames = () => {
+    return ([
+      getDroppedFileName(elevatorFile.name, "e"),
+      getDroppedFileName(lfdFile.name, "l"),
+      getDroppedFileName(pfdFile.name, "p"),
+      getDroppedFileName(svgFile.name,'svg'),
+      getDroppedFileName(standardAdFile.name, 'standardAd')
+    ])
+  }
+  const getAllDroppedFilenames = () => {
+    return ([
+      elevatorFile.name,
+      lfdFile.name,
+      pfdFile.name,
+      svgFile.name,
+      standardAdFile.name
+    ])
+  }
   ////////////////////////////////////////////////////////
 
   const circleButtonClickHandler = (e) => {
@@ -144,9 +222,6 @@ function App() {
           image file and SVG
         lobby FSBI
           l image, p image, 1 svg
-        
-
-
 
       */
       // moving from ad builder to results page:
@@ -156,7 +231,10 @@ function App() {
       // fileTypePrefixNoSlash
       // eORlORp
       // mediaExtension
-
+      console.log('filename = ', getFilename())
+      setFilename(getFilename)
+      setAllDroppedFilenames(getAllDroppedFilenames)
+      setAllDroppedNewFilenames(getAllDroppedNewFilenames)
       // 
       setCurrentPageNumber(3);
     }
@@ -173,6 +251,13 @@ function App() {
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
     setProductIndex(inputValues.product)
+
+    // clear all files and previews
+    setElevatorFile({})
+    setLfdFile({})
+    setPfdFile({})
+    setSvgFile({})
+    setStandardAdFile({})
 
     // now set all values in inputValues for all values in the data element of current product
 
@@ -311,28 +396,59 @@ function App() {
       }
     }
   };
-  const handleLFDDropzoneChanges = (name, value) => {
-    setLfdFile((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    // get extension
-    if (name === "name") {
-      const splitValue = value.split(".");
-      setMediaExtension(splitValue[1]);
+  const handleLFDDropzoneChanges = (name, value, droppedFileType) => {
+    if (droppedFileType === 'svg') {
+      setSvgFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-  };
-  const handlePFDDropzoneChanges = (name, value) => {
-    setPfdFile((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-    // get extension
-    if (name === "name") {
-      const splitValue = value.split(".");
-      setMediaExtension(splitValue[1]);
+    else if (droppedFileType === 'standardAd') {
+      console.log("setting standard ad")
+      setStandardAdFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-  };
+    else {
+      setLfdFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      // get extension
+      if (name === "name") {
+        const splitValue = value.split(".");
+        setMediaExtension(splitValue[1]);
+      }
+    }
+  }
+
+  const handlePFDDropzoneChanges = (name, value, droppedFileType) => {
+    if (droppedFileType === 'svg') {
+      setSvgFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+    else if (droppedFileType === 'standardAd') {
+      console.log("setting standard ad")
+      setStandardAdFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+    else {
+      setPfdFile((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      // get extension
+      if (name === "name") {
+        const splitValue = value.split(".");
+        setMediaExtension(splitValue[1]);
+      }
+    };
+  }
 
   ///////////////////////////////////////////////
 
@@ -499,9 +615,8 @@ function App() {
 
           </div>
 
-
           <div className={`resultsPage page ${currentPageNumber === 3 ? "active-page" : ""}`}>
-            <Results />
+            <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
           </div>
         </div>
 

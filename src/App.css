@@ -1,6 +1,25 @@
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Avenir-Roman";
   margin: 0;
   padding: 0;
+  /* font-size: 62.5%; */
+}
+html{ font-size: 62.5%}
+
+:root {
+  --primary: #d81e5b;
+  --secondary: #8c38ff;
+  --dark: #131a26;
+  --light: #eee;
+  --neutral: #e4e4ee;
+
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+  --standard-box-shadow-color: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
 }
 
 @font-face {
@@ -19,7 +38,7 @@
 
 .titleText {
   font-family: "Avenir-Heavy";
-  font-size: 15px;
+  font-size: 1.5rem;
   color: white;
   margin-bottom: 10px;
   font-weight: 700;
@@ -27,7 +46,7 @@
 
 .standardText {
   font-family: "Avenir-Roman";
-  font-size: 18px;
+  font-size: 1.8rem;
   color: white;
 }
 .standardTextError {
@@ -36,7 +55,7 @@
 
 .resultsTitleText {
   font-family: "Avenir-Heavy";
-  font-size: 15px;
+  font-size: 1.5rem;
   color: white;
   margin-bottom: 7px;
   font-weight: 700;
@@ -45,39 +64,20 @@
 .resultsTextHolder {
   font-family: "Avenir-Roman";
   padding-left: 10px;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 2.1;
   color: white;
   width: 388px;
-  height: 37px;
+  min-height: 37px;
   border-radius: 1px;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
-  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  box-shadow: var(--standard-box-shadow-color);
   margin-bottom: 20px;
 }
-
-
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  font-family: "Avenir-Roman";
-}
-
-:root {
-  --primary: #d81e5b;
-  --secondary: #8c38ff;
-  --dark: #131a26;
-  --light: #eee;
-  --neutral: #e4e4ee;
-
-  --select-border: #777;
-  --select-focus: blue;
-  --select-arrow: var(--select-border);
-}
-
-
 
 .appContainer {
   width: 1280px;
@@ -88,13 +88,11 @@
   align-items: center;
   position: relative;
 
-
   font-family: "Avenir-Roman";
 }
 
 .bgImageContainer {
-
-  background-image: url('./assets/bg3.png');
+  background-image: url("./assets/bg3.png");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
@@ -131,8 +129,6 @@
   flex-direction: column;
 }
 
-
-
 .active-page {
   display: block;
   width: 100%;
@@ -154,11 +150,10 @@
   height: 393px;
 }
 
-
 .errorMessage {
   color: red;
   margin-left: 20px;
-  font-size: 25px;
+  font-size: 2.5rem;
 }
 
 .adBuildingPage {
@@ -167,18 +162,17 @@
   display: flex;
 }
 
-
-.adBuildingPage.elevator{
+.adBuildingPage.elevator {
   padding-left: 26.4%;
-  padding-right: 26.4%;
+  /* padding-right: 26.4%; */
 }
-.adBuildingPage.landscape{
+.adBuildingPage.landscape {
   padding-left: 19.5%;
-  padding-right: 19.5%;
+  /* padding-right: 19.5%; */
 }
-.adBuildingPage.portrait{
+.adBuildingPage.portrait {
   padding-left: 37.3%;
-  padding-right: 37.3%;
+  /* padding-right: 37.3%; */
 }
 
 .adBuildingPage .platformButtonContainer {
@@ -190,18 +184,22 @@
   width: 515px;
   height: 100%;
   border-radius: 5px;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
-  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  box-shadow: var(--standard-box-shadow-color);
   padding: 10px;
 }
 .adBuildingPage .adBuildingPageContent.elevator {
-  width: 515px;
+  width: 530px;
 }
 .adBuildingPage .adBuildingPageContent.landscape {
-  width: 693px;
+  width: 706px;
 }
 .adBuildingPage .adBuildingPageContent.portrait {
-  width: 237px;
+  width: 223px;
 }
 
 .adBuildingPageInner {
@@ -220,15 +218,18 @@
   justify-content: center;
 }
 
-
 .platformButton {
   border-radius: 5px;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
-  box-shadow: 0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33);
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  box-shadow: var(--standard-box-shadow-color);
   width: 100%;
   height: 54px;
   font-family: "Avenir-Heavy";
-  font-size: 16px;
+  font-size: 1.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -238,7 +239,11 @@
 }
 
 .platformButtonOn {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(255, 255, 255, 0.2) 100%);
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
 }
 
 .platformButtonDisabled {

@@ -11,6 +11,7 @@ const L_fsbi = (props) => {
     position: "absolute",
     right: "50px",
     top: "25px",
+    zIndex: '100'
   };
 
   const handleAllDropzoneChanges = (name, value) => {

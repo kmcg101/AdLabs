@@ -52,12 +52,15 @@ function Dropzone(props) {
         console.log("dropped and name is ", newFile.name)
         const nameArray = newFile.name.split(".");
         const ext = nameArray[1];
+        console.log('ext = ', ext)
         
         if(ext === 'mp4'){
+          console.log("setting mediaType to video")
           setMediaType("video");
         }
 
-        if (mediaType !== "video") {
+        /// this is always set to image even when dropping video
+        if (ext !== "mp4") {
           console.log("dropped and image")
           const i = new Image();
           i.onload = () => {
@@ -91,6 +94,7 @@ function Dropzone(props) {
           // need to interrogate video for its secrets
           const video = document.createElement("video");
           video.addEventListener("canplay", (event) => {
+            console.log("video loaded")
             handleDropzoneChange("width", video.videoWidth);
             handleDropzoneChange("height", video.videoHeight);
             handleDropzoneChange("type", newFile.type);
@@ -122,6 +126,7 @@ function Dropzone(props) {
       </div>
     </div>
   ));
+
   const videoPreview = files.map((file) => (
     <div key={file.name}>
       <div className="dropzoneImageParent">

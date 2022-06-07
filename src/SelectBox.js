@@ -16,9 +16,12 @@ function SelectBox(props) {
 
     control: (provided, state) => ({
       ...provided,
+      // fontSize: "4.5rem",
+      // lineHeight: "3.5rem",
       color: "white",
       height: "28px",
       background: "linear-gradient(0deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
+      
       
       borderRadius: "0px",
       boxShadow: 'none',
@@ -37,7 +40,7 @@ function SelectBox(props) {
 
     option: (provided, state) => ({
       ...provided,
-      fontSize: "15px",
+      fontSize: "1.5rem",
       color: "white",
       "&:hover": {
         background: "rgba(0,155,219,.5)"

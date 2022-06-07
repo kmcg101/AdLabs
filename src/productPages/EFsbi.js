@@ -14,7 +14,8 @@ const E_fsbi =  (props) => {
         border: 'solid black 1px',
         position: 'absolute',
         right: "50px",
-        top: '25px'
+        top: '25px',
+        zIndex: '100'
     }
     return (
         <div className='elevatorProductContainer'>

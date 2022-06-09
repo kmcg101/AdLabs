@@ -3,6 +3,7 @@
     height: 100%;
     position: absolute;
     object-fit: fill;
+    box-sizing: border-box;
   }
   .droppedImageHolder{
     object-fit: fill;
@@ -10,6 +11,13 @@
     width: 100%;
     height: 100%;
   }
+  .droppedImageHolder img{
+    object-fit: contain;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
 
   .dropzoneImageGrandParent{
     overflow: hidden;

@@ -7,10 +7,19 @@ const L_fsa = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
+
+  const lFullScreen = {
+    width: "79.5%",
+    height: "93%",
+    position: "absolute",
+    left: "140px",
+    top: "0px",
+    zIndex: "100"
+}
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div className="lFullScreen">
+      <div style={lFullScreen} className="lFullScreen">
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

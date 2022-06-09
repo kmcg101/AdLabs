@@ -6,17 +6,14 @@ import background from "../assets/ehfsp.png";
 
 
 const hfspMedia = {
-    position: "relative",
-    width: "98%",
+    position: "absolute",
+    width: "97%",
     height: "58%",
-    marginBottom: '5px',
-    border: '1px black solid'
+    top: '7px',
+    left: '8px',
+    zIndex: "100"
 }
-const hfspContent = {
-    width: "98%",
-    height: "38%",
-    border: '1px black solid'
-}
+
 
 
 const E_hfsp = (props) => {
@@ -30,7 +27,6 @@ const E_hfsp = (props) => {
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
             <div style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
-            <div style={hfspContent}></div>
         </div>
     )
 };

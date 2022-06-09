@@ -8,22 +8,14 @@ const P_vsa = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const pVsaImage = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
+    width: "48%",
+    height: "49%",
+    zIndex: "100",
     position: "absolute",
-    left: "150px",
-    top: "10px",
+    left: "8px",
+    top: "7px",
   };
-  const pVsaContent = {
-    width: "36.5%",
-    height: "60%",
-    border: "solid pink 1px",
-    position: "absolute",
-    left: "370px",
-    top: "85px",
-    color: "white",
-  };
+ 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
@@ -35,7 +27,6 @@ const P_vsa = (props) => {
           droppedFileType="portrait"
         />
       </div>
-      <div style={pVsaContent}>Content</div>
     </div>
   );
 };

@@ -4,6 +4,22 @@ import '../App.css'
 
 const Results = (props) => {
 
+
+  const resultsFullPage = {
+    width: '100%',
+    height: '100%',
+    display: 'flex'
+  }
+  
+  const resultsLeftColumn = {
+    marginRight: "50px"
+  }
+
+  const resultsRightColumn = {
+   
+  }
+  
+
     const inputValues = props.inputValues;
     const filename = props.filename
     const allDroppedFilenames = props.allDroppedFilenames;
@@ -26,7 +42,7 @@ const Results = (props) => {
         <li style={ulStyle}>{items}</li>
     );
 
-   
+
     const listOfReturnedFiles = () => {
         return (
             <div>
@@ -40,8 +56,8 @@ const Results = (props) => {
     }
 
     return (
-        <div className='inputsFullPage'>
-            <div className='inputsLeftColumn'>
+        <div style={resultsFullPage}>
+            <div style={resultsLeftColumn}>
                 <div className='resultsSegmentContainer'>
                     <div className='resultsTitleText'>AD NAME:</div>
                     <div className='resultsTextHolder'>{filename}</div>
@@ -52,7 +68,7 @@ const Results = (props) => {
                 </div>
 
             </div>
-            <div className='inputsRightColumn'>
+            <div style={resultsRightColumn}>
                 <div className='resultsSegmentContainer'>
                     <div className='resultsTitleText'>AD FILES FOR DOWNLOAD:</div>
                     <div className='resultsTextHolder'>{listOfReturnedFiles()}</div>

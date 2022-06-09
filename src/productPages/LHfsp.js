@@ -4,21 +4,14 @@ import Dropzone from "../Dropzone";
 import background from "../assets/lhfsp.png";
 
 const L_hfsp = (props) => {
-  const lHfspContent = {
-    width: "79%",
-    height: "150px",
-    position: "absolute",
-    left: "140px",
-    top: "0px",
-    border: "3px pink solid",
-  };
+  
   const lHalfScreen = {
     position: "absolute",
-    left: "140px",
-    top: "175px",
-    width: "79%",
-    height: "150px",
-    border: "3px pink solid",
+    left: "150px",
+    top: "12px",
+    width: "77.5%",
+    height: "241px",
+    zIndex: "100"
   };
 
   const handleAllDropzoneChanges = (name, value) => {
@@ -35,7 +28,6 @@ const L_hfsp = (props) => {
           droppedFileType="landscape"
         />
       </div>
-      <div style={lHfspContent}></div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import './pages/inputs.css'
-// import './App.css'
+import './pages/inputs.css'
 
 
 
@@ -20,17 +20,17 @@ function SelectBox(props) {
       // lineHeight: "3.5rem",
       color: "white",
       height: "28px",
-      background: "linear-gradient(0deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
-      
-      
+      background: "linear-gradient(180deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
+
+
       borderRadius: "0px",
       boxShadow: 'none',
       "&:hover": {
         border: '1px #009bdb solid'
       },
-      
-      
-      
+
+
+
       // need to create a true false to make this work
       border: inputsCheckButtonPressed && isValueSelected === false ? 0 : '1px',
       border: inputsCheckButtonPressed && isValueSelected === false ? "1px red solid" : "none",
@@ -40,7 +40,7 @@ function SelectBox(props) {
 
     option: (provided, state) => ({
       ...provided,
-      fontSize: "1.5rem",
+      fontSize: "1.2rem",
       color: "white",
       "&:hover": {
         background: "rgba(0,155,219,.5)"
@@ -64,7 +64,7 @@ function SelectBox(props) {
 
     menu: (provided, state) => ({
       ...provided,
-      background: "linear-gradient(0deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
+      background: "linear-gradient(180deg, rgba(0,0,0,.6) 100%, rgba(0,0,0,.2) 0%)",
       marginTop: "-10px",
       marginBottom: 0,
 
@@ -94,14 +94,16 @@ function SelectBox(props) {
 
   };
 
-  const handleAnyInputsChange = (e, action) =>{
+  const handleAnyInputsChange = (e, action) => {
     setIsValueSelected(true)
     props.handleAnyInputsChange(action.name, e.value)
   }
   return (
     <div id={props.varID}>
       <label className='titleText'>{props.label}</label>
+
       <Select
+        className={`${inputsCheckButtonPressed && isValueSelected === false ? "textInputErrorShake" : ""}`}
         styles={styles}
         placeholder="select..."
         name={props.varID}
@@ -116,7 +118,7 @@ function SelectBox(props) {
             primary25: 'rgba(0,0,0,0)',
 
           },
-        
+
         })}
       ></Select>
     </div>

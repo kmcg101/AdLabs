@@ -11,7 +11,6 @@ const E_fsbi =  (props) => {
     const eFSBILogo = {
         width: "20%",
         height: "20%",
-        border: 'solid black 1px',
         position: 'absolute',
         right: "50px",
         top: '25px',

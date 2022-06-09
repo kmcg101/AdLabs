@@ -27,23 +27,7 @@ const Inputs = (props) => {
             <div className='inputsFullPage'>
                 <div className='inputsLeftColumn'>
                     
-                    {/* <label>CLIENT NAME:</label>
-                    <input
-                        type='text'
-                        value={inputValues.company}
-                        onChange={handleAnyInputsChange}
-                        name='client'
-                        >
-                    </input>
-                    <label>CAMPAIGN:</label>
-                    <input
-                        type='text'
-                        value={inputValues.company}
-                        onChange={handleAnyInputsChange}
-                        name=
-                        >
-                    </input> */}
-                    
+                                     
                     <TextBox 
                         isError={false}
                         value={props.inputValues.client}

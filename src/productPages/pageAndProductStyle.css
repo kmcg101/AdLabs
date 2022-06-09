@@ -6,15 +6,7 @@
     position: relative;
 }
 
-.eStandardAd {
-    margin-bottom: 24px;
-    width: 75%;
-    height: 56.25%;
-    border: solid black 1px;
-    position: relative;
-    overflow: hidden;
-    z-index: 100;
-}
+
 
 video {
     object-fit: scale-down;
@@ -23,14 +15,12 @@ video {
 .eHSContentNarrow {
     width: 75%;
     height: 32.9%;
-    border: solid black 1px;
     z-index: 100;
 }
 
 .eFullScreen {
     width: 100%;
     height: 100%;
-    border: solid black 1px;
     position: relative;
     z-index: 100;
 }
@@ -76,23 +66,7 @@ video {
 
 /* **************** Landscape Windows ****************** */
 
-.lBint {
-    width: 100px;
-    height: 300px;
-    position: absolute;
-    top: 0px;
-    left: 500px;
-    border: pink 3px solid;
-}
 
-.lStandardAd {
-    width: 300px;
-    height: 168px;
-    position: absolute;
-    top: 0px;
-    left: 140px;
-    border: pink 3px solid;
-}
 
 .lHSContent {
     width: 300px;
@@ -100,14 +74,4 @@ video {
     position: absolute;
     top: 187px;
     left: 140px;
-    border: pink 3px solid;
-}
-.lFullScreen {
-    width: 79%;
-    height: 91%;
-    border: solid pink 3px;
-    position: absolute;
-    z-index: 100;
-    left: 140px;
-    top: 0px;
 }

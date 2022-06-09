@@ -5,22 +5,14 @@ import background from "../assets/lvsa.png";
 
 const L_vsa = (props) => {
   const vsaImage = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
+    width: "28%",
+    height: "88%",
     position: "absolute",
-    left: "150px",
-    top: "10px",
+    left: "166px",
+    top: "11px",
+    zIndex: "100"
   };
-  const vsaContent = {
-    width: "36.5%",
-    height: "60%",
-    border: "solid pink 1px",
-    position: "absolute",
-    left: "370px",
-    top: "85px",
-    color: "white",
-  };
+ 
 
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
@@ -36,7 +28,6 @@ const L_vsa = (props) => {
           droppedFileType="landscape"
         />
       </div>
-      <div style={vsaContent}>Content</div>
     </div>
   );
 };

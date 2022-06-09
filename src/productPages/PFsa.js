@@ -8,18 +8,18 @@ const P_fsa = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const pFullScreen = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
+    width: "99%",
+    height: "74%",
     position: "absolute",
-    left: "150px",
-    top: "10px",
+    left: "0px",
+    top: "0px",
+    zIndex: "100"
   };
 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div className={pFullScreen}>
+      <div style={pFullScreen}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

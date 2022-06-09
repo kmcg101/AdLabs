@@ -8,21 +8,14 @@ const P_hfsp = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
 
-  const pHfspContent = {
-    width: "79%",
-    height: "150px",
-    position: "absolute",
-    left: "140px",
-    top: "0px",
-    border: "3px pink solid",
-  };
+  
   const pHalfScreen = {
     position: "absolute",
-    left: "140px",
-    top: "175px",
-    width: "79%",
-    height: "150px",
-    border: "3px pink solid",
+    left: "8px",
+    top: "5px",
+    width: "91%",
+    height: "190px",
+    zIndex: "100"
   };
 
   return (
@@ -36,7 +29,6 @@ const P_hfsp = (props) => {
           droppedFileType="portrait"
         />
       </div>
-      <div style={pHfspContent}></div>
     </div>
   );
 };

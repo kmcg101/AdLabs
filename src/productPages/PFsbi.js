@@ -9,18 +9,18 @@ const P_fsbi = (props) => {
   };
 
   const pFullScreen = {
-    width: "20%",
-    height: "20%",
-    border: "solid black 1px",
+    width: "99%",
+    height: "74%",
     position: "absolute",
-    right: "50px",
-    top: "25px",
+    left: "0px",
+    top: "0px",
+    zIndex: "100"
   };
 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div className={pFullScreen}>
+      <div style={pFullScreen}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

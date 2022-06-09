@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import './pages/inputs.css'
 
 function TextBox(props) {
-    const [valueIsValid, setValueIsValid] = useState(true)
+    const [valueIsValid, setValueIsValid] = useState(false)
 
     const handleAnyInputsChange = (e) => {
         const name = e.target.name;
@@ -29,7 +29,7 @@ function TextBox(props) {
             <div className='textBoxInner'>
                 <label className="titleText">{props.label}</label>
                 <div className=''>
-                    <input className={`standardText ${inputsCheckButtonPressed &&  valueIsValid === false ? "textInputError": "" }`}
+                    <input className={`standardText ${inputsCheckButtonPressed &&  valueIsValid === false ? "textInputErrorShake textInputErrorOutline": "" }`}
                         
                         type='text'
                         name={props.varID}

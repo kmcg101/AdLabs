@@ -7,12 +7,33 @@ const L_bint = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
+
+
+  const lBint =  {
+    top: "10px",
+    left: "597px",
+    width: "89px",
+    height: "360px",
+    position: "absolute",
+    zIndex: "100"
+}
+
+  const lStandardAd = {
+    top: "12px",
+    left: "151px",
+    width: "427px",
+    height: "238px",
+    position: "absolute",
+    zIndex: "100"
+}
+
+
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
 
-      <div className="lStandardAd">
-        Standard
+      <div style={lStandardAd} className="lStandardAd">
+       
         <Dropzone
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
@@ -21,8 +42,8 @@ const L_bint = (props) => {
           droppedFileType="standardAd"
         />
       </div>
-      <div className="lBint">
-        BINT
+      <div style={lBint} className="lBint">
+        
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -30,7 +51,7 @@ const L_bint = (props) => {
           droppedFileType="landscape"
         />
       </div>
-      <div className="lHSContent">Content0</div>
+     
     </div>
   );
 };

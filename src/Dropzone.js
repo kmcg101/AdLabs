@@ -1,15 +1,17 @@
 import React, { useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
+import bgImage from "./assets/dropzoneBGImage.png";
 
 const baseStyle = {
-  borderWidth: 1,
   borderRadius: 2,
-  borderColor: "blue",
-  borderStyle: "dashed",
+  border: "white dashed 2px",
   color: "#bdbdbd",
   outline: "none",
   transition: "border .24s ease-in-out",
+  backgroundImage: "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
+  
+  
 };
 const acceptStyle = {
   borderColor: "#00e676",
@@ -20,6 +22,13 @@ const rejectStyle = {
   borderColor: "#ff1744",
   borderWidth: 4,
 };
+const dzBackgroundImage = {
+  width: "100%",
+  height: "100%",
+  backgroundImage: `url(${bgImage})`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+}
 
 
 function Dropzone(props) {
@@ -142,6 +151,7 @@ function Dropzone(props) {
     <div>
       <div className="dropzoneImageGrandParent">
         <div {...getRootProps({ style })} className="dropZone">
+          <div style={dzBackgroundImage} className='dzBackgroundImage'></div>
           <input {...getInputProps()} />
         </div>
         <div className="droppedImageHolder">{mediaType === 'image' ? imagePreview : videoPreview}</div>

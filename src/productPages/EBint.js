@@ -10,13 +10,22 @@ const E_bint = (props) => {
     }
     
     const eBINTImage = {
-        width: "20.3%",
-        height: "95.2%",
+        width: "21%",
+        height: "95%",
         position: 'absolute',
-        right: "10px",
-        top: '0px',
-        border: 'solid black 1px',
+        right: "7px",
+        top: '7px',
         zIndex: 100
+    }
+    const eStandardAd = {
+    
+        width: "75%",
+        height: "56.25%",
+        position: "absolute",
+        marginLeft: "7px",
+        marginTop: "8px",
+        overflow: "hidden",
+        zIndex: "100"
     }
 
     return (
@@ -25,11 +34,11 @@ const E_bint = (props) => {
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
             
-            <div className='eStandardAd'>
+            <div style={eStandardAd}className='eStandardAd'>
                 <Dropzone isStandardAd="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='standardAd'/>
             </div>
            
-            <div className='eHSContentNarrow'></div>
+            
             <div style={eBINTImage}>    
                 <Dropzone                      handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
             </div>

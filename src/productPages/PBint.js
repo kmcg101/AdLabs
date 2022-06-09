@@ -7,37 +7,27 @@ const P_bint = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
-
-  const pHSContent = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
-    position: "absolute",
-    left: "150px",
-    top: "10px",
-  };
   const pBint = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
+    width: "95%",
+    height: "16%",
     position: "absolute",
-    left: "150px",
-    top: "10px",
+    left: "5px",
+    top: "7px",
+    zIndex: "100"
   };
   const pStandardAd = {
-    width: "24%",
-    height: "60%",
-    border: "solid black 1px",
+    width: "95%",
+    height: "29%",
     position: "absolute",
-    left: "150px",
-    top: "10px",
+    left: "5px",
+    top: "80px",
+    zIndex: "100"
   };
 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div className={pStandardAd}>
-        Standard
+      <div style={pStandardAd}>
         <Dropzone
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
@@ -46,8 +36,7 @@ const P_bint = (props) => {
           droppedFileType="standardAd"
         />
       </div>
-      <div className={pBint}>
-        BINT
+      <div style={pBint}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -55,7 +44,6 @@ const P_bint = (props) => {
           droppedFileType="portrait"
         />
       </div>
-      <div className={pHSContent}>Content0</div>
     </div>
   );
 };

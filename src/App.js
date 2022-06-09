@@ -62,8 +62,8 @@ function App() {
   // these are all the values in the current product's data file
   const [productValues, setProductValues] = useState({})
   const [inputValues, setInputValues] = useState({
-    client: "",
-    campaign: "",
+    //client: "",
+    //campaign: "",
     //mediaType: 'image'
     //product: 'e-bint'
     //duration: 15,
@@ -123,20 +123,27 @@ function App() {
     standard ad
     */
     
-    console.log("trying to split ", filenameString)
+    console.log("typestring = ", typeString)
     
     const baseFilename = getFilename();
     const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
-    const nameSplit = filenameString.split(".");
+    const nameSplit = typeof(filenameString) === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[1];
     const videoOrImageString = ext === "mp4" ? "video" : 'image'
     let returnValue = '';
 
-    if (typeString === 'svg') {
+    if(typeof(filenameString) === "undefined"){
+      //console.log("after split, returning undefined ", )
+      returnValue = undefined;
+    }
+    else if (typeString === 'svg') {
       returnValue = (`${baseFilename}.${ext}`)
     }
-    else if (typeString === 'stdandardAd') {
+    else if (typeString === 'standardAd') {
       returnValue = (`${baseFilename}.${ext}`)
+    }
+    else if (typeString === 'p') {
+      returnValue = (`${baseFilename}_p${videoOrImageString}.${ext}`)
     }
     else {
       returnValue = (`${baseFilename}_${eORl}${videoOrImageString}.${ext}`)
@@ -609,9 +616,11 @@ function App() {
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
               </div>
-
+              
 
             </div>
+            <div className='platformButtonContainer'></div>
+
 
           </div>
 

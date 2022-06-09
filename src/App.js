@@ -46,16 +46,13 @@ function App() {
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-  // elevator, lfd, pfd
-  const [currentAdBuildingPageNumber, setCurrentAdBuildingPageNumber] = useState(1);
-
   const [productIndex, setProductIndex] = useState(4);
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
 
   const [menuButtonIndex, setMenuButtonIndex] = useState(1);
   const [inputComplete, setInputComplete] = useState(false);
 
-  const [isElevator, setIsElevator] = useState();
+  const [isElevator, setIsElevator] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState();
   const [requiresBlankFile, setRequiresBlankFile] = useState();
 
@@ -122,17 +119,16 @@ function App() {
     svg file
     standard ad
     */
-    
-    console.log("typestring = ", typeString)
-    
+
+
     const baseFilename = getFilename();
     const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
-    const nameSplit = typeof(filenameString) === "undefined" ? "" : filenameString.split(".");
+    const nameSplit = typeof (filenameString) === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[1];
     const videoOrImageString = ext === "mp4" ? "video" : 'image'
     let returnValue = '';
 
-    if(typeof(filenameString) === "undefined"){
+    if (typeof (filenameString) === "undefined") {
       //console.log("after split, returning undefined ", )
       returnValue = undefined;
     }
@@ -158,7 +154,7 @@ function App() {
       getDroppedFileName(elevatorFile.name, "e"),
       getDroppedFileName(lfdFile.name, "l"),
       getDroppedFileName(pfdFile.name, "p"),
-      getDroppedFileName(svgFile.name,'svg'),
+      getDroppedFileName(svgFile.name, 'svg'),
       getDroppedFileName(standardAdFile.name, 'standardAd')
     ])
   }
@@ -182,6 +178,7 @@ function App() {
 
   const handleContinueButtonPressed = () => {
     if (currentPageNumber === 1) {
+      // moving from inputs to Elevator or LFD
       // check if all values filled in
       if (
         inputValues.client &&
@@ -202,6 +199,11 @@ function App() {
       }
     }
     else if (currentPageNumber === 2) {
+      // moving from elevator/lfd to PFD
+      setCurrentPageNumber(3);
+
+    }
+    else if (currentPageNumber === 3) {
       // check if all dropboxes have been filled
       /*
       HOLD WHEN MISSING:
@@ -243,17 +245,9 @@ function App() {
       setAllDroppedFilenames(getAllDroppedFilenames)
       setAllDroppedNewFilenames(getAllDroppedNewFilenames)
       // 
-      setCurrentPageNumber(3);
+      setCurrentPageNumber(4);
     }
   };
-
-  const handleAdBuildingNavClick = (e) => {
-    const numberValue = parseInt(e.target.attributes.dataindex.value)
-    console.log(numberValue)
-    setCurrentAdBuildingPageNumber(numberValue)
-  }
-
-
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
@@ -353,20 +347,20 @@ function App() {
 
   ///////////////////////////////////////////////////////
 
-  const handleTabClick = (ind) => {
-    //console.log(ind)
-    setMenuButtonIndex(ind);
-  };
+  // const handleTabClick = (ind) => {
+  //   //console.log(ind)
+  //   setMenuButtonIndex(ind);
+  // };
 
   // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
     // if this is setting elevator or lobby, change currentAdBuildingPageNumber to show either elev or lfp
     if (name === 'platform') {
       if (value === 'elevator') {
-        setCurrentAdBuildingPageNumber(1)
+        setIsElevator(true)
       }
       else {
-        setCurrentAdBuildingPageNumber(2)
+        setIsElevator(false)
       }
     }
     setInputValues((prevState) => ({
@@ -585,24 +579,22 @@ function App() {
               inputsCheckButtonPressed={inputsCheckButtonPressed}
             />
           </div>
-          <div className={`adBuildingPage page ${currentPageNumber === 2 ? "active-page-flex" : ""} ${currentAdBuildingPageNumber === 1 ? "elevator" : currentAdBuildingPageNumber === 2 ? "landscape" : "portrait"}`}>
-            <div className='platformButtonContainer'>
-              <div onClick={handleAdBuildingNavClick} dataindex={1} className={`platformButton ${currentAdBuildingPageNumber === 1 ? "platformButtonOn" : ""} ${inputValues.platform === 'elevator' ? "" : "platformButtonDisabled"}`}>EDU</div>
-              <div onClick={handleAdBuildingNavClick} dataindex={2} className={`platformButton ${currentAdBuildingPageNumber === 2 ? "platformButtonOn" : ""} ${inputValues.platform === 'lobby' ? "" : "platformButtonDisabled"}`}>LFD</div>
-              <div onClick={handleAdBuildingNavClick} dataindex={3} className={`platformButton ${currentAdBuildingPageNumber === 3 ? "platformButtonOn" : ""} ${inputValues.platform === 'lobby' ? "" : "platformButtonDisabled"}`}>PFD</div>
-            </div>
+          {/* this is the building page that gets turned on for steps 2 3 adn 4 */}
+          <div className={`adBuildingPage page ${currentPageNumber === 2 || currentPageNumber === 3 ? "active-page-flex" : ""} ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
+            {/* this is the part with the gradient background and 10px padding*/}
+            <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
 
-            <div className={`adBuildingPageContent ${currentAdBuildingPageNumber === 1 ? "elevator" : currentAdBuildingPageNumber === 2 ? "landscape" : "portrait"}`}>
-
-              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 1 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              {/* elevator */}
+              <div className={`adBuildingPageInner ${currentPageNumber === 2  && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageElevator
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
                 />
               </div>
-
-              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 2 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              
+              {/* lfd */}
+              <div className={`adBuildingPageInner ${currentPageNumber === 2  && isElevator === false ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageLFD
                   productIndex={productIndex}
                   inputValues={inputValues}
@@ -610,21 +602,23 @@ function App() {
                 />
               </div>
 
-              <div className={`adBuildingPageInner ${currentAdBuildingPageNumber === 3 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              {/* pfd */}
+              <div className={`adBuildingPageInner ${currentPageNumber === 3 && isElevator === false ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PagePFD
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
               </div>
-              
+
+
 
             </div>
-            <div className='platformButtonContainer'></div>
+
 
 
           </div>
 
-          <div className={`resultsPage page ${currentPageNumber === 3 ? "active-page" : ""}`}>
+          <div className={`resultsPage page ${currentPageNumber === 4 ? "active-page" : ""}`}>
             <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
           </div>
         </div>
@@ -633,9 +627,10 @@ function App() {
 
         <div className='navSub'>
           <div className='buttonsHolder'>
-            <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : currentPageNumber === 2 ? "enabled" : currentPageNumber === 3 ? "enabled" : "disabled"}`} id='b1'>1</div>
-            <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber === 3 ? "enabled" : "disabled"}`} id='b1'>2</div>
-            <div onClick={circleButtonClickHandler} dataindex={3} className='circleButton disabled' id='b1'>3</div>
+            <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>1</div>
+            <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>2</div>
+            <div onClick={circleButtonClickHandler} dataindex={3} className={`circleButton ${currentPageNumber === 3 ? "current" : currentPageNumber > 3 ? "enabled" : "disabled"}`}>3</div>
+            <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 4 ? "current" : "disabled"}`}>4</div>
           </div>
           <div className='continueButton' onClick={handleContinueButtonPressed}>CONTINUE</div>
         </div>

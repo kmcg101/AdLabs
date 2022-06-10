@@ -25,6 +25,8 @@
 
 import './assets/fonts/Avenir-Roman-12.ttf';
 
+import { getManifestFile, getBlankManifest, getBlankHTML } from './Utilities'
+import { getHTMLFile } from './TemplateFactory'
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
@@ -50,24 +52,23 @@ function App() {
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
 
   const [menuButtonIndex, setMenuButtonIndex] = useState(1);
-  const [inputComplete, setInputComplete] = useState(false);
+  //const [inputComplete, setInputComplete] = useState(false);
 
   const [isElevator, setIsElevator] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState();
-  const [requiresBlankFile, setRequiresBlankFile] = useState();
+  const [requiresBlankFile, setRequiresBlankFile] = useState(false);
 
   // these are all the values in the current product's data file
   const [productValues, setProductValues] = useState({})
   const [inputValues, setInputValues] = useState({
-    //client: "",
-    //campaign: "",
-    //mediaType: 'image'
+    client: "",
+    campaign: "",
+    
     //product: 'e-bint'
     //duration: 15,
     //country: 'us'
     // isElevator: null,
     // isFullScreen: null,
-    // requiresBlankFile:
 
   });
 
@@ -90,11 +91,7 @@ function App() {
   // those children pass the data up to the handleAnyInputChange() function
 
   const getFilename = () => {
-    //refreshtest_15_widget1_us_e-bint
-    //refreshtest_15_fsastatic_us_fs_e-fsa 
-
     const productNumber = parseInt(inputValues.product)
-
     const clientName = inputValues.client;
     const duration = inputValues.duration;
     const desc = inputValues.campaign;
@@ -103,24 +100,18 @@ function App() {
     const fsValue = DATA_PRODUCTS.data[productNumber].isFS ? "_fs" : ""
     const product = DATA_PRODUCTS.data[productNumber].label;
 
+    try {
+      setBlankFilename(
+        `${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`
+      );
+    } catch {
+      console.log("not yet");
+    }
     return (`${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`)
-
   }
 
-  const getDroppedFileName = (filenameString, typeString) => {
-    /*
-    heineken_15_dryjanuary22_us_fs_e-fsa_video
-
-    filename + (elp) + videoORImage . same extension
-
-    elevator file
-    lfd file
-    pfd file
-    svg file
-    standard ad
-    */
-
-
+  const getNewNameForDroppedFile = (filenameString, typeString) => {
+  
     const baseFilename = getFilename();
     const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
     const nameSplit = typeof (filenameString) === "undefined" ? "" : filenameString.split(".");
@@ -129,7 +120,6 @@ function App() {
     let returnValue = '';
 
     if (typeof (filenameString) === "undefined") {
-      //console.log("after split, returning undefined ", )
       returnValue = undefined;
     }
     else if (typeString === 'svg') {
@@ -149,15 +139,23 @@ function App() {
 
   }
 
+  // these functions are called when landing on the Results page.
+  // they make the arrays that display in the text areas that show filed received and to be delivered
+  // Keep in mind, these are not the same file names that are used to create the files put in the zip file.
+  // these are just for display.
+  // creates an array of all the new file names of files that were dropped
+
+
   const getAllDroppedNewFilenames = () => {
     return ([
-      getDroppedFileName(elevatorFile.name, "e"),
-      getDroppedFileName(lfdFile.name, "l"),
-      getDroppedFileName(pfdFile.name, "p"),
-      getDroppedFileName(svgFile.name, 'svg'),
-      getDroppedFileName(standardAdFile.name, 'standardAd')
+      getNewNameForDroppedFile(elevatorFile.name, "e"),
+      getNewNameForDroppedFile(lfdFile.name, "l"),
+      getNewNameForDroppedFile(pfdFile.name, "p"),
+      getNewNameForDroppedFile(svgFile.name, 'svg'),
+      getNewNameForDroppedFile(standardAdFile.name, 'standardAd')
     ])
   }
+  // creates an array of all names of files that were dropped.
   const getAllDroppedFilenames = () => {
     return ([
       elevatorFile.name,
@@ -188,12 +186,12 @@ function App() {
         inputValues.platform &&
         inputValues.duration
       ) {
-        setInputComplete(true);
+        // setInputComplete(true);
         console.log("complete")
         setInputsCheckButtonPressed(false);
         setCurrentPageNumber(2);
       } else {
-        setInputComplete(false);
+        // setInputComplete(false);
         console.log("not complete")
         setInputsCheckButtonPressed(true);
       }
@@ -204,6 +202,10 @@ function App() {
 
     }
     else if (currentPageNumber === 3) {
+      // this runs when landing on the RESULTS  page.
+
+
+
       // check if all dropboxes have been filled
       /*
       HOLD WHEN MISSING:
@@ -240,12 +242,21 @@ function App() {
       // fileTypePrefixNoSlash
       // eORlORp
       // mediaExtension
-      console.log('filename = ', getFilename())
+      
+      // this sets filename and blank filename
       setFilename(getFilename)
+      const productNumber = parseInt(inputValues.product)
+      setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile)
+      
       setAllDroppedFilenames(getAllDroppedFilenames)
+      
       setAllDroppedNewFilenames(getAllDroppedNewFilenames)
       // 
       setCurrentPageNumber(4);
+    }
+    else if (currentPageNumber === 4) {
+      console.log("do it")
+      deliverTemplateFiles();
     }
   };
 
@@ -259,33 +270,6 @@ function App() {
     setPfdFile({})
     setSvgFile({})
     setStandardAdFile({})
-
-    // now set all values in inputValues for all values in the data element of current product
-
-    //PRODUCT_DATA[inputValues.product]
-    //Object.keys(courses);
-    //const keys = Object.keys(PRODUCT_DATA.data[inputValues.product]);
-    //console.log('keys = ', keys);
-
-
-    /*
-    if (inputValues.product) {
-      const searchValue = `${inputValues.product}`;
-      var filteredObj = Data.products.find(function (item, i) {
-        if (item.product === searchValue) {
-          console.log("found, index = " + i);
-          setProductIndex(i);
-
-          // determine if FS or not
-          setIsFullScreen(Data.products[i].isFullScreen);
-          // determine if Elevator or not
-          setIsElevator(Data.products[i].isElevator);
-          // determine if requires blank file or not
-          setRequiresBlankFile(Data.products[i].requiresBlankFile);
-        }
-      });
-    }
-    */
   };
 
   useEffect(() => {
@@ -294,56 +278,34 @@ function App() {
 
 
 
-  ////////////////////////////////////////////////////////
-
-
-  // this sets the filename.  On filename change (useEffect) the file creation starts
-  const handleDownloadButtonPress = () => {
-
-    const fsValue = isFullScreen ? `_fs` : ``;
-
-    //heineken_15_dryjanuary22_us_fs_l-fsa
-    setFilename(
-      `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}${fsValue}_${inputValues.product}`
-    );
-
-    //refreshtest_15_fsbiblank_us_fs_e-fsbi
-    try {
-      setBlankFilename(
-        `${inputValues.client}_${inputValues.duration}_${Data.products[productIndex].productShortName}blank_${inputValues.countryCode}${fsValue}_${inputValues.product}`
-      );
-    } catch {
-      console.log("not yet");
-    }
-  }
 
   ////////////////////////////////////////////////////////
   // check if all inputs entered. this runs when any input changes
 
-  const checkIfInputComplete = () => {
+  // const checkIfInputComplete = () => {
 
-    if (
-      inputValues.client &&
-      inputValues.campaign &&
-      inputValues.product &&
-      inputValues.countryCode &&
-      inputValues.duration
-    ) {
-      setInputComplete(true);
-    } else {
-      setInputComplete(false);
-    }
-  };
+  //   if (
+  //     inputValues.client &&
+  //     inputValues.campaign &&
+  //     inputValues.product &&
+  //     inputValues.countryCode &&
+  //     inputValues.duration
+  //   ) {
+  //     setInputComplete(true);
+  //   } else {
+  //     setInputComplete(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    checkIfInputComplete();
-  }, [
-    inputValues.client,
-    inputValues.campaign,
-    inputValues.countryCode,
-    inputValues.duration,
-    inputValues.product,
-  ]);
+  // useEffect(() => {
+  //   checkIfInputComplete();
+  // }, [
+  //   inputValues.client,
+  //   inputValues.campaign,
+  //   inputValues.countryCode,
+  //   inputValues.duration,
+  //   inputValues.product,
+  // ]);
 
   ///////////////////////////////////////////////////////
 
@@ -457,29 +419,27 @@ function App() {
   // * zip 'em up
 
   // is ext the same as mediaExtension?
-  const deliverTemplateFiles = ((valH, valM, ext, blankHTML, blankManifest) => {
+  const deliverTemplateFiles = () => {
     const fsValue = isFullScreen ? `_fs` : ``;
-    // const finalFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
-    const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}`;
-    // const finalBlankFileName = `${inputValues.client}_${inputValues.duration}_${Data.products[productIndex].productShortName}blank_${inputValues.countryCode}${fsValue}_${inputValues.product}`;
-    // const fileTypePrefix = ext === "mp4" ? "video/" : "image/";
-    const fileTypePrefixNoSlash = ext === "mp4" ? "video" : "image";
-    // const fileTypeSuffix = ext;
-    // const finalFileType = fileTypePrefix + fileTypeSuffix;
+    
+    const fileTypePrefixNoSlash = mediaExtension === "mp4" ? "video" : "image";
 
     // will eventually need a variable for e l or p.
     const eORl = isElevator ? "e" : "l";
+   
+    const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
+        
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = valH;
+    let contentH = getHTMLFile(filename, isElevator, mediaExtension, productIndex);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });
 
     // manifest file
     //valM is the text of the manifest template passed from TemplateCreator
-    var contentM = valM;
+    var contentM = getManifestFile(filename, isElevator, mediaExtension);
     var blobM = new Blob([contentM], {
       type: "text/plain;charset=utf-8",
     });
@@ -491,13 +451,13 @@ function App() {
 
     if (requiresBlankFile) {
       // blank HTML file
-      let contentBH = blankHTML;
+      let contentBH = getBlankHTML(blankFilename);
       blobBH = new Blob([contentBH], {
         type: "text/plain;charset=utf-8",
       });
 
       // blank manifest file
-      var contentBM = blankManifest;
+      var contentBM = getBlankManifest(blankFilename);
       blobBM = new Blob([contentBM], {
         type: "text/plain;charset=utf-8",
       });
@@ -513,7 +473,25 @@ function App() {
     const loadElevator = elevatorFile.payload ? elevatorFile.payload.arrayBuffer()
       .then((result) => {
         newZip.file(
-          `${filename}_${eORl}${fileTypePrefixNoSlash}.${mediaExtension}`,
+          `${filename}_e${fileTypePrefixNoSlash}.${mediaExtension}`,
+          result
+        );
+      })
+      : ""
+
+      const loadLFD = lfdFile.payload ? lfdFile.payload.arrayBuffer()
+      .then((result) => {
+        newZip.file(
+          `${filename}_l${fileTypePrefixNoSlash}.${mediaExtension}`,
+          result
+        );
+      })
+      : ""
+      
+      const loadPFD = pfdFile.payload ? pfdFile.payload.arrayBuffer()
+      .then((result) => {
+        newZip.file(
+          `${filename}_p${fileTypePrefixNoSlash}.${mediaExtension}`,
           result
         );
       })
@@ -539,6 +517,8 @@ function App() {
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
+      { file: lfdFile, fn: loadLFD },
+      { file: pfdFile, fn: loadPFD },
       { file: svgFile, fn: loadSVG },
       { file: standardAdFile, fn: loadStandardAd }
     ]
@@ -561,7 +541,7 @@ function App() {
         saveAs(content, `${filename}.zip`)
       });
     })
-  })
+  }
 
 
   return (
@@ -609,16 +589,10 @@ function App() {
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
               </div>
-
-
-
             </div>
-
-
-
           </div>
 
-          <div className={`resultsPage page ${currentPageNumber === 4 ? "active-page" : ""}`}>
+          <div className={`resultsPage page ${currentPageNumber === 4 ? "active-page-flex" : ""}`}>
             <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
           </div>
         </div>
@@ -632,22 +606,19 @@ function App() {
             <div onClick={circleButtonClickHandler} dataindex={3} className={`circleButton ${currentPageNumber === 3 ? "current" : currentPageNumber > 3 ? "enabled" : "disabled"}`}>3</div>
             <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 4 ? "current" : "disabled"}`}>4</div>
           </div>
-          <div className='continueButton' onClick={handleContinueButtonPressed}>CONTINUE</div>
+          <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 4 ? "CREATE AD FILES" : "CONTINUE"}</div>
         </div>
       </div>
-      {/* <div className="appTitle">Captivate Ad Creator 3600x</div> */}
+     
 
-      {/* <TemplateCreator
-        elevatorFile={elevatorFile}
-        inputComplete={inputComplete}
+      {/* { <TemplateCreator
         isElevator={isElevator}
         deliverTemplateFiles={deliverTemplateFiles}
         productIndex={productIndex}
         filename={filename}
         blankFilename={blankFilename}
         mediaExtension={mediaExtension}
-        handleDownloadButtonPress={handleDownloadButtonPress}
-      /> */}
+      /> } */}
 
 
 

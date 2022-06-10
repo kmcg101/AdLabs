@@ -9,7 +9,6 @@ function TextBox(props) {
     const handleAnyInputsChange = (e) => {
         const name = e.target.name;
         const value = e.target.value
-        console.log(name, value)
         props.handleAnyInputsChange(name, value);
         if(value === ""){
             setValueIsValid(false);

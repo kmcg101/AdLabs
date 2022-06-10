@@ -8,12 +8,7 @@ function Template_Creator(props) {
     const filename = props.filename;
     const blankFilename = props.blankFilename;
     const isElevator = props.isElevator;
-
-    const inputComplete = props.inputComplete;
-    const elevatorFile = props.elevatorFile;
     const mediaExtension = props.mediaExtension;
-
-
     const productIndex = props.productIndex;
 
     const videoOrImage = mediaExtension === 'mp4' ? 'video' : 'image'
@@ -34,20 +29,11 @@ function Template_Creator(props) {
             vid_e.play();   
         }`
 
-    const handleDownloadButtonPress = () => {
-        props.handleDownloadButtonPress();
-    }
 
     // pressing the button sets the filename
     function deliverTemplateFiles() {
-        props.deliverTemplateFiles(productArray[productIndex], E_MANIFEST, mediaExtension, BLANK_HTML, BLANK_MANIFEST)
+        props.deliverTemplateFiles()
     }
-
-    useEffect(() => {
-        if (props.inputComplete) {
-            deliverTemplateFiles();
-        }
-    }, [props.filename]);
 
 
 
@@ -603,9 +589,7 @@ function Template_Creator(props) {
     return (
         <div>
             <button
-                //disabled={!inputComplete}
-                disabled={!inputComplete || Object.keys(elevatorFile).length === 0} 
-                onClick={handleDownloadButtonPress}>
+                onClick={deliverTemplateFiles}>
                 Create Files
             </button>
         </div>

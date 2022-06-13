@@ -35,7 +35,7 @@ const L_fsbi = (props) => {
           droppedFileType="landscape"
         />
       </div>
-      <div style={lFSBILogo}>
+      <div className='lFSBISVG' style={lFSBILogo}>
       
         <Dropzone
           isSVG="true"

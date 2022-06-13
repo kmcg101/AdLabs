@@ -19,7 +19,7 @@ const P_vsa = (props) => {
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div style={pVsaImage}>
+      <div class='pVSAImage' style={pVsaImage}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

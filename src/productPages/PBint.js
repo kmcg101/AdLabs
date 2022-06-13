@@ -27,7 +27,7 @@ const P_bint = (props) => {
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div style={pStandardAd}>
+      <div className='pStandardAd' style={pStandardAd}>
         <Dropzone
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
@@ -36,7 +36,7 @@ const P_bint = (props) => {
           droppedFileType="standardAd"
         />
       </div>
-      <div style={pBint}>
+      <div class='pBintAd' style={pBint}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

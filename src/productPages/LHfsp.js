@@ -20,7 +20,7 @@ const L_hfsp = (props) => {
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div style={lHalfScreen}>
+      <div class='lHFSPImage' style={lHalfScreen}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

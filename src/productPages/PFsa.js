@@ -19,7 +19,7 @@ const P_fsa = (props) => {
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div style={pFullScreen}>
+      <div className='pFullScreen' style={pFullScreen}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

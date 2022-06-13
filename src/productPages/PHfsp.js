@@ -21,7 +21,7 @@ const P_hfsp = (props) => {
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div style={pHalfScreen}>
+      <div class='pHFSPImage' style={pHalfScreen}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

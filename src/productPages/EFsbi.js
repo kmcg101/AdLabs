@@ -22,7 +22,7 @@ const E_fsbi =  (props) => {
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
             <div className='eFullScreen'>   <Dropzone               handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
-            <div style={eFSBILogo}>         <Dropzone isSVG="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='svg'/></div>
+            <div className='eFSBISVG' style={eFSBILogo}>         <Dropzone isSVG="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='svg'/></div>
         </div>
     );
 };

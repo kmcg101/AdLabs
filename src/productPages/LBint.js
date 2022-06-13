@@ -32,7 +32,7 @@ const L_bint = (props) => {
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
 
-      <div style={lStandardAd} className="lStandardAd">
+      <div className='lStandardAd' style={lStandardAd} >
        
         <Dropzone
           isStandardAd="true"
@@ -42,7 +42,7 @@ const L_bint = (props) => {
           droppedFileType="standardAd"
         />
       </div>
-      <div style={lBint} className="lBint">
+      <div style={lBint} className="lBintAd">
         
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}

@@ -34,12 +34,12 @@ const E_bint = (props) => {
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
             
-            <div style={eStandardAd}className='eStandardAd'>
+            <div style={eStandardAd} className='eStandardAd'>
                 <Dropzone isStandardAd="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='standardAd'/>
             </div>
            
             
-            <div style={eBINTImage}>    
+            <div class='eBintAd' style={eBINTImage}>    
                 <Dropzone                      handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
             </div>
         </div>

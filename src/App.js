@@ -51,25 +51,13 @@ function App() {
   const [productIndex, setProductIndex] = useState(4);
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
 
-  const [menuButtonIndex, setMenuButtonIndex] = useState(1);
-  //const [inputComplete, setInputComplete] = useState(false);
-
   const [isElevator, setIsElevator] = useState(true);
-  const [isFullScreen, setIsFullScreen] = useState();
   const [requiresBlankFile, setRequiresBlankFile] = useState(false);
 
-  // these are all the values in the current product's data file
-  const [productValues, setProductValues] = useState({})
   const [inputValues, setInputValues] = useState({
     client: "",
     campaign: "",
     
-    //product: 'e-bint'
-    //duration: 15,
-    //country: 'us'
-    // isElevator: null,
-    // isFullScreen: null,
-
   });
 
   const [filename, setFilename] = useState();
@@ -87,9 +75,8 @@ function App() {
 
   const [mediaExtension, setMediaExtension] = useState();
 
-  // inputValues is passed to Input which is then passed to each select and text box
-  // those children pass the data up to the handleAnyInputChange() function
-
+  // this is called when arriving at Results page (4).  Sets filename and blank filename
+  // also used when compiling list of input files and their new names
   const getFilename = () => {
     const productNumber = parseInt(inputValues.product)
     const clientName = inputValues.client;
@@ -111,9 +98,10 @@ function App() {
   }
 
   const getNewNameForDroppedFile = (filenameString, typeString) => {
-  
-    const baseFilename = getFilename();
     const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
+   
+    const baseFilename = getFilename(inputValues, eORl,  DATA_PRODUCTS.data[productIndex].label);
+    
     const nameSplit = typeof (filenameString) === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[1];
     const videoOrImageString = ext === "mp4" ? "video" : 'image'
@@ -235,14 +223,7 @@ function App() {
           l image, p image, 1 svg
 
       */
-      // moving from ad builder to results page:
-      // set file name
-      // set blank file name
-      // set fsValue
-      // fileTypePrefixNoSlash
-      // eORlORp
-      // mediaExtension
-      
+        
       // this sets filename and blank filename
       setFilename(getFilename)
       const productNumber = parseInt(inputValues.product)
@@ -276,43 +257,6 @@ function App() {
     effectHandleProductChange();
   }, [inputValues.product]);
 
-
-
-
-  ////////////////////////////////////////////////////////
-  // check if all inputs entered. this runs when any input changes
-
-  // const checkIfInputComplete = () => {
-
-  //   if (
-  //     inputValues.client &&
-  //     inputValues.campaign &&
-  //     inputValues.product &&
-  //     inputValues.countryCode &&
-  //     inputValues.duration
-  //   ) {
-  //     setInputComplete(true);
-  //   } else {
-  //     setInputComplete(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   checkIfInputComplete();
-  // }, [
-  //   inputValues.client,
-  //   inputValues.campaign,
-  //   inputValues.countryCode,
-  //   inputValues.duration,
-  //   inputValues.product,
-  // ]);
-
-  ///////////////////////////////////////////////////////
-
-  // const handleTabClick = (ind) => {
-  //   //console.log(ind)
-  //   setMenuButtonIndex(ind);
-  // };
 
   // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
@@ -414,17 +358,11 @@ function App() {
   }
 
   ///////////////////////////////////////////////
-
-
   // * zip 'em up
 
-  // is ext the same as mediaExtension?
   const deliverTemplateFiles = () => {
-    const fsValue = isFullScreen ? `_fs` : ``;
-    
     const fileTypePrefixNoSlash = mediaExtension === "mp4" ? "video" : "image";
 
-    // will eventually need a variable for e l or p.
     const eORl = isElevator ? "e" : "l";
    
     const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
@@ -526,8 +464,6 @@ function App() {
       if (obj.file.payload) {
         return obj.fn
       }
-
-
     })
 
     Promise.all(promiseArray).then((e) => {
@@ -597,8 +533,6 @@ function App() {
           </div>
         </div>
 
-
-
         <div className='navSub'>
           <div className='buttonsHolder'>
             <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>1</div>
@@ -610,18 +544,6 @@ function App() {
         </div>
       </div>
      
-
-      {/* { <TemplateCreator
-        isElevator={isElevator}
-        deliverTemplateFiles={deliverTemplateFiles}
-        productIndex={productIndex}
-        filename={filename}
-        blankFilename={blankFilename}
-        mediaExtension={mediaExtension}
-      /> } */}
-
-
-
     </div>
 
 

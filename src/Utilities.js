@@ -1,5 +1,22 @@
 
+export const getFilename = (inputValues, isFS, product) => {
+    console.log("inputValues = ", inputValues)
+    const clientName = inputValues.client;
+    const duration = inputValues.duration;
+    const desc = inputValues.campaign;
+    const countryCode = inputValues.countryCode;
+    const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
+    const fsValue = isFS ? "_fs" : ""
 
+    // try {
+    //   setBlankFilename(
+    //     `${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`
+    //   );
+    // } catch {
+    //   console.log("not yet");
+    // }
+    return (`${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`)
+  }
 
 export function getManifestFile(filename, isElevator, mediaExtension){
     

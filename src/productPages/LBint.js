@@ -11,18 +11,18 @@ const L_bint = (props) => {
 
   const lBint =  {
     top: "10px",
-    left: "597px",
-    width: "89px",
-    height: "360px",
+    left: "1086px",
+    width: "160px",
+    height: "640px",
     position: "absolute",
     zIndex: "100"
 }
 
   const lStandardAd = {
-    top: "12px",
-    left: "151px",
-    width: "427px",
-    height: "238px",
+    top: "10px",
+    left: "271px",
+    width: "768px",
+    height: "432px",
     position: "absolute",
     zIndex: "100"
 }

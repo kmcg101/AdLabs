@@ -31,7 +31,7 @@ const Inputs = (props) => {
                     <TextBox 
                         isError={false}
                         value={props.inputValues.client}
-                        label="CLIENT NAME: v2.1"
+                        label="CLIENT NAME: v2.2"
                         varID="client"
                         handleAnyInputsChange={handleAnyInputsChange}
                         inputsCheckButtonPressed = {inputsCheckButtonPressed}

@@ -105,9 +105,22 @@ html{ font-size: 100%}
   align-items: center;
 }
 
+.topSub .logoContainer{
+  width: 250px;
+  height: auto;
+  
+}
+.topSub .logoContainer img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .topSub {
   width: 100%;
   height: 142px;
+  display: flex;
+  justify-content: center;
 }
 
 .contentSub {
@@ -174,18 +187,8 @@ html{ font-size: 100%}
   width: 100%;
   height: 100%;
   display: flex;
-}
-
-.adBuildingPage.elevator {
   justify-content: center;
-}
-.adBuildingPage.landscape {
-  padding-left: 19.5%;
-  /* padding-right: 19.5%; */
-}
-.adBuildingPage.portrait {
-  padding-left: 40%;
-  /* padding-right: 37.3%; */
+  align-items: center
 }
 
 .adBuildingPage .platformButtonContainer {
@@ -193,26 +196,22 @@ html{ font-size: 100%}
   height: 100%;
 }
 
-.adBuildingPage .adBuildingPageContent {
-  width: 515px;
-  height: 100%;
-  border-radius: 5px;
-  background-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  box-shadow: var(--standard-box-shadow-color);
-  padding: 10px;
-}
+
 .adBuildingPage .adBuildingPageContent.elevator {
-  width: 530px;
+  width: 640px;
+  height: 480px;
+  transform: scale(.82);
 }
 .adBuildingPage .adBuildingPageContent.landscape {
-  width: 706px;
+  width: 1280px;
+  height: 720px;
+  transform: scale(.5527);
 }
 .adBuildingPage .adBuildingPageContent.portrait {
-  width: 223px;
+  width: 720px;
+  height: 1280px;
+  transform: scale(.3109);
+
 }
 
 .adBuildingPageInner {

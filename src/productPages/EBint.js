@@ -10,20 +10,20 @@ const E_bint = (props) => {
     }
     
     const eBINTImage = {
-        width: "21%",
-        height: "95%",
+        width: "130px",
+        height: "457px",
         position: 'absolute',
-        right: "7px",
-        top: '7px',
+        left: "500px",
+        top: '10px',
         zIndex: 100
     }
     const eStandardAd = {
     
-        width: "75%",
-        height: "56.25%",
+        width: "480px",
+        height: "270px",
         position: "absolute",
-        marginLeft: "7px",
-        marginTop: "8px",
+        marginLeft: "10px",
+        marginTop: "10px",
         overflow: "hidden",
         zIndex: "100"
     }

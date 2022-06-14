@@ -7,10 +7,10 @@ import background from "../assets/ehfsp.png";
 
 const hfspMedia = {
     position: "absolute",
-    width: "97%",
-    height: "58%",
-    top: '7px',
-    left: '8px',
+    width: "620px",
+    height: "278px",
+    top: '10px',
+    left: '10px',
     zIndex: "100"
 }
 

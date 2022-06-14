@@ -9,10 +9,10 @@ const L_fsa = (props) => {
   };
 
   const lFullScreen = {
-    width: "79.5%",
-    height: "93%",
+    width: "1024px",
+    height: "680px",
     position: "absolute",
-    left: "140px",
+    left: "256px",
     top: "0px",
     zIndex: "100"
 }

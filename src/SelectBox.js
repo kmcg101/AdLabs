@@ -40,7 +40,7 @@ function SelectBox(props) {
 
     option: (provided, state) => ({
       ...provided,
-      fontSize: "1.2rem",
+      fontSize: "1.0rem",
       color: "white",
       "&:hover": {
         background: "rgba(0,155,219,.5)"

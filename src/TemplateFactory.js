@@ -1250,7 +1250,6 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex) 
     const currentArray = isElevator ? productArrayE : productArrayL
 
     let returnValue = currentArray[productIndex]
-    console.log('currentArray = ', currentArray)
-    console.log('returnValue = ', returnValue)
+   
     return (returnValue)
 }

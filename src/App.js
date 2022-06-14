@@ -31,8 +31,7 @@ import { getHTMLFile } from './TemplateFactory'
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import './nav.css'
-import Data from "./data.json";
-import TemplateCreator from "./templates/Template_Creator.js";
+// import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
@@ -42,6 +41,7 @@ import PagePFD from './pages/PagePFD';
 import Inputs from "./pages/Inputs";
 import Results from "./pages/Results";
 import DATA_PRODUCTS from "./DATA_PRODUCTS"
+import adLabsLogo from './assets/AdLabs.svg'
 
 function App() {
 
@@ -157,7 +157,6 @@ function App() {
 
   const circleButtonClickHandler = (e) => {
     const numberValue = parseInt(e.target.attributes.dataindex.value)
-    console.log("num value = ", numberValue)
     setCurrentPageNumber(numberValue);
 
   }
@@ -483,7 +482,11 @@ function App() {
   return (
     <div className='bgImageContainer'>
       <div className="appContainer">
-        <div className='topSub'></div>
+        <div className='topSub'>
+          <div className='logoContainer'>
+            <img src={adLabsLogo} alt='logo'></img>
+          </div>
+        </div>
         <div className='contentSub'>
 
 
@@ -501,6 +504,7 @@ function App() {
             <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
 
               {/* elevator */}
+              {/* this is what gets turned active/inactive to show/hide */}
               <div className={`adBuildingPageInner ${currentPageNumber === 2  && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageElevator
                   productIndex={productIndex}

@@ -16,7 +16,7 @@ const PageLFD = (props) => {
   }
 
   return (
-    <div className='landscapePageContainer'>
+    <div className='pageContainer'>
     {productIndex === 0 ? <LBint
       handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
       productIndex={productIndex}

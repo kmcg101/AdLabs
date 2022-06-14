@@ -16,7 +16,7 @@ const PagePFD = (props) => {
   }
 
   return (
-    <div className='portraitPageContainer'>
+    <div className='pageContainer'>
     {productIndex === 0 ? <PBint
       handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
       productIndex={productIndex}

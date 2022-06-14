@@ -8,19 +8,19 @@ const P_bint = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const pBint = {
-    width: "95%",
-    height: "16%",
+    width: "672px",
+    height: "210px",
     position: "absolute",
-    left: "5px",
-    top: "7px",
+    left: "10px",
+    top: "10px",
     zIndex: "100"
   };
   const pStandardAd = {
-    width: "95%",
-    height: "29%",
+    width: "692px",
+    height: "432px",
     position: "absolute",
-    left: "5px",
-    top: "80px",
+    left: "13px",
+    top: "258px",
     zIndex: "100"
   };
 

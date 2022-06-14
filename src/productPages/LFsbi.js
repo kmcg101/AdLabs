@@ -5,18 +5,18 @@ import background from "../assets/lfsbi.png";
 
 const L_fsbi = (props) => {
   const lFSBILogo = {
-    width: "17%",
-    height: "20%",
+    width: "160px",
+    height: "160px",
     position: "absolute",
-    right: "17px",
+    left: "1070px",
     top: "10px",
     zIndex: '100'
   };
   const lFullScreen = {
-    width: "79.5%",
-    height: "93%",
+    width: "1024px",
+    height: "680px",
     position: "absolute",
-    left: "140px",
+    left: "256px",
     top: "0px",
     zIndex: "100"
 }

@@ -21,30 +21,19 @@ video {
 .eFullScreen {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0px;
+    left: 0px;
     z-index: 100;
 }
 
-.elevatorPageContainer {
+.pageContainer {
     width: 100%;
     height: 100%;
-    /* padding-left: 12.5%; */
-    /* padding-right: 12.5%; */
+   
 }
 
-.landscapePageContainer {
-    width: 100%;
-    height: 100%;
-    padding-left: 0px;
-    padding-right: 0%;
-}
 
-.portraitPageContainer {
-    width: 100%;
-    height: 100%;
-    padding-left: 0%;
-    padding-right: 0%;
-}
 
 .backgroundImageContainer {
     pointer-events: none;

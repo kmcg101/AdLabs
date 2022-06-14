@@ -8,12 +8,12 @@ const P_vsa = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const pVsaImage = {
-    width: "48%",
-    height: "49%",
+    width: "360px",
+    height: "640px",
     zIndex: "100",
     position: "absolute",
-    left: "8px",
-    top: "7px",
+    left: "10px",
+    top: "10px",
   };
  
   return (

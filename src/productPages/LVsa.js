@@ -5,11 +5,11 @@ import background from "../assets/lvsa.png";
 
 const L_vsa = (props) => {
   const vsaImage = {
-    width: "28%",
-    height: "88%",
+    width: "360px",
+    height: "640px",
     position: "absolute",
-    left: "166px",
-    top: "11px",
+    left: "306px",
+    top: "20px",
     zIndex: "100"
   };
  

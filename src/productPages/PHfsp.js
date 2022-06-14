@@ -11,10 +11,10 @@ const P_hfsp = (props) => {
   
   const pHalfScreen = {
     position: "absolute",
-    left: "8px",
-    top: "5px",
-    width: "91%",
-    height: "190px",
+    left: "10px",
+    top: "10px",
+    width: "672px",
+    height: "210px",
     zIndex: "100"
   };
 

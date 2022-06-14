@@ -9,11 +9,11 @@ const E_fsbi =  (props) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)
     }
     const eFSBILogo = {
-        width: "20%",
-        height: "20%",
+        width: "90px",
+        height: "90px",
         position: 'absolute',
-        right: "50px",
-        top: '25px',
+        left: "500px",
+        top: '10px',
         zIndex: '100'
     }
     return (

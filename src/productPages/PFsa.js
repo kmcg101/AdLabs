@@ -8,8 +8,8 @@ const P_fsa = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const pFullScreen = {
-    width: "99%",
-    height: "74%",
+    width: "720px",
+    height: "960px",
     position: "absolute",
     left: "0px",
     top: "0px",

@@ -4,11 +4,11 @@ import Dropzone from '../Dropzone'
 import background from "../assets/evsa.png";
 
 const vsaImage = {
-    width: "36.5%",
-    height: "86.66%",
+    width: "234px",
+    height: "416px",
     position: 'absolute',
-    left: "12px",
-    top: '12px',
+    left: "14px",
+    top: '14px',
     zIndex: "100"
 }
 

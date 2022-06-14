@@ -15,7 +15,7 @@ const PageElevator = (props) => {
   const inputValues = props.inputValues;
 
   return (
-    <div className='elevatorPageContainer'>
+    <div className='pageContainer'>
       {productIndex === 0 ? <EBint
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}

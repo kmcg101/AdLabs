@@ -28,6 +28,7 @@
   }
   .circleButton.current {
     pointer-events: none;
+    border: 3px solid #009bdb;
   }
   .circleButton.disabled {
     border: 3px solid #ffffff;
@@ -57,5 +58,15 @@
   
   .continueButton:hover {
     border: 2px #009bdb solid;
+  }
+
+  .backButton{
+   
+    background-color: green;
+    position: absolute;
+    top:10px;
+    left:10px;
+    font-size: 2rem;
+    padding: 4px;
   }
   

@@ -20,7 +20,7 @@ const L_vsa = (props) => {
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div class='lVSAImage' style={vsaImage}>
+      <div className='lVSAImage' style={vsaImage}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

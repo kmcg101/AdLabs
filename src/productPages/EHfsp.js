@@ -26,7 +26,7 @@ const E_hfsp = (props) => {
             <div className='backgroundImageContainer'>
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
-            <div class='eHFSPImage' style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
+            <div className='eHFSPImage' style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
         </div>
     )
 };

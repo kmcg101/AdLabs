@@ -155,6 +155,14 @@ function App() {
   }
   ////////////////////////////////////////////////////////
 
+  const handleBackButton = () => {
+    console.log("back")
+    if(currentPageNumber > 1){
+      setCurrentPageNumber(currentPageNumber - 1)
+    }
+
+  }
+
   const circleButtonClickHandler = (e) => {
     const numberValue = parseInt(e.target.attributes.dataindex.value)
     setCurrentPageNumber(numberValue);
@@ -235,7 +243,7 @@ function App() {
       setCurrentPageNumber(4);
     }
     else if (currentPageNumber === 4) {
-      console.log("do it")
+     
       deliverTemplateFiles();
     }
   };
@@ -486,6 +494,9 @@ function App() {
           <div className='logoContainer'>
             <img src={adLabsLogo} alt='logo'></img>
           </div>
+          <button className='backButton' onClick={handleBackButton}>
+            BACK
+          </button>
         </div>
         <div className='contentSub'>
 

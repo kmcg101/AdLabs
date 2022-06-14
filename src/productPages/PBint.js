@@ -36,7 +36,7 @@ const P_bint = (props) => {
           droppedFileType="standardAd"
         />
       </div>
-      <div class='pBintAd' style={pBint}>
+      <div className='pBintAd' style={pBint}>
         <Dropzone
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}

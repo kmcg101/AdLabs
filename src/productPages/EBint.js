@@ -39,7 +39,7 @@ const E_bint = (props) => {
             </div>
            
             
-            <div class='eBintAd' style={eBINTImage}>    
+            <div className='eBintAd' style={eBINTImage}>    
                 <Dropzone                      handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
             </div>
         </div>

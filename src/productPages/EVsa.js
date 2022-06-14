@@ -24,7 +24,7 @@ const E_vsa = (props) => {
             <div className='backgroundImageContainer'>
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
-            <div class='eVSAImage' style={vsaImage}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
+            <div className='eVSAImage' style={vsaImage}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
         </div>
     )
 

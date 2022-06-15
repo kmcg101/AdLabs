@@ -11,16 +11,16 @@ const P_bint = (props) => {
     width: "672px",
     height: "210px",
     position: "absolute",
-    left: "10px",
-    top: "10px",
+    left: "24px",
+    top: "24px",
     zIndex: "100"
   };
   const pStandardAd = {
-    width: "692px",
-    height: "432px",
+    width: "672px",
+    height: "378px",
     position: "absolute",
-    left: "13px",
-    top: "258px",
+    left: "24px",
+    top: "256px",
     zIndex: "100"
   };
 

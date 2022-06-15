@@ -31,9 +31,12 @@ function SelectBox(props) {
 
 
 
-      // need to create a true false to make this work
+      // need to create a tr ue false to make this work
       border: inputsCheckButtonPressed && isValueSelected === false ? 0 : '1px',
-      border: inputsCheckButtonPressed && isValueSelected === false ? "1px red solid" : "none",
+      // border: inputsCheckButtonPressed && isValueSelected === false ? "1px red solid" : "none",
+      boxShadow: inputsCheckButtonPressed && isValueSelected === false ? "0px 0px 8px 1px #0ff": "none"
+
+       
 
 
     }),

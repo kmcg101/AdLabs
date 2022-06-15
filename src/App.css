@@ -105,10 +105,10 @@ html{ font-size: 100%}
   align-items: center;
 }
 
-.topSub .logoContainer{
-  width: 250px;
-  height: auto;
-  
+.logoContainer{
+  position: absolute;
+  top: 0px;
+  transform: scale(.5)
 }
 .topSub .logoContainer img{
   width: 100%;
@@ -121,6 +121,7 @@ html{ font-size: 100%}
   height: 142px;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 }
 
 .contentSub {

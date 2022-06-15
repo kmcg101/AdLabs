@@ -7,8 +7,8 @@ const L_hfsp = (props) => {
   
   const lHalfScreen = {
     position: "absolute",
-    left: "275px",
-    top: "10px",
+    left: "279px",
+    top: "22px",
     width: "982px",
     height: "433px",
     zIndex: "100"

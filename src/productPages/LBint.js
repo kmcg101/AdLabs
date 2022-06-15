@@ -10,8 +10,8 @@ const L_bint = (props) => {
 
 
   const lBint =  {
-    top: "10px",
-    left: "1086px",
+    top: "22px",
+    left: "1081px",
     width: "160px",
     height: "640px",
     position: "absolute",
@@ -19,8 +19,8 @@ const L_bint = (props) => {
 }
 
   const lStandardAd = {
-    top: "10px",
-    left: "271px",
+    top: "22px",
+    left: "276px",
     width: "768px",
     height: "432px",
     position: "absolute",

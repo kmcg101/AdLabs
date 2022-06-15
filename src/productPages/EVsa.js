@@ -7,8 +7,8 @@ const vsaImage = {
     width: "234px",
     height: "416px",
     position: 'absolute',
-    left: "14px",
-    top: '14px',
+    left: "304px",
+    top: '19px',
     zIndex: "100"
 }
 

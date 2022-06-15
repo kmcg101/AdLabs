@@ -5,6 +5,8 @@
 // git push origin master
 // git remote set-url origin git@github.com:kmcg101/app4.git
 
+// remove last commit for when you put unwanted files in it:  git reset --hard HEAD~1
+
 // video or image contain
 // vid or image 100% x 100%, object fit contain or scale down
 // container w and h needs to be set pixels.
@@ -47,6 +49,8 @@ function App() {
 
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  // nav while dropping files 1 or 2 for l p.
+  const [currentBuildNavNumber, setCurrentBuildNavNumber] = useState(1)
 
   const [productIndex, setProductIndex] = useState(4);
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
@@ -57,7 +61,7 @@ function App() {
   const [inputValues, setInputValues] = useState({
     client: "",
     campaign: "",
-    
+
   });
 
   const [filename, setFilename] = useState();
@@ -99,9 +103,9 @@ function App() {
 
   const getNewNameForDroppedFile = (filenameString, typeString) => {
     const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
-   
-    const baseFilename = getFilename(inputValues, eORl,  DATA_PRODUCTS.data[productIndex].label);
-    
+
+    const baseFilename = getFilename(inputValues, eORl, DATA_PRODUCTS.data[productIndex].label);
+
     const nameSplit = typeof (filenameString) === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[1];
     const videoOrImageString = ext === "mp4" ? "video" : 'image'
@@ -156,8 +160,7 @@ function App() {
   ////////////////////////////////////////////////////////
 
   const handleBackButton = () => {
-    console.log("back")
-    if(currentPageNumber > 1){
+    if (currentPageNumber > 1) {
       setCurrentPageNumber(currentPageNumber - 1)
     }
 
@@ -169,13 +172,25 @@ function App() {
 
   }
 
+  const handleELPNavClick = (e) => {
+    const val = parseInt(e.target.dataset.value)
+    setCurrentBuildNavNumber(val)
+
+  }
+  function onlyLettersAndNumbers(str) {
+    return /^[A-Za-z0-9-]*$/.test(str);
+  }
+
   const handleContinueButtonPressed = () => {
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
       if (
+        
         inputValues.client &&
         inputValues.campaign &&
+        onlyLettersAndNumbers(inputValues.client) &&
+        onlyLettersAndNumbers(inputValues.campaign) &&
         inputValues.product !== undefined &&
         inputValues.countryCode &&
         inputValues.platform &&
@@ -192,11 +207,7 @@ function App() {
       }
     }
     else if (currentPageNumber === 2) {
-      // moving from elevator/lfd to PFD
-      setCurrentPageNumber(3);
 
-    }
-    else if (currentPageNumber === 3) {
       // this runs when landing on the RESULTS  page.
 
 
@@ -230,20 +241,20 @@ function App() {
           l image, p image, 1 svg
 
       */
-        
+
       // this sets filename and blank filename
       setFilename(getFilename)
       const productNumber = parseInt(inputValues.product)
       setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile)
-      
+
       setAllDroppedFilenames(getAllDroppedFilenames)
-      
+
       setAllDroppedNewFilenames(getAllDroppedNewFilenames)
       // 
-      setCurrentPageNumber(4);
+      setCurrentPageNumber(3);
     }
-    else if (currentPageNumber === 4) {
-     
+    else if (currentPageNumber === 3) {
+
       deliverTemplateFiles();
     }
   };
@@ -371,9 +382,9 @@ function App() {
     const fileTypePrefixNoSlash = mediaExtension === "mp4" ? "video" : "image";
 
     const eORl = isElevator ? "e" : "l";
-   
+
     const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
-        
+
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
@@ -424,7 +435,7 @@ function App() {
       })
       : ""
 
-      const loadLFD = lfdFile.payload ? lfdFile.payload.arrayBuffer()
+    const loadLFD = lfdFile.payload ? lfdFile.payload.arrayBuffer()
       .then((result) => {
         newZip.file(
           `${filename}_l${fileTypePrefixNoSlash}.${mediaExtension}`,
@@ -432,8 +443,8 @@ function App() {
         );
       })
       : ""
-      
-      const loadPFD = pfdFile.payload ? pfdFile.payload.arrayBuffer()
+
+    const loadPFD = pfdFile.payload ? pfdFile.payload.arrayBuffer()
       .then((result) => {
         newZip.file(
           `${filename}_p${fileTypePrefixNoSlash}.${mediaExtension}`,
@@ -488,12 +499,18 @@ function App() {
 
 
   return (
+
     <div className='bgImageContainer'>
+      <div className='logoContainer'>
+        <img src={adLabsLogo} alt='logo'></img>
+      </div>
       <div className="appContainer">
         <div className='topSub'>
-          <div className='logoContainer'>
-            <img src={adLabsLogo} alt='logo'></img>
+          <div className={`elpNavigatorContainer ${currentPageNumber === 2 ? 'enabled' : "disabled"} `}>
+            <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
+            <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
           </div>
+
           <button className='backButton' onClick={handleBackButton}>
             BACK
           </button>
@@ -510,22 +527,23 @@ function App() {
             />
           </div>
           {/* this is the building page that gets turned on for steps 2 3 adn 4 */}
-          <div className={`adBuildingPage page ${currentPageNumber === 2 || currentPageNumber === 3 ? "active-page-flex" : ""} ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
-            {/* this is the part with the gradient background and 10px padding*/}
-            <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
+          <div className={`adBuildingPage page ${currentPageNumber === 2 ? "active-page-flex" : ""} ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
+
+            {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
+            <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
 
               {/* elevator */}
               {/* this is what gets turned active/inactive to show/hide */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 2  && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageElevator
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
                 />
               </div>
-              
+
               {/* lfd */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 2  && isElevator === false ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageLFD
                   productIndex={productIndex}
                   inputValues={inputValues}
@@ -534,7 +552,7 @@ function App() {
               </div>
 
               {/* pfd */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 3 && isElevator === false ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
+              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PagePFD
                   productIndex={productIndex}
                   inputValues={inputValues}
@@ -543,7 +561,7 @@ function App() {
             </div>
           </div>
 
-          <div className={`resultsPage page ${currentPageNumber === 4 ? "active-page-flex" : ""}`}>
+          <div className={`resultsPage page ${currentPageNumber === 3 ? "active-page-flex" : ""}`}>
             <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
           </div>
         </div>
@@ -552,13 +570,12 @@ function App() {
           <div className='buttonsHolder'>
             <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>1</div>
             <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>2</div>
-            <div onClick={circleButtonClickHandler} dataindex={3} className={`circleButton ${currentPageNumber === 3 ? "current" : currentPageNumber > 3 ? "enabled" : "disabled"}`}>3</div>
-            <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 4 ? "current" : "disabled"}`}>4</div>
+            <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>3</div>
           </div>
-          <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 4 ? "CREATE AD FILES" : "CONTINUE"}</div>
+          <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 3 ? "CREATE AD FILES" : "CONTINUE"}</div>
         </div>
       </div>
-     
+
     </div>
 
 

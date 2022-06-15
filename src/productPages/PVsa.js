@@ -12,8 +12,8 @@ const P_vsa = (props) => {
     height: "640px",
     zIndex: "100",
     position: "absolute",
-    left: "10px",
-    top: "10px",
+    left: "24px",
+    top: "24px",
   };
  
   return (

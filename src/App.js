@@ -36,6 +36,7 @@ import './nav.css'
 //import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import { MaterialPicker } from 'react-color';
 
 import PageElevator from './pages/PageElevator';
 import PageLFD from './pages/PageLFD';

@@ -29,15 +29,13 @@ const Inputs = (props) => {
                     
                                      
                     <TextBox 
-                        isError={false}
                         value={props.inputValues.client}
-                        label="CLIENT NAME: v2.6"
+                        label="CLIENT NAME: v2.7"
                         varID="client"
                         handleAnyInputsChange={handleAnyInputsChange}
                         inputsCheckButtonPressed = {inputsCheckButtonPressed}
                     />
                     <TextBox  
-                        isError={false}
                         value={props.inputValues.campaign}
                         label="DESCRIPTION:"
                         varID="campaign"
@@ -56,6 +54,9 @@ const Inputs = (props) => {
                         inputsCheckButtonPressed = {inputsCheckButtonPressed}
 
                     />
+
+                   
+
                 </div>
 
                 <div className='inputsRightColumn'>

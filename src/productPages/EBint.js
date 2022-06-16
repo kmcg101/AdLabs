@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
 import background from "../assets/ebint.png";
+import { SketchPicker } from 'react-color';
 
 const E_bint = (props) => {
 
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)
     }
-
+    const [bgColor, setBGColor] = useState("#FFFFFF")
     const acceptedFileTypeStringStandardAd = "video/mp4";
     const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
     
@@ -31,11 +32,29 @@ const E_bint = (props) => {
         overflow: "hidden",
         zIndex: "100"
     }
+    const pickerStyle = {
+        position: "absolute",
+        left: "-350px",
+        top: "78px",
+        transform: 'scale(1.2)'
+    }
+    const bgStyle = {
+        backgroundColor: bgColor
+    }
+ 
 
     return (
-        <div className='elevatorProductContainer'>
-            <div className='backgroundImageContainer'>
+        <div  className='elevatorProductContainer'>
+            <div style={bgStyle} className='backgroundImageContainer'>
                 <img alt='' className='backgroundImage' src={background}></img>
+            </div>
+
+            <div  style={pickerStyle}>
+                <SketchPicker 
+                    color={bgColor}
+                    onChangeComplete={ (color) =>{ setBGColor(color.hex) }  }
+                
+                />
             </div>
             
             <div style={eStandardAd} className='eStandardAd'>

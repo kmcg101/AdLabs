@@ -33,7 +33,7 @@ import { getHTMLFile } from './TemplateFactory'
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import './nav.css'
-// import Data from "./data.json";
+//import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
@@ -501,6 +501,7 @@ function App() {
   return (
 
     <div className='bgImageContainer'>
+     
       <div className='logoContainer'>
         <img src={adLabsLogo} alt='logo'></img>
       </div>

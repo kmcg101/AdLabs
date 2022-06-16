@@ -13,7 +13,7 @@
     "jszip": "^3.9.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-dropzone": "^12.0.4",
+    "react-dropzone": "^12.1.0",
     "react-dropzone-uploader": "^2.11.0",
     "react-hooks-worker": "^1.0.4",
     "react-mediainfo": "^0.0.42",

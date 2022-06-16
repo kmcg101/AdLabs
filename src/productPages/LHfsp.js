@@ -14,6 +14,7 @@ const L_hfsp = (props) => {
     zIndex: "100"
   };
   const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
+  
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };

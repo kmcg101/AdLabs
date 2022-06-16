@@ -5,6 +5,7 @@ import background from "../assets/efsbi.png";
 
 const E_fsbi =  (props) => {
     const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
+    
     const acceptedFileTypeStringSVG = "image/svg+xml";
 
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {

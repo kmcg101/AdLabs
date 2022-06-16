@@ -24,6 +24,8 @@ const E_bint = (props) => {
     
         width: "480px",
         height: "270px",
+        left: "10px",
+        top: "10px",
         position: "absolute",
       
         overflow: "hidden",

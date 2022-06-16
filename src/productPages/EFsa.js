@@ -6,6 +6,7 @@ import background from "../assets/efsa.png";
 const E_fsa = (props) => {
  
     const acceptedFileTypeString = "video/mp4";
+
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)
     }

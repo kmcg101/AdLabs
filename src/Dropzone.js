@@ -33,14 +33,27 @@ const dzBackgroundImage = {
 function Dropzone(props) {
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
+  const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString)
 
+  function getHintString(str) {
+    
+    let newString = str.split(",");
+    let stringArrayMap = newString.map(function (value) {
+      let split = value.split("/")
+      return split[1]
+    })
+    return "accepted files: " + stringArrayMap.join(', ');
+    //return "accepted files: ", String(stringArrayMap)
+  }
+
+  const [showHint, setShowHint] = useState(false)
   const [mediaType, setMediaType] = useState("image")
   const [files, setFiles] = useState([]);
   const handleDropzoneChange = (name, value) => {
     props.handleAllDropzoneChanges(name, value, props.droppedFileType);
   };
 
-  const { getRootProps, getInputProps,  isDragActive, isDragAccept, isDragReject } =
+  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } =
     useDropzone({
       maxFiles: 1,
       accept: acceptedFileTypeString,
@@ -156,7 +169,12 @@ function Dropzone(props) {
 
   return (
     <div>
-      <div className="dropzoneImageGrandParent">
+      <div className="dropzoneImageGrandParent"
+        onMouseEnter={() => setShowHint(true)}
+        onMouseLeave={() => setShowHint(false)}
+      >
+
+        <div className={`dropzoneHint ${showHint ? "showIt" : "hideIt"}`}>{acceptedFileTypeMessageString}</div>
         <div {...getRootProps({ style })} className="dropZone">
           <div style={dzBackgroundImage} className='dzBackgroundImage'></div>
           <input {...getInputProps()} />

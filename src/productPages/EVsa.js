@@ -15,6 +15,7 @@ const vsaImage = {
 
 const E_vsa = (props) => {
     const acceptedFileTypeString = "video/mp4";
+    
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)
     }

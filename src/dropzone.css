@@ -110,3 +110,18 @@
   height: 640px;
 }
 
+.dropzoneHint{
+  position: absolute;
+  color: white;
+  display: none;
+  top: 10px;
+  left: 10px;
+  font-size: 1.2rem;
+}
+.dropzoneHint.showIt{
+  display: block;
+}
+.dropzoneHint.hideIt{
+  display: none;
+}
+

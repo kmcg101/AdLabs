@@ -13,6 +13,7 @@ const L_vsa = (props) => {
     zIndex: "100"
   };
  
+  const acceptedFileTypeString = "video/mp4";
 
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
@@ -22,6 +23,7 @@ const L_vsa = (props) => {
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='lVSAImage' style={vsaImage}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

@@ -8,6 +8,9 @@ const E_bint = (props) => {
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)
     }
+
+    const acceptedFileTypeStringStandardAd = "video/mp4";
+    const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
     
     const eBINTImage = {
         width: "130px",
@@ -22,8 +25,7 @@ const E_bint = (props) => {
         width: "480px",
         height: "270px",
         position: "absolute",
-        marginLeft: "10px",
-        marginTop: "10px",
+      
         overflow: "hidden",
         zIndex: "100"
     }
@@ -35,12 +37,12 @@ const E_bint = (props) => {
             </div>
             
             <div style={eStandardAd} className='eStandardAd'>
-                <Dropzone isStandardAd="true"  handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='standardAd'/>
+                <Dropzone acceptedFileTypeString={acceptedFileTypeStringStandardAd} isStandardAd="true" handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='standardAd'/>
             </div>
            
             
             <div className='eBintAd' style={eBINTImage}>    
-                <Dropzone                      handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
+                <Dropzone acceptedFileTypeString={acceptedFileTypeString} handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/>
             </div>
         </div>
     );

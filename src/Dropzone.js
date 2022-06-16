@@ -9,7 +9,7 @@ const baseStyle = {
   // color: "#bdbdbd",
   // outline: "none",
   // transition: "border .24s ease-in-out",
-  // backgroundImage: "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
+  backgroundImage: "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
 };
 
 const acceptStyle = {
@@ -32,6 +32,8 @@ const dzBackgroundImage = {
 
 function Dropzone(props) {
 
+  const acceptedFileTypeString = props.acceptedFileTypeString;
+
   const [mediaType, setMediaType] = useState("image")
   const [files, setFiles] = useState([]);
   const handleDropzoneChange = (name, value) => {
@@ -41,19 +43,7 @@ function Dropzone(props) {
   const { getRootProps, getInputProps,  isDragActive, isDragAccept, isDragReject } =
     useDropzone({
       maxFiles: 1,
-      accept: 'image/*',
-      // accept: [
-      //   'image/jpeg',
-      //   'image/png'
-      // ]
-      //'image/jpeg': ['.jpg'],
-      // 'image/png': ['.png'],
-      // 'video/mp4': ['.mp4'],
-      // 'image/svg+xml': ['.svg']
-
-      // when dropping a file not in the 'accept' list, there is an error getting name.
-      // it seems that the accept list is just what files are accepted after drop
-      // and not what files are not accepted on drag over
+      accept: acceptedFileTypeString,
 
       onDrop: (acceptedFiles) => {
 

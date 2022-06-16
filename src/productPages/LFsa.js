@@ -7,7 +7,7 @@ const L_fsa = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
-
+  const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
   const lFullScreen = {
     width: "1024px",
     height: "680px",
@@ -21,6 +21,7 @@ const L_fsa = (props) => {
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div style={lFullScreen} className="lFullScreen">
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString} 
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

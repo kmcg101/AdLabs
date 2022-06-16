@@ -23,12 +23,15 @@ const P_bint = (props) => {
     top: "256px",
     zIndex: "100"
   };
+  const acceptedFileTypeStringStandardAd = "video/mp4";
+  const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='pStandardAd' style={pStandardAd}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeStringStandardAd} 
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -38,6 +41,7 @@ const P_bint = (props) => {
       </div>
       <div className='pBintAd' style={pBint}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString} 
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

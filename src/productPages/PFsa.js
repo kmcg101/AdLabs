@@ -15,12 +15,14 @@ const P_fsa = (props) => {
     top: "0px",
     zIndex: "100"
   };
+  const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
 
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='pFullScreen' style={pFullScreen}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

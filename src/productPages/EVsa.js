@@ -14,7 +14,7 @@ const vsaImage = {
 
 
 const E_vsa = (props) => {
-
+    const acceptedFileTypeString = "video/mp4";
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)
     }
@@ -24,7 +24,7 @@ const E_vsa = (props) => {
             <div className='backgroundImageContainer'>
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
-            <div className='eVSAImage' style={vsaImage}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
+            <div className='eVSAImage' style={vsaImage}><Dropzone acceptedFileTypeString={acceptedFileTypeString} handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
         </div>
     )
 

@@ -16,12 +16,14 @@ const P_fsbi = (props) => {
     top: "0px",
     zIndex: "100"
   };
-
+  const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
+  const acceptedFileTypeStringSVG = "image/svg+xml";
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='pFullScreen' style={pFullScreen}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

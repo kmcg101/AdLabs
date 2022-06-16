@@ -17,12 +17,13 @@ const P_hfsp = (props) => {
     height: "610px",
     zIndex: "100"
   };
-
+  const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='pHFSPImage' style={pHalfScreen}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

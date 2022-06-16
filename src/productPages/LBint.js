@@ -7,7 +7,8 @@ const L_bint = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
-
+  const acceptedFileTypeStringStandardAd = "video/mp4";
+  const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
 
   const lBint =  {
     top: "22px",
@@ -35,6 +36,7 @@ const L_bint = (props) => {
       <div className='lStandardAd' style={lStandardAd} >
        
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeStringStandardAd} 
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -45,6 +47,7 @@ const L_bint = (props) => {
       <div style={lBint} className="lBintAd">
         
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString} 
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

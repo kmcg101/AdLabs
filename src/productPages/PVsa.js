@@ -15,12 +15,13 @@ const P_vsa = (props) => {
     left: "24px",
     top: "24px",
   };
- 
+  const acceptedFileTypeString = "video/mp4";
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className='pVSAImage' style={pVsaImage}>
         <Dropzone
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

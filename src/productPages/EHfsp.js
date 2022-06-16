@@ -17,7 +17,7 @@ const hfspMedia = {
 
 
 const E_hfsp = (props) => {
-
+    const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)
     }
@@ -26,7 +26,7 @@ const E_hfsp = (props) => {
             <div className='backgroundImageContainer'>
                 <img alt='' className='backgroundImage' src={background}></img>
             </div>
-            <div className='eHFSPImage' style={hfspMedia}><Dropzone handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
+            <div className='eHFSPImage' style={hfspMedia}><Dropzone acceptedFileTypeString={acceptedFileTypeString} handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='elevator'/></div>
         </div>
     )
 };

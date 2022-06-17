@@ -36,7 +36,8 @@ import './nav.css'
 //import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import { MaterialPicker } from 'react-color';
+import ColorPicker from "./ColorPicker"
+
 
 import PageElevator from './pages/PageElevator';
 import PageLFD from './pages/PageLFD';
@@ -45,6 +46,7 @@ import Inputs from "./pages/Inputs";
 import Results from "./pages/Results";
 import DATA_PRODUCTS from "./DATA_PRODUCTS"
 import adLabsLogo from './assets/AdLabs.svg'
+import backButton from './assets/backButtonSmall.png'
 
 function App() {
 
@@ -65,6 +67,8 @@ function App() {
 
   });
 
+  const [bintBGColor, setBintBGColor] = useState("#FFFFFF")
+
   const [filename, setFilename] = useState();
   const [blankFilename, setBlankFilename] = useState();
 
@@ -79,6 +83,7 @@ function App() {
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([])
 
   const [mediaExtension, setMediaExtension] = useState();
+
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
   // also used when compiling list of input files and their new names
@@ -187,7 +192,7 @@ function App() {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
       if (
-        
+
         inputValues.client &&
         inputValues.campaign &&
         onlyLettersAndNumbers(inputValues.client) &&
@@ -497,29 +502,36 @@ function App() {
       });
     })
   }
+  const handleBINTColorChange = (color) => {
+    console.log("color is ", color)
+    setBintBGColor(color)
+  }
 
 
   return (
 
     <div className='bgImageContainer'>
-     
+
       <div className='logoContainer'>
         <img src={adLabsLogo} alt='logo'></img>
       </div>
       <div className="appContainer">
         <div className='topSub'>
-          <div className={`elpNavigatorContainer ${currentPageNumber === 2 ? 'enabled' : "disabled"} `}>
+
+        { currentPageNumber === 2 ? 
+        <div className="elpNavigatorContainer" > 
             <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
             <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
-          </div>
+        </div> : null}
 
-          <button className='backButton' onClick={handleBackButton}>
-            BACK
-          </button>
+          <div className='backButton' onClick={handleBackButton}>
+            <img src={backButton} alt="back"></img>
+          </div>
         </div>
         <div className='contentSub'>
-
-
+          {/* color picker */}
+          { currentPageNumber === 2 && productIndex === 0 ?  <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null }
+          
           <div className={`inputsPage page ${currentPageNumber === 1 ? "active-page" : ""}`}>
             <Inputs
               productIndex={productIndex}
@@ -528,7 +540,7 @@ function App() {
               inputsCheckButtonPressed={inputsCheckButtonPressed}
             />
           </div>
-          {/* this is the building page that gets turned on for steps 2 3 adn 4 */}
+          {/* this is the building page that gets turned on for step 2 */}
           <div className={`adBuildingPage page ${currentPageNumber === 2 ? "active-page-flex" : ""} ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
 
             {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
@@ -538,6 +550,7 @@ function App() {
               {/* this is what gets turned active/inactive to show/hide */}
               <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageElevator
+                  bintBGColor={bintBGColor}
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
@@ -547,6 +560,7 @@ function App() {
               {/* lfd */}
               <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PageLFD
+                  bintBGColor={bintBGColor}
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
@@ -556,6 +570,7 @@ function App() {
               {/* pfd */}
               <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
                 <PagePFD
+                  bintBGColor={bintBGColor}
                   productIndex={productIndex}
                   inputValues={inputValues}
                   handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />

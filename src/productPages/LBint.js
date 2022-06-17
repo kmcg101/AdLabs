@@ -9,15 +9,16 @@ const L_bint = (props) => {
   };
   const acceptedFileTypeStringStandardAd = "video/mp4";
   const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
+  const bintBGColor = props.bintBGColor;
 
-  const lBint =  {
+  const lBint = {
     top: "22px",
     left: "1081px",
     width: "160px",
     height: "640px",
     position: "absolute",
     zIndex: "100"
-}
+  }
 
   const lStandardAd = {
     top: "22px",
@@ -26,17 +27,24 @@ const L_bint = (props) => {
     height: "432px",
     position: "absolute",
     zIndex: "100"
-}
+  }
+  const bgStyle = {
+    backgroundColor: bintBGColor
+  }
 
 
   return (
     <div className="landscapeProductContainer">
-      <img alt="" className="backgroundImageContainer" src={background}></img>
+
+      <div style={bgStyle} className='backgroundImageContainer'>
+        <img alt="" className="backgroundImageContainer" src={background}></img>
+      </div>
+
 
       <div className='lStandardAd' style={lStandardAd} >
-       
+
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeStringStandardAd} 
+          acceptedFileTypeString={acceptedFileTypeStringStandardAd}
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -45,16 +53,16 @@ const L_bint = (props) => {
         />
       </div>
       <div style={lBint} className="lBintAd">
-        
+
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeString} 
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}
           droppedFileType="landscape"
         />
       </div>
-     
+
     </div>
   );
 };

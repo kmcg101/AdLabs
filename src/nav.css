@@ -63,12 +63,11 @@
 }
 
 .backButton {
-  background-color: green;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 2rem;
-  padding: 4px;
+  top: -40px;
+  left: -60px;
+  transform: scale(.4);
+  background-color: transparent;
 }
 
 

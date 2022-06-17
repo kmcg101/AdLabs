@@ -3,7 +3,9 @@ import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import background from "../assets/pbint.png";
 
+
 const P_bint = (props) => {
+  const bintBGColor=props.bintBGColor;
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
@@ -23,12 +25,17 @@ const P_bint = (props) => {
     top: "256px",
     zIndex: "100"
   };
+  const bgStyle = {
+        backgroundColor: bintBGColor
+    }
   const acceptedFileTypeStringStandardAd = "video/mp4";
   const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
 
   return (
     <div className="portraitProductContainer">
-      <img alt="" className="backgroundImageContainer" src={background}></img>
+      <div style={bgStyle} className='backgroundImageContainer'>
+        <img alt="" className="backgroundImageContainer" src={background}></img>
+      </div>
       <div className='pStandardAd' style={pStandardAd}>
         <Dropzone
           acceptedFileTypeString={acceptedFileTypeStringStandardAd} 

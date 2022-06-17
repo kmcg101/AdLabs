@@ -10,6 +10,7 @@ import '../productPages/pageAndProductStyle.css'
 const PagePFD = (props) => { 
   const productIndex = props.productIndex;
   const inputValues = props.inputValues;
+  const  bintBGColor = props.bintBGColor;
 
   const handlePFDDropzoneChanges = (name, value, droppedFileType) => {
     props.handleAllDropzoneChangesParent(name, value, droppedFileType);
@@ -18,6 +19,7 @@ const PagePFD = (props) => {
   return (
     <div className='pageContainer'>
     {productIndex === 0 ? <PBint
+      bintBGColor={bintBGColor}
       handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
       productIndex={productIndex}
     /> : null}

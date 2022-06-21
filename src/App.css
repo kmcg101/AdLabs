@@ -5,6 +5,7 @@
   font-family: "Avenir-Roman";
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   /* font-size: 62.5%; */
 }
 html{ font-size: 100%}
@@ -48,9 +49,6 @@ html{ font-size: 100%}
   font-family: "Avenir-Roman";
   font-size: 1.8rem;
   color: white;
-}
-.standardTextError {
-  border: 1px red solid;
 }
 
 .resultsTitleText {
@@ -133,19 +131,7 @@ html{ font-size: 100%}
   position: relative;
 }
 
-.inputsPage{
-  padding-left: 20%;
-  padding-right: 20%;
-}
-.resultsPage {
-  padding-left: 0%;
-  padding-right: 0%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 
-}
 
 .navSub {
   width: 100%;
@@ -157,11 +143,7 @@ html{ font-size: 100%}
   flex-direction: column;
 }
 
-.active-page {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+
 
 .productPage {
   display: none;
@@ -183,13 +165,22 @@ html{ font-size: 100%}
   margin-left: 20px;
   font-size: 2.5rem;
 }
+/* //////////////////////////
+////////////////  PAGES (step 2)
+///////////////////////////
+*/
 
-.adBuildingPage {
+.page {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center
+}
+.inputsPage{
+  display: block;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
 .adBuildingPage .platformButtonContainer {
@@ -222,14 +213,6 @@ html{ font-size: 100%}
   justify-content: center;
 }
 
-.adBuildingPageInnerInactive {
-  display: none;
-}
-
-.adBuildingPageInnerActive {
-  display: flex;
-  justify-content: center;
-}
 
 .platformButton {
   border-radius: 5px;
@@ -263,28 +246,12 @@ html{ font-size: 100%}
   display: none;
 }
 
-.page {
-  display: none;
-  height: 100%;
-}
-
-.active-page {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.active-page-flex {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
 
 
 .colorPicker{
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 190px;
   /* transform: scale(.8); */
   /* transform-origin: top left; */
 }

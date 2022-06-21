@@ -173,13 +173,16 @@ function Dropzone(props) {
         onMouseEnter={() => setShowHint(true)}
         onMouseLeave={() => setShowHint(false)}
       >
+        {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null }
+        
+        <div className="droppedImageHolder">{mediaType === 'image' ? imagePreview : videoPreview}</div>
 
-        <div className={`dropzoneHint ${showHint ? "showIt" : "hideIt"}`}>{acceptedFileTypeMessageString}</div>
         <div {...getRootProps({ style })} className="dropZone">
           <div style={dzBackgroundImage} className='dzBackgroundImage'></div>
           <input {...getInputProps()} />
         </div>
-        <div className="droppedImageHolder">{mediaType === 'image' ? imagePreview : videoPreview}</div>
+        
+        
 
       </div>
     </div>

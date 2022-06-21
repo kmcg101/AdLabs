@@ -22,7 +22,7 @@ const ColorPicker = (props) => {
         <div style={pickerStyle} className="colorPicker">
             <BlockPicker 
                 triangle="hide"
-                colors="['#ff8a65', '#ba68c8']"
+                
                 color={bgColor}
                 onChangeComplete={(color) => { handleBINTColorChange(color) }}
             />

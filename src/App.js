@@ -518,21 +518,23 @@ function App() {
       <div className="appContainer">
         <div className='topSub'>
 
-        { currentPageNumber === 2 ? 
-        <div className="elpNavigatorContainer" > 
-            <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
-            <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${isElevator ? 'disabled' : currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
-        </div> : null}
+          {currentPageNumber === 2 && !isElevator ?
+            <div className="elpNavigatorContainer" >
+              <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
+              <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
+            </div> : null}
 
           <div className='backButton' onClick={handleBackButton}>
             <img src={backButton} alt="back"></img>
           </div>
         </div>
         <div className='contentSub'>
-          {/* color picker */}
-          { currentPageNumber === 2 && productIndex === 0 ?  <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null }
-          
-          <div className={`inputsPage page ${currentPageNumber === 1 ? "active-page" : ""}`}>
+          {/* color picker, only displayed on page 2 and bint */}
+          {currentPageNumber === 2 && productIndex === 0 ? <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null}
+
+          {/* PAGE 1 */}
+          {currentPageNumber === 1 ? 
+          <div className="inputsPage page">
             <Inputs
               productIndex={productIndex}
               inputValues={inputValues}
@@ -540,47 +542,60 @@ function App() {
               inputsCheckButtonPressed={inputsCheckButtonPressed}
             />
           </div>
-          {/* this is the building page that gets turned on for step 2 */}
-          <div className={`adBuildingPage page ${currentPageNumber === 2 ? "active-page-flex" : ""} ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false ? "landscape" : "portrait"}`}>
+          : null }
+
+          {/* PAGE 2 */}
+          {currentPageNumber === 2 ? 
+          <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"}`}>
 
             {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
             <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
 
               {/* elevator */}
-              {/* this is what gets turned active/inactive to show/hide */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === true ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
-                <PageElevator
-                  bintBGColor={bintBGColor}
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
-                />
-              </div>
+              {currentPageNumber === 2 && isElevator === true ?
+                <div className='adBuildingPageInner'>
+                  <PageElevator
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
+                  />
+                </div>
+                : null}
 
               {/* lfd */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
-                <PageLFD
-                  bintBGColor={bintBGColor}
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
-                />
-              </div>
+              {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ?
+                <div className='adBuildingPageInner'>
+                  <PageLFD
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
+                  />
+                </div>
+                : null}
+
 
               {/* pfd */}
-              <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ? "adBuildingPageInnerActive" : "adBuildingPageInnerInactive"}`}>
-                <PagePFD
-                  bintBGColor={bintBGColor}
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
-              </div>
+              {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ?
+                <div className='adBuildingPageInner'>
+                  <PagePFD
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
+                </div>
+                : null}
             </div>
           </div>
+          : null }
 
-          <div className={`resultsPage page ${currentPageNumber === 3 ? "active-page-flex" : ""}`}>
+          {/* PAGE 3 */}
+          {currentPageNumber === 3 ? 
+          <div className="resultsPage page">
             <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
           </div>
+          : null }
         </div>
 
         <div className='navSub'>
@@ -593,7 +608,7 @@ function App() {
         </div>
       </div>
 
-    </div>
+    </div >
 
 
   );

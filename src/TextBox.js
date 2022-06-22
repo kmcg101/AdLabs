@@ -40,7 +40,7 @@ function TextBox(props) {
                 <div className=''>
                     <input className={`standardText ${inputsCheckButtonPressed &&  valueIsValid === false ? "textInputErrorShake textInputErrorOutline" : allGoodCharacters ? "" : "textInputErrorOutline" }`}
                    
-                        
+                        color='blue'
                         type='text'
                         name={props.varID}
                         value={props.value}

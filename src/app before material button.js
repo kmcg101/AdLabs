@@ -38,6 +38,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import ColorPicker from "./ColorPicker"
 
+
 import PageElevator from './pages/PageElevator';
 import PageLFD from './pages/PageLFD';
 import PagePFD from './pages/PagePFD';
@@ -45,12 +46,7 @@ import Inputs from "./pages/Inputs";
 import Results from "./pages/Results";
 import DATA_PRODUCTS from "./DATA_PRODUCTS"
 import adLabsLogo from './assets/AdLabs.svg'
-
-import { ThemeProvider } from '@material-ui/core'
-import CssBaseline from '@material-ui/core/CssBaseline'
-
-import {ContinueButton, BackButton} from './Buttons'
-import { AppTheme } from './MaterialTheme'
+import backButton from './assets/backButtonSmall.png'
 
 
 
@@ -89,7 +85,7 @@ function App() {
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([])
 
   const [mediaExtension, setMediaExtension] = useState();
-  console.log(React.version)
+
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
   // also used when compiling list of input files and their new names
@@ -194,7 +190,6 @@ function App() {
   }
 
   const handleContinueButtonPressed = () => {
-    console.log("trying")
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
@@ -516,113 +511,107 @@ function App() {
 
 
   return (
-    <ThemeProvider theme={AppTheme}>
-      <CssBaseline />
-      <div className='bgImageContainer'>
 
-        <div className='logoContainer'>
-          <img src={adLabsLogo} alt='logo'></img>
-        </div>
-        <div className="appContainer">
-          <div className='topSub'>
+    <div className='bgImageContainer'>
 
-            {currentPageNumber === 2 && !isElevator ?
-              <div className="elpNavigatorContainer" >
-                <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
-                <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
-              </div> : null}
+      <div className='logoContainer'>
+        <img src={adLabsLogo} alt='logo'></img>
+      </div>
+      <div className="appContainer">
+        <div className='topSub'>
 
-            <BackButton handleBackButton={handleBackButton} />
+          {currentPageNumber === 2 && !isElevator ?
+            <div className="elpNavigatorContainer" >
+              <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 1 ? 'current' : 'enabled'}`}>LFD</div>
+              <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
+            </div> : null}
             
-            
+          <div className='backButton' onClick={handleBackButton}>
+            <img src={backButton} alt="back"></img>
           </div>
-          <div className='contentSub'>
-            {/* color picker, only displayed on page 2 and bint */}
-            {currentPageNumber === 2 && productIndex === 0 ? <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null}
+        </div>
+        <div className='contentSub'>
+          {/* color picker, only displayed on page 2 and bint */}
+          {currentPageNumber === 2 && productIndex === 0 ? <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null}
 
-            {/* PAGE 1 */}
-            {currentPageNumber === 1 ?
-              <div className="inputsPage page">
-                <Inputs
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAnyInputsChange={handleAnyInputsChange}
-                  inputsCheckButtonPressed={inputsCheckButtonPressed}
-                />
-              </div>
-              : null}
+          {/* PAGE 1 */}
+          {currentPageNumber === 1 ? 
+          <div className="inputsPage page">
+            <Inputs
+              productIndex={productIndex}
+              inputValues={inputValues}
+              handleAnyInputsChange={handleAnyInputsChange}
+              inputsCheckButtonPressed={inputsCheckButtonPressed}
+            />
+          </div>
+          : null }
 
-            {/* PAGE 2 */}
-            {currentPageNumber === 2 ?
-              <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"}`}>
+          {/* PAGE 2 */}
+          {currentPageNumber === 2 ? 
+          <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"}`}>
 
-                {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
-                <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
+            {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
+            <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
 
-                  {/* elevator */}
-                  {currentPageNumber === 2 && isElevator === true ?
-                    <div className='adBuildingPageInner'>
-                      <PageElevator
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
-                      />
-                    </div>
-                    : null}
-
-                  {/* lfd */}
-                  {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ?
-                    <div className='adBuildingPageInner'>
-                      <PageLFD
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
-                      />
-                    </div>
-                    : null}
-
-
-                  {/* pfd */}
-                  {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ?
-                    <div className='adBuildingPageInner'>
-                      <PagePFD
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
-                    </div>
-                    : null}
+              {/* elevator */}
+              {currentPageNumber === 2 && isElevator === true ?
+                <div className='adBuildingPageInner'>
+                  <PageElevator
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
+                  />
                 </div>
-              </div>
-              : null}
+                : null}
 
-            {/* PAGE 3 */}
-            {currentPageNumber === 3 ?
-              <div className="resultsPage page">
-                <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
-              </div>
-              : null}
-          </div>
+              {/* lfd */}
+              {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ?
+                <div className='adBuildingPageInner'>
+                  <PageLFD
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
+                  />
+                </div>
+                : null}
 
-          <div className='navSub'>
-            <div className='buttonsHolder'>
-              <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>1</div>
-              <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>2</div>
-              <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>3</div>
+
+              {/* pfd */}
+              {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ?
+                <div className='adBuildingPageInner'>
+                  <PagePFD
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleAllDropzoneChangesParent={handlePFDDropzoneChanges} />
+                </div>
+                : null}
             </div>
-            {/* <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 3 ? "CREATE AD FILES" : "CONTINUE"}</div> */}
-            <ContinueButton
-              currentPageNumber={currentPageNumber}
-              handleContinueButtonPressed={handleContinueButtonPressed}
-            >
-            </ContinueButton>
           </div>
+          : null }
+
+          {/* PAGE 3 */}
+          {currentPageNumber === 3 ? 
+          <div className="resultsPage page">
+            <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
+          </div>
+          : null }
         </div>
 
-      </div >
-    </ThemeProvider>
+        <div className='navSub'>
+          <div className='buttonsHolder'>
+            <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>1</div>
+            <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>2</div>
+            <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>3</div>
+          </div>
+          {/* <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 3 ? "CREATE AD FILES" : "CONTINUE"}</div> */}
+          
+        </div>
+      </div>
+
+    </div >
 
 
   );

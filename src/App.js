@@ -63,6 +63,7 @@ function App() {
 
   const [productIndex, setProductIndex] = useState(4);
   const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false)
+  const [inputsCheckButtonPressedOnce, setInputsCheckButtonPressedOnce] = useState(false)
 
   const [isElevator, setIsElevator] = useState(true);
   const [requiresBlankFile, setRequiresBlankFile] = useState(false);
@@ -196,6 +197,7 @@ function App() {
   }
 
   const handleContinueButtonPressed = () => {
+    setInputsCheckButtonPressedOnce(true);
     console.log("trying")
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
@@ -214,11 +216,16 @@ function App() {
         // setInputComplete(true);
         console.log("complete")
         setInputsCheckButtonPressed(false);
+
         setCurrentPageNumber(2);
       } else {
         // setInputComplete(false);
         console.log("not complete")
         setInputsCheckButtonPressed(true);
+        // set back to false so that error animations will play again
+        setTimeout(() => {
+          setInputsCheckButtonPressed(false);
+        }, "2000")
       }
     }
     else if (currentPageNumber === 2) {
@@ -538,14 +545,14 @@ function App() {
               </div> : null}
 
             {currentPageNumber === 2 ?
-             <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}> </BlackWhiteToggleButton> : null}
+              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}> </BlackWhiteToggleButton> : null}
 
             <BackButton handleBackButton={handleBackButton} />
 
 
           </div>
           <div className='contentSub'>
-           
+
 
             {/* PAGE 1 */}
             {currentPageNumber === 1 ?
@@ -555,6 +562,7 @@ function App() {
                   inputValues={inputValues}
                   handleAnyInputsChange={handleAnyInputsChange}
                   inputsCheckButtonPressed={inputsCheckButtonPressed}
+                  inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
                 />
               </div>
               : null}

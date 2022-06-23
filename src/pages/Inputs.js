@@ -35,6 +35,7 @@ const Inputs = (props) => {
     let DATA_PLATFORM_ARRAY = DATA_PLATFORM.data;
 
     const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
+    const inputsCheckButtonPressedOnce = props.inputsCheckButtonPressedOnce;
 
     const [clientError, setClientError] = useState(true)
     const [campaignError, setCampaignError] = useState(false)
@@ -85,10 +86,11 @@ const Inputs = (props) => {
 
                     <TextBox
                             value={props.inputValues.client}
-                            label="CLIENT NAME: v2.11"
+                            label="CLIENT NAME: v2.12"
                             varID="client"
                             handleAnyInputsChange={handleAnyInputsChange}
                             inputsCheckButtonPressed={inputsCheckButtonPressed}
+                            inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
                         />
                     <TextBox
                         value={props.inputValues.campaign}
@@ -96,6 +98,7 @@ const Inputs = (props) => {
                         varID="campaign"
                         handleAnyInputsChange={handleAnyInputsChange}
                         inputsCheckButtonPressed={inputsCheckButtonPressed}
+                        inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
                     />
 
                     <SelectBox

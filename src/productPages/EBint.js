@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './pageAndProductStyle.css'
 import Dropzone from '../Dropzone'
-import background from "../assets/ebint.png";
+import blackTextImage from "../assets/ebintBlackText.png";
+import whiteTextImage from "../assets/ebintWhiteText.png";
 
 
 const E_bint = (props) => {
@@ -11,9 +12,12 @@ const E_bint = (props) => {
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)
     }
-    const bintBGColor=props.bintBGColor;
     const acceptedFileTypeStringStandardAd = "video/mp4";
     const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
+    const isBlackText = props.isBlackText;
+    const  bintBGColorPre = props.bintBGColor;
+    const bintBGColor = "#" + bintBGColorPre
+    //console.log("bintBGColor = " , bintBGColor)
     
     const eBINTImage = {
         width: "130px",
@@ -24,13 +28,11 @@ const E_bint = (props) => {
         zIndex: 100
     }
     const eStandardAd = {
-    
         width: "480px",
         height: "270px",
         left: "10px",
         top: "10px",
         position: "absolute",
-      
         overflow: "hidden",
         zIndex: "100"
     }
@@ -43,10 +45,9 @@ const E_bint = (props) => {
     return (
         <div  className='elevatorProductContainer'>
             <div style={bgStyle} className='backgroundImageContainer'>
-                <img alt='' className='backgroundImage' src={background}></img>
+                <img alt='' className='backgroundImage' src={isBlackText ? blackTextImage : whiteTextImage}></img>
             </div>
 
-           
             
             <div style={eStandardAd} className='eStandardAd'>
                 <Dropzone acceptedFileTypeString={acceptedFileTypeStringStandardAd} isStandardAd="true" handleAllDropzoneChanges={handleAllDropzoneChanges} droppedFile={props.droppedFile} productIndex={props.productIndex} droppedFileType='standardAd'/>

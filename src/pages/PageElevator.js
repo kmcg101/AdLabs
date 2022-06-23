@@ -14,10 +14,12 @@ const PageElevator = (props) => {
   const productIndex = props.productIndex;
   const inputValues = props.inputValues;
   const  bintBGColor = props.bintBGColor;
+  const isBlackText = props.isBlackText;
 
   return (
     <div className='pageContainer'>
       {productIndex === 0 ? <EBint
+        isBlackText={isBlackText}
         bintBGColor={bintBGColor}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}

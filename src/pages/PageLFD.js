@@ -11,6 +11,7 @@ const PageLFD = (props) => {
   const productIndex = props.productIndex;
   const inputValues = props.inputValues;
   const  bintBGColor = props.bintBGColor;
+  const isBlackText = props.isBlackText;
 
   const handleLFDDropzoneChanges = (name, value, droppedFileType) => {
     props.handleAllDropzoneChangesParent(name, value, droppedFileType);
@@ -19,6 +20,7 @@ const PageLFD = (props) => {
   return (
     <div className='pageContainer'>
     {productIndex === 0 ? <LBint
+      isBlackText={isBlackText}
       bintBGColor={bintBGColor}
       handleAllDropzoneChangesParent={handleLFDDropzoneChanges}
       productIndex={productIndex}

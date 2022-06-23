@@ -1,7 +1,8 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
-import background from "../assets/lbint.png";
+import blackTextImage from "../assets/lbintBlackText.png";
+import whiteTextImage from "../assets/lbintWhiteText.png";
 
 const L_bint = (props) => {
   const handleAllDropzoneChanges = (name, value) => {
@@ -9,7 +10,9 @@ const L_bint = (props) => {
   };
   const acceptedFileTypeStringStandardAd = "video/mp4";
   const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
-  const bintBGColor = props.bintBGColor;
+  const  bintBGColorPre = props.bintBGColor;
+  const bintBGColor = "#" + bintBGColorPre
+  const isBlackText = props.isBlackText;
 
   const lBint = {
     top: "22px",
@@ -30,14 +33,14 @@ const L_bint = (props) => {
   }
   const bgStyle = {
     backgroundColor: bintBGColor
-  }
+}
 
 
   return (
     <div className="landscapeProductContainer">
 
       <div style={bgStyle} className='backgroundImageContainer'>
-        <img alt="" className="backgroundImageContainer" src={background}></img>
+        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
 
 

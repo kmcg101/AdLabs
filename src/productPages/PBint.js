@@ -1,14 +1,19 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
-import background from "../assets/pbint.png";
+import blackTextImage from "../assets/pbintBlackText.png";
+import whiteTextImage from "../assets/pbintWhiteText.png";
 
 
 const P_bint = (props) => {
-  const bintBGColor=props.bintBGColor;
+  const  bintBGColorPre = props.bintBGColor;
+  const bintBGColor = "#" + bintBGColorPre
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
+
+  const isBlackText = props.isBlackText;
+
   const pBint = {
     width: "672px",
     height: "210px",
@@ -26,19 +31,19 @@ const P_bint = (props) => {
     zIndex: "100"
   };
   const bgStyle = {
-        backgroundColor: bintBGColor
-    }
+    backgroundColor: bintBGColor
+  }
   const acceptedFileTypeStringStandardAd = "video/mp4";
   const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
 
   return (
     <div className="portraitProductContainer">
       <div style={bgStyle} className='backgroundImageContainer'>
-        <img alt="" className="backgroundImageContainer" src={background}></img>
+        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
       <div className='pStandardAd' style={pStandardAd}>
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeStringStandardAd} 
+          acceptedFileTypeString={acceptedFileTypeStringStandardAd}
           isStandardAd="true"
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
@@ -48,7 +53,7 @@ const P_bint = (props) => {
       </div>
       <div className='pBintAd' style={pBint}>
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeString} 
+          acceptedFileTypeString={acceptedFileTypeString}
           handleAllDropzoneChanges={handleAllDropzoneChanges}
           droppedFile={props.droppedFile}
           productIndex={props.productIndex}

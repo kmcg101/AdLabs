@@ -36,7 +36,6 @@ import './nav.css'
 //import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import ColorPicker from "./ColorPicker"
 
 import PageElevator from './pages/PageElevator';
 import PageLFD from './pages/PageLFD';
@@ -47,9 +46,10 @@ import DATA_PRODUCTS from "./DATA_PRODUCTS"
 import adLabsLogo from './assets/AdLabs.svg'
 
 import { ThemeProvider } from '@material-ui/core'
+
 import CssBaseline from '@material-ui/core/CssBaseline'
 
-import {ContinueButton, BackButton} from './Buttons'
+import { BlackWhiteToggleButton, ContinueButton, BackButton } from './Buttons'
 import { AppTheme } from './MaterialTheme'
 
 
@@ -73,7 +73,7 @@ function App() {
 
   });
 
-  const [bintBGColor, setBintBGColor] = useState("#FFFFFF")
+  const [bintBGColor, setBintBGColor] = useState("FFFFFF")
 
   const [filename, setFilename] = useState();
   const [blankFilename, setBlankFilename] = useState();
@@ -89,7 +89,9 @@ function App() {
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([])
 
   const [mediaExtension, setMediaExtension] = useState();
-  console.log(React.version)
+
+  const [isBlackText, setIsBlackText] = useState(true);
+
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
   // also used when compiling list of input files and their new names
@@ -510,8 +512,11 @@ function App() {
     })
   }
   const handleBINTColorChange = (color) => {
-    console.log("color is ", color)
+    console.log("color is type ", typeof color)
     setBintBGColor(color)
+  }
+  const handleBlackWhiteToggleChange = () => {
+    setIsBlackText(prevIsBlackText => !prevIsBlackText);
   }
 
 
@@ -532,13 +537,15 @@ function App() {
                 <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
               </div> : null}
 
+            {currentPageNumber === 2 ?
+             <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}> </BlackWhiteToggleButton> : null}
+
             <BackButton handleBackButton={handleBackButton} />
-            
-            
+
+
           </div>
           <div className='contentSub'>
-            {/* color picker, only displayed on page 2 and bint */}
-            {currentPageNumber === 2 && productIndex === 0 ? <ColorPicker handleBINTColorChange={handleBINTColorChange} /> : null}
+           
 
             {/* PAGE 1 */}
             {currentPageNumber === 1 ?
@@ -563,6 +570,7 @@ function App() {
                   {currentPageNumber === 2 && isElevator === true ?
                     <div className='adBuildingPageInner'>
                       <PageElevator
+                        isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
                         inputValues={inputValues}
@@ -575,6 +583,7 @@ function App() {
                   {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ?
                     <div className='adBuildingPageInner'>
                       <PageLFD
+                        isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
                         inputValues={inputValues}
@@ -588,6 +597,7 @@ function App() {
                   {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ?
                     <div className='adBuildingPageInner'>
                       <PagePFD
+                        isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
                         inputValues={inputValues}

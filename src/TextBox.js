@@ -28,8 +28,6 @@ function TextBox(props) {
         }
     };
     const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
-    const inputValues = props.inputValues;
-
 
 
     return (
@@ -39,8 +37,6 @@ function TextBox(props) {
                 <label className="titleText">{props.label}</label>
                 <div className=''>
                     <input className={`standardText ${inputsCheckButtonPressed &&  valueIsValid === false ? "textInputErrorShake textInputErrorOutline" : allGoodCharacters ? "" : "textInputErrorOutline" }`}
-                   
-                        color='blue'
                         type='text'
                         name={props.varID}
                         value={props.value}

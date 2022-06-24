@@ -7,6 +7,9 @@ const E_fsbi =  (props) => {
     const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
     
     const acceptedFileTypeStringSVG = "image/svg+xml";
+    const elevatorFileError = props.elevatorFileError
+    const svgFileError = props.svgFileError
+
 
     const handleAllDropzoneChanges = (name, value, droppedFileType) => {
         props.handleAllDropzoneChangesParent(name, value, droppedFileType)

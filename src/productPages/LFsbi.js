@@ -23,6 +23,10 @@ const L_fsbi = (props) => {
 const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
 const acceptedFileTypeStringSVG = "image/svg+xml";
 
+const lfdFileError = props.lfdFileError
+  const svgFileError = props.svgFileError
+
+
 
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);

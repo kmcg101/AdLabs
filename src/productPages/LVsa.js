@@ -14,6 +14,7 @@ const L_vsa = (props) => {
   };
  
   const acceptedFileTypeString = "video/mp4";
+  const lfdFileError = props.lfdFileError
 
   const handleAllDropzoneChanges = (name, value) => {
     props.handleAllDropzoneChangesParent(name, value);

@@ -7,11 +7,15 @@ import PFsbi from "../productPages/PFsbi";
 
 import '../productPages/pageAndProductStyle.css'
 
-const PagePFD = (props) => { 
+const PagePFD = (props) => {
   const productIndex = props.productIndex;
   const inputValues = props.inputValues;
-  const  bintBGColor = props.bintBGColor;
+  const bintBGColor = props.bintBGColor;
   const isBlackText = props.isBlackText;
+
+  const pfdFileError = props.pfdFileError
+  const svgFileError = props.svgFileError
+  const standardAdFileError = props.standardAdFileError
 
   const handlePFDDropzoneChanges = (name, value, droppedFileType) => {
     props.handleAllDropzoneChangesParent(name, value, droppedFileType);
@@ -19,34 +23,41 @@ const PagePFD = (props) => {
 
   return (
     <div className='pageContainer'>
-    {productIndex === 0 ? <PBint
-      isBlackText={isBlackText}
-      bintBGColor={bintBGColor}
-      handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
-      productIndex={productIndex}
-    /> : null}
-    {productIndex === 1 ? <PFsa
-      handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
-      productIndex={productIndex}
-    /> : null}
-    {productIndex === 2 ? <PHfsp
-      handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
-      productIndex={productIndex}
-    /> : null}
-    {productIndex === 3 ? <PVsa
-      handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
-      productIndex={productIndex}
-    /> : null}
-    {productIndex === 4 ? <PFsbi
-      handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
-      productIndex={productIndex}
-    /> : null}
+      {productIndex === 0 ? <PBint
+        pfdFileError={pfdFileError}
+        standardAdFileError={standardAdFileError}
+        isBlackText={isBlackText}
+        bintBGColor={bintBGColor}
+        handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
+        productIndex={productIndex}
+      /> : null}
+      {productIndex === 1 ? <PFsa
+        pfdFileError={pfdFileError}
+        handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
+        productIndex={productIndex}
+      /> : null}
+      {productIndex === 2 ? <PHfsp
+        pfdFileError={pfdFileError}
+        handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
+        productIndex={productIndex}
+      /> : null}
+      {productIndex === 3 ? <PVsa
+        pfdFileError={pfdFileError}
+        handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
+        productIndex={productIndex}
+      /> : null}
+      {productIndex === 4 ? <PFsbi
+        pfdFileError={pfdFileError}
+        svgFileError={svgFileError}
+        handleAllDropzoneChangesParent={handlePFDDropzoneChanges}
+        productIndex={productIndex}
+      /> : null}
 
 
-  </div>
-   
-           
-        
+    </div>
+
+
+
   )
 }
 

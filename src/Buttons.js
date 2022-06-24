@@ -23,7 +23,8 @@ const useStyles = makeStyles((AppTheme) => ({
         userSelect: "none",
         '&:hover': {
             border: "2px #009bdb solid"
-        }
+        },
+        zIndex: "100",
     },
     backButton: {
         position: "absolute",
@@ -55,7 +56,7 @@ export const ContinueButton = (props) => {
     const classes = useStyles();
     return (
 
-        <Button onClick={handleContinueButtonPressed} className={classes.continueButton} >{currentPageNumber === 3 ? "CREATE AD FILES" : "CONTINUE"}</Button>
+        <Button onClick={handleContinueButtonPressed} className={classes.continueButton} >{currentPageNumber === 3 ? "CREATE AD FILES" : currentPageNumber === 4 ? "CREATE NEW AD" : "CONTINUE"}</Button>
     )
 }
 export const BackButton = (props) => {

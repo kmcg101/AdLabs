@@ -18,6 +18,12 @@ const P_fsbi = (props) => {
   };
   const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
   const acceptedFileTypeStringSVG = "image/svg+xml";
+
+  const pfdFileError = props.pfdFileError
+  const svgFileError = props.svgFileError
+
+
+
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>

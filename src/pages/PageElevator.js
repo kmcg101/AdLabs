@@ -13,12 +13,17 @@ const PageElevator = (props) => {
   }
   const productIndex = props.productIndex;
   const inputValues = props.inputValues;
-  const  bintBGColor = props.bintBGColor;
+  const bintBGColor = props.bintBGColor;
   const isBlackText = props.isBlackText;
+  const elevatorFileError = props.elevatorFileError
+  const svgFileError = props.svgFileError
+  const standardAdFileError = props.standardAdFileError
 
   return (
     <div className='pageContainer'>
       {productIndex === 0 ? <EBint
+        elevatorFileError={elevatorFileError}
+        standardAdFileError={standardAdFileError}
         isBlackText={isBlackText}
         bintBGColor={bintBGColor}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
@@ -26,21 +31,26 @@ const PageElevator = (props) => {
         assetType={inputValues.mediaType}
       /> : null}
       {productIndex === 1 ? <EFsa
+        elevatorFileError={elevatorFileError}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}
         assetType={inputValues.mediaType}
       /> : null}
       {productIndex === 2 ? <EHfsp
+        elevatorFileError={elevatorFileError}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}
         assetType={inputValues.mediaType}
       /> : null}
       {productIndex === 3 ? <EVsa
+        elevatorFileError={elevatorFileError}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}
         assetType={inputValues.mediaType}
       /> : null}
       {productIndex === 4 ? <EFsbi
+        elevatorFileError={elevatorFileError}
+        svgFileError={svgFileError}
         handleAllDropzoneChangesParent={handleElevatorDropzoneChanges}
         productIndex={productIndex}
         assetType={inputValues.mediaType}

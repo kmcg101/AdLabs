@@ -1,4 +1,4 @@
-export function getHTMLFile(filename, isElevator, mediaExtension, productIndex) {
+export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, bintBGColor) {
 
     console.log('trying from factory ', filename, isElevator, mediaExtension, productIndex)
     const eORl = isElevator ? 'e' : "l"
@@ -60,7 +60,7 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex) 
                     z-index: 1;
                     width: 100%;
                     height: 100%;
-                    background: rgba(0,158,219,0.9);
+                    background: #${bintBGColor};
                 }
                 
                 .${filename} .media_frame1 {
@@ -556,7 +556,7 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex) 
                 z-index: 1;
                 width: 100%;
                 height: 100%;
-				background: linear-gradient(0deg, rgba(0,158,219,0.2) 0%, rgba(0,158,219,0.7) 19%, rgba(0,158,219,1) 64%);
+				background: #${bintBGColor};
 				
             }
 			

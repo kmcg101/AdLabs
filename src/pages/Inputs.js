@@ -86,7 +86,7 @@ const Inputs = (props) => {
 
                     <TextBox
                             value={props.inputValues.client}
-                            label="CLIENT NAME: v2.12"
+                            label="CLIENT NAME: v2.13"
                             varID="client"
                             handleAnyInputsChange={handleAnyInputsChange}
                             inputsCheckButtonPressed={inputsCheckButtonPressed}
@@ -102,6 +102,7 @@ const Inputs = (props) => {
                     />
 
                     <SelectBox
+                        value={props.inputValues.product}
                         isError={false}
                         options={DATA_PRODUCTS_ARRAY}
                         label="PRODUCT:"

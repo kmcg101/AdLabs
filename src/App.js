@@ -7,28 +7,12 @@
 
 // remove last commit for when you put unwanted files in it:  git reset --hard HEAD~1
 
-// video or image contain
-// vid or image 100% x 100%, object fit contain or scale down
-// container w and h needs to be set pixels.
-
-
-// TO DO
-// notes:
-// should I directly reference the data file or set a variable to its value?
-// in zip function, is ext the same as mediaExtension?
-// dropzone is currently using a passed down inputValues.mediaType to determine
-//    how to render the preview.  If it is a video or image.  Should use the actual
-//    file's file type for this.
-// dropzone: why is red outline always showing on dropzone drag over?
-// dropzone: conditional file type accepted and reflext in dotted outline
-//
-// 
-// include lobby files
 
 import './assets/fonts/Avenir-Roman-12.ttf';
 
 import { getManifestFile, getBlankManifest, getBlankHTML } from './Utilities'
 import { getHTMLFile } from './TemplateFactory'
+import ConfirmationScreen from './ConfirmationScreen';
 
 import React, { useEffect, useState } from "react";
 import "./App.css";
@@ -86,13 +70,18 @@ function App() {
   const [svgFile, setSvgFile] = useState({}); // 17
   const [standardAdFile, setStandardAdFile] = useState({}); //18
 
+  const [elevatorFileError, setElevatorFileError] = useState(false)
+  const [lfdFileError, setLfdFileError] = useState(false)
+  const [pfdFileError, setPfdFileError] = useState(false)
+  const [svgFileError, setSvgFileError] = useState(false)
+  const [standardAdFileError, setStandardAdFileError] = useState(false)
+
   const [allDroppedFilenames, setAllDroppedFilenames] = useState([])
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([])
 
   const [mediaExtension, setMediaExtension] = useState();
 
   const [isBlackText, setIsBlackText] = useState(true);
-
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
   // also used when compiling list of input files and their new names
@@ -263,23 +252,139 @@ function App() {
           l image, p image, 1 svg
 
       */
+      // check if proper files dropped
+      let checkErrors = 0;
 
-      // this sets filename and blank filename
-      setFilename(getFilename)
-      const productNumber = parseInt(inputValues.product)
-      setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile)
+      // check for primary files
+      if (isElevator) {
+        if (elevatorFile.payload) {
+          console.log("elevator file found")
+          setElevatorFileError(false)
+        }
+        else {
+          console.log("elevator file missing")
+          setElevatorFileError(true)
+          checkErrors++
+        }
+      }
+      else {
+        if (lfdFile.payload) {
+          console.log("l file found")
+          setLfdFileError(false)
+        }
+        else {
+          console.log("l file missing")
+          setLfdFileError(true)
+          checkErrors++
+        }
+        if (pfdFile.payload) {
+          console.log("p file found")
+          setPfdFileError(false)
+        }
+        else {
+          console.log("p file missing")
+          setPfdFileError(true)
+          checkErrors++
+        }
+      }
 
-      setAllDroppedFilenames(getAllDroppedFilenames)
 
-      setAllDroppedNewFilenames(getAllDroppedNewFilenames)
-      // 
-      setCurrentPageNumber(3);
+      // check for svg
+      if (inputValues.product === 4) {
+        if (svgFile.payload) {
+          setSvgFileError(false)
+          console.log("svg file found")
+        }
+        else {
+          setSvgFileError(true)
+          console.log("svg file missing")
+          checkErrors++
+        }
+      }
+      // check for standard ad
+      if (inputValues.product === 0) {
+        if (standardAdFile.payload) {
+          setStandardAdFileError(false)
+          console.log("standard ad file found")
+        }
+        else {
+          setStandardAdFileError(true)
+          console.log("standard ad file missing")
+          checkErrors++
+        }
+      }
+      setTimeout(() => {
+        setElevatorFileError(false);
+        setLfdFileError(false);
+        setPfdFileError(false);
+        setSvgFileError(false);
+        setStandardAdFileError(false);
+      }, "2000")
+
+
+      if (checkErrors === 0) {
+        // this sets filename and blank filename
+        setFilename(getFilename)
+        const productNumber = parseInt(inputValues.product)
+        setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile)
+
+        setAllDroppedFilenames(getAllDroppedFilenames)
+
+        setAllDroppedNewFilenames(getAllDroppedNewFilenames)
+        // 
+        setCurrentPageNumber(3);
+      }
     }
     else if (currentPageNumber === 3) {
 
       deliverTemplateFiles();
+      
+    }
+    else if (currentPageNumber === 4) {
+      resetStateToBeginning()
     }
   };
+  const resetStateToBeginning = () => {
+    setCurrentPageNumber(1)
+    
+    // remove all images and videos
+   setProductIndex(0);
+    setInputsCheckButtonPressed(false)
+    setInputsCheckButtonPressedOnce(false)
+  
+    setIsElevator(true);
+    setRequiresBlankFile(false);
+  
+   setInputValues({
+      client: "",
+      campaign: "",
+  
+    });
+  
+    setBintBGColor("FFFFFF")
+  
+    setFilename();
+    setBlankFilename();
+  
+    // dropped images and video files
+    setElevatorFile({});
+    setLfdFile({});
+    setPfdFile({});
+    setSvgFile({}); // 17
+    setStandardAdFile({}); //18
+  
+    setElevatorFileError(false)
+    setLfdFileError(false)
+    setPfdFileError(false)
+    setSvgFileError(false)
+    setStandardAdFileError(false)
+  
+    setAllDroppedFilenames([])
+    setAllDroppedNewFilenames([])
+  
+    setMediaExtension();
+    setIsBlackText(true);
+  }
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
@@ -410,7 +515,7 @@ function App() {
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = getHTMLFile(filename, isElevator, mediaExtension, productIndex);
+    let contentH = getHTMLFile(filename, isElevator, mediaExtension, productIndex, bintBGColor);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });
@@ -516,6 +621,13 @@ function App() {
       newZip.generateAsync({ type: "blob" }).then(function (content) {
         saveAs(content, `${filename}.zip`)
       });
+    }).then((e) => {
+      console.log("finished")
+      // if success, show final screen
+      setCurrentPageNumber(4)
+      
+    }).catch((e) => {
+      console.log("zip errro")
     })
   }
   const handleBINTColorChange = (color) => {
@@ -544,7 +656,7 @@ function App() {
                 <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? 'current' : 'enabled'}`}>PFD</div>
               </div> : null}
 
-            {currentPageNumber === 2 ?
+            {currentPageNumber === 2 && inputValues.product === 0 ?
               <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}> </BlackWhiteToggleButton> : null}
 
             <BackButton handleBackButton={handleBackButton} />
@@ -578,6 +690,9 @@ function App() {
                   {currentPageNumber === 2 && isElevator === true ?
                     <div className='adBuildingPageInner'>
                       <PageElevator
+                        elevatorFileError={elevatorFileError}
+                        svgFileError={svgFileError}
+                        standardAdFileError={standardAdFileError}
                         isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
@@ -591,6 +706,9 @@ function App() {
                   {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ?
                     <div className='adBuildingPageInner'>
                       <PageLFD
+                        lfdFileError={lfdFileError}
+                        svgFileError={svgFileError}
+                        standardAdFileError={standardAdFileError}
                         isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
@@ -605,6 +723,9 @@ function App() {
                   {currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 2 ?
                     <div className='adBuildingPageInner'>
                       <PagePFD
+                        pfdFileError={pfdFileError}
+                        svgFileError={svgFileError}
+                        standardAdFileError={standardAdFileError}
                         isBlackText={isBlackText}
                         bintBGColor={bintBGColor}
                         productIndex={productIndex}
@@ -617,7 +738,7 @@ function App() {
               : null}
 
             {/* PAGE 3 */}
-            {currentPageNumber === 3 ?
+            {currentPageNumber === 3 || currentPageNumber === 4 ?
               <div className="resultsPage page">
                 <Results allDroppedFilenames={allDroppedFilenames} allDroppedNewFilenames={allDroppedNewFilenames} filename={filename} />
               </div>
@@ -630,12 +751,13 @@ function App() {
               <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>2</div>
               <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>3</div>
             </div>
-            {/* <div className='continueButton' onClick={handleContinueButtonPressed}>{currentPageNumber === 3 ? "CREATE AD FILES" : "CONTINUE"}</div> */}
+
             <ContinueButton
               currentPageNumber={currentPageNumber}
               handleContinueButtonPressed={handleContinueButtonPressed}
             >
             </ContinueButton>
+            {currentPageNumber === 4 ? <ConfirmationScreen /> : null}
           </div>
         </div>
 

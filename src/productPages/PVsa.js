@@ -16,6 +16,10 @@ const P_vsa = (props) => {
     top: "24px",
   };
   const acceptedFileTypeString = "video/mp4";
+
+  const pfdFileError = props.pfdFileError
+
+
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>

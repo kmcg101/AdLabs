@@ -16,6 +16,8 @@ const P_fsa = (props) => {
     zIndex: "100"
   };
   const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
+  const pfdFileError = props.pfdFileError
+
 
   return (
     <div className="portraitProductContainer">

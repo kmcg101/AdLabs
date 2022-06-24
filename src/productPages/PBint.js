@@ -13,6 +13,8 @@ const P_bint = (props) => {
   };
 
   const isBlackText = props.isBlackText;
+  const pfdFileError = props.pfdFileError
+  const standardAdFileError = props.standardAdFileError
 
   const pBint = {
     width: "672px",

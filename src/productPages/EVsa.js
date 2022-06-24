@@ -7,7 +7,7 @@ const vsaImage = {
     width: "234px",
     height: "416px",
     position: 'absolute',
-    left: "304px",
+    left: "18px",
     top: '19px',
     zIndex: "100"
 }
@@ -15,6 +15,8 @@ const vsaImage = {
 
 const E_vsa = (props) => {
     const acceptedFileTypeString = "video/mp4";
+    const elevatorFileError = props.elevatorFileError
+
     
     const handleAllDropzoneChanges = (name, value) => {
         props.handleAllDropzoneChangesParent(name, value)

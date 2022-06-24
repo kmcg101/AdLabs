@@ -18,6 +18,10 @@ const P_hfsp = (props) => {
     zIndex: "100"
   };
   const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
+  const pfdFileError = props.pfdFileError
+
+
+
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>

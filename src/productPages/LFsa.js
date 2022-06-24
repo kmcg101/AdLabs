@@ -8,6 +8,9 @@ const L_fsa = (props) => {
     props.handleAllDropzoneChangesParent(name, value);
   };
   const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
+
+  const lfdFileError = props.lfdFileError
+
   
   const lFullScreen = {
     width: "1024px",

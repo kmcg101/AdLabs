@@ -109,6 +109,7 @@ function SelectBox(props) {
         className={`${inputsCheckButtonPressed && isValueSelected === false ? "textInputErrorShake" : ""}`}
         styles={styles}
         placeholder="select..."
+        // value={props.inputValues.product}
         name={props.varID}
         options={props.options}
         onChange={handleAnyInputsChange}

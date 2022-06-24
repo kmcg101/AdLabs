@@ -18,6 +18,8 @@ const E_bint = (props) => {
     const  bintBGColorPre = props.bintBGColor;
     const bintBGColor = "#" + bintBGColorPre
     //console.log("bintBGColor = " , bintBGColor)
+    const elevatorFileError = props.elevatorFileError
+    const standardAdFileError = props.standardAdFileError
     
     const eBINTImage = {
         width: "130px",

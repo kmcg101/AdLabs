@@ -4,22 +4,17 @@ import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
 
 const baseStyle = {
-  // borderRadius: 2,
   border: "white dashed 2px",
-  // color: "#bdbdbd",
-  // outline: "none",
-  // transition: "border .24s ease-in-out",
-  backgroundImage: "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
+  backgroundImage:
+    "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
 };
 
 const acceptStyle = {
   border: "#00e676 dashed 4px",
-
 };
 
 const rejectStyle = {
   border: "#ff1744 dashed 4px",
-
 };
 const dzBackgroundImage = {
   width: "100%",
@@ -27,135 +22,138 @@ const dzBackgroundImage = {
   backgroundImage: `url(${bgImage})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
-}
-
+};
 
 function Dropzone(props) {
+  /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
-  const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString)
+  const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
 
   function getHintString(str) {
-    
     let newString = str.split(",");
-    let stringArrayMap = newString.map(function (value) {
-      let split = value.split("/")
-      return split[1]
-    })
-    return "accepted files: " + stringArrayMap.join(', ');
-    //return "accepted files: ", String(stringArrayMap)
+    let stringArrayMap = newString.map(function(value) {
+      let split = value.split("/");
+      return split[1];
+    });
+    return "accepted files: " + stringArrayMap.join(", ");
   }
 
-  const [showHint, setShowHint] = useState(false)
-  const [mediaType, setMediaType] = useState("image")
+  //////////////////////////////
+
+  const [showHint, setShowHint] = useState(false);
+
+  // all this does is determine which preview div to display, image or video
+  const [mediaType, setMediaType] = useState("image");
+
+  // this is where dropped files are added
+  // only used for preview
   const [files, setFiles] = useState([]);
-  const handleDropzoneChange = (name, value) => {
-    props.handleAllDropzoneChanges(name, value, props.droppedFileType);
+
+  const handleDropzoneChanges = (name, value) => {
+    // dropped file type = elevator, landscape, portrait, standard, svg.
+    // this writes the name/value pair to the approprate dropped file in app.js
+    props.handleDropzoneChanges(name, value, props.droppedFileType);
   };
 
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } =
-    useDropzone({
-      maxFiles: 1,
-      accept: acceptedFileTypeString,
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
+    maxFiles: 1,
+    multiple: false,
+    accept: acceptedFileTypeString,
 
-      onDrop: (acceptedFiles) => {
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+      // get width and height of preview
 
+      // this value is 0 when a file out of the accepted list is dropped
+      console.log("number of files dropped = ", acceptedFiles.length);
+      if (acceptedFiles.length > 0) {
+        const newFile = acceptedFiles[0];
+        handleDropzoneChanges("payload", newFile);
 
-        setFiles(
-          acceptedFiles.map((file) =>
-            Object.assign(file, {
-              preview: URL.createObjectURL(file),
-            })
-          )
-        );
-        // get width and height of preview
+        console.log("dropped and name is ", newFile.name);
+        const nameArray = newFile.name.split(".");
+        const ext = nameArray[1];
+        console.log("ext = ", ext);
 
-        // this value is 0 when a file out of the accepted list is dropped
-        console.log("number of files dropped = ", acceptedFiles.length)
-        if (acceptedFiles.length > 0) {
-
-
-          const newFile = acceptedFiles[0];
-          handleDropzoneChange("payload", newFile);
-
-          console.log("dropped and name is ", newFile.name)
-          const nameArray = newFile.name.split(".");
-          const ext = nameArray[1];
-          console.log('ext = ', ext)
-
-          if (ext === 'mp4') {
-            console.log("setting mediaType to video")
-            setMediaType("video");
-          }
-
-          if (ext !== "mp4") {
-            console.log("dropped and image")
-            const i = new Image();
-            i.onload = () => {
-              let reader = new FileReader();
-              reader.readAsDataURL(newFile);
-              reader.onload = () => {
-                //setExpectedWidth(Data.products[props.productIndex].eWidth);
-                //setExpectedHeight(Data.products[props.productIndex].eHeight);
-
-                // const expectedFileTypeInner = `${Data.products[props.productIndex].isVideo
-                //   ? "video"
-                //   : "image/png"
-                //   }`;
-                //setExpectedType(expectedFileTypeInner);
-
-                //setExpectedSize(Data.products[props.productIndex].maxFileSize);
-
-                handleDropzoneChange("width", i.width);
-                handleDropzoneChange("height", i.height);
-                handleDropzoneChange("type", newFile.type);
-                handleDropzoneChange("size", newFile.size);
-                handleDropzoneChange("name", newFile.name);
-                handleDropzoneChange("productIndex", props.productIndex);
-              };
-            };
-            if (acceptedFiles.length > 0) {
-              i.src = newFile.preview;
-            }
-          } else {
-            console.log("dropped and video")
-            // need to interrogate video for its secrets
-            const video = document.createElement("video");
-            video.addEventListener("canplay", (event) => {
-              console.log("video loaded")
-              handleDropzoneChange("width", video.videoWidth);
-              handleDropzoneChange("height", video.videoHeight);
-              handleDropzoneChange("type", newFile.type);
-              handleDropzoneChange("size", newFile.size);
-              handleDropzoneChange("name", newFile.name);
-              handleDropzoneChange("productIndex", props.productIndex);
-            });
-            video.src = URL.createObjectURL(newFile);
-
-          }
+        if (ext === "mp4") {
+          console.log("setting mediaType to video");
+          setMediaType("video");
+        } else {
+          setMediaType("image");
         }
 
-      },
-    });
+        if (ext !== "mp4") {
+          console.log("dropped and image");
+          const i = new Image();
+          i.onload = () => {
+            let reader = new FileReader();
+            reader.readAsDataURL(newFile);
+            reader.onload = () => {
+              handleDropzoneChanges("width", i.width);
+              handleDropzoneChanges("height", i.height);
+              handleDropzoneChanges("type", newFile.type);
+              handleDropzoneChanges("size", newFile.size);
+              handleDropzoneChanges("name", newFile.name);
+            };
+          };
+          if (acceptedFiles.length > 0) {
+            i.src = newFile.preview;
+          }
+        } else {
+          console.log("dropped and video");
+          // need to interrogate video for its secrets
+          const video = document.createElement("video");
+          video.addEventListener("canplay", (event) => {
+            console.log("video loaded");
+            handleDropzoneChanges("width", video.videoWidth);
+            handleDropzoneChanges("height", video.videoHeight);
+            handleDropzoneChanges("type", newFile.type);
+            handleDropzoneChanges("size", newFile.size);
+            handleDropzoneChanges("name", newFile.name);
+          });
+          video.src = URL.createObjectURL(newFile);
+        }
+      }
+    },
+  });
 
-  const style = useMemo(() => ({
-    ...baseStyle,
-    ...(isDragAccept ? acceptStyle : {}),
-    ...(isDragReject ? rejectStyle : {}),
-  }),
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
     [isDragAccept, isDragReject]
   );
 
-
+  function imagePreviewNEW() {
+    return (
+      <div className="dropzoneImageParent">
+        <img src={files[0].preview} style={{ width: "100%" }} alt="preview" />
+      </div>
+    );
+  }
 
   const imagePreview = files.map((file) => (
     <div key={file.name}>
       <div className="dropzoneImageParent">
-        <img src={file.preview} style={{ width: "100%" }} alt="preview" />
+        <img src={files[0].preview} style={{ width: "100%" }} alt="preview" />
       </div>
     </div>
   ));
-
   const videoPreview = files.map((file) => (
     <div key={file.name}>
       <div className="dropzoneImageParent">
@@ -164,29 +162,29 @@ function Dropzone(props) {
         </video>
       </div>
     </div>
-
   ));
 
   return (
     <div>
-      <div className="dropzoneImageGrandParent"
+      <div
+        className="dropzoneImageGrandParent"
         onMouseEnter={() => setShowHint(true)}
         onMouseLeave={() => setShowHint(false)}
       >
-        {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null }
-        
-        <div className="droppedImageHolder">{mediaType === 'image' ? imagePreview : videoPreview}</div>
+        {showHint ? (
+          <div className="dropzoneHint">{acceptedFileTypeMessageString}</div>
+        ) : null}
+
+        <div className="droppedImageHolder">
+          {mediaType === "image" ? imagePreview : videoPreview}
+        </div>
 
         <div {...getRootProps({ style })} className="dropZone">
-          <div style={dzBackgroundImage} className='dzBackgroundImage'></div>
+          <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
           <input {...getInputProps()} />
         </div>
-        
-        
-
       </div>
     </div>
   );
 }
 export default Dropzone;
-

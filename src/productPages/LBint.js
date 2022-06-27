@@ -3,18 +3,18 @@ import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
+import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const L_bint = (props) => {
-  const handleAllDropzoneChanges = (name, value) => {
-    props.handleAllDropzoneChangesParent(name, value);
+  const handleDropzoneChanges = (name, value, droppedFileType) => {
+    props.handleDropzoneChanges(name, value, droppedFileType);
   };
-  const acceptedFileTypeStringStandardAd = "video/mp4";
-  const acceptedFileTypeString = "image/png, image/jpg, image/jpeg";
-  const  bintBGColorPre = props.bintBGColor;
-  const bintBGColor = "#" + bintBGColorPre
+
+  const bintBGColorPre = props.bintBGColor;
+  const bintBGColor = "#" + bintBGColorPre;
   const isBlackText = props.isBlackText;
-  const lfdFileError = props.lfdFileError
-  const standardAdFileError = props.standardAdFileError
+  const lfdFileError = props.lfdFileError;
+  const standardAdFileError = props.standardAdFileError;
 
   const lBint = {
     top: "22px",
@@ -22,8 +22,8 @@ const L_bint = (props) => {
     width: "160px",
     height: "640px",
     position: "absolute",
-    zIndex: "100"
-  }
+    zIndex: "100",
+  };
 
   const lStandardAd = {
     top: "22px",
@@ -31,43 +31,36 @@ const L_bint = (props) => {
     width: "768px",
     height: "432px",
     position: "absolute",
-    zIndex: "100"
-  }
+    zIndex: "100",
+  };
   const bgStyle = {
-    backgroundColor: bintBGColor
-}
-
+    backgroundColor: bintBGColor,
+  };
 
   return (
     <div className="landscapeProductContainer">
-
-      <div style={bgStyle} className='backgroundImageContainer'>
-        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+      <div style={bgStyle} className="backgroundImageContainer">
+        <img
+          alt=""
+          className="backgroundImageContainer"
+          src={isBlackText ? blackTextImage : whiteTextImage}
+        ></img>
       </div>
 
-
-      <div className='lStandardAd' style={lStandardAd} >
-
+      <div className="lStandardAd" style={lStandardAd}>
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeStringStandardAd}
-          isStandardAd="true"
-          handleAllDropzoneChanges={handleAllDropzoneChanges}
-          droppedFile={props.droppedFile}
-          productIndex={props.productIndex}
+          acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
+          handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
         />
       </div>
       <div style={lBint} className="lBintAd">
-
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeString}
-          handleAllDropzoneChanges={handleAllDropzoneChanges}
-          droppedFile={props.droppedFile}
-          productIndex={props.productIndex}
+          acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
+          handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
         />
       </div>
-
     </div>
   );
 };

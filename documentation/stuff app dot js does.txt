@@ -1,0 +1,59 @@
+Stuff app.js does
+
+when arriving at page 3, results page before zipping:
+    set filename state value
+    set blank filename state value
+
+2 functions create this result used in displaying results page, page 3:
+    create array of proper final filename of dropped files
+    creates array of the actual names of all dropped files
+
+NAV
+    handle back button press
+    handle circle button press
+    handle l/p buttons toggle during drop page
+    handle continue button click
+        also sets 'inputsCheckButtonPressedOnce(true)
+        this also does most of the checks to see if ok to go to next step
+
+    
+    reset all sate to beginning state
+
+    handle input change (set state of inputValues)
+
+    handle dropzone changes to update e, l, p... file state
+
+    deliver template files
+
+    useEffect (only used 1 time)
+        on product change setProductIndex and clear all dropped file state values (e,l,p, svg, standard)
+    
+
+
+What does the ELP component need?
+able to run handleDropzoneChanges()
+props:
+    productIndex
+    indexValues
+    bintBGColor
+    isBlackText
+    e, l, p fileError
+    accepted file type string
+    bg image (white, black text for bint)
+    
+    dropzones:
+            file type string to accept
+            file type hint string
+        width
+        height
+        x
+        y
+        what type of file dropped: e, l, p, standard, svg
+        
+
+
+
+
+
+
+

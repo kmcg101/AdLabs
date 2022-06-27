@@ -6,58 +6,54 @@ import DATA_DURATION from "../DATA_DURATION";
 import DATA_COUNTRY_CODE from "../DATA_COUNTRY_CODE";
 import DATA_PLATFORM from "../DATA_PLATFORM";
 
-import TextField from "@material-ui/core/TextField"
-import { makeStyles } from '@material-ui/core/styles'
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((AppTheme) => ({
+  textInputStyle: {
+    // color: '#FFFFFF',
+    //backgroundColor: "#fff",
 
-    textInputStyle: {
-        // color: '#FFFFFF',
-        //backgroundColor: "#fff",
-
-        // height: "37px",
-        // paddingLeft: "10px",
-        border: "none",
-        background: "linear-gradient(180deg, rgba(0, 0, 0, .6) 100%, rgba(0, 0, 0, .2) 0%)",
-        display: "block",
-        // this is the helper text color
-        "& .Mui-error": {
-            color: "#cc0000"
-        },
-    }
-}))
+    // height: "37px",
+    // paddingLeft: "10px",
+    border: "none",
+    background:
+      "linear-gradient(180deg, rgba(0, 0, 0, .6) 100%, rgba(0, 0, 0, .2) 0%)",
+    display: "block",
+    // this is the helper text color
+    "& .Mui-error": {
+      color: "#cc0000",
+    },
+  },
+}));
 
 const Inputs = (props) => {
+  let DATA_PRODUCTS_ARRAY = DATA_PRODUCTS.data;
+  let DATA_DURATION_ARRAY = DATA_DURATION.data;
+  let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
+  let DATA_PLATFORM_ARRAY = DATA_PLATFORM.data;
 
-    let DATA_PRODUCTS_ARRAY = DATA_PRODUCTS.data;
-    let DATA_DURATION_ARRAY = DATA_DURATION.data;
-    let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
-    let DATA_PLATFORM_ARRAY = DATA_PLATFORM.data;
+  const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
+  const inputsCheckButtonPressedOnce = props.inputsCheckButtonPressedOnce;
 
-    const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
-    const inputsCheckButtonPressedOnce = props.inputsCheckButtonPressedOnce;
+  const [clientError, setClientError] = useState(true);
+  const [campaignError, setCampaignError] = useState(false);
 
-    const [clientError, setClientError] = useState(true)
-    const [campaignError, setCampaignError] = useState(false)
+  const handleAnyInputsChange = (name, value) => {
+    // for mui textfield
+    //props.handleAnyInputsChange(e.target.name, e.target.value);
 
-    const handleAnyInputsChange = (name, value) => {
-        // for mui textfield
-        //props.handleAnyInputsChange(e.target.name, e.target.value);
-        
-        // for my textfields
-        props.handleAnyInputsChange(name, value);
-    };
+    // for my textfields
+    props.handleAnyInputsChange(name, value);
+  };
 
-    const classes = useStyles()
+  const classes = useStyles();
 
-
-    return (
-        <div>
-
-            <div className='inputsFullPage'>
-
-                <div className='inputsLeftColumn'>
-                    {/* <TextField
+  return (
+    <div>
+      <div className="inputsFullPage">
+        <div className="inputsLeftColumn">
+          {/* <TextField
                         onChange={handleAnyInputsChange}
                         className={classes.textInputStyle}
                         label="CLIENT NAME: v2.10"
@@ -84,68 +80,63 @@ const Inputs = (props) => {
                         }}
                     ></TextField> */}
 
-                    <TextBox
-                            value={props.inputValues.client}
-                            label="CLIENT NAME: v2.13"
-                            varID="client"
-                            handleAnyInputsChange={handleAnyInputsChange}
-                            inputsCheckButtonPressed={inputsCheckButtonPressed}
-                            inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-                        />
-                    <TextBox
-                        value={props.inputValues.campaign}
-                        label="DESCRIPTION:"
-                        varID="campaign"
-                        handleAnyInputsChange={handleAnyInputsChange}
-                        inputsCheckButtonPressed={inputsCheckButtonPressed}
-                        inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-                    />
+          <TextBox
+            value={props.inputValues.client}
+            label="CLIENT NAME: v2.14"
+            varID="client"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+            inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
+          />
+          <TextBox
+            value={props.inputValues.campaign}
+            label="DESCRIPTION:"
+            varID="campaign"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+            inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
+          />
 
-                    <SelectBox
-                        value={props.inputValues.product}
-                        isError={false}
-                        options={DATA_PRODUCTS_ARRAY}
-                        label="PRODUCT:"
-                        varID="product"
-                        handleAnyInputsChange={handleAnyInputsChange}
-                        inputsCheckButtonPressed={inputsCheckButtonPressed}
-                    />
-
-                </div>
-
-                <div className='inputsRightColumn'>
-                    <SelectBox
-                        isError={false}
-                        options={DATA_DURATION_ARRAY}
-                        label="DURATION:"
-                        varID="duration"
-                        handleAnyInputsChange={handleAnyInputsChange}
-                        inputsCheckButtonPressed={inputsCheckButtonPressed}
-                    />
-                    <SelectBox
-                        isError={false}
-                        options={DATA_COUNTRY_CODE_ARRAY}
-                        label="COUNTRY:"
-                        varID="countryCode"
-                        handleAnyInputsChange={handleAnyInputsChange}
-                        inputsCheckButtonPressed={inputsCheckButtonPressed}
-                    />
-                    <SelectBox
-                        isError={false}
-                        options={DATA_PLATFORM_ARRAY}
-                        label="PLATFORM:"
-                        varID="platform"
-                        handleAnyInputsChange={handleAnyInputsChange}
-                        inputsCheckButtonPressed={inputsCheckButtonPressed}
-                    />
-                </div>
-
-            </div>
-
+          <SelectBox
+            value={props.inputValues.product}
+            isError={false}
+            options={DATA_PRODUCTS_ARRAY}
+            label="PRODUCT:"
+            varID="product"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+          />
         </div>
 
-
-    );
+        <div className="inputsRightColumn">
+          <SelectBox
+            isError={false}
+            options={DATA_DURATION_ARRAY}
+            label="DURATION:"
+            varID="duration"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+          />
+          <SelectBox
+            isError={false}
+            options={DATA_COUNTRY_CODE_ARRAY}
+            label="COUNTRY:"
+            varID="countryCode"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+          />
+          <SelectBox
+            isError={false}
+            options={DATA_PLATFORM_ARRAY}
+            label="PLATFORM:"
+            varID="platform"
+            handleAnyInputsChange={handleAnyInputsChange}
+            inputsCheckButtonPressed={inputsCheckButtonPressed}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Inputs;

@@ -2,32 +2,30 @@ import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import background from "../assets/lhfsp.png";
+import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const L_hfsp = (props) => {
-  
   const lHalfScreen = {
     position: "absolute",
     left: "279px",
     top: "22px",
     width: "982px",
     height: "433px",
-    zIndex: "100"
+    zIndex: "100",
   };
-  const acceptedFileTypeString = "video/mp4, image/png, image/jpg, image/jpeg";
-  const lfdFileError = props.lfdFileError
-  
-  const handleAllDropzoneChanges = (name, value) => {
-    props.handleAllDropzoneChangesParent(name, value);
+
+  const lfdFileError = props.lfdFileError;
+
+  const handleDropzoneChanges = (name, value, droppedFileType) => {
+    props.handleDropzoneChanges(name, value, droppedFileType);
   };
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div class='lHFSPImage' style={lHalfScreen}>
+      <div class="lHFSPImage" style={lHalfScreen}>
         <Dropzone
-          acceptedFileTypeString={acceptedFileTypeString}
-          handleAllDropzoneChanges={handleAllDropzoneChanges}
-          droppedFile={props.droppedFile}
-          productIndex={props.productIndex}
+          acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
+          handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
         />
       </div>

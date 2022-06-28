@@ -21,6 +21,7 @@
     "react-color": "^2.19.3",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.0.0",
+    "react-dom-confetti": "^0.2.0",
     "react-dropzone": "^12.1.0",
     "react-dropzone-uploader": "^2.11.0",
     "react-hooks-worker": "^1.0.4",

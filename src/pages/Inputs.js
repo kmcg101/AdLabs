@@ -82,7 +82,7 @@ const Inputs = (props) => {
 
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: v2.14"
+            label="CLIENT NAME: v2.15"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import Confetti from "react-confetti";
+import Confetti from "react-dom-confetti";
+import "./confetti.css";
 
 const ConfirmationScreen = (props) => {
+  const [confettiOn, setConfettiOn] = useState(false);
+
   const fullScreenBG = {
     position: "absolute",
     width: "100%",
@@ -36,15 +39,41 @@ const ConfirmationScreen = (props) => {
     alignItems: "center",
     textAlign: "center",
   };
-
-  const confettiStyle = {
-    position: "fixed",
-    width: "1280px",
+  const config = {
+    angle: "142",
+    spread: "360",
+    startVelocity: "58",
+    elementCount: "113",
+    dragFriction: "0.15",
+    duration: "8270",
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    perspective: "590px",
+    colors: ["#f00", "#0f0", "#00f"],
   };
+  const confettiStyle = {
+    position: "absolute",
+    left: "100px",
+    top: "100px",
+  };
+
+  const toggleButton = () => {
+    setConfettiOn(!confettiOn);
+  };
+
+  useEffect(() => {
+    setConfettiOn(true);
+  }, []);
 
   return (
     <div style={fullScreenBG} className="fullScreenBG">
-      <Confetti style={confettiStyle} />
+      <Confetti
+        style={confettiStyle}
+        className="confetti"
+        active={confettiOn}
+        config={config}
+      />
 
       <div style={successMessage} className="successMessage">
         SUCCESS

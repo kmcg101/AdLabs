@@ -543,6 +543,19 @@ function App() {
   const handleBlackWhiteToggleChange = () => {
     setIsBlackText((prevIsBlackText) => !prevIsBlackText);
   };
+  const config = {
+    angle: "142",
+    spread: "360",
+    startVelocity: "58",
+    elementCount: "113",
+    dragFriction: "0.15",
+    duration: "8270",
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    perspective: "590px",
+    colors: ["#f00", "#0f0", "#00f"],
+  };
 
   return (
     <ThemeProvider theme={AppTheme}>
@@ -731,7 +744,11 @@ function App() {
               currentPageNumber={currentPageNumber}
               handleContinueButtonPressed={handleContinueButtonPressed}
             ></ContinueButton>
-            {currentPageNumber === 4 ? <ConfirmationScreen /> : null}
+            {currentPageNumber === 4 ? (
+              <>
+                <ConfirmationScreen />
+              </>
+            ) : null}
           </div>
         </div>
       </div>

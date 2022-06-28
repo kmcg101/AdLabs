@@ -1,14 +1,15 @@
 *,
 *::before,
 *::after {
-               
   font-family: "Avenir-Roman";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* font-size: 62.5%; */
 }
-html{ font-size: 100%}
+html {
+  font-size: 100%;
+}
 
 :root {
   --primary: #d81e5b;
@@ -71,8 +72,8 @@ html{ font-size: 100%}
   border-radius: 1px;
   background-image: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.2) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 100%
   );
   box-shadow: var(--standard-box-shadow-color);
   margin-bottom: 20px;
@@ -103,12 +104,12 @@ html{ font-size: 100%}
   align-items: center;
 }
 
-.logoContainer{
+.logoContainer {
   position: absolute;
   top: 0px;
-  transform: scale(.5)
+  transform: scale(0.5);
 }
-.topSub .logoContainer img{
+.topSub .logoContainer img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -131,8 +132,6 @@ html{ font-size: 100%}
   position: relative;
 }
 
-
-
 .navSub {
   width: 100%;
   height: 180px;
@@ -142,8 +141,6 @@ html{ font-size: 100%}
   padding-bottom: 1.5%;
   flex-direction: column;
 }
-
-
 
 .productPage {
   display: none;
@@ -160,7 +157,6 @@ html{ font-size: 100%}
   height: 393px;
 }
 
-
 /* //////////////////////////
 ////////////////  PAGES (step 2)
 ///////////////////////////
@@ -171,9 +167,9 @@ html{ font-size: 100%}
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
-.inputsPage{
+.inputsPage {
   display: block;
   padding-left: 20%;
   padding-right: 20%;
@@ -184,22 +180,20 @@ html{ font-size: 100%}
   height: 100%;
 }
 
-
 .adBuildingPage .adBuildingPageContent.elevator {
   width: 640px;
   height: 480px;
-  transform: scale(.82);
+  transform: scale(0.82);
 }
 .adBuildingPage .adBuildingPageContent.landscape {
   width: 1280px;
   height: 720px;
-  transform: scale(.5527);
+  transform: scale(0.5527);
 }
 .adBuildingPage .adBuildingPageContent.portrait {
   width: 720px;
   height: 1280px;
-  transform: scale(.3109);
-
+  transform: scale(0.3109);
 }
 
 .adBuildingPageInner {
@@ -209,13 +203,12 @@ html{ font-size: 100%}
   justify-content: center;
 }
 
-
 .platformButton {
   border-radius: 5px;
   background-image: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.2) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 100%
   );
   box-shadow: var(--standard-box-shadow-color);
   width: 100%;
@@ -242,9 +235,7 @@ html{ font-size: 100%}
   display: none;
 }
 
-
-
-.colorPicker{
+.colorPicker {
   position: absolute;
   top: 0px;
   left: 190px;

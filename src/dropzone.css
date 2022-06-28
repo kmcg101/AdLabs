@@ -11,6 +11,11 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  left: -4px;
+  top: -4px;
+  padding: 8px;
+  z-index: 100;
+  pointer-events: none;
 }
 
 .droppedImageHolder img {
@@ -19,7 +24,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .dropzoneImageGrandParent {
   overflow: hidden;
@@ -63,7 +67,6 @@
   height: 416px;
 }
 
-
 .lStandardAd .dropzoneImageParent {
   width: 768px;
   height: 432px;
@@ -89,7 +92,6 @@
   height: 640px;
 }
 
-
 .pStandardAd .dropzoneImageParent {
   width: 672px;
   height: 378px;
@@ -99,7 +101,7 @@
   height: 210px;
 }
 .pFullScreen .dropzoneImageParent {
-  width:720px;
+  width: 720px;
   height: 960px;
 }
 .pHFSPImage .dropzoneImageParent {
@@ -111,11 +113,10 @@
   height: 640px;
 }
 
-.dropzoneHint{
+.dropzoneHint {
   position: absolute;
   color: white;
   top: 10px;
   left: 10px;
   font-size: 1.3rem;
 }
-

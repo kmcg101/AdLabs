@@ -29,7 +29,7 @@ const ConfirmationScreen = (props) => {
     fontSize: "16px",
     borderRadius: "1px",
     backgroundImage:
-      "linear-gradient( 90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.50196) 100%)",
+      "linear-gradient( 180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)",
     boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
     width: "231px",
     height: "72px",

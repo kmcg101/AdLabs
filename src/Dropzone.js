@@ -6,7 +6,7 @@ import bgImage from "./assets/dropzoneBGImage.png";
 const baseStyle = {
   border: "white dashed 2px",
   backgroundImage:
-    "linear-gradient( 0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%)",
+    "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
 };
 
 const acceptStyle = {

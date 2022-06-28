@@ -18,7 +18,7 @@ const useStyles = makeStyles((AppTheme) => ({
     // paddingLeft: "10px",
     border: "none",
     background:
-      "linear-gradient(180deg, rgba(0, 0, 0, .6) 100%, rgba(0, 0, 0, .2) 0%)",
+      "linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .6) 100%)",
     display: "block",
     // this is the helper text color
     "& .Mui-error": {
@@ -82,7 +82,7 @@ const Inputs = (props) => {
 
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: v2.16"
+            label="CLIENT NAME: v2.17"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}

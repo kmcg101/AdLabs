@@ -162,7 +162,7 @@ function App() {
   ////////////////////////////////////////////////////////
 
   const handleBackButton = () => {
-    if (currentPageNumber > 1) {
+    if (currentPageNumber > 1 && currentPageNumber < 4) {
       setCurrentPageNumber(currentPageNumber - 1);
     }
   };
@@ -700,6 +700,10 @@ function App() {
                   allDroppedFilenames={allDroppedFilenames}
                   allDroppedNewFilenames={allDroppedNewFilenames}
                   filename={filename}
+                  blankFilename={blankFilename}
+                  requiresBlankFile={requiresBlankFile}
+                  bintBGColor={bintBGColor}
+                  inputValues={inputValues}
                 />
               </div>
             ) : null}

@@ -58,12 +58,10 @@ const ConfirmationScreen = (props) => {
     top: "100px",
   };
 
-  const toggleButton = () => {
-    setConfettiOn(!confettiOn);
-  };
-
   useEffect(() => {
-    setConfettiOn(true);
+    setTimeout(function() {
+      setConfettiOn(true);
+    }, 300);
   }, []);
 
   return (

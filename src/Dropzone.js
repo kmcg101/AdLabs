@@ -183,13 +183,12 @@ function Dropzone(props) {
           <div className="dropzoneHint">{acceptedFileTypeMessageString}</div>
         ) : null}
 
-        <div className="droppedImageHolder">
-          {mediaType === "image" ? imagePreview : videoPreview}
-        </div>
-
         <div {...getRootProps({ style })} className="dropZone">
-          <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
-          <div style={dzGradientDiv} className="dzGradientDiv"></div>
+          <div className="droppedImageHolder">
+            <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
+            {mediaType === "image" ? imagePreview : videoPreview}
+          </div>
+
           <input {...getInputProps()} />
         </div>
       </div>

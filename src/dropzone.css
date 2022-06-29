@@ -3,15 +3,21 @@
   height: 100%;
   position: absolute;
   box-sizing: border-box;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  padding: 2px;
 }
 
 .droppedImageHolder {
-  object-fit: fill;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  position: absolute;
-
+  position: relative;
   z-index: 150;
   pointer-events: none;
 }
@@ -40,9 +46,19 @@
   height: 100%;
 }
 
+.dropzoneHint {
+  position: absolute;
+  color: white;
+  top: 10px;
+  left: 10px;
+  font-size: 1.3rem;
+  z-index: 3000;
+}
+/* 
 .eStandardAd .dropzoneImageParent {
   width: 480px;
   height: 270px;
+ 
 }
 .eBintAd .dropzoneImageParent {
   width: 130px;
@@ -109,12 +125,4 @@
 .pVSAImage .dropzoneImageParent {
   width: 360px;
   height: 640px;
-}
-
-.dropzoneHint {
-  position: absolute;
-  color: white;
-  top: 10px;
-  left: 10px;
-  font-size: 1.3rem;
-}
+} */

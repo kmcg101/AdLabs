@@ -50,7 +50,7 @@ const ConfirmationScreen = (props) => {
     width: "9px",
     height: "9px",
     perspective: "1000px",
-    colors: ["#f00", "#0f0", "#00f"],
+    colors: ["#003767", "#989b9c", "#353432", "#009bdb", "#a3da60", "#ffff00"],
   };
   const confettiStyle = {
     position: "absolute",

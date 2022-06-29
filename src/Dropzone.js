@@ -5,8 +5,6 @@ import bgImage from "./assets/dropzoneBGImage.png";
 
 const baseStyle = {
   border: "white dashed 2px",
-  backgroundImage:
-    "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
 };
 
 const acceptStyle = {
@@ -22,6 +20,16 @@ const dzBackgroundImage = {
   backgroundImage: `url(${bgImage})`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
+  position: "absolute",
+  zIndex: "100",
+};
+const dzGradientDiv = {
+  width: "100%",
+  height: "100%",
+  backgroundImage:
+    "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+  position: "absolute",
+  zIndex: "50",
 };
 
 function Dropzone(props) {
@@ -181,6 +189,7 @@ function Dropzone(props) {
 
         <div {...getRootProps({ style })} className="dropZone">
           <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
+          <div style={dzGradientDiv} className="dzGradientDiv"></div>
           <input {...getInputProps()} />
         </div>
       </div>

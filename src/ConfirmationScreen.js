@@ -40,16 +40,16 @@ const ConfirmationScreen = (props) => {
     textAlign: "center",
   };
   const config = {
-    angle: "142",
+    angle: "91",
     spread: "360",
-    startVelocity: "58",
-    elementCount: "113",
-    dragFriction: "0.15",
-    duration: "8270",
-    stagger: 3,
-    width: "10px",
-    height: "10px",
-    perspective: "590px",
+    startVelocity: "15",
+    elementCount: "101",
+    dragFriction: "0.05",
+    duration: "1750",
+    stagger: "0",
+    width: "9px",
+    height: "9px",
+    perspective: "1000px",
     colors: ["#f00", "#0f0", "#00f"],
   };
   const confettiStyle = {

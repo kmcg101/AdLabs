@@ -56,7 +56,7 @@ function SelectBox(props) {
     menu: (provided, state) => ({
       ...provided,
       background:
-        "linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.5) 100%)",
+        "linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.60) 100%)",
       marginTop: "-10px",
       marginBottom: 0,
     }),

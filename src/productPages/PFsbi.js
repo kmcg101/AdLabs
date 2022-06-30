@@ -9,6 +9,15 @@ const P_fsbi = (props) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
 
+  const pFSBILogo = {
+    width: "200px",
+    height: "200px",
+    position: "absolute",
+    left: "460px",
+    top: "50px",
+    zIndex: "100",
+  };
+
   const pFullScreen = {
     width: "720px",
     height: "960px",
@@ -17,7 +26,7 @@ const P_fsbi = (props) => {
     top: "0px",
     zIndex: "100",
   };
-
+  const svgFile = props.svgFile;
   const pfdFileError = props.pfdFileError;
   const svgFileError = props.svgFileError;
 
@@ -29,6 +38,15 @@ const P_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="portrait"
+        />
+      </div>
+
+      <div className="pFSBISVG" style={pFSBILogo}>
+        <Dropzone
+          acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
+          handleDropzoneChanges={handleDropzoneChanges}
+          droppedFileType="svg"
+          svgFile={svgFile}
         />
       </div>
     </div>

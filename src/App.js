@@ -668,6 +668,7 @@ function App() {
                         productIndex={productIndex}
                         inputValues={inputValues}
                         handleDropzoneChanges={handleDropzoneChanges}
+                        svgFile={svgFile}
                       />
                     </div>
                   ) : null}
@@ -686,6 +687,7 @@ function App() {
                         productIndex={productIndex}
                         inputValues={inputValues}
                         handleDropzoneChanges={handleDropzoneChanges}
+                        svgFile={svgFile}
                       />
                     </div>
                   ) : null}

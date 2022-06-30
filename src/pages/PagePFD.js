@@ -15,6 +15,7 @@ const PagePFD = (props) => {
   const pfdFileError = props.pfdFileError;
   const svgFileError = props.svgFileError;
   const standardAdFileError = props.standardAdFileError;
+  const svgFile = props.svgFile;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -54,6 +55,7 @@ const PagePFD = (props) => {
           pfdFileError={pfdFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
     </div>

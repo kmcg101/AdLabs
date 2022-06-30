@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
@@ -37,6 +37,8 @@ function Dropzone(props) {
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
+  const svgFile = props.svgFile;
+  const droppedFileType = props.droppedFileType;
 
   function getHintString(str) {
     let newString = str.split(",");
@@ -58,6 +60,10 @@ function Dropzone(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
+  useEffect(() => {
+    console.log("change");
+  }, [files]);
+
   const handleDropzoneChanges = (name, value) => {
     // dropped file type = elevator, landscape, portrait, standard, svg.
     // this writes the name/value pair to the approprate dropped file in app.js
@@ -65,6 +71,8 @@ function Dropzone(props) {
   };
 
   const {
+    acceptedFiles,
+    fileRejections,
     getRootProps,
     getInputProps,
     isDragActive,
@@ -76,18 +84,22 @@ function Dropzone(props) {
     accept: acceptedFileTypeString,
 
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-      // get width and height of preview
-
-      // this value is 0 when a file out of the accepted list is dropped
-      console.log("number of files dropped = ", acceptedFiles.length);
+      console.log("accepted files = ", acceptedFiles);
+      console.log("rejected files = ", fileRejections);
       if (acceptedFiles.length > 0) {
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          )
+        );
+      }
+      // get width and height of preview
+      // this value is 0 when a file out of the accepted list is dropped
+
+      if (acceptedFiles.length > 0) {
+        console.log("trying and not zero");
         const newFile = acceptedFiles[0];
         handleDropzoneChanges("payload", newFile);
 
@@ -97,14 +109,12 @@ function Dropzone(props) {
         console.log("ext = ", ext);
 
         if (ext === "mp4") {
-          console.log("setting mediaType to video");
           setMediaType("video");
         } else {
           setMediaType("image");
         }
 
         if (ext !== "mp4") {
-          console.log("dropped and image");
           const i = new Image();
           i.onload = () => {
             let reader = new FileReader();
@@ -147,29 +157,57 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  function imagePreviewNEW() {
-    return (
-      <div className="dropzoneImageParent">
-        <img src={files[0].preview} style={{ width: "100%" }} alt="preview" />
-      </div>
-    );
-  }
-
+  // const svgImagePreview =
+  //   typeof svgFile === undefined ||
+  //   svgFile === null ||
+  //   Object.keys(svgFile).length === 0
+  //     ? null
+  //     : svgFile.map((file) =>
+  //         Object.keys(svgFile).length === 0 ? null : (
+  //           <img
+  //             src={URL.createObjectURL(svgFile.payload)}
+  //             style={{ width: "100%" }}
+  //             alt="preview"
+  //           />
+  //         )
+  //       );
+  /*
+  svgFile.map((file) => (
+    <img
+      src={URL.createObjectURL(file.payload)}
+      style={{ width: "100%" }}
+      alt="preview"
+    />
+  ));
+  */
   const imagePreview = files.map((file) => (
-    <div key={file.name}>
-      <div className="dropzoneImageParent">
-        <img src={files[0].preview} style={{ width: "100%" }} alt="preview" />
-      </div>
-    </div>
+    <img
+      src={URL.createObjectURL(files[0])}
+      style={{ width: "100%" }}
+      alt="preview"
+    />
   ));
   const videoPreview = files.map((file) => (
-    <div key={file.name}>
-      <div className="dropzoneImageParent">
-        <video autoPlay loop style={{ width: "100%" }}>
-          <source src={URL.createObjectURL(file)} />
-        </video>
-      </div>
-    </div>
+    <video autoPlay loop style={{ width: "100%" }}>
+      <source src={URL.createObjectURL(files[0])} />
+    </video>
+  ));
+
+  const acceptedFileItems = acceptedFiles.map((file) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  const fileRejectionItems = fileRejections.map(({ file, errors }) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+      <ul>
+        {errors.map((e) => (
+          <li key={e.code}>{e.message}</li>
+        ))}
+      </ul>
+    </li>
   ));
 
   return (
@@ -186,8 +224,18 @@ function Dropzone(props) {
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
             <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
-            {mediaType === "image" ? imagePreview : videoPreview}
+            <div className="dropzoneImageParent">
+              {/* {mediaType === "video"
+                ? videoPreview
+                : droppedFileType === "svg" && files.length === 0
+                ? svgImagePreview
+                : imagePreview} */}
+              {mediaType === "video" ? videoPreview : imagePreview}
+            </div>
           </div>
+
+          {/* it is successfully rejecting the PNG file but it is writing it to state  */}
+          {/* looks like all files are showing up in the accepted files array */}
 
           <input {...getInputProps()} />
         </div>

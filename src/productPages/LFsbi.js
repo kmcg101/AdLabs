@@ -10,7 +10,7 @@ const L_fsbi = (props) => {
     height: "160px",
     position: "absolute",
     left: "1070px",
-    top: "10px",
+    top: "30px",
     zIndex: "100",
   };
   const lFullScreen = {
@@ -21,13 +21,14 @@ const L_fsbi = (props) => {
     top: "0px",
     zIndex: "100",
   };
-
+  const svgFile = props.svgFile;
   const lfdFileError = props.lfdFileError;
   const svgFileError = props.svgFileError;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
+
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
@@ -43,6 +44,7 @@ const L_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="svg"
+          svgFile={svgFile}
         />
       </div>
     </div>

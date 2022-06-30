@@ -38,6 +38,7 @@ const P_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="portrait"
+          svgFile={svgFile}
         />
       </div>
 

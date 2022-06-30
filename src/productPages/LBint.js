@@ -15,6 +15,7 @@ const L_bint = (props) => {
   const isBlackText = props.isBlackText;
   const lfdFileError = props.lfdFileError;
   const standardAdFileError = props.standardAdFileError;
+  const svgFile = props.svgFile;
 
   const lBint = {
     top: "22px",
@@ -52,6 +53,7 @@ const L_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
+          svgFile={svgFile}
         />
       </div>
       <div style={lBint} className="lBintAd">
@@ -59,6 +61,7 @@ const L_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
+          svgFile={svgFile}
         />
       </div>
     </div>

@@ -61,7 +61,8 @@ function Dropzone(props) {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    console.log("change");
+    console.log("files change ", files);
+    console.log("svgFile = ", svgFile);
   }, [files]);
 
   const handleDropzoneChanges = (name, value) => {
@@ -84,8 +85,6 @@ function Dropzone(props) {
     accept: acceptedFileTypeString,
 
     onDrop: (acceptedFiles) => {
-      console.log("accepted files = ", acceptedFiles);
-      console.log("rejected files = ", fileRejections);
       if (acceptedFiles.length > 0) {
         setFiles(
           acceptedFiles.map((file) =>
@@ -180,34 +179,30 @@ function Dropzone(props) {
     />
   ));
   */
+  //const [svgFileTest, setSvgFileTest] = useState(); // 17
+  //console.log("svgFileType = ", typeof svgFileTest);
+  //console.log("app svgFileType = ", typeof svgFile);
+  //console.log("app svgFile = ", svgFile);
+  // const svgImagePreview = svgFile.map((file) => (
+  //   <img
+  //     key={file.name}
+  //     src={URL.createObjectURL(file[0])}
+  //     style={{ width: "100%" }}
+  //     alt="preview"
+  //   />
+  // ));
   const imagePreview = files.map((file) => (
     <img
+      key={file.name}
       src={URL.createObjectURL(files[0])}
       style={{ width: "100%" }}
       alt="preview"
     />
   ));
   const videoPreview = files.map((file) => (
-    <video autoPlay loop style={{ width: "100%" }}>
+    <video key={file.name} autoPlay loop style={{ width: "100%" }}>
       <source src={URL.createObjectURL(files[0])} />
     </video>
-  ));
-
-  const acceptedFileItems = acceptedFiles.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
-  const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-      <ul>
-        {errors.map((e) => (
-          <li key={e.code}>{e.message}</li>
-        ))}
-      </ul>
-    </li>
   ));
 
   return (

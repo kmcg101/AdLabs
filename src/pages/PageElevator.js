@@ -17,6 +17,7 @@ const PageElevator = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const svgFileError = props.svgFileError;
   const standardAdFileError = props.standardAdFileError;
+  const svgFile = props.svgFile;
 
   return (
     <div className="pageContainer">
@@ -27,24 +28,28 @@ const PageElevator = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
       {productIndex === 1 ? (
         <EFsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
       {productIndex === 2 ? (
         <EHfsp
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
       {productIndex === 3 ? (
         <EVsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -52,6 +57,7 @@ const PageElevator = (props) => {
           elevatorFileError={elevatorFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          svgFile={svgFile}
         />
       ) : null}
     </div>

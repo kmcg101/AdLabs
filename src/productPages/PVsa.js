@@ -18,6 +18,7 @@ const P_vsa = (props) => {
   };
 
   const pfdFileError = props.pfdFileError;
+  const svgFile = props.svgFile;
 
   return (
     <div className="portraitProductContainer">
@@ -27,6 +28,7 @@ const P_vsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="portrait"
+          svgFile={svgFile}
         />
       </div>
     </div>

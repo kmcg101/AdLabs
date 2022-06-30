@@ -48,25 +48,29 @@ const Results = (props) => {
   };
 
   const listOfDroppedFiles = allDroppedFilenamesFiltered.map((items) => (
-    <li style={ulStyle}>{items}</li>
+    <li key={items} style={ulStyle}>
+      {items}
+    </li>
   ));
 
   const listOfDroppedFilesNewFilenames = allDroppedNewFilenamesFiltered.map(
-    (items) => <li style={ulStyle}>{items}</li>
+    (items) => (
+      <li key={items} style={ulStyle}>
+        {items}
+      </li>
+    )
   );
 
-  const listOfReturnedFiles = () => {
-    return (
-      <div>
-        <ul style={ulStyle}>
-          <li>{filename}.html</li>
-          <li>{filename}.manifest</li>
-          {requiresBlankFile ? <li>{blankFilename}.html</li> : null}
-          {requiresBlankFile ? <li>{blankFilename}.manifest</li> : null}
-        </ul>
-      </div>
-    );
-  };
+  const listOfReturnedFiles = (
+    <div>
+      <ul style={ulStyle}>
+        <li>{filename}.html</li>
+        <li>{filename}.manifest</li>
+        {requiresBlankFile ? <li>{blankFilename}.html</li> : null}
+        {requiresBlankFile ? <li>{blankFilename}.manifest</li> : null}
+      </ul>
+    </div>
+  );
 
   return (
     <div className="resultsFullPage" style={resultsFullPage}>
@@ -88,7 +92,7 @@ const Results = (props) => {
         <div className="resultsTopRight" style={halfWidth}>
           <div className="resultsSegmentContainer">
             <div className="resultsTitleText">AD FILES FOR DOWNLOAD:</div>
-            <div className="resultsTextHolder">{listOfReturnedFiles()}</div>
+            <div className="resultsTextHolder">{listOfReturnedFiles}</div>
           </div>
         </div>
       </div>

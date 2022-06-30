@@ -37,6 +37,7 @@ const L_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
+          svgFile={svgFile}
         />
       </div>
       <div className="lFSBISVG" style={lFSBILogo}>

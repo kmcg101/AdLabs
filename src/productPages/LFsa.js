@@ -10,6 +10,7 @@ const L_fsa = (props) => {
   };
 
   const lfdFileError = props.lfdFileError;
+  const svgFile = props.svgFile;
 
   const lFullScreen = {
     width: "1024px",
@@ -27,6 +28,7 @@ const L_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
+          svgFile={svgFile}
         />
       </div>
     </div>

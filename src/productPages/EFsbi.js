@@ -7,6 +7,7 @@ import DROPZONE_DATA from "../DROPZONE_DATA";
 const E_fsbi = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const svgFileError = props.svgFileError;
+  const svgFile = props.svgFile;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -30,6 +31,7 @@ const E_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="elevator"
+          svgFile={svgFile}
         />
       </div>
       <div className="eFSBISVG" style={eFSBILogo}>
@@ -37,6 +39,7 @@ const E_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="svg"
+          svgFile={svgFile}
         />
       </div>
     </div>

@@ -63,11 +63,11 @@ function App() {
   const [blankFilename, setBlankFilename] = useState();
 
   // dropped images and video files
-  const [elevatorFile, setElevatorFile] = useState({}); //14
-  const [lfdFile, setLfdFile] = useState({});
-  const [pfdFile, setPfdFile] = useState({});
-  const [svgFile, setSvgFile] = useState({}); // 17
-  const [standardAdFile, setStandardAdFile] = useState({}); //18
+  const [elevatorFile, setElevatorFile] = useState([]); //14
+  const [lfdFile, setLfdFile] = useState();
+  const [pfdFile, setPfdFile] = useState();
+  const [svgFile, setSvgFile] = useState(); // 17
+  const [standardAdFile, setStandardAdFile] = useState(); //18
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);
@@ -346,7 +346,7 @@ function App() {
     setElevatorFile({});
     setLfdFile({});
     setPfdFile({});
-    setSvgFile({});
+    setSvgFile([]);
     setStandardAdFile({});
   };
 
@@ -561,6 +561,11 @@ function App() {
     <ThemeProvider theme={AppTheme}>
       <CssBaseline />
       <div className="bgImageContainer">
+        {currentPageNumber === 4 ? (
+          <>
+            <ConfirmationScreen />
+          </>
+        ) : null}
         <div className="logoContainer">
           <img src={adLabsLogo} alt="logo"></img>
         </div>
@@ -599,7 +604,9 @@ function App() {
               </BlackWhiteToggleButton>
             ) : null}
 
-            <BackButton handleBackButton={handleBackButton} />
+            {currentPageNumber !== 4 ? (
+              <BackButton handleBackButton={handleBackButton} />
+            ) : null}
           </div>
           <div className="contentSub">
             {/* PAGE 1 */}
@@ -650,15 +657,18 @@ function App() {
                         productIndex={productIndex}
                         inputValues={inputValues}
                         handleDropzoneChanges={handleDropzoneChanges}
+                        svgFile={svgFile}
                       />
                     </div>
                   ) : null}
 
                   {/* lfd */}
-                  {currentPageNumber === 2 &&
-                  isElevator === false &&
-                  currentBuildNavNumber === 1 ? (
-                    <div className="adBuildingPageInner">
+                  {currentPageNumber === 2 && isElevator === false ? (
+                    <div
+                      className={`adBuildingPageInner ${
+                        currentBuildNavNumber === 2 ? "hide" : ""
+                      }`}
+                    >
                       <PageLFD
                         lfdFileError={lfdFileError}
                         svgFileError={svgFileError}
@@ -674,10 +684,12 @@ function App() {
                   ) : null}
 
                   {/* pfd */}
-                  {currentPageNumber === 2 &&
-                  isElevator === false &&
-                  currentBuildNavNumber === 2 ? (
-                    <div className="adBuildingPageInner">
+                  {currentPageNumber === 2 && isElevator === false ? (
+                    <div
+                      className={`adBuildingPageInner ${
+                        currentBuildNavNumber === 1 ? "hide" : ""
+                      }`}
+                    >
                       <PagePFD
                         pfdFileError={pfdFileError}
                         svgFileError={svgFileError}
@@ -696,7 +708,7 @@ function App() {
             ) : null}
 
             {/* PAGE 3 */}
-            {currentPageNumber === 3 || currentPageNumber === 4 ? (
+            {currentPageNumber === 3 ? (
               <div className="resultsPage page">
                 <Results
                   allDroppedFilenames={allDroppedFilenames}
@@ -712,49 +724,46 @@ function App() {
           </div>
 
           <div className="navSub">
-            <div className="buttonsHolder">
-              <div
-                onClick={circleButtonClickHandler}
-                dataindex={1}
-                className={`circleButton ${
-                  currentPageNumber === 1 ? "current" : "enabled"
-                }`}
-              >
-                1
+            {currentPageNumber !== 4 ? (
+              <div className="buttonsHolder">
+                <div
+                  onClick={circleButtonClickHandler}
+                  dataindex={1}
+                  className={`circleButton ${
+                    currentPageNumber === 1 ? "current" : "enabled"
+                  }`}
+                >
+                  1
+                </div>
+                <div
+                  onClick={circleButtonClickHandler}
+                  dataindex={2}
+                  className={`circleButton ${
+                    currentPageNumber === 2
+                      ? "current"
+                      : currentPageNumber > 2
+                      ? "enabled"
+                      : "disabled"
+                  }`}
+                >
+                  2
+                </div>
+                <div
+                  onClick={circleButtonClickHandler}
+                  dataindex={4}
+                  className={`circleButton ${
+                    currentPageNumber === 3 ? "current" : "disabled"
+                  }`}
+                >
+                  3
+                </div>
               </div>
-              <div
-                onClick={circleButtonClickHandler}
-                dataindex={2}
-                className={`circleButton ${
-                  currentPageNumber === 2
-                    ? "current"
-                    : currentPageNumber > 2
-                    ? "enabled"
-                    : "disabled"
-                }`}
-              >
-                2
-              </div>
-              <div
-                onClick={circleButtonClickHandler}
-                dataindex={4}
-                className={`circleButton ${
-                  currentPageNumber === 3 ? "current" : "disabled"
-                }`}
-              >
-                3
-              </div>
-            </div>
+            ) : null}
 
             <ContinueButton
               currentPageNumber={currentPageNumber}
               handleContinueButtonPressed={handleContinueButtonPressed}
             ></ContinueButton>
-            {currentPageNumber === 4 ? (
-              <>
-                <ConfirmationScreen />
-              </>
-            ) : null}
           </div>
         </div>
       </div>

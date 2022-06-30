@@ -8,6 +8,7 @@ const P_fsa = (props) => {
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
+  const svgFile = props.svgFile;
   const pFullScreen = {
     width: "720px",
     height: "960px",
@@ -27,6 +28,7 @@ const P_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="portrait"
+          svgFile={svgFile}
         />
       </div>
     </div>

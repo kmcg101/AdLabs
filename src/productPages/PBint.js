@@ -15,6 +15,7 @@ const P_bint = (props) => {
   const isBlackText = props.isBlackText;
   const pfdFileError = props.pfdFileError;
   const standardAdFileError = props.standardAdFileError;
+  const svgFile = props.svgFile;
 
   const pBint = {
     width: "672px",
@@ -50,6 +51,7 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
+          svgFile={svgFile}
         />
       </div>
       <div className="pBintAd" style={pBint}>
@@ -57,6 +59,7 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="portrait"
+          svgFile={svgFile}
         />
       </div>
     </div>

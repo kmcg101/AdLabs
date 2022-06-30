@@ -16,6 +16,7 @@ const E_bint = (props) => {
   //console.log("bintBGColor = " , bintBGColor)
   const elevatorFileError = props.elevatorFileError;
   const standardAdFileError = props.standardAdFileError;
+  const svgFile = props.svgFile;
 
   const eBINTImage = {
     width: "130px",
@@ -54,6 +55,7 @@ const E_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
+          svgFile={svgFile}
         />
       </div>
 
@@ -62,6 +64,7 @@ const E_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="elevator"
+          svgFile={svgFile}
         />
       </div>
     </div>

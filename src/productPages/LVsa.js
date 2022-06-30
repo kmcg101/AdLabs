@@ -15,6 +15,7 @@ const L_vsa = (props) => {
   };
 
   const lfdFileError = props.lfdFileError;
+  const svgFile = props.svgFile;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -27,6 +28,7 @@ const L_vsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="landscape"
+          svgFile={svgFile}
         />
       </div>
     </div>

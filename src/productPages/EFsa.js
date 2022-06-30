@@ -6,6 +6,7 @@ import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const E_fsa = (props) => {
   const elevatorFileError = props.elevatorFileError;
+  const svgFile = props.svgFile;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -17,6 +18,7 @@ const E_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="elevator"
+          svgFile={svgFile}
         />
       </div>
       <div className="backgroundImageContainer">

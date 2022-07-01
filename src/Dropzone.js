@@ -81,68 +81,65 @@ function Dropzone(props) {
     isDragReject,
   } = useDropzone({
     maxFiles: 1,
+    noClick: true,
     multiple: false,
     accept: acceptedFileTypeString,
 
-    onDrop: (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        setFiles(
-          acceptedFiles.map((file) =>
-            Object.assign(file, {
-              preview: URL.createObjectURL(file),
-            })
-          )
-        );
-      }
+    onDropAccepted: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
 
-      if (acceptedFiles.length > 0) {
-        console.log("trying and not zero");
-        const newFile = acceptedFiles[0];
-        handleDropzoneChanges("payload", newFile);
+      console.log("trying and not zero");
+      const newFile = acceptedFiles[0];
+      handleDropzoneChanges("payload", newFile);
 
-        console.log("dropped and name is ", newFile.name);
-        const nameArray = newFile.name.split(".");
-        const ext = nameArray[1];
-        console.log("ext = ", ext);
+      console.log("dropped and name is ", newFile.name);
+      const nameArray = newFile.name.split(".");
+      const ext = nameArray[1];
+      console.log("ext = ", ext);
 
-        if (ext === "mp4") {
-          setMediaType("video");
-        } else {
-          setMediaType("image");
-        }
+      if (ext === "mp4") {
+        setMediaType("video");
+      } else {
+        setMediaType("image");
+      }
 
-        if (ext !== "mp4") {
-          const i = new Image();
-          i.onload = () => {
-            let reader = new FileReader();
-            reader.readAsDataURL(newFile);
-            reader.onload = () => {
-              handleDropzoneChanges("width", i.width);
-              handleDropzoneChanges("height", i.height);
-              handleDropzoneChanges("type", newFile.type);
-              handleDropzoneChanges("size", newFile.size);
-              handleDropzoneChanges("name", newFile.name);
-            };
-          };
-          if (acceptedFiles.length > 0) {
-            i.src = newFile.preview;
-          }
-        } else {
-          console.log("dropped and video");
-          // need to interrogate video for its secrets
-          const video = document.createElement("video");
-          video.addEventListener("canplay", (event) => {
-            console.log("video loaded");
-            handleDropzoneChanges("width", video.videoWidth);
-            handleDropzoneChanges("height", video.videoHeight);
+      if (ext !== "mp4") {
+        const i = new Image();
+        i.onload = () => {
+          let reader = new FileReader();
+          reader.readAsDataURL(newFile);
+          reader.onload = () => {
+            handleDropzoneChanges("width", i.width);
+            handleDropzoneChanges("height", i.height);
             handleDropzoneChanges("type", newFile.type);
             handleDropzoneChanges("size", newFile.size);
             handleDropzoneChanges("name", newFile.name);
-          });
-          video.src = URL.createObjectURL(newFile);
-        }
+          };
+        };
+
+        i.src = newFile.preview;
+      } else {
+        console.log("dropped and video");
+        // need to interrogate video for its secrets
+        const video = document.createElement("video");
+        video.addEventListener("canplay", (event) => {
+          console.log("video loaded");
+          handleDropzoneChanges("width", video.videoWidth);
+          handleDropzoneChanges("height", video.videoHeight);
+          handleDropzoneChanges("type", newFile.type);
+          handleDropzoneChanges("size", newFile.size);
+          handleDropzoneChanges("name", newFile.name);
+        });
+        video.src = URL.createObjectURL(newFile);
       }
     },
   });

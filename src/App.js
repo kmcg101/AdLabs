@@ -63,11 +63,11 @@ function App() {
   const [blankFilename, setBlankFilename] = useState();
 
   // dropped images and video files
-  const [elevatorFile, setElevatorFile] = useState([]); //14
-  const [lfdFile, setLfdFile] = useState();
-  const [pfdFile, setPfdFile] = useState();
-  const [svgFile, setSvgFile] = useState(); // 17
-  const [standardAdFile, setStandardAdFile] = useState(); //18
+  const [elevatorFile, setElevatorFile] = useState({}); //14
+  const [lfdFile, setLfdFile] = useState({});
+  const [pfdFile, setPfdFile] = useState({});
+  const [svgFile, setSvgFile] = useState({}); // 17
+  const [standardAdFile, setStandardAdFile] = useState({}); //18
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);

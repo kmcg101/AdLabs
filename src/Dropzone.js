@@ -156,41 +156,17 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  // const svgImagePreview =
-  //   typeof svgFile === undefined ||
-  //   svgFile === null ||
-  //   Object.keys(svgFile).length === 0
-  //     ? null
-  //     : svgFile.map((file) =>
-  //         Object.keys(svgFile).length === 0 ? null : (
-  //           <img
-  //             src={URL.createObjectURL(svgFile.payload)}
-  //             style={{ width: "100%" }}
-  //             alt="preview"
-  //           />
-  //         )
-  //       );
-  /*
-  svgFile.map((file) => (
-    <img
-      src={URL.createObjectURL(file.payload)}
-      style={{ width: "100%" }}
-      alt="preview"
-    />
-  ));
-  */
-  //const [svgFileTest, setSvgFileTest] = useState(); // 17
-  //console.log("svgFileType = ", typeof svgFileTest);
   //console.log("app svgFileType = ", typeof svgFile);
   //console.log("app svgFile = ", svgFile);
-  // const svgImagePreview = svgFile.map((file) => (
-  //   <img
-  //     key={file.name}
-  //     src={URL.createObjectURL(file[0])}
-  //     style={{ width: "100%" }}
-  //     alt="preview"
-  //   />
-  // ));
+  const svgImagePreview = (
+    <div className="help"></div>
+    // <img
+    //   src={URL.createObjectURL(svgFile[0].payload)}
+    //   style={{ width: "100%" }}
+    //   alt="preview"
+    // />
+  );
+
   const imagePreview = files.map((file) => (
     <img
       key={file.name}
@@ -220,17 +196,18 @@ function Dropzone(props) {
           <div className="droppedImageHolder">
             <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
             <div className="dropzoneImageParent">
-              {/* {mediaType === "video"
+              {mediaType === "video"
                 ? videoPreview
-                : droppedFileType === "svg" && files.length === 0
+                : droppedFileType === "svg" &&
+                  files.length === 0 &&
+                  svgFile.length > 0
                 ? svgImagePreview
-                : imagePreview} */}
-              {mediaType === "video" ? videoPreview : imagePreview}
+                : imagePreview}
+              {/* {mediaType === "video" ? videoPreview : imagePreview} */}
             </div>
           </div>
 
-          {/* it is successfully rejecting the PNG file but it is writing it to state  */}
-          {/* looks like all files are showing up in the accepted files array */}
+          {/* when does this refresh and check if the conditions are met? */}
 
           <input {...getInputProps()} />
         </div>

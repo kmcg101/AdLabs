@@ -610,117 +610,123 @@ function App() {
           </div>
           <div className="contentSub">
             {/* PAGE 1 */}
-            {currentPageNumber === 1 ? (
-              <div className="inputsPage page">
-                <Inputs
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAnyInputsChange={handleAnyInputsChange}
-                  inputsCheckButtonPressed={inputsCheckButtonPressed}
-                  inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-                />
-              </div>
-            ) : null}
+            {/* {`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`} */}
+
+            <div
+              className={`inputsPage page ${
+                currentPageNumber !== 1 ? "hide" : ""
+              }`}
+            >
+              <Inputs
+                productIndex={productIndex}
+                inputValues={inputValues}
+                handleAnyInputsChange={handleAnyInputsChange}
+                inputsCheckButtonPressed={inputsCheckButtonPressed}
+                inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
+              />
+            </div>
 
             {/* PAGE 2 */}
-            {currentPageNumber === 2 ? (
+
+            <div
+              className={`adBuildingPage page ${
+                isElevator === true
+                  ? "elevator"
+                  : isElevator === false
+                  ? "landscape"
+                  : "portrait"
+              } ${currentPageNumber !== 2 ? "hide" : ""}`}
+            >
+              {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
               <div
-                className={`adBuildingPage page ${
-                  isElevator === true
+                className={`adBuildingPageContent ${
+                  currentPageNumber === 2 && isElevator === true
                     ? "elevator"
-                    : isElevator === false
+                    : currentPageNumber === 2 &&
+                      isElevator === false &&
+                      currentBuildNavNumber === 1
                     ? "landscape"
                     : "portrait"
                 }`}
               >
-                {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
-                <div
-                  className={`adBuildingPageContent ${
-                    currentPageNumber === 2 && isElevator === true
-                      ? "elevator"
-                      : currentPageNumber === 2 &&
-                        isElevator === false &&
-                        currentBuildNavNumber === 1
-                      ? "landscape"
-                      : "portrait"
-                  }`}
-                >
-                  {/* elevator */}
-                  {currentPageNumber === 2 && isElevator === true ? (
-                    <div className="adBuildingPageInner">
-                      <PageElevator
-                        elevatorFileError={elevatorFileError}
-                        svgFileError={svgFileError}
-                        standardAdFileError={standardAdFileError}
-                        isBlackText={isBlackText}
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleDropzoneChanges={handleDropzoneChanges}
-                        svgFile={svgFile}
-                      />
-                    </div>
-                  ) : null}
+                {/* elevator */}
+                {currentPageNumber === 2 && isElevator === true ? (
+                  <div className="adBuildingPageInner">
+                    <PageElevator
+                      elevatorFileError={elevatorFileError}
+                      svgFileError={svgFileError}
+                      standardAdFileError={standardAdFileError}
+                      isBlackText={isBlackText}
+                      bintBGColor={bintBGColor}
+                      productIndex={productIndex}
+                      inputValues={inputValues}
+                      handleDropzoneChanges={handleDropzoneChanges}
+                      svgFile={svgFile}
+                    />
+                  </div>
+                ) : null}
 
-                  {/* lfd */}
-                  {currentPageNumber === 2 && isElevator === false ? (
-                    <div
-                      className={`adBuildingPageInner ${
-                        currentBuildNavNumber === 2 ? "hide" : ""
-                      }`}
-                    >
-                      <PageLFD
-                        lfdFileError={lfdFileError}
-                        svgFileError={svgFileError}
-                        standardAdFileError={standardAdFileError}
-                        isBlackText={isBlackText}
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleDropzoneChanges={handleDropzoneChanges}
-                        svgFile={svgFile}
-                      />
-                    </div>
-                  ) : null}
+                {/* lfd */}
+                {currentPageNumber === 2 && isElevator === false ? (
+                  <div
+                    className={`adBuildingPageInner ${
+                      currentBuildNavNumber === 2 ? "hide" : ""
+                    }`}
+                  >
+                    <PageLFD
+                      lfdFileError={lfdFileError}
+                      svgFileError={svgFileError}
+                      standardAdFileError={standardAdFileError}
+                      isBlackText={isBlackText}
+                      bintBGColor={bintBGColor}
+                      productIndex={productIndex}
+                      inputValues={inputValues}
+                      handleDropzoneChanges={handleDropzoneChanges}
+                      svgFile={svgFile}
+                    />
+                  </div>
+                ) : null}
 
-                  {/* pfd */}
-                  {currentPageNumber === 2 && isElevator === false ? (
-                    <div
-                      className={`adBuildingPageInner ${
-                        currentBuildNavNumber === 1 ? "hide" : ""
-                      }`}
-                    >
-                      <PagePFD
-                        pfdFileError={pfdFileError}
-                        svgFileError={svgFileError}
-                        standardAdFileError={standardAdFileError}
-                        isBlackText={isBlackText}
-                        bintBGColor={bintBGColor}
-                        productIndex={productIndex}
-                        inputValues={inputValues}
-                        handleDropzoneChanges={handleDropzoneChanges}
-                        svgFile={svgFile}
-                      />
-                    </div>
-                  ) : null}
-                </div>
+                {/* pfd */}
+                {currentPageNumber === 2 && isElevator === false ? (
+                  <div
+                    className={`adBuildingPageInner ${
+                      currentBuildNavNumber === 1 ? "hide" : ""
+                    }`}
+                  >
+                    <PagePFD
+                      pfdFileError={pfdFileError}
+                      svgFileError={svgFileError}
+                      standardAdFileError={standardAdFileError}
+                      isBlackText={isBlackText}
+                      bintBGColor={bintBGColor}
+                      productIndex={productIndex}
+                      inputValues={inputValues}
+                      handleDropzoneChanges={handleDropzoneChanges}
+                      svgFile={svgFile}
+                    />
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+            </div>
 
             {/* PAGE 3 */}
-            {currentPageNumber === 3 ? (
-              <div className="resultsPage page">
-                <Results
-                  allDroppedFilenames={allDroppedFilenames}
-                  allDroppedNewFilenames={allDroppedNewFilenames}
-                  filename={filename}
-                  blankFilename={blankFilename}
-                  requiresBlankFile={requiresBlankFile}
-                  bintBGColor={bintBGColor}
-                  inputValues={inputValues}
-                />
-              </div>
-            ) : null}
+
+            <div
+              className={`resultsPage page ${
+                currentPageNumber !== 3 ? "hide" : ""
+              }`}
+            >
+              <Results
+                allDroppedFilenames={allDroppedFilenames}
+                allDroppedNewFilenames={allDroppedNewFilenames}
+                filename={filename}
+                blankFilename={blankFilename}
+                requiresBlankFile={requiresBlankFile}
+                bintBGColor={bintBGColor}
+                inputValues={inputValues}
+              />
+            </div>
           </div>
 
           <div className="navSub">

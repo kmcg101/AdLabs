@@ -63,7 +63,7 @@ function Dropzone(props) {
   useEffect(() => {
     console.log("files change ", files);
     console.log("svgFile = ", svgFile);
-  }, [files]);
+  }, [svgFile]);
 
   const handleDropzoneChanges = (name, value) => {
     // dropped file type = elevator, landscape, portrait, standard, svg.
@@ -97,14 +97,11 @@ function Dropzone(props) {
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
 
-      console.log("trying and not zero");
       const newFile = acceptedFiles[0];
       handleDropzoneChanges("payload", newFile);
 
-      console.log("dropped and name is ", newFile.name);
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
-      console.log("ext = ", ext);
 
       if (ext === "mp4") {
         setMediaType("video");
@@ -128,11 +125,9 @@ function Dropzone(props) {
 
         i.src = newFile.preview;
       } else {
-        console.log("dropped and video");
         // need to interrogate video for its secrets
         const video = document.createElement("video");
         video.addEventListener("canplay", (event) => {
-          console.log("video loaded");
           handleDropzoneChanges("width", video.videoWidth);
           handleDropzoneChanges("height", video.videoHeight);
           handleDropzoneChanges("type", newFile.type);
@@ -153,15 +148,21 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  //console.log("app svgFileType = ", typeof svgFile);
-  //console.log("app svgFile = ", svgFile);
+  // running into same problem.  the payload does not exist yet but this is failing
   const svgImagePreview = (
-    <div className="help"></div>
-    // <img
-    //   src={URL.createObjectURL(svgFile[0].payload)}
-    //   style={{ width: "100%" }}
-    //   alt="preview"
-    // />
+    <img
+      src={
+        Object.keys(svgFile).length > 0
+          ? URL.createObjectURL(svgFile.payload)
+          : null
+      }
+      style={
+        Object.keys(svgFile).length > 0
+          ? { width: "100%" }
+          : { display: "none" }
+      }
+      alt="preview"
+    />
   );
 
   const imagePreview = files.map((file) => (
@@ -177,6 +178,15 @@ function Dropzone(props) {
       <source src={URL.createObjectURL(files[0])} />
     </video>
   ));
+  function myPopulatingFunction() {
+    return droppedFileType === "svg" &&
+      files.length === 0 &&
+      svgFile.payload ? (
+      svgImagePreview
+    ) : (
+      <div>brother not dropped yet</div>
+    );
+  }
 
   return (
     <div>
@@ -188,16 +198,14 @@ function Dropzone(props) {
         {showHint ? (
           <div className="dropzoneHint">{acceptedFileTypeMessageString}</div>
         ) : null}
-
+        {/* <div className="extraParent">{myPopulatingFunction()}</div> */}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
             <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
             <div className="dropzoneImageParent">
               {mediaType === "video"
                 ? videoPreview
-                : droppedFileType === "svg" &&
-                  files.length === 0 &&
-                  svgFile.length > 0
+                : droppedFileType === "svg" && files.length === 0 && svgFile
                 ? svgImagePreview
                 : imagePreview}
               {/* {mediaType === "video" ? videoPreview : imagePreview} */}

@@ -169,6 +169,11 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+.page.hide {
+  display: none;
+}
+
 .inputsPage {
   display: block;
   padding-left: 20%;

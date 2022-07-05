@@ -149,21 +149,21 @@ function Dropzone(props) {
   );
 
   // running into same problem.  the payload does not exist yet but this is failing
-  const svgImagePreview = (
-    <img
-      src={
-        Object.keys(svgFile).length > 0
-          ? URL.createObjectURL(svgFile.payload)
-          : null
-      }
-      style={
-        Object.keys(svgFile).length > 0
-          ? { width: "100%" }
-          : { display: "none" }
-      }
-      alt="preview"
-    />
-  );
+  // const svgImagePreview = (
+  //   <img
+  //     src={
+  //       Object.keys(svgFile).length > 0
+  //         ? URL.createObjectURL(svgFile.payload)
+  //         : null
+  //     }
+  //     style={
+  //       Object.keys(svgFile).length > 0
+  //         ? { width: "100%" }
+  //         : { display: "none" }
+  //     }
+  //     alt="preview"
+  //   />
+  // );
 
   const imagePreview = files.map((file) => (
     <img
@@ -178,15 +178,6 @@ function Dropzone(props) {
       <source src={URL.createObjectURL(files[0])} />
     </video>
   ));
-  function myPopulatingFunction() {
-    return droppedFileType === "svg" &&
-      files.length === 0 &&
-      svgFile.payload ? (
-      svgImagePreview
-    ) : (
-      <div>brother not dropped yet</div>
-    );
-  }
 
   return (
     <div>
@@ -198,16 +189,15 @@ function Dropzone(props) {
         {showHint ? (
           <div className="dropzoneHint">{acceptedFileTypeMessageString}</div>
         ) : null}
-        {/* <div className="extraParent">{myPopulatingFunction()}</div> */}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
             <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
             <div className="dropzoneImageParent">
               {mediaType === "video"
                 ? videoPreview
-                : droppedFileType === "svg" && files.length === 0 && svgFile
-                ? svgImagePreview
-                : imagePreview}
+                : // : droppedFileType === "svg" && files.length === 0 && svgFile
+                  // ? svgImagePreview
+                  imagePreview}
               {/* {mediaType === "video" ? videoPreview : imagePreview} */}
             </div>
           </div>

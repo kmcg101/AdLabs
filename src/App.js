@@ -624,7 +624,7 @@ function App() {
             {/* PAGE 1 */}
             {/* {`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`} */}
 
-            {currentPageNumber !== 3 ? (
+            {currentPageNumber !== 4 ? (
               <div
                 className={`inputsPage page ${
                   currentPageNumber !== 1 ? "hide" : ""
@@ -664,24 +664,31 @@ function App() {
                 }`}
               >
                 {/* elevator */}
-                {currentPageNumber === 2 && isElevator === true ? (
-                  <div className="adBuildingPageInner">
-                    <PageElevator
-                      elevatorFileError={elevatorFileError}
-                      svgFileError={svgFileError}
-                      standardAdFileError={standardAdFileError}
-                      isBlackText={isBlackText}
-                      bintBGColor={bintBGColor}
-                      productIndex={productIndex}
-                      inputValues={inputValues}
-                      handleDropzoneChanges={handleDropzoneChanges}
-                      svgFile={svgFile}
-                    />
-                  </div>
-                ) : null}
-
+                <div
+                  className={`adBuildingPageInner ${
+                    currentPageNumber === 2 && isElevator ? "" : "hide"
+                  }`}
+                >
+                  <PageElevator
+                    elevatorFileError={elevatorFileError}
+                    svgFileError={svgFileError}
+                    standardAdFileError={standardAdFileError}
+                    isBlackText={isBlackText}
+                    bintBGColor={bintBGColor}
+                    productIndex={productIndex}
+                    inputValues={inputValues}
+                    handleDropzoneChanges={handleDropzoneChanges}
+                    svgFile={svgFile}
+                  />
+                </div>
                 {/* lfd */}
-                {currentPageNumber === 2 && isElevator === false ? (
+                <div
+                  className={`adBuildingPageInner ${
+                    currentPageNumber === 2 && isElevator === false
+                      ? ""
+                      : "hide"
+                  }`}
+                >
                   <div
                     className={`adBuildingPageInner ${
                       currentBuildNavNumber === 2 ? "hide" : ""
@@ -699,10 +706,8 @@ function App() {
                       svgFile={svgFile}
                     />
                   </div>
-                ) : null}
+                  {/* pfd */}
 
-                {/* pfd */}
-                {currentPageNumber === 2 && isElevator === false ? (
                   <div
                     className={`adBuildingPageInner ${
                       currentBuildNavNumber === 1 ? "hide" : ""
@@ -720,7 +725,7 @@ function App() {
                       svgFile={svgFile}
                     />
                   </div>
-                ) : null}
+                </div>
               </div>
             </div>
 

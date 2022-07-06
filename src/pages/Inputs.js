@@ -82,7 +82,7 @@ const Inputs = (props) => {
 
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: v2.23"
+            label="CLIENT NAME: v2.24"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
@@ -110,6 +110,7 @@ const Inputs = (props) => {
 
         <div className="inputsRightColumn">
           <SelectBox
+            value={props.inputValues.duration}
             isError={false}
             options={DATA_DURATION_ARRAY}
             label="DURATION:"
@@ -118,6 +119,7 @@ const Inputs = (props) => {
             inputsCheckButtonPressed={inputsCheckButtonPressed}
           />
           <SelectBox
+            value={props.inputValues.countryCode}
             isError={false}
             options={DATA_COUNTRY_CODE_ARRAY}
             label="COUNTRY:"
@@ -126,6 +128,7 @@ const Inputs = (props) => {
             inputsCheckButtonPressed={inputsCheckButtonPressed}
           />
           <SelectBox
+            value={props.inputValues.platform}
             isError={false}
             options={DATA_PLATFORM_ARRAY}
             label="PLATFORM:"

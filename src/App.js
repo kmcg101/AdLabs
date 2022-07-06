@@ -54,6 +54,9 @@ function App() {
   const [inputValues, setInputValues] = useState({
     client: "",
     campaign: "",
+    // product: "",
+    // duration: "",
+    // countryCode: "",
   });
 
   const [bintBGColor, setBintBGColor] = useState("FFFFFF");
@@ -183,7 +186,7 @@ function App() {
 
   const handleContinueButtonPressed = () => {
     setInputsCheckButtonPressedOnce(true);
-    console.log("trying");
+
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
@@ -293,9 +296,11 @@ function App() {
         setCurrentPageNumber(3);
       }
     } else if (currentPageNumber === 3) {
+      // hide inputs so form will be reset.
       deliverTemplateFiles();
     } else if (currentPageNumber === 4) {
       resetStateToBeginning();
+      // show inputs so form is reset
     }
   };
   const resetStateToBeginning = () => {
@@ -619,19 +624,21 @@ function App() {
             {/* PAGE 1 */}
             {/* {`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`} */}
 
-            <div
-              className={`inputsPage page ${
-                currentPageNumber !== 1 ? "hide" : ""
-              }`}
-            >
-              <Inputs
-                productIndex={productIndex}
-                inputValues={inputValues}
-                handleAnyInputsChange={handleAnyInputsChange}
-                inputsCheckButtonPressed={inputsCheckButtonPressed}
-                inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-              />
-            </div>
+            {currentPageNumber !== 3 ? (
+              <div
+                className={`inputsPage page ${
+                  currentPageNumber !== 1 ? "hide" : ""
+                }`}
+              >
+                <Inputs
+                  productIndex={productIndex}
+                  inputValues={inputValues}
+                  handleAnyInputsChange={handleAnyInputsChange}
+                  inputsCheckButtonPressed={inputsCheckButtonPressed}
+                  inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
+                />
+              </div>
+            ) : null}
 
             {/* PAGE 2 */}
 

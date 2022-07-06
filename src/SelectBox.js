@@ -99,7 +99,7 @@ function SelectBox(props) {
         }`}
         styles={styles}
         placeholder="select..."
-        // value={props.inputValues.product}
+        // value={props.value}
         name={props.varID}
         options={props.options}
         onChange={handleAnyInputsChange}

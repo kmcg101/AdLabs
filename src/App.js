@@ -15,7 +15,6 @@ import ConfirmationScreen from "./ConfirmationScreen";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./nav.css";
-//import Data from "./data.json";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
@@ -68,6 +67,8 @@ function App() {
   const [pfdFile, setPfdFile] = useState({});
   const [svgFile, setSvgFile] = useState({}); // 17
   const [standardAdFile, setStandardAdFile] = useState({}); //18
+
+  const [mediaExtensions, setMediaExtensions] = useState({});
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);
@@ -400,11 +401,13 @@ function App() {
         [name]: value,
       }));
     }
-
-    // get extension
+    // svg, standardAd, elevator, landscape, portrait
     if (name === "name") {
       const splitValue = value.split(".");
-      setMediaExtension(splitValue[1]);
+      setMediaExtensions((prevState) => ({
+        ...prevState,
+        [droppedFileType]: splitValue[1],
+      }));
     }
   };
 
@@ -412,8 +415,6 @@ function App() {
   // * zip 'em up
 
   const deliverTemplateFiles = () => {
-    const fileTypePrefixNoSlash = mediaExtension === "mp4" ? "video" : "image";
-
     const eORl = isElevator ? "e" : "l";
 
     const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
@@ -423,7 +424,7 @@ function App() {
     let contentH = getHTMLFile(
       filename,
       isElevator,
-      mediaExtension,
+      mediaExtensions,
       productIndex,
       bintBGColor
     );
@@ -433,7 +434,7 @@ function App() {
 
     // manifest file
     //valM is the text of the manifest template passed from TemplateCreator
-    var contentM = getManifestFile(filename, isElevator, mediaExtension);
+    var contentM = getManifestFile(filename, isElevator, mediaExtensions);
     var blobM = new Blob([contentM], {
       type: "text/plain;charset=utf-8",
     });
@@ -467,7 +468,9 @@ function App() {
     const loadElevator = elevatorFile.payload
       ? elevatorFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_e${fileTypePrefixNoSlash}.${mediaExtension}`,
+            `${filename}_e${
+              mediaExtensions.elevator === "mp4" ? "video" : "image"
+            }.${mediaExtensions.elevator}`,
             result
           );
         })
@@ -476,7 +479,9 @@ function App() {
     const loadLFD = lfdFile.payload
       ? lfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_l${fileTypePrefixNoSlash}.${mediaExtension}`,
+            `${filename}_l${
+              mediaExtensions.elevator === "mp4" ? "video" : "image"
+            }.${mediaExtensions.landscape}`,
             result
           );
         })
@@ -485,7 +490,9 @@ function App() {
     const loadPFD = pfdFile.payload
       ? pfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_p${fileTypePrefixNoSlash}.${mediaExtension}`,
+            `${filename}_p${
+              mediaExtensions.elevator === "mp4" ? "video" : "image"
+            }.${mediaExtensions.portrait}`,
             result
           );
         })

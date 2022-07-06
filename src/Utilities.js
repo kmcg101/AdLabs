@@ -1,46 +1,47 @@
-
 export const getFilename = (inputValues, isFS, product) => {
-    console.log("inputValues = ", inputValues)
-    const clientName = inputValues.client;
-    const duration = inputValues.duration;
-    const desc = inputValues.campaign;
-    const countryCode = inputValues.countryCode;
-    const eORl = inputValues.platform === 'elevator' ? 'e' : 'l';
-    const fsValue = isFS ? "_fs" : ""
+  console.log("inputValues = ", inputValues);
+  const clientName = inputValues.client;
+  const duration = inputValues.duration;
+  const desc = inputValues.campaign;
+  const countryCode = inputValues.countryCode;
+  const eORl = inputValues.platform === "elevator" ? "e" : "l";
+  const fsValue = isFS ? "_fs" : "";
 
-    // try {
-    //   setBlankFilename(
-    //     `${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`
-    //   );
-    // } catch {
-    //   console.log("not yet");
-    // }
-    return (`${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`)
-  }
+  // try {
+  //   setBlankFilename(
+  //     `${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`
+  //   );
+  // } catch {
+  //   console.log("not yet");
+  // }
+  return `${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`;
+};
 
-export function getManifestFile(filename, isElevator, mediaExtension){
-    
-    const filenameString = filename ? filename.toString() : ""
-    const videoOrImage = mediaExtension === 'mp4' ? "video" : "image";
+export function getManifestFile(filename, isElevator, mediaExtensions) {
+  const filenameString = filename ? filename.toString() : "";
+  const videoOrImageE = mediaExtensions.elevator === "mp4" ? "video" : "image";
+  const videoOrImageL = mediaExtensions.landscape === "mp4" ? "video" : "image";
+  const videoOrImageP = mediaExtensions.portrait === "mp4" ? "video" : "image";
 
+  const svgManifestEntry = filenameString.includes("-fsbi")
+    ? `advertising/${filename}.svg`
+    : "";
 
-    const svgManifestEntry = filenameString.includes("-fsbi") ? `advertising/${filename}.svg` : ""
+  const mediaManifestEntry = isElevator
+    ? `"advertising/${filename}_e${videoOrImageE}.${mediaExtensions.elevator}"`
+    : `"advertising/${filename}_l${videoOrImageL}.${mediaExtensions.landscape}" ,"advertising/${filename}_p${videoOrImageP}.${mediaExtensions.portrait}"`;
 
-    const mediaManifestEntry = isElevator ? `"advertising/${filename}_e${videoOrImage}.${mediaExtension}"` : `"advertising/${filename}_l${videoOrImage}.${mediaExtension}" ,"advertising/${filename}_p${videoOrImage}.${mediaExtension}"`
-
-    return (`
+  return `
     {
         "html": "advertising/${filename}.html",
         "fonts": [],
         "images": [${mediaManifestEntry} ${svgManifestEntry}]
     }
-    `
-)
-
+    `;
 }
 
-export function getBlankHTML(blankFilename){
-    return (`<!DOCTYPE html>
+export function getBlankHTML(blankFilename) {
+  return `<!DOCTYPE html>
     <html>
     <head>
     <body class="adbodystyle">
@@ -68,23 +69,15 @@ export function getBlankHTML(blankFilename){
         </div>
     </body>
     </html>
-    `)
-
+    `;
 }
 
-
-
 export function getBlankManifest(blankFilename) {
-
-    return (`
+  return `
 {
     "html": "advertising/${blankFilename}.html",
     "fonts": [],
     "images": []
 }
-`
-    )
+`;
 }
-
-
-

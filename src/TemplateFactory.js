@@ -1,23 +1,32 @@
-export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, bintBGColor) {
+export function getHTMLFile(
+  filename,
+  isElevator,
+  mediaExtensions,
+  productIndex,
+  bintBGColor
+) {
+  console.log(
+    "trying from factory ",
+    filename,
+    isElevator,
+    mediaExtensions,
+    productIndex
+  );
+  const eORl = isElevator ? "e" : "l";
+  const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
+  const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
+  const imageTagP = `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
 
-    console.log('trying from factory ', filename, isElevator, mediaExtension, productIndex)
-    const eORl = isElevator ? 'e' : "l"
-    const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtension}"></img>`;
-    const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtension}"></img>`;
-    const imageTagP = `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtension}"></img>`;
+  const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtensions.elevator}" type="video/mp4"></video>`;
+  const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtensions.landscape}" type="video/mp4"></video>`;
+  const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtensions.portrait}" type="video/mp4"></video>`;
 
-    const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtension}" type="video/mp4"></video>`
-    const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtension}" type="video/mp4"></video>`
-    const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtension}" type="video/mp4"></video>`
-
-    const playContentVideoE =
-        `var myThis = this;
+  const playContentVideoE = `var myThis = this;
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
         if (vid) {
             vid.play();   
-        }`
-    const playContentVideoL =
-        `
+        }`;
+  const playContentVideoL = `
             let vid_l = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_l');
             let vid_p = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_p');
             var myThis = this;
@@ -33,8 +42,8 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
                     vid_l.play();   
                 }
             }
-        `
-    const E_BINT = (`<!DOCTYPE html>
+        `;
+  const E_BINT = `<!DOCTYPE html>
     <html>
     
     <head>
@@ -200,9 +209,9 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
         </div>
     </body>
     
-    </html>`)
+    </html>`;
 
-    const E_FSA = (`<!DOCTYPE html>
+  const E_FSA = `<!DOCTYPE html>
     <html>
     <head>
     <body class="adbodystyle">
@@ -241,7 +250,7 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
             </style>
     
             <div class='media_frame1'>
-               ${mediaExtension === 'mp4' ? videoTagE : imageTagE}
+               ${mediaExtensions.elevator === "mp4" ? videoTagE : imageTagE}
             </div>
         <script>
     
@@ -251,16 +260,19 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
                         super(parentElement);
                     }
                     playContent() {
-                        ${mediaExtension === 'mp4' ? playContentVideoE : ""}
+                        ${
+                          mediaExtensions.elevator === "mp4"
+                            ? playContentVideoE
+                            : ""
+                        }
                     }
                 });
         </script>
         </div>
     </body>
-    </html>`)
+    </html>`;
 
-
-    const E_HFSP = (`<!DOCTYPE html>
+  const E_HFSP = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -300,7 +312,7 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
         </style>
 
         <div id="mediaframe_1" class='${filename} media_frame1'>
-            <img class='media' src ="/advertising/${filename}_eimage.${mediaExtension}">
+            <img class='media' src ="/advertising/${filename}_eimage.${mediaExtensions.elevator}">
         </div>
     <script>
         common.methods.registerAdScript("${filename}",
@@ -315,9 +327,9 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
     </script>
     </div>
 </body>
-</html>`)
+</html>`;
 
-    const E_VSA = (`<!DOCTYPE html>
+  const E_VSA = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -385,9 +397,9 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
     </script>
     </div>
 </body>
-</html>`)
+</html>`;
 
-    const E_FSBI = (`<!DOCTYPE html>
+  const E_FSBI = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -527,10 +539,9 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
         </script>
     </div>
 </body>
-</html>`)
+</html>`;
 
-
-    const L_BINT = (`<!DOCTYPE html>
+  const L_BINT = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -731,9 +742,9 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
     </div>
 </body>
 
-</html>`)
+</html>`;
 
-    const L_FSA = (`<!DOCTYPE html>
+  const L_FSA = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -806,11 +817,11 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
             }
         </style>
 		<div class='${filename} media_frame1'>
-            ${mediaExtension === 'mp4' ? videoTagL : imageTagL}
+            ${mediaExtensions.landscape === "mp4" ? videoTagL : imageTagL}
         </div>
 		
 		<div class='${filename} media_frame2'>
-            ${mediaExtension === 'mp4' ? videoTagP : imageTagP}
+            ${mediaExtensions.portrait === "mp4" ? videoTagP : imageTagP}
         </div>
 
     <script>
@@ -822,19 +833,20 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
                 }
 				
                 playContent() {
-                    ${mediaExtension === 'mp4' ? playContentVideoL : ""}
+                    ${
+                      mediaExtensions.landscape === "mp4"
+                        ? playContentVideoL
+                        : ""
+                    }
                 }
             });
     </script>
     </div>
 </body>
 </html>
-`)
+`;
 
-
-
-
-    const L_HFSP = (`<!DOCTYPE html>
+  const L_HFSP = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -933,8 +945,8 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
 </body>
 
 </html>
-`)
-    const L_VSA = (`
+`;
+  const L_VSA = `
     <!DOCTYPE html>
 <html>
 
@@ -1048,8 +1060,8 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
 </body>
 
 </html>
-`)
-    const L_FSBI = (`<!DOCTYPE html>
+`;
+  const L_FSBI = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -1242,14 +1254,14 @@ export function getHTMLFile(filename, isElevator, mediaExtension, productIndex, 
 </body>
 
 </html>
-`)
+`;
 
-    const productArrayE = [E_BINT, E_FSA, E_HFSP, E_VSA, E_FSBI]
-    const productArrayL = [L_BINT, L_FSA, L_HFSP, L_VSA, L_FSBI]
+  const productArrayE = [E_BINT, E_FSA, E_HFSP, E_VSA, E_FSBI];
+  const productArrayL = [L_BINT, L_FSA, L_HFSP, L_VSA, L_FSBI];
 
-    const currentArray = isElevator ? productArrayE : productArrayL
+  const currentArray = isElevator ? productArrayE : productArrayL;
 
-    let returnValue = currentArray[productIndex]
-   
-    return (returnValue)
+  let returnValue = currentArray[productIndex];
+
+  return returnValue;
 }

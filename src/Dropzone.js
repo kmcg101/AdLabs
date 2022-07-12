@@ -26,8 +26,7 @@ const dzBackgroundImage = {
 const dzGradientDiv = {
   width: "100%",
   height: "100%",
-  backgroundImage:
-    "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
   position: "absolute",
   zIndex: "50",
 };
@@ -148,30 +147,18 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  // running into same problem.  the payload does not exist yet but this is failing
-  // const svgImagePreview = (
-  //   <img
-  //     src={
-  //       Object.keys(svgFile).length > 0
-  //         ? URL.createObjectURL(svgFile.payload)
-  //         : null
-  //     }
-  //     style={
-  //       Object.keys(svgFile).length > 0
-  //         ? { width: "100%" }
-  //         : { display: "none" }
-  //     }
-  //     alt="preview"
-  //   />
-  // );
+  const svgImagePreview = (
+    <div>
+      <img
+        src={svgFile !== undefined && Object.keys(svgFile).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
+        style={svgFile !== undefined && Object.keys(svgFile).length > 0 ? { width: "100%" } : { display: "none" }}
+        alt="preview"
+      />
+    </div>
+  );
 
   const imagePreview = files.map((file) => (
-    <img
-      key={file.name}
-      src={URL.createObjectURL(files[0])}
-      style={{ width: "100%" }}
-      alt="preview"
-    />
+    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
   ));
   const videoPreview = files.map((file) => (
     <video key={file.name} autoPlay loop style={{ width: "100%" }}>
@@ -186,23 +173,21 @@ function Dropzone(props) {
         onMouseEnter={() => setShowHint(true)}
         onMouseLeave={() => setShowHint(false)}
       >
-        {showHint ? (
-          <div className="dropzoneHint">{acceptedFileTypeMessageString}</div>
-        ) : null}
+        {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
+            {Object.keys(files).length === 0 ? (
+              <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
+            ) : null}
             <div className="dropzoneImageParent">
               {mediaType === "video"
                 ? videoPreview
-                : // : droppedFileType === "svg" && files.length === 0 && svgFile
-                  // ? svgImagePreview
-                  imagePreview}
+                : droppedFileType === "svg" && Object.keys(svgFile).length > 0 && Object.keys(files).length === 0
+                ? svgImagePreview
+                : imagePreview}
               {/* {mediaType === "video" ? videoPreview : imagePreview} */}
             </div>
           </div>
-
-          {/* when does this refresh and check if the conditions are met? */}
 
           <input {...getInputProps()} />
         </div>

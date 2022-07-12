@@ -15,8 +15,7 @@ function SelectBox(props) {
       // lineHeight: "3.5rem",
       color: "white",
       height: "28px",
-      background:
-        "linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.6) 100%)",
+      background: "linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.6) 100%)",
 
       borderRadius: "0px",
       boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
@@ -24,10 +23,7 @@ function SelectBox(props) {
       // need to create a tr ue false to make this work
       border: inputsCheckButtonPressed && isValueSelected === false ? 0 : "1px",
       // border: inputsCheckButtonPressed && isValueSelected === false ? "1px red solid" : "none",
-      boxShadow:
-        inputsCheckButtonPressed && isValueSelected === false
-          ? "0px 0px 8px 1px #0ff"
-          : "none",
+      boxShadow: inputsCheckButtonPressed && isValueSelected === false ? "0px 0px 8px 1px #0ff" : "none",
     }),
 
     option: (provided, state) => ({
@@ -55,8 +51,7 @@ function SelectBox(props) {
 
     menu: (provided, state) => ({
       ...provided,
-      background:
-        "linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.60) 100%)",
+      background: "linear-gradient(180deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.60) 100%)",
       marginTop: "-10px",
       marginBottom: 0,
     }),
@@ -92,14 +87,10 @@ function SelectBox(props) {
       <label className="titleText">{props.label}</label>
 
       <Select
-        className={`${
-          inputsCheckButtonPressed && isValueSelected === false
-            ? "textInputErrorShake"
-            : ""
-        }`}
+        className={`${inputsCheckButtonPressed && isValueSelected === false ? "textInputErrorShake" : ""}`}
         styles={styles}
         placeholder="select..."
-        // value={props.value}
+        //value={props.value}
         name={props.varID}
         options={props.options}
         onChange={handleAnyInputsChange}

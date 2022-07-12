@@ -40,13 +40,8 @@ function App() {
   const [currentBuildNavNumber, setCurrentBuildNavNumber] = useState(1);
 
   const [productIndex, setProductIndex] = useState(4);
-  const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(
-    false
-  );
-  const [
-    inputsCheckButtonPressedOnce,
-    setInputsCheckButtonPressedOnce,
-  ] = useState(false);
+  const [inputsCheckButtonPressed, setInputsCheckButtonPressed] = useState(false);
+  const [inputsCheckButtonPressedOnce, setInputsCheckButtonPressedOnce] = useState(false);
 
   const [isElevator, setIsElevator] = useState(true);
   const [requiresBlankFile, setRequiresBlankFile] = useState(false);
@@ -65,13 +60,13 @@ function App() {
   const [blankFilename, setBlankFilename] = useState();
 
   // dropped images and video files
-  const [elevatorFile, setElevatorFile] = useState({}); //14
-  const [lfdFile, setLfdFile] = useState({});
-  const [pfdFile, setPfdFile] = useState({});
-  const [svgFile, setSvgFile] = useState({}); // 17
-  const [standardAdFile, setStandardAdFile] = useState({}); //18
+  const [elevatorFile, setElevatorFile] = useState({}); // 12
+  const [lfdFile, setLfdFile] = useState({}); // 13
+  const [pfdFile, setPfdFile] = useState({}); // 14
+  const [svgFile, setSvgFile] = useState({}); // 15
+  const [standardAdFile, setStandardAdFile] = useState({}); // 16
 
-  const [mediaExtensions, setMediaExtensions] = useState({});
+  const [mediaExtensions, setMediaExtensions] = useState({}); // 17
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);
@@ -99,9 +94,7 @@ function App() {
     const product = DATA_PRODUCTS.data[productNumber].label;
 
     try {
-      setBlankFilename(
-        `${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`
-      );
+      setBlankFilename(`${clientName}_${duration}_${product}blank_${countryCode}${fsValue}_${eORl}-${product}`);
     } catch {
       console.log("not yet");
     }
@@ -111,14 +104,9 @@ function App() {
   const getNewNameForDroppedFile = (filenameString, typeString) => {
     const eORl = inputValues.platform === "elevator" ? "e" : "l";
 
-    const baseFilename = getFilename(
-      inputValues,
-      eORl,
-      DATA_PRODUCTS.data[productIndex].label
-    );
+    const baseFilename = getFilename(inputValues, eORl, DATA_PRODUCTS.data[productIndex].label);
 
-    const nameSplit =
-      typeof filenameString === "undefined" ? "" : filenameString.split(".");
+    const nameSplit = typeof filenameString === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[1];
     const videoOrImageString = ext === "mp4" ? "video" : "image";
     let returnValue = "";
@@ -155,13 +143,7 @@ function App() {
   };
   // creates an array of all names of files that were dropped.
   const getAllDroppedFilenames = () => {
-    return [
-      elevatorFile.name,
-      lfdFile.name,
-      pfdFile.name,
-      svgFile.name,
-      standardAdFile.name,
-    ];
+    return [elevatorFile.name, lfdFile.name, pfdFile.name, svgFile.name, standardAdFile.name];
   };
   ////////////////////////////////////////////////////////
 
@@ -285,9 +267,7 @@ function App() {
         // this sets filename and blank filename
         setFilename(getFilename);
         const productNumber = parseInt(inputValues.product);
-        setRequiresBlankFile(
-          DATA_PRODUCTS.data[productNumber].requiresBlankFile
-        );
+        setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile);
 
         setAllDroppedFilenames(getAllDroppedFilenames);
 
@@ -347,12 +327,11 @@ function App() {
   // runs when product changes to set productIndex, isElevator, isFullScreen
   const effectHandleProductChange = () => {
     setProductIndex(inputValues.product);
-
     // clear all files and previews
     setElevatorFile({});
     setLfdFile({});
     setPfdFile({});
-    setSvgFile([]);
+    setSvgFile({});
     setStandardAdFile({});
   };
 
@@ -370,6 +349,7 @@ function App() {
         setIsElevator(false);
       }
     }
+
     setInputValues((prevState) => ({
       ...prevState,
       [name]: value,
@@ -426,13 +406,7 @@ function App() {
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = getHTMLFile(
-      filename,
-      isElevator,
-      mediaExtensions,
-      productIndex,
-      bintBGColor
-    );
+    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });
@@ -473,9 +447,7 @@ function App() {
     const loadElevator = elevatorFile.payload
       ? elevatorFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_e${
-              mediaExtensions.elevator === "mp4" ? "video" : "image"
-            }.${mediaExtensions.elevator}`,
+            `${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`,
             result
           );
         })
@@ -484,9 +456,7 @@ function App() {
     const loadLFD = lfdFile.payload
       ? lfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_l${
-              mediaExtensions.elevator === "mp4" ? "video" : "image"
-            }.${mediaExtensions.landscape}`,
+            `${filename}_l${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
             result
           );
         })
@@ -495,9 +465,7 @@ function App() {
     const loadPFD = pfdFile.payload
       ? pfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_p${
-              mediaExtensions.elevator === "mp4" ? "video" : "image"
-            }.${mediaExtensions.portrait}`,
+            `${filename}_p${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
             result
           );
         })
@@ -588,18 +556,14 @@ function App() {
                 <div
                   data-value="1"
                   onClick={handleELPNavClick}
-                  className={`elpNavButton ${
-                    currentBuildNavNumber === 1 ? "current" : "enabled"
-                  }`}
+                  className={`elpNavButton ${currentBuildNavNumber === 1 ? "current" : "enabled"}`}
                 >
                   LFD
                 </div>
                 <div
                   data-value="2"
                   onClick={handleELPNavClick}
-                  className={`elpNavButton ${
-                    currentBuildNavNumber === 2 ? "current" : "enabled"
-                  }`}
+                  className={`elpNavButton ${currentBuildNavNumber === 2 ? "current" : "enabled"}`}
                 >
                   PFD
                 </div>
@@ -616,20 +580,14 @@ function App() {
               </BlackWhiteToggleButton>
             ) : null}
 
-            {currentPageNumber !== 4 ? (
-              <BackButton handleBackButton={handleBackButton} />
-            ) : null}
+            {currentPageNumber !== 4 ? <BackButton handleBackButton={handleBackButton} /> : null}
           </div>
           <div className="contentSub">
             {/* PAGE 1 */}
             {/* {`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`} */}
 
             {currentPageNumber !== 4 ? (
-              <div
-                className={`inputsPage page ${
-                  currentPageNumber !== 1 ? "hide" : ""
-                }`}
-              >
+              <div className={`inputsPage page ${currentPageNumber !== 1 ? "hide" : ""}`}>
                 <Inputs
                   productIndex={productIndex}
                   inputValues={inputValues}
@@ -644,11 +602,7 @@ function App() {
 
             <div
               className={`adBuildingPage page ${
-                isElevator === true
-                  ? "elevator"
-                  : isElevator === false
-                  ? "landscape"
-                  : "portrait"
+                isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"
               } ${currentPageNumber !== 2 ? "hide" : ""}`}
             >
               {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
@@ -656,19 +610,13 @@ function App() {
                 className={`adBuildingPageContent ${
                   currentPageNumber === 2 && isElevator === true
                     ? "elevator"
-                    : currentPageNumber === 2 &&
-                      isElevator === false &&
-                      currentBuildNavNumber === 1
+                    : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1
                     ? "landscape"
                     : "portrait"
                 }`}
               >
                 {/* elevator */}
-                <div
-                  className={`adBuildingPageInner ${
-                    currentPageNumber === 2 && isElevator ? "" : "hide"
-                  }`}
-                >
+                <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
                   <PageElevator
                     elevatorFileError={elevatorFileError}
                     svgFileError={svgFileError}
@@ -682,18 +630,8 @@ function App() {
                   />
                 </div>
                 {/* lfd */}
-                <div
-                  className={`adBuildingPageInner ${
-                    currentPageNumber === 2 && isElevator === false
-                      ? ""
-                      : "hide"
-                  }`}
-                >
-                  <div
-                    className={`adBuildingPageInner ${
-                      currentBuildNavNumber === 2 ? "hide" : ""
-                    }`}
-                  >
+                <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
+                  <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
                       lfdFileError={lfdFileError}
                       svgFileError={svgFileError}
@@ -708,11 +646,7 @@ function App() {
                   </div>
                   {/* pfd */}
 
-                  <div
-                    className={`adBuildingPageInner ${
-                      currentBuildNavNumber === 1 ? "hide" : ""
-                    }`}
-                  >
+                  <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
                     <PagePFD
                       pfdFileError={pfdFileError}
                       svgFileError={svgFileError}
@@ -731,11 +665,7 @@ function App() {
 
             {/* PAGE 3 */}
 
-            <div
-              className={`resultsPage page ${
-                currentPageNumber !== 3 ? "hide" : ""
-              }`}
-            >
+            <div className={`resultsPage page ${currentPageNumber !== 3 ? "hide" : ""}`}>
               <Results
                 allDroppedFilenames={allDroppedFilenames}
                 allDroppedNewFilenames={allDroppedNewFilenames}
@@ -754,9 +684,7 @@ function App() {
                 <div
                   onClick={circleButtonClickHandler}
                   dataindex={1}
-                  className={`circleButton ${
-                    currentPageNumber === 1 ? "current" : "enabled"
-                  }`}
+                  className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}
                 >
                   1
                 </div>
@@ -764,11 +692,7 @@ function App() {
                   onClick={circleButtonClickHandler}
                   dataindex={2}
                   className={`circleButton ${
-                    currentPageNumber === 2
-                      ? "current"
-                      : currentPageNumber > 2
-                      ? "enabled"
-                      : "disabled"
+                    currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"
                   }`}
                 >
                   2
@@ -776,9 +700,7 @@ function App() {
                 <div
                   onClick={circleButtonClickHandler}
                   dataindex={4}
-                  className={`circleButton ${
-                    currentPageNumber === 3 ? "current" : "disabled"
-                  }`}
+                  className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}
                 >
                   3
                 </div>

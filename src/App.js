@@ -23,6 +23,8 @@ import PageLFD from "./pages/PageLFD";
 import PagePFD from "./pages/PagePFD";
 import Inputs from "./pages/Inputs";
 import Results from "./pages/Results";
+import Filename from "./Filename";
+import WarningMessage from "./WarningMessage";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 import adLabsLogo from "./assets/AdLabs.svg";
 
@@ -45,6 +47,7 @@ function App() {
 
   const [isElevator, setIsElevator] = useState(true);
   const [requiresBlankFile, setRequiresBlankFile] = useState(false);
+  const [warningMessageText, setWarningMessageText] = useState();
 
   const [inputValues, setInputValues] = useState({
     client: "",
@@ -80,6 +83,10 @@ function App() {
   const [mediaExtension, setMediaExtension] = useState();
 
   const [isBlackText, setIsBlackText] = useState(true);
+
+  const handleWarningMessageText = (txt) => {
+    setWarningMessageText(txt);
+  };
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
   // also used when compiling list of input files and their new names
@@ -357,6 +364,7 @@ function App() {
   };
 
   /////////////////////////////////////////////////
+
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     // droppedFileType = elevator, landscape, portrait, svg, standardAd
     if (droppedFileType === "svg") {
@@ -551,6 +559,13 @@ function App() {
         </div>
         <div className="appContainer">
           <div className="topSub">
+            {currentPageNumber !== 4 ? <Filename inputValues={inputValues} /> : null}
+            {currentPageNumber !== 4 ? (
+              <WarningMessage
+                handleWarningMessageText={handleWarningMessageText}
+                warningMessageText={warningMessageText}
+              />
+            ) : null}
             {currentPageNumber === 2 && !isElevator ? (
               <div className="elpNavigatorContainer">
                 <div

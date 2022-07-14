@@ -8,6 +8,7 @@ const E_fsbi = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const svgFileError = props.svgFileError;
   const svgFile = props.svgFile;
+  const productIndex = props.productIndex;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -30,6 +31,7 @@ const E_fsbi = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="elevator"
           svgFile={svgFile}
         />
@@ -38,6 +40,7 @@ const E_fsbi = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="svg"
           svgFile={svgFile}
         />

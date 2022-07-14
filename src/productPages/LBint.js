@@ -16,6 +16,7 @@ const L_bint = (props) => {
   const lfdFileError = props.lfdFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const productIndex = props.productIndex;
 
   const lBint = {
     top: "22px",
@@ -41,17 +42,14 @@ const L_bint = (props) => {
   return (
     <div className="landscapeProductContainer">
       <div style={bgStyle} className="backgroundImageContainer">
-        <img
-          alt=""
-          className="backgroundImageContainer"
-          src={isBlackText ? blackTextImage : whiteTextImage}
-        ></img>
+        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
 
       <div className="lStandardAd" style={lStandardAd}>
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="standardAd"
           svgFile={svgFile}
         />
@@ -60,6 +58,7 @@ const L_bint = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="landscape"
           svgFile={svgFile}
         />

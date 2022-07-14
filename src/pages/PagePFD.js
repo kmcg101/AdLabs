@@ -30,31 +30,24 @@ const PagePFD = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
         />
       ) : null}
       {productIndex === 1 ? (
-        <PFsa
-          pfdFileError={pfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <PFsa pfdFileError={pfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 2 ? (
-        <PHfsp
-          pfdFileError={pfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <PHfsp pfdFileError={pfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 3 ? (
-        <PVsa
-          pfdFileError={pfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <PVsa pfdFileError={pfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 4 ? (
         <PFsbi
           pfdFileError={pfdFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}

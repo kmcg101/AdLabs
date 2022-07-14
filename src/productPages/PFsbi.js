@@ -29,14 +29,16 @@ const P_fsbi = (props) => {
   const svgFile = props.svgFile;
   const pfdFileError = props.pfdFileError;
   const svgFileError = props.svgFileError;
-
+  const productIndex = props.productIndex;
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="pFullScreen" style={pFullScreen}>
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
+          rejectDroppedFile={props.rejectDroppedFile}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="portrait"
           svgFile={svgFile}
         />
@@ -46,6 +48,7 @@ const P_fsbi = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="svg"
           svgFile={svgFile}
         />

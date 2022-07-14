@@ -24,6 +24,7 @@ const L_fsbi = (props) => {
   const svgFile = props.svgFile;
   const lfdFileError = props.lfdFileError;
   const svgFileError = props.svgFileError;
+  const productIndex = props.productIndex;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -36,6 +37,7 @@ const L_fsbi = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="landscape"
           svgFile={svgFile}
         />
@@ -44,6 +46,7 @@ const L_fsbi = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="svg"
           svgFile={svgFile}
         />

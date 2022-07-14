@@ -20,6 +20,7 @@ const P_hfsp = (props) => {
 
   const pfdFileError = props.pfdFileError;
   const svgFile = props.svgFile;
+  const productIndex = props.productIndex;
 
   return (
     <div className="portraitProductContainer">
@@ -28,6 +29,7 @@ const P_hfsp = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="portrait"
           svgFile={svgFile}
         />

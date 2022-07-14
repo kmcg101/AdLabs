@@ -30,31 +30,24 @@ const PageLFD = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
         />
       ) : null}
       {productIndex === 1 ? (
-        <LFsa
-          lfdFileError={lfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <LFsa lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 2 ? (
-        <LHfsp
-          lfdFileError={lfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <LHfsp lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 3 ? (
-        <LVsa
-          lfdFileError={lfdFileError}
-          handleDropzoneChanges={handleDropzoneChanges}
-        />
+        <LVsa lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
       ) : null}
       {productIndex === 4 ? (
         <LFsbi
           lfdFileError={lfdFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}

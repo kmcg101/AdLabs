@@ -2,17 +2,20 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
+import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
   border: "white dashed 2px",
 };
 
 const acceptStyle = {
-  border: "#00e676 dashed 4px",
+  // border: "#00e676 dashed 2px",
+  boxShadow: "0px 0px 8px 1px #00e676",
 };
 
 const rejectStyle = {
-  border: "#ff1744 dashed 4px",
+  // border: "#ff1744 dashed 2px",
+  boxShadow: "0px 0px 8px 1px #ff1744",
 };
 const dzBackgroundImage = {
   width: "100%",
@@ -38,6 +41,7 @@ function Dropzone(props) {
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
   const svgFile = props.svgFile;
   const droppedFileType = props.droppedFileType;
+  const productIndex = props.productIndex;
 
   function getHintString(str) {
     let newString = str.split(",");
@@ -64,6 +68,39 @@ function Dropzone(props) {
     console.log("svgFile = ", svgFile);
   }, [svgFile]);
 
+  const rejectDroppedFile = (val) => {
+    props.rejectDroppedFile(val);
+  };
+  const validateDroppedFile = (w, h) => {
+    const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
+    const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
+    const expectedPixelsP = DATA_PRODUCTS.data[productIndex].pixels.pPixels;
+    let expectedPixels;
+    {
+      droppedFileType === "elevator"
+        ? (expectedPixels = expectedPixelsE)
+        : droppedFileType === "landscape"
+        ? (expectedPixels = expectedPixelsL)
+        : (expectedPixels = expectedPixelsP);
+    }
+    const receivedPixels = w * h;
+    console.log("expected = ", expectedPixels);
+    console.log("received = ", receivedPixels);
+
+    const exists = Object.values(expectedPixels).includes(receivedPixels);
+
+    if (droppedFileType === "svg" || droppedFileType === "standardAd") {
+      return true;
+    } else if (exists) {
+      console.log("right size");
+      return true;
+    } else {
+      console.log("wrong size");
+      setFiles([]);
+      return false;
+    }
+  };
+
   const handleDropzoneChanges = (name, value) => {
     // dropped file type = elevator, landscape, portrait, standard, svg.
     // this writes the name/value pair to the approprate dropped file in app.js
@@ -80,11 +117,12 @@ function Dropzone(props) {
     isDragReject,
   } = useDropzone({
     maxFiles: 1,
-    noClick: true,
+    noClick: false,
     multiple: false,
     accept: acceptedFileTypeString,
 
     onDropAccepted: (acceptedFiles) => {
+      console.log("dropped");
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {
@@ -95,10 +133,7 @@ function Dropzone(props) {
 
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
-
       const newFile = acceptedFiles[0];
-      handleDropzoneChanges("payload", newFile);
-
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
 
@@ -107,18 +142,34 @@ function Dropzone(props) {
       } else {
         setMediaType("image");
       }
-
+      console.log("checking if mp4 ", newFile);
       if (ext !== "mp4") {
+        console.log("not mp4, time to load image");
         const i = new Image();
         i.onload = () => {
+          console.log("i loaded");
           let reader = new FileReader();
           reader.readAsDataURL(newFile);
           reader.onload = () => {
-            handleDropzoneChanges("width", i.width);
-            handleDropzoneChanges("height", i.height);
-            handleDropzoneChanges("type", newFile.type);
-            handleDropzoneChanges("size", newFile.size);
-            handleDropzoneChanges("name", newFile.name);
+            console.log("reader loaded");
+
+            const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
+            if (droppedFileIsCorrectSize) {
+              console.log("image and correct");
+              // setFiles(
+              //   acceptedFiles.map((file) =>
+              //     Object.assign(file, {
+              //       preview: URL.createObjectURL(file),
+              //     })
+              //   )
+              // );
+              handleDropzoneChanges("name", newFile.name);
+              handleDropzoneChanges("payload", newFile);
+              handleDropzoneChanges("width", i.width);
+              handleDropzoneChanges("height", i.height);
+              handleDropzoneChanges("type", newFile.type);
+              handleDropzoneChanges("size", newFile.size);
+            }
           };
         };
 
@@ -127,11 +178,22 @@ function Dropzone(props) {
         // need to interrogate video for its secrets
         const video = document.createElement("video");
         video.addEventListener("canplay", (event) => {
-          handleDropzoneChanges("width", video.videoWidth);
-          handleDropzoneChanges("height", video.videoHeight);
-          handleDropzoneChanges("type", newFile.type);
-          handleDropzoneChanges("size", newFile.size);
-          handleDropzoneChanges("name", newFile.name);
+          const droppedFileIsCorrectSize = validateDroppedFile(video.videoWidth, video.videoHeight);
+          if (droppedFileIsCorrectSize) {
+            // setFiles(
+            //   acceptedFiles.map((file) =>
+            //     Object.assign(file, {
+            //       preview: URL.createObjectURL(file),
+            //     })
+            //   )
+            // );
+            handleDropzoneChanges("payload", newFile);
+            handleDropzoneChanges("width", video.videoWidth);
+            handleDropzoneChanges("height", video.videoHeight);
+            handleDropzoneChanges("type", newFile.type);
+            handleDropzoneChanges("size", newFile.size);
+            handleDropzoneChanges("name", newFile.name);
+          }
         });
         video.src = URL.createObjectURL(newFile);
       }

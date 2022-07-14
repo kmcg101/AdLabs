@@ -81,7 +81,7 @@ const Inputs = (props) => {
 
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: v2.26"
+            label="CLIENT NAME: v3.0"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
@@ -89,7 +89,7 @@ const Inputs = (props) => {
           />
           <TextBox
             value={props.inputValues.campaign}
-            label="DESCRIPTION:"
+            label="DESCRIPTOR:"
             varID="campaign"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
@@ -97,11 +97,11 @@ const Inputs = (props) => {
           />
 
           <SelectBox
-            value={props.inputValues.product}
+            value={props.inputValues.platform}
             isError={false}
-            options={DATA_PRODUCTS_ARRAY}
-            label="PRODUCT:"
-            varID="product"
+            options={DATA_PLATFORM_ARRAY}
+            label="NETWORK:"
+            varID="platform"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
           />
@@ -121,17 +121,17 @@ const Inputs = (props) => {
             value={props.inputValues.countryCode}
             isError={false}
             options={DATA_COUNTRY_CODE_ARRAY}
-            label="COUNTRY:"
+            label="COUNTRY/LANGUAGE:"
             varID="countryCode"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
           />
           <SelectBox
-            value={props.inputValues.platform}
+            value={props.inputValues.product}
             isError={false}
-            options={DATA_PLATFORM_ARRAY}
-            label="PLATFORM:"
-            varID="platform"
+            options={DATA_PRODUCTS_ARRAY}
+            label="PRODUCT:"
+            varID="product"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}
           />

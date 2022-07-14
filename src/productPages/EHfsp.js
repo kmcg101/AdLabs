@@ -16,7 +16,7 @@ const hfspMedia = {
 const E_hfsp = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const svgFile = props.svgFile;
-
+  const productIndex = props.productIndex;
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
@@ -29,6 +29,7 @@ const E_hfsp = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="elevator"
           svgFile={svgFile}
         />

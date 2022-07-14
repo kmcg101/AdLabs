@@ -16,7 +16,7 @@ const L_hfsp = (props) => {
 
   const lfdFileError = props.lfdFileError;
   const svgFile = props.svgFile;
-
+  const productIndex = props.productIndex;
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
@@ -27,6 +27,7 @@ const L_hfsp = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="landscape"
           svgFile={svgFile}
         />

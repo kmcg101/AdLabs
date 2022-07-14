@@ -16,6 +16,7 @@ const P_bint = (props) => {
   const pfdFileError = props.pfdFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const productIndex = props.productIndex;
 
   const pBint = {
     width: "672px",
@@ -40,16 +41,13 @@ const P_bint = (props) => {
   return (
     <div className="portraitProductContainer">
       <div style={bgStyle} className="backgroundImageContainer">
-        <img
-          alt=""
-          className="backgroundImageContainer"
-          src={isBlackText ? blackTextImage : whiteTextImage}
-        ></img>
+        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
       <div className="pStandardAd" style={pStandardAd}>
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="standardAd"
           svgFile={svgFile}
         />
@@ -58,6 +56,7 @@ const P_bint = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="portrait"
           svgFile={svgFile}
         />

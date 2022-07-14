@@ -28,6 +28,7 @@ const PageElevator = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}
@@ -35,6 +36,7 @@ const PageElevator = (props) => {
         <EFsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}
@@ -42,6 +44,7 @@ const PageElevator = (props) => {
         <EHfsp
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}
@@ -49,6 +52,7 @@ const PageElevator = (props) => {
         <EVsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}
@@ -57,6 +61,7 @@ const PageElevator = (props) => {
           elevatorFileError={elevatorFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       ) : null}

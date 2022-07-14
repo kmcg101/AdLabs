@@ -17,6 +17,7 @@ const E_bint = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const productIndex = props.productIndex;
 
   const eBINTImage = {
     width: "130px",
@@ -43,11 +44,7 @@ const E_bint = (props) => {
   return (
     <div className="elevatorProductContainer">
       <div style={bgStyle} className="backgroundImageContainer">
-        <img
-          alt=""
-          className="backgroundImage"
-          src={isBlackText ? blackTextImage : whiteTextImage}
-        ></img>
+        <img alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
 
       <div style={eStandardAd} className="eStandardAd">
@@ -55,6 +52,7 @@ const E_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
+          productIndex={productIndex}
           svgFile={svgFile}
         />
       </div>
@@ -63,6 +61,7 @@ const E_bint = (props) => {
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
+          productIndex={productIndex}
           droppedFileType="elevator"
           svgFile={svgFile}
         />

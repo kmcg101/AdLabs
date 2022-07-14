@@ -36,6 +36,7 @@ function TextBox(props) {
     zIndex: 100,
     fontSize: "15px",
     color: "white",
+    fontStyle: "italic",
   };
   const textBoxInner = {
     position: "relative",
@@ -49,17 +50,9 @@ function TextBox(props) {
           {/* <input className={`standardText ${inputsCheckButtonPressed && valueIsValid === false ? "textInputErrorShake" : inputsCheckButtonPressedOnce && valueIsValid === false ?  "textInputErrorOutline" : allGoodCharacters ? "" : "textInputErrorOutline"}` */}
           <input
             className={`standardText ${
-              inputsCheckButtonPressed && allGoodCharacters === false
-                ? "textInputErrorShake"
-                : ""
-            } ${
-              inputsCheckButtonPressed && valueIsValid === false
-                ? "textInputErrorShake"
-                : ""
-            } ${
-              inputsCheckButtonPressedOnce && valueIsValid === false
-                ? "textInputErrorOutline"
-                : ""
+              inputsCheckButtonPressed && allGoodCharacters === false ? "textInputErrorShake" : ""
+            } ${inputsCheckButtonPressed && valueIsValid === false ? "textInputErrorShake" : ""} ${
+              inputsCheckButtonPressedOnce && valueIsValid === false ? "textInputErrorOutline" : ""
             } ${allGoodCharacters === false ? "textInputErrorOutline" : ""} `}
             type="text"
             name={props.varID}
@@ -67,9 +60,7 @@ function TextBox(props) {
             onChange={handleAnyInputsChange}
           ></input>
         </div>
-        {allGoodCharacters ? null : (
-          <div style={textInputErrorText}>numbers, letters, hyphens</div>
-        )}
+        {allGoodCharacters ? null : <div style={textInputErrorText}>numbers, letters, hyphens</div>}
       </div>
     </div>
   );

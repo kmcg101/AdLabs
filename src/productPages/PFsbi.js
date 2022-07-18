@@ -39,6 +39,7 @@ const P_fsbi = (props) => {
           rejectDroppedFile={props.rejectDroppedFile}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
         />
@@ -49,6 +50,7 @@ const P_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
         />

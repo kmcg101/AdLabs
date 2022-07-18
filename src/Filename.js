@@ -7,7 +7,7 @@ function Filename(props) {
     color: "white",
     fontFamily: "Avenir-Heavy",
     position: "absolute",
-    top: "80px",
+    top: "55px",
   };
   const productNumber = parseInt(props.inputValues.product);
   const company = props.inputValues.client ? props.inputValues.client : "client";

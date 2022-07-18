@@ -43,6 +43,10 @@ function Dropzone(props) {
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
 
+  const handleWarningMessageText = (txt, useIcon) => {
+    props.handleWarningMessageText(txt, useIcon);
+  };
+
   function getHintString(str) {
     let newString = str.split(",");
     let stringArrayMap = newString.map(function(value) {
@@ -75,6 +79,10 @@ function Dropzone(props) {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
     const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
     const expectedPixelsP = DATA_PRODUCTS.data[productIndex].pixels.pPixels;
+
+    const expectedSizeE = DATA_PRODUCTS.data[productIndex].acceptedSizeText.eSizes;
+    const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
+    const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
     {
       droppedFileType === "elevator"
@@ -83,6 +91,14 @@ function Dropzone(props) {
         ? (expectedPixels = expectedPixelsL)
         : (expectedPixels = expectedPixelsP);
     }
+    let acceptedSizes;
+    {
+      droppedFileType === "elevator"
+        ? (acceptedSizes = expectedSizeE)
+        : droppedFileType === "landscape"
+        ? (acceptedSizes = expectedSizeL)
+        : (acceptedSizes = expectedSizeP);
+    }
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
     console.log("received = ", receivedPixels);
@@ -90,11 +106,14 @@ function Dropzone(props) {
     const exists = Object.values(expectedPixels).includes(receivedPixels);
 
     if (droppedFileType === "svg" || droppedFileType === "standardAd") {
+      handleWarningMessageText("", false);
       return true;
     } else if (exists) {
       console.log("right size");
+      handleWarningMessageText("", false);
       return true;
     } else {
+      handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
       return false;
@@ -120,6 +139,11 @@ function Dropzone(props) {
     noClick: false,
     multiple: false,
     accept: acceptedFileTypeString,
+
+    onDropRejected: (rejectedFiles) => {
+      console.log("rejected");
+      handleWarningMessageText("wrong file type dropped.", true);
+    },
 
     onDropAccepted: (acceptedFiles) => {
       console.log("dropped");
@@ -212,7 +236,7 @@ function Dropzone(props) {
   const svgImagePreview = (
     <div>
       <img
-        src={svgFile !== undefined && Object.keys(svgFile).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
+        // src={svgFile !== undefined && Object.keys(svgFile).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
         style={svgFile !== undefined && Object.keys(svgFile).length > 0 ? { width: "100%" } : { display: "none" }}
         alt="preview"
       />

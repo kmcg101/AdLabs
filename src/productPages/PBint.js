@@ -48,6 +48,7 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="standardAd"
           svgFile={svgFile}
         />
@@ -57,6 +58,7 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
         />

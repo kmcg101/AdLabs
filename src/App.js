@@ -47,7 +47,8 @@ function App() {
 
   const [isElevator, setIsElevator] = useState(true);
   const [requiresBlankFile, setRequiresBlankFile] = useState(false);
-  const [warningMessageText, setWarningMessageText] = useState();
+  const [warningMessageText, setWarningMessageText] = useState("");
+  const [warningMessageTextShowIcon, setWarningMessageTextShowIcon] = useState();
 
   const [inputValues, setInputValues] = useState({
     client: "",
@@ -84,8 +85,11 @@ function App() {
 
   const [isBlackText, setIsBlackText] = useState(true);
 
-  const handleWarningMessageText = (txt) => {
+  const handleWarningMessageText = (txt, showIcon) => {
+    console.log("running, txt = ", txt);
+    console.log("showIcon = ", showIcon);
     setWarningMessageText(txt);
+    setWarningMessageTextShowIcon(showIcon);
   };
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
@@ -191,12 +195,15 @@ function App() {
       ) {
         // setInputComplete(true);
         console.log("complete");
+        handleWarningMessageText("", false);
         setInputsCheckButtonPressed(false);
 
         setCurrentPageNumber(2);
+        handleWarningMessageText("drag and drop or click for upload", false);
       } else {
         // setInputComplete(false);
         console.log("not complete");
+        handleWarningMessageText("input not complete.", true);
         setInputsCheckButtonPressed(true);
         // set back to false so that error animations will play again
         setTimeout(() => {
@@ -210,31 +217,38 @@ function App() {
 
       // check if proper files dropped
       let checkErrors = 0;
+      let missingFilesArray = [];
 
       // check for primary files
       if (isElevator) {
         if (elevatorFile.payload) {
           console.log("elevator file found");
+
           setElevatorFileError(false);
         } else {
           console.log("elevator file missing");
+          missingFilesArray.push("elevator");
           setElevatorFileError(true);
           checkErrors++;
         }
       } else {
         if (lfdFile.payload) {
           console.log("l file found");
+
           setLfdFileError(false);
         } else {
           console.log("l file missing");
+          missingFilesArray.push("lfd");
           setLfdFileError(true);
           checkErrors++;
         }
         if (pfdFile.payload) {
           console.log("p file found");
+
           setPfdFileError(false);
         } else {
           console.log("p file missing");
+          missingFilesArray.push("pfd");
           setPfdFileError(true);
           checkErrors++;
         }
@@ -248,20 +262,22 @@ function App() {
         } else {
           setSvgFileError(true);
           console.log("svg file missing");
+          missingFilesArray.push("svg");
           checkErrors++;
         }
       }
       // check for standard ad
-      if (inputValues.product === 0) {
-        if (standardAdFile.payload) {
-          setStandardAdFileError(false);
-          console.log("standard ad file found");
-        } else {
-          setStandardAdFileError(true);
-          console.log("standard ad file missing");
-          checkErrors++;
-        }
-      }
+      // if (inputValues.product === 0) {
+      //   if (standardAdFile.payload) {
+      //     setStandardAdFileError(false);
+      //     console.log("standard ad file found");
+      //   } else {
+      //     setStandardAdFileError(true);
+      //     console.log("standard ad file missing");
+      //     missingFilesArray.push("standard ad");
+      //     checkErrors++;
+      //   }
+      // }
       setTimeout(() => {
         setElevatorFileError(false);
         setLfdFileError(false);
@@ -271,6 +287,7 @@ function App() {
       }, "2000");
 
       if (checkErrors === 0) {
+        handleWarningMessageText("", false);
         // this sets filename and blank filename
         setFilename(getFilename);
         const productNumber = parseInt(inputValues.product);
@@ -281,6 +298,8 @@ function App() {
         setAllDroppedNewFilenames(getAllDroppedNewFilenames);
         //
         setCurrentPageNumber(3);
+      } else {
+        handleWarningMessageText(`files missing: ${missingFilesArray}`, true);
       }
     } else if (currentPageNumber === 3) {
       // hide inputs so form will be reset.
@@ -291,6 +310,8 @@ function App() {
     }
   };
   const resetStateToBeginning = () => {
+    window.location.reload();
+    /*
     setCurrentPageNumber(1);
 
     // remove all images and videos
@@ -329,6 +350,7 @@ function App() {
 
     setMediaExtension();
     setIsBlackText(true);
+    */
   };
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
@@ -485,18 +507,18 @@ function App() {
         })
       : "";
 
-    const loadStandardAd = standardAdFile.payload
-      ? standardAdFile.payload.arrayBuffer().then((result) => {
-          newZip.file(`${finalStandardAdFilename}.mp4`, result);
-        })
-      : "";
+    // const loadStandardAd = standardAdFile.payload
+    //   ? standardAdFile.payload.arrayBuffer().then((result) => {
+    //       newZip.file(`${finalStandardAdFilename}.mp4`, result);
+    //     })
+    //   : "";
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
       { file: lfdFile, fn: loadLFD },
       { file: pfdFile, fn: loadPFD },
       { file: svgFile, fn: loadSVG },
-      { file: standardAdFile, fn: loadStandardAd },
+      // { file: standardAdFile, fn: loadStandardAd },
     ];
     const promiseArray = loadObject.map((obj) => {
       if (obj.file.payload) {
@@ -562,8 +584,8 @@ function App() {
             {currentPageNumber !== 4 ? <Filename inputValues={inputValues} /> : null}
             {currentPageNumber !== 4 ? (
               <WarningMessage
-                handleWarningMessageText={handleWarningMessageText}
                 warningMessageText={warningMessageText}
+                warningMessageTextShowIcon={warningMessageTextShowIcon}
               />
             ) : null}
             {currentPageNumber === 2 && !isElevator ? (
@@ -641,6 +663,7 @@ function App() {
                     productIndex={productIndex}
                     inputValues={inputValues}
                     handleDropzoneChanges={handleDropzoneChanges}
+                    handleWarningMessageText={handleWarningMessageText}
                     svgFile={svgFile}
                   />
                 </div>
@@ -656,6 +679,7 @@ function App() {
                       productIndex={productIndex}
                       inputValues={inputValues}
                       handleDropzoneChanges={handleDropzoneChanges}
+                      handleWarningMessageText={handleWarningMessageText}
                       svgFile={svgFile}
                     />
                   </div>
@@ -671,6 +695,7 @@ function App() {
                       productIndex={productIndex}
                       inputValues={inputValues}
                       handleDropzoneChanges={handleDropzoneChanges}
+                      handleWarningMessageText={handleWarningMessageText}
                       svgFile={svgFile}
                     />
                   </div>
@@ -688,6 +713,8 @@ function App() {
                 blankFilename={blankFilename}
                 requiresBlankFile={requiresBlankFile}
                 bintBGColor={bintBGColor}
+                productIndex={productIndex}
+                isBlackText={isBlackText}
                 inputValues={inputValues}
               />
             </div>

@@ -53,6 +53,7 @@ const E_bint = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           svgFile={svgFile}
         />
       </div>
@@ -62,6 +63,7 @@ const E_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
+          handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
         />

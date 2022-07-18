@@ -28,6 +28,7 @@ const PageElevator = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />
@@ -36,6 +37,7 @@ const PageElevator = (props) => {
         <EFsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />
@@ -44,6 +46,7 @@ const PageElevator = (props) => {
         <EHfsp
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />
@@ -52,6 +55,7 @@ const PageElevator = (props) => {
         <EVsa
           elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />
@@ -61,6 +65,7 @@ const PageElevator = (props) => {
           elevatorFileError={elevatorFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />

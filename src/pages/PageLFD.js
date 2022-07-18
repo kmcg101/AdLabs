@@ -30,23 +30,40 @@ const PageLFD = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
         />
       ) : null}
       {productIndex === 1 ? (
-        <LFsa lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
+        <LFsa
+          lfdFileError={lfdFileError}
+          handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
+          productIndex={productIndex}
+        />
       ) : null}
       {productIndex === 2 ? (
-        <LHfsp lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
+        <LHfsp
+          lfdFileError={lfdFileError}
+          handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
+          productIndex={productIndex}
+        />
       ) : null}
       {productIndex === 3 ? (
-        <LVsa lfdFileError={lfdFileError} handleDropzoneChanges={handleDropzoneChanges} productIndex={productIndex} />
+        <LVsa
+          lfdFileError={lfdFileError}
+          handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
+          productIndex={productIndex}
+        />
       ) : null}
       {productIndex === 4 ? (
         <LFsbi
           lfdFileError={lfdFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
         />

@@ -86,8 +86,6 @@ function App() {
   const [isBlackText, setIsBlackText] = useState(true);
 
   const handleWarningMessageText = (txt, showIcon) => {
-    console.log("running, txt = ", txt);
-    console.log("showIcon = ", showIcon);
     setWarningMessageText(txt);
     setWarningMessageTextShowIcon(showIcon);
   };
@@ -665,6 +663,7 @@ function App() {
                     handleDropzoneChanges={handleDropzoneChanges}
                     handleWarningMessageText={handleWarningMessageText}
                     svgFile={svgFile}
+                    elevatorFile={elevatorFile}
                   />
                 </div>
                 {/* lfd */}

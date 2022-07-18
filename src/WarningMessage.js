@@ -23,7 +23,6 @@ function WarningMessage(props) {
   //const [warningMessageText, setWarningMessageText] = useState(props.warningMessageText);
   const warningMessageText = props.warningMessageText;
   const warningMessageTextShowIcon = props.warningMessageTextShowIcon;
-  console.log("show icon = ", warningMessageTextShowIcon);
 
   return (
     <div className="warningMessage" style={messageFormat}>

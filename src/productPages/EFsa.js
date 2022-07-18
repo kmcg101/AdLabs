@@ -21,6 +21,7 @@ const E_fsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          elevatorFile={props.elevatorFile}
         />
       </div>
       <div className="backgroundImageContainer">

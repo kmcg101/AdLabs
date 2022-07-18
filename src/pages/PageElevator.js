@@ -40,6 +40,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={props.elevatorFile}
         />
       ) : null}
       {productIndex === 2 ? (

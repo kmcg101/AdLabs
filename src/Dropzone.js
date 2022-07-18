@@ -67,10 +67,10 @@ function Dropzone(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
-  useEffect(() => {
-    console.log("files change ", files);
-    console.log("svgFile = ", svgFile);
-  }, [svgFile]);
+  // useEffect(() => {
+  //    console.log("files change ", files);
+  //    console.log("svgFile = ", svgFile);
+  // }, [svgFile]);
 
   const rejectDroppedFile = (val) => {
     props.rejectDroppedFile(val);
@@ -116,6 +116,9 @@ function Dropzone(props) {
       handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
+
+      handleDropzoneChanges("payload", null);
+
       return false;
     }
   };
@@ -145,15 +148,21 @@ function Dropzone(props) {
       handleWarningMessageText("wrong file type dropped.", true);
     },
 
+    // accepted files are ones that are the correct file type.  File size is checked later
     onDropAccepted: (acceptedFiles) => {
-      console.log("dropped");
+      console.log("1 files ", files);
+      console.log("1 accepted ", acceptedFiles);
+      // {file, preview} is put in state of files
+      // this does not seem to put anything in state FILES.  it puts the preview in the acceptedFiles
       setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
+        acceptedFiles.map((myfile) =>
+          Object.assign(myfile, {
+            preview: URL.createObjectURL(myfile),
           })
         )
       );
+      console.log("2 files ", files);
+      console.log("2 accepted ", acceptedFiles);
 
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
@@ -166,9 +175,12 @@ function Dropzone(props) {
       } else {
         setMediaType("image");
       }
-      console.log("checking if mp4 ", newFile);
+
       if (ext !== "mp4") {
-        console.log("not mp4, time to load image");
+        console.log("not mp4 and acceptFiles = ", acceptedFiles);
+        // accepted files has name, type, preview blob
+        console.log("not mp4 and files = ", files);
+        // files is still zero
         const i = new Image();
         i.onload = () => {
           console.log("i loaded");
@@ -180,13 +192,7 @@ function Dropzone(props) {
             const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
             if (droppedFileIsCorrectSize) {
               console.log("image and correct");
-              // setFiles(
-              //   acceptedFiles.map((file) =>
-              //     Object.assign(file, {
-              //       preview: URL.createObjectURL(file),
-              //     })
-              //   )
-              // );
+
               handleDropzoneChanges("name", newFile.name);
               handleDropzoneChanges("payload", newFile);
               handleDropzoneChanges("width", i.width);
@@ -204,13 +210,6 @@ function Dropzone(props) {
         video.addEventListener("canplay", (event) => {
           const droppedFileIsCorrectSize = validateDroppedFile(video.videoWidth, video.videoHeight);
           if (droppedFileIsCorrectSize) {
-            // setFiles(
-            //   acceptedFiles.map((file) =>
-            //     Object.assign(file, {
-            //       preview: URL.createObjectURL(file),
-            //     })
-            //   )
-            // );
             handleDropzoneChanges("payload", newFile);
             handleDropzoneChanges("width", video.videoWidth);
             handleDropzoneChanges("height", video.videoHeight);
@@ -233,6 +232,8 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
+  // put the map function back in here
+  //const svgImagePreview = files.map((file) => (
   const svgImagePreview = (
     <div>
       <img
@@ -246,6 +247,7 @@ function Dropzone(props) {
   const imagePreview = files.map((file) => (
     <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
   ));
+
   const videoPreview = files.map((file) => (
     <video key={file.name} autoPlay loop style={{ width: "100%" }}>
       <source src={URL.createObjectURL(files[0])} />

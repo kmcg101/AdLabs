@@ -32,6 +32,7 @@ const P_fsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

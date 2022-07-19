@@ -31,6 +31,7 @@ const L_vsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

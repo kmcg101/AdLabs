@@ -12,7 +12,7 @@ import { getManifestFile, getBlankManifest, getBlankHTML } from "./Utilities";
 import { getHTMLFile } from "./TemplateFactory";
 import ConfirmationScreen from "./ConfirmationScreen";
 
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./App.css";
 import "./nav.css";
 import JSZip from "jszip";
@@ -29,6 +29,7 @@ import DATA_PRODUCTS from "./DATA_PRODUCTS";
 import adLabsLogo from "./assets/AdLabs.svg";
 
 import { ThemeProvider } from "@material-ui/core";
+import { useScreenshot } from "use-screenshot-hook";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -36,6 +37,12 @@ import { BlackWhiteToggleButton, ContinueButton, BackButton } from "./Buttons";
 import { AppTheme } from "./MaterialTheme";
 
 function App() {
+  // for screen shots
+  const imageRef = useRef(null);
+  const { image, takeScreenshot } = useScreenshot({ ref: imageRef });
+  //const { image, takeScreenshot } = useScreenshot();
+
+  const [screenshot, setScreenshot] = useState(); // 6
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   // nav while dropping files 1 or 2 for l p.
@@ -59,6 +66,8 @@ function App() {
   });
 
   const [bintBGColor, setBintBGColor] = useState("FFFFFF");
+
+  const [shakeDropzoneBGImage, setShakeDropzoneBGImage] = useState(false);
 
   const [filename, setFilename] = useState();
   const [blankFilename, setBlankFilename] = useState();
@@ -175,6 +184,10 @@ function App() {
     return /^[A-Za-z0-9-]*$/.test(str);
   }
 
+  useEffect(() => {
+    setScreenshot(image);
+  }, [image]);
+
   const handleContinueButtonPressed = () => {
     setInputsCheckButtonPressedOnce(true);
 
@@ -213,6 +226,8 @@ function App() {
 
       // check if all dropboxes have been filled
 
+      takeScreenshot();
+
       // check if proper files dropped
       let checkErrors = 0;
       let missingFilesArray = [];
@@ -224,6 +239,12 @@ function App() {
 
           setElevatorFileError(false);
         } else {
+          // shake the dropzone background image
+          setShakeDropzoneBGImage(true);
+          setTimeout(() => {
+            setShakeDropzoneBGImage(false);
+          }, "2000");
+
           console.log("elevator file missing");
           missingFilesArray.push("elevator");
           setElevatorFileError(true);
@@ -245,6 +266,11 @@ function App() {
 
           setPfdFileError(false);
         } else {
+          // shake the dropzone background image
+          setShakeDropzoneBGImage(true);
+          setTimeout(() => {
+            setShakeDropzoneBGImage(false);
+          }, "2000");
           console.log("p file missing");
           missingFilesArray.push("pfd");
           setPfdFileError(true);
@@ -258,6 +284,11 @@ function App() {
           setSvgFileError(false);
           console.log("svg file found");
         } else {
+          // shake the dropzone background image
+          setShakeDropzoneBGImage(true);
+          setTimeout(() => {
+            setShakeDropzoneBGImage(false);
+          }, "2000");
           setSvgFileError(true);
           console.log("svg file missing");
           missingFilesArray.push("svg");
@@ -295,7 +326,10 @@ function App() {
 
         setAllDroppedNewFilenames(getAllDroppedNewFilenames);
         //
-        setCurrentPageNumber(3);
+        // pause this for x seconds so that it can take the screenshot
+        setTimeout(() => {
+          setCurrentPageNumber(3);
+        }, "500");
       } else {
         handleWarningMessageText(`files missing: ${missingFilesArray}`, true);
       }
@@ -651,7 +685,10 @@ function App() {
                 }`}
               >
                 {/* elevator */}
-                <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
+                <div
+                  ref={isElevator ? imageRef : null}
+                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
+                >
                   <PageElevator
                     elevatorFileError={elevatorFileError}
                     svgFileError={svgFileError}
@@ -663,11 +700,14 @@ function App() {
                     handleDropzoneChanges={handleDropzoneChanges}
                     handleWarningMessageText={handleWarningMessageText}
                     svgFile={svgFile}
-                    elevatorFile={elevatorFile}
+                    shakeDropzoneBGImage={shakeDropzoneBGImage}
                   />
                 </div>
                 {/* lfd */}
-                <div className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
+                <div
+                  ref={isElevator ? null : imageRef}
+                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}
+                >
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
                       lfdFileError={lfdFileError}
@@ -679,6 +719,7 @@ function App() {
                       inputValues={inputValues}
                       handleDropzoneChanges={handleDropzoneChanges}
                       handleWarningMessageText={handleWarningMessageText}
+                      shakeDropzoneBGImage={shakeDropzoneBGImage}
                       svgFile={svgFile}
                     />
                   </div>
@@ -696,6 +737,7 @@ function App() {
                       handleDropzoneChanges={handleDropzoneChanges}
                       handleWarningMessageText={handleWarningMessageText}
                       svgFile={svgFile}
+                      shakeDropzoneBGImage={shakeDropzoneBGImage}
                     />
                   </div>
                 </div>
@@ -715,6 +757,7 @@ function App() {
                 productIndex={productIndex}
                 isBlackText={isBlackText}
                 inputValues={inputValues}
+                screenshot={screenshot}
               />
             </div>
           </div>

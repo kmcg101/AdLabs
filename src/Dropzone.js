@@ -42,6 +42,7 @@ function Dropzone(props) {
   const svgFile = props.svgFile;
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
+  const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
 
   const handleWarningMessageText = (txt, useIcon) => {
     props.handleWarningMessageText(txt, useIcon);
@@ -72,9 +73,6 @@ function Dropzone(props) {
   //    console.log("svgFile = ", svgFile);
   // }, [svgFile]);
 
-  const rejectDroppedFile = (val) => {
-    props.rejectDroppedFile(val);
-  };
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
     const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
@@ -265,7 +263,10 @@ function Dropzone(props) {
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
             {Object.keys(files).length === 0 ? (
-              <div style={dzBackgroundImage} className="dzBackgroundImage"></div>
+              <div
+                style={dzBackgroundImage}
+                className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
+              ></div>
             ) : null}
             <div className="dropzoneImageParent">
               {mediaType === "video"

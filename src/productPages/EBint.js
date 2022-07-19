@@ -55,6 +55,7 @@ const E_bint = (props) => {
           productIndex={productIndex}
           handleWarningMessageText={props.handleWarningMessageText}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
 
@@ -66,6 +67,7 @@ const E_bint = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

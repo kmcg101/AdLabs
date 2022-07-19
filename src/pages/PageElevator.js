@@ -31,6 +31,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -40,7 +41,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          elevatorFile={props.elevatorFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -50,6 +51,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -59,6 +61,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -69,6 +72,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
     </div>

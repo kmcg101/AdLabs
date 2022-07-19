@@ -63,6 +63,7 @@ const L_bint = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

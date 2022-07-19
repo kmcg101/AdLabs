@@ -35,6 +35,7 @@ const E_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
       <div className="eFSBISVG" style={eFSBILogo}>
@@ -45,6 +46,7 @@ const E_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

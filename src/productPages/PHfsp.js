@@ -33,6 +33,7 @@ const P_hfsp = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

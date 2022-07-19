@@ -41,6 +41,7 @@ const L_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
       <div className="lFSBISVG" style={lFSBILogo}>
@@ -51,6 +52,7 @@ const L_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

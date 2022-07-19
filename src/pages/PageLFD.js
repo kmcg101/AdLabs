@@ -32,6 +32,7 @@ const PageLFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -40,6 +41,7 @@ const PageLFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -48,6 +50,7 @@ const PageLFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -56,6 +59,7 @@ const PageLFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -66,6 +70,7 @@ const PageLFD = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
     </div>

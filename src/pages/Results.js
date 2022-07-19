@@ -2,6 +2,12 @@ import React from "react";
 import { isNullOrUndefined } from "util";
 import myPreview from "../assets/preview.png";
 
+const screenshotImage = {
+  width: "100%",
+  height: "100%",
+  objectFit: "contain",
+  objectPosition: "top left",
+};
 const resultsFullPage = {
   width: "100%",
   height: "100%",
@@ -32,7 +38,7 @@ const resultsTextHolder = {
 };
 
 const myColumn = {
-  // width: "30%",
+  width: "45%",
   display: "flex",
   flexDirection: "column",
   marginLeft: "20px",
@@ -49,8 +55,8 @@ const resultsTopCenter = { textAlign: "center" };
 const resultsTopRight = { textAlign: "center" };
 const resultsBottomLeft = {};
 const resultsBottomCenter = {
-  transform: "scale(.9)",
-  transformOrigin: "top left",
+  width: "100%",
+  height: "100%",
 };
 const resultsBottomRight = {};
 
@@ -59,6 +65,7 @@ const Results = (props) => {
   const filename = props.filename;
   const blankFilename = props.blankFilename;
   const requiresBlankFile = props.requiresBlankFile;
+  const screenshot = props.screenshot;
 
   const bintBGColor = props.bintBGColor;
   const productIndex = props.productIndex;
@@ -131,7 +138,7 @@ const Results = (props) => {
           PREVIEW
         </div>
         <div className="resultsBottomCenter" style={resultsBottomCenter}>
-          <img src={myPreview} alt="preview"></img>
+          {screenshot ? <img style={screenshotImage} src={screenshot} alt="preview"></img> : null}
         </div>
       </div>
     </div>

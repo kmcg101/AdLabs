@@ -40,6 +40,7 @@ const PagePFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -48,6 +49,7 @@ const PagePFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -56,6 +58,7 @@ const PagePFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -65,6 +68,7 @@ const PagePFD = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
     </div>

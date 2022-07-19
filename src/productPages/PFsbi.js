@@ -36,12 +36,12 @@ const P_fsbi = (props) => {
       <div className="pFullScreen" style={pFullScreen}>
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
-          rejectDroppedFile={props.rejectDroppedFile}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
 
@@ -53,6 +53,7 @@ const P_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
+          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
     </div>

@@ -3,12 +3,15 @@
   transition: color 1s;
 }
 .warningMessageAnimation {
-  animation: fadeOutRed 2s;
+  animation: fadeOutRed 1.5s;
   animation-iteration-count: 1;
 }
 
 @keyframes fadeOutRed {
   0% {
+    color: red;
+  }
+  10% {
     color: red;
   }
   100% {

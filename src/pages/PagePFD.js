@@ -66,6 +66,7 @@ const PagePFD = (props) => {
           pfdFileError={pfdFileError}
           svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
+          handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}

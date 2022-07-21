@@ -232,15 +232,20 @@ function Dropzone(props) {
 
   // put the map function back in here
   //const svgImagePreview = files.map((file) => (
-  const svgImagePreview = (
+  const svgImagePreview = files.map((file) => (
     <div>
       <img
-        // src={svgFile !== undefined && Object.keys(svgFile).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
-        style={svgFile !== undefined && Object.keys(svgFile).length > 0 ? { width: "100%" } : { display: "none" }}
+        //src={svgFile !== undefined && Object.keys(files).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
+        //style={svgFile !== undefined && Object.keys(files).length > 0 ? { width: "100%" } : { display: "none" }}
+        //alt="preview"
+        key={file.name}
+        src={URL.createObjectURL(files[0])}
+        style={{ width: "100%" }}
         alt="preview"
       />
+      />
     </div>
-  );
+  ));
 
   const imagePreview = files.map((file) => (
     <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />

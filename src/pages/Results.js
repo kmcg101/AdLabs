@@ -30,7 +30,7 @@ const resultsTextHolder = {
   fontSize: "1.3rem",
   lineHeight: "2.1",
   color: "white",
-  minHeight: "37px",
+  // minHeight: "37px",
   borderRadius: "1px",
   backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
   boxShadow: "var(--standard-box-shadow-color)",
@@ -48,17 +48,26 @@ const columnLeft = {};
 const columnCenter = {};
 const columnRight = {};
 
-const resultsTopLeft = {
-  textAlign: "center",
-};
-const resultsTopCenter = { textAlign: "center" };
-const resultsTopRight = { textAlign: "center" };
-const resultsBottomLeft = {};
 const resultsBottomCenter = {
   width: "100%",
   height: "100%",
 };
-const resultsBottomRight = {};
+const resultsTextHolderScroll = {
+  fontFamily: "Avenir-Roman",
+  paddingLeft: "10px",
+  paddingRight: "30px",
+  fontSize: "1.3rem",
+  lineHeight: "2.1",
+  color: "white",
+  maxHeight: "250px",
+  borderRadius: "1px",
+  backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
+  boxShadow: "var(--standard-box-shadow-color)",
+  marginBottom: "20px",
+  overflowY: "scroll",
+  scrollbarColor: "green",
+  scrollbarWidth: "thin",
+};
 
 const Results = (props) => {
   const inputValues = props.inputValues;
@@ -118,23 +127,23 @@ const Results = (props) => {
   return (
     <div className="resultsFullPage" style={resultsFullPage}>
       <div className="columnLeft" style={myColumn}>
-        <div className="resultsTopLeft" style={(resultsTopLeft, resultsTitleText)}>
+        <div className="resultsTitleText" style={resultsTitleText}>
           INPUT
         </div>
-        <div className="resultsBottomLeft" style={(resultsBottomLeft, resultsTextHolder)}>
+        <div className="resultsTitleText" style={resultsTextHolder}>
           {listOfInput}
         </div>
-        <div className="resultsTopRight" style={(resultsTopRight, resultsTitleText)}>
+        <div className="resultsTitleText" style={resultsTitleText}>
           OUTPUT
         </div>
-        <div className="resultsBottomRight" style={(resultsBottomRight, resultsTextHolder)}>
+        <div className="listOutput" style={resultsTextHolderScroll}>
           {listOfDroppedFilesNewFilenames}
           {listOfReturnedFiles}
         </div>
       </div>
 
       <div className="columnCenter" style={myColumn}>
-        <div className="resultsTopCenter" style={(resultsTopCenter, resultsTitleText)}>
+        <div className="resultsTopCenter" style={resultsTitleText}>
           PREVIEW
         </div>
         <div className="resultsBottomCenter" style={resultsBottomCenter}>

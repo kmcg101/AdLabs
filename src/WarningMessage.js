@@ -23,9 +23,19 @@ function WarningMessage(props) {
   //const [warningMessageText, setWarningMessageText] = useState(props.warningMessageText);
   const warningMessageText = props.warningMessageText;
   const warningMessageTextShowIcon = props.warningMessageTextShowIcon;
+  const [showRedBoolean, setShowRedBoolean] = useState(false);
+
+  useEffect(() => {
+    console.log("change it");
+    // change
+    setShowRedBoolean(true);
+    setTimeout(() => {
+      setShowRedBoolean(false);
+    }, 2000);
+  }, [warningMessageText]);
 
   return (
-    <div className="warningMessage" style={messageFormat}>
+    <div className={`warningMessage ${showRedBoolean ? "warningMessageAnimation" : ""}`} style={messageFormat}>
       {warningMessageText === "" ? null : warningMessageTextShowIcon === false ? null : (
         <img style={iconX} src={XIcon} alt="back"></img>
       )}

@@ -30,6 +30,7 @@ import adLabsLogo from "./assets/AdLabs.svg";
 
 import { ThemeProvider } from "@material-ui/core";
 import { useScreenshot } from "use-screenshot-hook";
+import PopUp from "./PopUp";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -40,9 +41,8 @@ function App() {
   // for screen shots
   const imageRef = useRef(null);
   const { image, takeScreenshot } = useScreenshot({ ref: imageRef });
-  //const { image, takeScreenshot } = useScreenshot();
-
   const [screenshot, setScreenshot] = useState(); // 6
+
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   // nav while dropping files 1 or 2 for l p.
@@ -64,6 +64,8 @@ function App() {
     // duration: "",
     // countryCode: "",
   });
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("FFFFFF");
 
@@ -97,6 +99,24 @@ function App() {
   const handleWarningMessageText = (txt, showIcon) => {
     setWarningMessageText(txt);
     setWarningMessageTextShowIcon(showIcon);
+  };
+
+  const handleBackPopUpPress = () => {
+    // this only shows from Preview to Results so just set number to 2
+    setCurrentPageNumber(2);
+    setShowPopUp(false);
+    setPopUpMessage("");
+  };
+  const handleContinuePopUpPress = () => {
+    // duplicate the dropped file L to P or P to L
+    if (lfdFile.payload) {
+      // copy lfd to pfd
+    } else {
+      // copy pfd to lfd
+    }
+    setShowPopUp(false);
+    setPopUpMessage("");
+    okToGoToPageThree();
   };
 
   // this is called when arriving at Results page (4).  Sets filename and blank filename
@@ -225,7 +245,10 @@ function App() {
       // this runs when landing on the RESULTS  page.
 
       // check if all dropboxes have been filled
-
+      // would be nice to be able to set this to 1 and take a screen shot
+      // but the result was a screen shot that was not hte full size of the div.
+      // must have to wait for state to populate and get down to the builder component
+      //setCurrentBuildNavNumber(1);
       takeScreenshot();
 
       // check if proper files dropped
@@ -253,14 +276,19 @@ function App() {
       } else {
         if (lfdFile.payload) {
           console.log("l file found");
-
           setLfdFileError(false);
         } else {
+          // shake the dropzone background image
+          setShakeDropzoneBGImage(true);
+          setTimeout(() => {
+            setShakeDropzoneBGImage(false);
+          }, "2000");
           console.log("l file missing");
           missingFilesArray.push("lfd");
           setLfdFileError(true);
           checkErrors++;
         }
+
         if (pfdFile.payload) {
           console.log("p file found");
 
@@ -316,21 +344,15 @@ function App() {
       }, "2000");
 
       if (checkErrors === 0) {
-        handleWarningMessageText("", false);
-        // this sets filename and blank filename
-        setFilename(getFilename);
-        const productNumber = parseInt(inputValues.product);
-        setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile);
-
-        setAllDroppedFilenames(getAllDroppedFilenames);
-
-        setAllDroppedNewFilenames(getAllDroppedNewFilenames);
-        //
-        // pause this for x seconds so that it can take the screenshot
-        setTimeout(() => {
-          setCurrentPageNumber(3);
-        }, "500");
+        // if all filled in, always progress
+        okToGoToPageThree();
+      } else if (!isElevator && (inputValues.product === 1 || inputValues.product === 3) && checkErrors === 1) {
+        // lfsa or lvsa and 1 error, show overlay
+        setShowPopUp(true);
+        setPopUpMessage("The same asset will be used for LFD and PFD.  Click CANCEL to add a second asset.");
       } else {
+        // elevator or lobby bint, lobby hfsp, lobby fsbi and errors > 0,
+        // show the error text
         handleWarningMessageText(`files missing: ${missingFilesArray}`, true);
       }
     } else if (currentPageNumber === 3) {
@@ -340,6 +362,22 @@ function App() {
       resetStateToBeginning();
       // show inputs so form is reset
     }
+  };
+  const okToGoToPageThree = () => {
+    handleWarningMessageText("", false);
+    // this sets filename and blank filename
+    setFilename(getFilename);
+    const productNumber = parseInt(inputValues.product);
+    setRequiresBlankFile(DATA_PRODUCTS.data[productNumber].requiresBlankFile);
+
+    setAllDroppedFilenames(getAllDroppedFilenames);
+
+    setAllDroppedNewFilenames(getAllDroppedNewFilenames);
+    //
+    // pause this for x seconds so that it can take the screenshot
+    setTimeout(() => {
+      setCurrentPageNumber(3);
+    }, "500");
   };
   const resetStateToBeginning = () => {
     window.location.reload();
@@ -603,6 +641,13 @@ function App() {
     <ThemeProvider theme={AppTheme}>
       <CssBaseline />
       <div className="bgImageContainer">
+        {showPopUp ? (
+          <PopUp
+            popUpMessage={popUpMessage}
+            handleBackPopUpPress={handleBackPopUpPress}
+            handleContinuePopUpPress={handleContinuePopUpPress}
+          />
+        ) : null}
         {currentPageNumber === 4 ? (
           <>
             <ConfirmationScreen />

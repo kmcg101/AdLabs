@@ -64,7 +64,7 @@ function App() {
     // duration: "",
     // countryCode: "",
   });
-  const [showPopUp, setShowPopUp] = useState(true);
+  const [showPopUp, setShowPopUp] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("FFFFFF");

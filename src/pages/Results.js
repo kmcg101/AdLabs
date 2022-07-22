@@ -22,6 +22,14 @@ const resultsTitleText = {
   marginBottom: "7px",
   fontWeight: "700",
 };
+const resultsTitleTextRight = {
+  fontFamily: "Avenir-Heavy",
+  fontSize: "1rem",
+  color: "white",
+  marginBottom: "7px",
+  fontWeight: "700",
+  height: "5%",
+};
 
 const resultsTextHolder = {
   fontFamily: "Avenir-Roman",
@@ -38,19 +46,14 @@ const resultsTextHolder = {
 };
 
 const myColumn = {
-  width: "45%",
   display: "flex",
   flexDirection: "column",
   marginLeft: "20px",
-  // alignItems: "center",
 };
-const columnLeft = {};
-const columnCenter = {};
-const columnRight = {};
 
 const resultsBottomCenter = {
   width: "100%",
-  height: "100%",
+  height: "90%",
 };
 const resultsTextHolderScroll = {
   fontFamily: "Avenir-Roman",
@@ -60,6 +63,7 @@ const resultsTextHolderScroll = {
   lineHeight: "2.1",
   color: "white",
   maxHeight: "250px",
+  minHeight: "100px",
   borderRadius: "1px",
   backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
   boxShadow: "var(--standard-box-shadow-color)",
@@ -130,7 +134,7 @@ const Results = (props) => {
         <div className="resultsTitleText" style={resultsTitleText}>
           INPUT
         </div>
-        <div className="resultsTitleText" style={resultsTextHolder}>
+        <div className="listOutput" style={resultsTextHolderScroll}>
           {listOfInput}
         </div>
         <div className="resultsTitleText" style={resultsTitleText}>
@@ -143,7 +147,7 @@ const Results = (props) => {
       </div>
 
       <div className="columnCenter" style={myColumn}>
-        <div className="resultsTopCenter" style={resultsTitleText}>
+        <div className="resultsTopCenter" style={resultsTitleTextRight}>
           PREVIEW
         </div>
         <div className="resultsBottomCenter" style={resultsBottomCenter}>

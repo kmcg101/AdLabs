@@ -64,7 +64,7 @@ function App() {
     // duration: "",
     // countryCode: "",
   });
-  const [showPopUp, setShowPopUp] = useState(false);
+  const [showPopUp, setShowPopUp] = useState(true);
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("FFFFFF");
@@ -82,6 +82,8 @@ function App() {
   const [standardAdFile, setStandardAdFile] = useState({}); // 16
 
   const [mediaExtensions, setMediaExtensions] = useState({}); // 17
+  const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState();
+  const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState();
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);
@@ -108,12 +110,25 @@ function App() {
     setPopUpMessage("");
   };
   const handleContinuePopUpPress = () => {
-    // duplicate the dropped file L to P or P to L
-    if (lfdFile.payload) {
-      // copy lfd to pfd
+    // this runs when just 1 asset dropped
+    setLobbyAndOneAsset(true);
+    // handle mediaExtensions state.
+    if (mediaExtensions.landscape) {
+      setLobbyAndOneAssetIsLFD(true);
+      const newExtension = mediaExtensions.landscape;
+      setMediaExtensions((prevState) => ({
+        ...prevState,
+        portrait: newExtension,
+      }));
     } else {
-      // copy pfd to lfd
+      setLobbyAndOneAssetIsLFD(false);
+      const newExtension = mediaExtensions.portrait;
+      setMediaExtensions((prevState) => ({
+        ...prevState,
+        landscape: newExtension,
+      }));
     }
+
     setShowPopUp(false);
     setPopUpMessage("");
     okToGoToPageThree();
@@ -226,6 +241,8 @@ function App() {
       ) {
         // setInputComplete(true);
         console.log("complete");
+        setLobbyAndOneAssetIsLFD();
+        setLobbyAndOneAsset();
         handleWarningMessageText("", false);
         setInputsCheckButtonPressed(false);
 
@@ -349,7 +366,7 @@ function App() {
       } else if (!isElevator && (inputValues.product === 1 || inputValues.product === 3) && checkErrors === 1) {
         // lfsa or lvsa and 1 error, show overlay
         setShowPopUp(true);
-        setPopUpMessage("The same asset will be used for LFD and PFD.  Click CANCEL to add a second asset.");
+        setPopUpMessage("The same asset will be used for both landscape and portrait.");
       } else {
         // elevator or lobby bint, lobby hfsp, lobby fsbi and errors > 0,
         // show the error text
@@ -553,8 +570,11 @@ function App() {
         })
       : "";
 
-    const loadLFD = lfdFile.payload
-      ? lfdFile.payload.arrayBuffer().then((result) => {
+    // if this is a lobby 1 file and the source is a pfd, pfd is the source
+    // else, lfd is the source
+    const lfdSource = lobbyAndOneAsset && !lobbyAndOneAssetIsLFD ? pfdFile.payload : lfdFile.payload;
+    const loadLFD = lfdSource
+      ? lfdSource.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_l${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
             result
@@ -562,8 +582,9 @@ function App() {
         })
       : "";
 
-    const loadPFD = pfdFile.payload
-      ? pfdFile.payload.arrayBuffer().then((result) => {
+    const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile.payload : pfdFile.payload;
+    const loadPFD = pfdSource
+      ? pfdSource.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_p${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
             result
@@ -613,7 +634,7 @@ function App() {
         setCurrentPageNumber(4);
       })
       .catch((e) => {
-        console.log("zip errro");
+        console.log("zip error");
       });
   };
   const handleBINTColorChange = (color) => {

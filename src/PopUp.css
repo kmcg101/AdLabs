@@ -1,0 +1,20 @@
+.buttonStyle {
+  color: white;
+  font-size: 1.3em;
+
+  width: 50%;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-top: gray 1px solid;
+  transition: 0.4s;
+}
+
+#buttonLeft {
+  border-right: gray 1px solid;
+}
+
+.buttonStyle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

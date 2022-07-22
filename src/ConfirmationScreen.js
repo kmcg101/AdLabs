@@ -28,8 +28,7 @@ const ConfirmationScreen = (props) => {
   const downloadStartedMessage = {
     fontSize: "16px",
     borderRadius: "1px",
-    backgroundImage:
-      "linear-gradient( 180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)",
+    backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 100%)",
     boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
     width: "231px",
     height: "72px",
@@ -66,18 +65,13 @@ const ConfirmationScreen = (props) => {
 
   return (
     <div style={fullScreenBG} className="fullScreenBG">
-      <Confetti
-        style={confettiStyle}
-        className="confetti"
-        active={confettiOn}
-        config={config}
-      />
+      <Confetti style={confettiStyle} className="confetti" active={confettiOn} config={config} />
 
       <div style={successMessage} className="successMessage">
         SUCCESS
       </div>
       <div style={downloadStartedMessage} className="downloadStartedMessage">
-        YOUR DOWNLOAD HAS STARTED
+        Your download has started
       </div>
     </div>
   );

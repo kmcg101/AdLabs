@@ -27,9 +27,9 @@ const useStyles = makeStyles((AppTheme) => ({
     zIndex: "100",
   },
   backButton: {
-    position: "absolute",
-    top: "-40px",
-    left: "-60px",
+    position: "fixed",
+    top: "40px",
+    left: "40px",
     "&:hover": {
       opacity: ".5",
     },
@@ -56,15 +56,8 @@ export const ContinueButton = (props) => {
   const handleContinueButtonPressed = props.handleContinueButtonPressed;
   const classes = useStyles();
   return (
-    <Button
-      onClick={handleContinueButtonPressed}
-      className={classes.continueButton}
-    >
-      {currentPageNumber === 3
-        ? "CREATE AD FILES"
-        : currentPageNumber === 4
-        ? "CREATE NEW AD"
-        : "CONTINUE"}
+    <Button onClick={handleContinueButtonPressed} className={classes.continueButton}>
+      {currentPageNumber === 3 ? "CREATE AD FILES" : currentPageNumber === 4 ? "CREATE NEW AD" : "CONTINUE"}
     </Button>
   );
 };
@@ -72,10 +65,6 @@ export const BackButton = (props) => {
   const handleBackButton = props.handleBackButton;
   const classes = useStyles();
   return (
-    // <Button onClick={handleBackButton} className={classes.backButton} variant='contained'>
-    //     Back
-
-    // </Button>
     <div onClick={handleBackButton} className={classes.backButton}>
       <img src={backButton} alt="back"></img>
     </div>
@@ -125,18 +114,14 @@ export const BlackWhiteToggleButton = (props) => {
       <div className="bintColorPickerBG">
         <FormControlLabel
           className="bintColorPickerInner"
-          control={
-            <Switch onChange={handleBlackWhiteToggleChange} color="default" />
-          }
+          control={<Switch onChange={handleBlackWhiteToggleChange} color="default" />}
           labelPlacement="start"
           size="small"
           label="TEXT"
         />
       </div>
       {/* bint bg color text input */}
-      <div
-        className={`bintColorPickerBG color ${classes.colorPickerContainer}`}
-      >
+      <div className={`bintColorPickerBG color ${classes.colorPickerContainer}`}>
         #
         <input
           className={classes.colorPickerInput}

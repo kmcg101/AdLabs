@@ -23,9 +23,7 @@ export function getManifestFile(filename, isElevator, mediaExtensions) {
   const videoOrImageL = mediaExtensions.landscape === "mp4" ? "video" : "image";
   const videoOrImageP = mediaExtensions.portrait === "mp4" ? "video" : "image";
 
-  const svgManifestEntry = filenameString.includes("-fsbi")
-    ? `advertising/${filename}.svg`
-    : "";
+  const svgManifestEntry = filenameString.includes("-fsbi") ? `,"advertising/${filename}.svg"` : "";
 
   const mediaManifestEntry = isElevator
     ? `"advertising/${filename}_e${videoOrImageE}.${mediaExtensions.elevator}"`

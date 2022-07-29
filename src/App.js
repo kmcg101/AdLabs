@@ -29,7 +29,11 @@ import DATA_PRODUCTS from "./DATA_PRODUCTS";
 import adLabsLogo from "./assets/AdLabs.svg";
 
 import { ThemeProvider } from "@material-ui/core";
+
 import { useScreenshot } from "use-screenshot-hook";
+import * as htmlToImage from "html-to-image";
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+
 import PopUp from "./PopUp";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -82,8 +86,8 @@ function App() {
   const [standardAdFile, setStandardAdFile] = useState({}); // 16
 
   const [mediaExtensions, setMediaExtensions] = useState({}); // 17
-  const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState();
-  const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState();
+  const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
+  const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
 
   const [elevatorFileError, setElevatorFileError] = useState(false);
   const [lfdFileError, setLfdFileError] = useState(false);
@@ -572,9 +576,9 @@ function App() {
 
     // if this is a lobby 1 file and the source is a pfd, pfd is the source
     // else, lfd is the source
-    const lfdSource = lobbyAndOneAsset && !lobbyAndOneAssetIsLFD ? pfdFile.payload : lfdFile.payload;
-    const loadLFD = lfdSource
-      ? lfdSource.arrayBuffer().then((result) => {
+    const lfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD === false ? pfdFile : lfdFile;
+    const loadLFD = lfdSource.payload
+      ? lfdSource.payload.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_l${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
             result
@@ -582,9 +586,9 @@ function App() {
         })
       : "";
 
-    const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile.payload : pfdFile.payload;
-    const loadPFD = pfdSource
-      ? pfdSource.arrayBuffer().then((result) => {
+    const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
+    const loadPFD = pfdSource.payload
+      ? pfdSource.payload.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_p${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
             result
@@ -606,13 +610,14 @@ function App() {
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
-      { file: lfdFile, fn: loadLFD },
-      { file: pfdFile, fn: loadPFD },
+      { file: lfdSource, fn: loadLFD },
+      { file: pfdSource, fn: loadPFD },
       { file: svgFile, fn: loadSVG },
       // { file: standardAdFile, fn: loadStandardAd },
     ];
     const promiseArray = loadObject.map((obj) => {
       if (obj.file.payload) {
+        console.log("try ", obj.file);
         return obj.fn;
       }
     });

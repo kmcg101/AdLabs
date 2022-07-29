@@ -53,7 +53,7 @@ const myColumn = {
 
 const resultsBottomCenter = {
   width: "100%",
-  height: "90%",
+  height: "89.5%",
 };
 const resultsTextHolderScroll = {
   fontFamily: "Avenir-Roman",
@@ -68,7 +68,7 @@ const resultsTextHolderScroll = {
   backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
   boxShadow: "var(--standard-box-shadow-color)",
   marginBottom: "20px",
-  overflowY: "scroll",
+  overflowY: "auto",
   scrollbarColor: "green",
   scrollbarWidth: "thin",
 };

@@ -30,7 +30,7 @@ import adLabsLogo from "./assets/AdLabs.svg";
 
 import { ThemeProvider } from "@material-ui/core";
 
-import { useScreenshot } from "use-screenshot-hook";
+// import { useScreenshot } from "use-screenshot-hook";
 import * as htmlToImage from "html-to-image";
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
@@ -43,9 +43,8 @@ import { AppTheme } from "./MaterialTheme";
 
 function App() {
   // for screen shots
-  const imageRef = useRef(null);
-  const { image, takeScreenshot } = useScreenshot({ ref: imageRef });
-  const [screenshot, setScreenshot] = useState(); // 6
+  //const imageRef = useRef(null);
+  const [screenshot, setScreenshot] = useState(); // 2
 
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -223,9 +222,14 @@ function App() {
     return /^[A-Za-z0-9-]*$/.test(str);
   }
 
-  useEffect(() => {
-    setScreenshot(image);
-  }, [image]);
+  const takeScreenshot = () => {
+    htmlToImage.toPng(document.getElementById("screenGrabThis")).then(function(dataUrl) {
+      var img = new Image();
+      //img.src = dataUrl;
+      setScreenshot(dataUrl);
+      //document.body.appendChild(img);
+    });
+  };
 
   const handleContinueButtonPressed = () => {
     setInputsCheckButtonPressedOnce(true);
@@ -757,7 +761,8 @@ function App() {
               >
                 {/* elevator */}
                 <div
-                  ref={isElevator ? imageRef : null}
+                  // ref={isElevator ? imageRef : null}
+                  id={isElevator ? "screenGrabThis" : null}
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
                 >
                   <PageElevator
@@ -776,7 +781,9 @@ function App() {
                 </div>
                 {/* lfd */}
                 <div
-                  ref={isElevator ? null : imageRef}
+                  // ref={isElevator ? null : imageRef}
+                  id={isElevator ? null : "screenGrabThis"}
+                  // id="screenGrabThis"
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}
                 >
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>

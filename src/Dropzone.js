@@ -252,7 +252,7 @@ function Dropzone(props) {
   ));
 
   const videoPreview = files.map((file) => (
-    <video key={file.name} autoPlay loop style={{ width: "100%" }}>
+    <video key={file.name} autoplay loop style={{ width: "100%" }}>
       <source src={URL.createObjectURL(files[0])} />
     </video>
   ));

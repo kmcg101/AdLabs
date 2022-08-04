@@ -11,11 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((AppTheme) => ({
   textInputStyle: {
-    // color: '#FFFFFF',
-    //backgroundColor: "#fff",
-
-    // height: "37px",
-    // paddingLeft: "10px",
     border: "none",
     background: "linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .6) 100%)",
     display: "block",
@@ -26,14 +21,11 @@ const useStyles = makeStyles((AppTheme) => ({
   },
 }));
 
-const Inputs = (props) => {
+const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce, inputValues }) => {
   let DATA_PRODUCTS_ARRAY = DATA_PRODUCTS.data;
   let DATA_DURATION_ARRAY = DATA_DURATION.data;
   let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
   let DATA_PLATFORM_ARRAY = DATA_PLATFORM.data;
-
-  const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
-  const inputsCheckButtonPressedOnce = props.inputsCheckButtonPressedOnce;
 
   const [clientError, setClientError] = useState(true);
   const [campaignError, setCampaignError] = useState(false);
@@ -52,33 +44,6 @@ const Inputs = (props) => {
     <div>
       <div className="inputsFullPage">
         <div className="inputsLeftColumn">
-          {/* <TextField
-                        onChange={handleAnyInputsChange}
-                        className={classes.textInputStyle}
-                        label="CLIENT NAME: v2.10"
-                        fullWidth
-                        name='client'
-                        error={clientError}
-                        helperText={clientError ? "Valid characters: 0-9, A-Z, dash (-)" : ""}
-                        InputProps={{
-                            disableUnderline: true, // <== added this
-                        }}
-
-                    ></TextField>
-
-                    <TextField
-                        onChange={handleAnyInputsChange}
-                        className={classes.textInputStyle}
-                        label="DESCRIPTION:"
-                        fullWidth
-                        name='campaign'
-                        error={campaignError}
-                        helperText={campaignError ? "Valid characters: 0-9, A-Z, dash (-)" : ""}
-                        InputProps={{
-                            disableUnderline: true, // <== added this
-                        }}
-                    ></TextField> */}
-
           <TextBox
             value={props.inputValues.client}
             label="CLIENT NAME: v4.10"

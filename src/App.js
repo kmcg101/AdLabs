@@ -12,7 +12,7 @@ import { getManifestFile, getBlankManifest, getBlankHTML } from "./Utilities";
 import { getHTMLFile } from "./TemplateFactory";
 import ConfirmationScreen from "./ConfirmationScreen";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./nav.css";
 import JSZip from "jszip";
@@ -226,9 +226,10 @@ function App() {
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
-        var img = new Image();
+        //var img = new Image();
         //img.src = dataUrl;
         setScreenshot(dataUrl);
+        // the problem may be that it isn't waiting long enough for the state to be set
         //document.body.appendChild(img);
       })
       .catch(() => {
@@ -407,7 +408,7 @@ function App() {
     // pause this for x seconds so that it can take the screenshot
     setTimeout(() => {
       setCurrentPageNumber(3);
-    }, "500");
+    }, "3000");
   };
   const resetStateToBeginning = () => {
     window.location.reload();

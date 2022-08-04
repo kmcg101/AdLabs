@@ -73,20 +73,18 @@ const resultsTextHolderScroll = {
   scrollbarWidth: "thin",
 };
 
-const Results = (props) => {
-  const inputValues = props.inputValues;
-  const filename = props.filename;
-  const blankFilename = props.blankFilename;
-  const requiresBlankFile = props.requiresBlankFile;
-  const screenshot = props.screenshot;
-
-  const bintBGColor = props.bintBGColor;
-  const productIndex = props.productIndex;
-  const isBlackText = props.isBlackText;
-
-  const allDroppedFilenames = props.allDroppedFilenames;
-  const allDroppedNewFilenames = props.allDroppedNewFilenames;
-
+const Results = ({
+  inputValues,
+  filename,
+  blankFilename,
+  requiresBlankFile,
+  screenshot,
+  bintBGColor,
+  productIndex,
+  isBlackText,
+  allDroppedFilenames,
+  allDroppedNewFilenames,
+}) => {
   const allDroppedFilenamesFiltered = allDroppedFilenames.filter((val) => val !== undefined);
   const allDroppedNewFilenamesFiltered = allDroppedNewFilenames.filter((val) => val !== undefined);
 
@@ -109,7 +107,7 @@ const Results = (props) => {
   const listOfInput = (
     <div>
       <ul style={ulStyle}>
-        <li>{listOfDroppedFiles}</li>
+        {listOfDroppedFiles}
         {productIndex === 0 ? <li>#{bintBGColor}</li> : null}
         {productIndex === 0 && isBlackText === true ? <li>Black</li> : null}
         {productIndex === 0 && isBlackText === false ? <li>White</li> : null}

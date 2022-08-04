@@ -223,12 +223,17 @@ function App() {
   }
 
   const takeScreenshot = () => {
-    htmlToImage.toPng(document.getElementById("screenGrabThis")).then(function(dataUrl) {
-      var img = new Image();
-      //img.src = dataUrl;
-      setScreenshot(dataUrl);
-      //document.body.appendChild(img);
-    });
+    htmlToImage
+      .toPng(document.getElementById("screenGrabThis"))
+      .then(function(dataUrl) {
+        var img = new Image();
+        //img.src = dataUrl;
+        setScreenshot(dataUrl);
+        //document.body.appendChild(img);
+      })
+      .catch(() => {
+        console.log("there was an error");
+      });
   };
 
   const handleContinueButtonPressed = () => {

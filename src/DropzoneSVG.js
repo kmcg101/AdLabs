@@ -32,7 +32,7 @@ const dzGradientDiv = {
   zIndex: "50",
 };
 
-function Dropzone(props) {
+function DropzoneSVG(props) {
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
@@ -67,6 +67,24 @@ function Dropzone(props) {
   // this is where dropped files are added
   // only used for preview
   const [files, setFiles] = useState([]);
+
+  const createSVGImg = () => {
+    return <img src={URL.createObjectURL(svgFile.payload[0])} style={{ width: "100%" }} alt="preview" />;
+  };
+  useEffect(() => {
+    if (
+      Object.keys(svgFile).length > 0 &&
+      Object.keys(files).length === 0 &&
+      acceptedFileTypeString == "image/svg+xml"
+    ) {
+      console.log("populate it");
+      const elem = document.createElement("img");
+      elem.src = URL.createObjectURL(svgFile.payload);
+      const el = ref.current;
+      el.appendChild(elem);
+    }
+    // create an img with svgFile.payload as the source
+  }, [svgFile.payload]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
@@ -267,4 +285,4 @@ function Dropzone(props) {
     </div>
   );
 }
-export default Dropzone;
+export default DropzoneSVG;

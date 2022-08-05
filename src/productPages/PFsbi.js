@@ -1,6 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/pfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -46,7 +47,7 @@ const P_fsbi = (props) => {
       </div>
 
       <div className="pFSBISVG" style={pFSBILogo}>
-        <Dropzone
+        <DropzoneSVG
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}

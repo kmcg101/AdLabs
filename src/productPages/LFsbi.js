@@ -1,6 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/lfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -45,7 +46,7 @@ const L_fsbi = (props) => {
         />
       </div>
       <div className="lFSBISVG" style={lFSBILogo}>
-        <Dropzone
+        <DropzoneSVG
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}

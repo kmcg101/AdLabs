@@ -459,6 +459,8 @@ function App() {
   /////////////////////////////////////////////////
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
+    // if svg and lobby, get reference to the other svg
+
     // droppedFileType = elevator, landscape, portrait, svg, standardAd
     if (droppedFileType === "svg") {
       setSvgFile((prevState) => ({

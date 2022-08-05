@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
@@ -9,12 +9,10 @@ const baseStyle = {
 };
 
 const acceptStyle = {
-  // border: "#00e676 dashed 2px",
   boxShadow: "0px 0px 8px 1px #00e676",
 };
 
 const rejectStyle = {
-  // border: "#ff1744 dashed 2px",
   boxShadow: "0px 0px 8px 1px #ff1744",
 };
 const dzBackgroundImage = {
@@ -44,6 +42,8 @@ function Dropzone(props) {
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
 
+  const ref = useRef(null);
+
   const handleWarningMessageText = (txt, useIcon) => {
     props.handleWarningMessageText(txt, useIcon);
   };
@@ -68,10 +68,27 @@ function Dropzone(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
-  // useEffect(() => {
-  //    console.log("files change ", files);
-  //    console.log("svgFile = ", svgFile);
-  // }, [svgFile]);
+  const createSVGImg = () => {
+    return <img src={URL.createObjectURL(svgFile.payload[0])} style={{ width: "100%" }} alt="preview" />;
+  };
+  useEffect(() => {
+    // console.log("svg file change");
+
+    if (
+      Object.keys(svgFile).length > 0 &&
+      Object.keys(files).length === 0 &&
+      acceptedFileTypeString == "image/svg+xml"
+    ) {
+      console.log("populate it");
+      const elem = document.createElement("img");
+      elem.src = URL.createObjectURL(svgFile.payload);
+      const el = ref.current;
+      el.appendChild(elem);
+      // create an img with svgFile.payload as the source
+    } else {
+      //console.log("no need to populate");
+    }
+  }, [svgFile.payload]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
@@ -231,20 +248,8 @@ function Dropzone(props) {
   );
 
   // put the map function back in here
-  //const svgImagePreview = files.map((file) => (
   const svgImagePreview = files.map((file) => (
-    <div>
-      <img
-        //src={svgFile !== undefined && Object.keys(files).length > 0 ? URL.createObjectURL(svgFile.payload) : null}
-        //style={svgFile !== undefined && Object.keys(files).length > 0 ? { width: "100%" } : { display: "none" }}
-        //alt="preview"
-        key={file.name}
-        src={URL.createObjectURL(files[0])}
-        style={{ width: "100%" }}
-        alt="preview"
-      />
-      />
-    </div>
+    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
   ));
 
   const imagePreview = files.map((file) => (
@@ -273,13 +278,8 @@ function Dropzone(props) {
                 className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
               ></div>
             ) : null}
-            <div className="dropzoneImageParent">
-              {mediaType === "video"
-                ? videoPreview
-                : droppedFileType === "svg" && Object.keys(svgFile).length > 0 && Object.keys(files).length === 0
-                ? svgImagePreview
-                : imagePreview}
-              {/* {mediaType === "video" ? videoPreview : imagePreview} */}
+            <div ref={ref} className="dropzoneImageParent">
+              {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview}
             </div>
           </div>
 

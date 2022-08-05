@@ -72,6 +72,9 @@ const resultsTextHolderScroll = {
   scrollbarColor: "green",
   scrollbarWidth: "thin",
 };
+const ulStyle = {
+  listStyleType: "none",
+};
 
 const Results = ({
   inputValues,
@@ -87,10 +90,6 @@ const Results = ({
 }) => {
   const allDroppedFilenamesFiltered = allDroppedFilenames.filter((val) => val !== undefined);
   const allDroppedNewFilenamesFiltered = allDroppedNewFilenames.filter((val) => val !== undefined);
-
-  const ulStyle = {
-    listStyleType: "none",
-  };
 
   const listOfDroppedFiles = allDroppedFilenamesFiltered.map((items) => (
     <li key={items} style={ulStyle}>

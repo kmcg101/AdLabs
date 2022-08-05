@@ -223,6 +223,9 @@ function App() {
   }
 
   const takeScreenshot = () => {
+    // the only place that this function is called is when there are no errors
+    // on page 2 and it is time to go to page 3.  Because of this it is ok
+    // to have a useEffect for state value SCREENSHOT.  When it changes, go to page 3
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
@@ -276,11 +279,6 @@ function App() {
       // this runs when landing on the RESULTS  page.
 
       // check if all dropboxes have been filled
-      // would be nice to be able to set this to 1 and take a screen shot
-      // but the result was a screen shot that was not hte full size of the div.
-      // must have to wait for state to populate and get down to the builder component
-      //setCurrentBuildNavNumber(1);
-      takeScreenshot();
 
       // check if proper files dropped
       let checkErrors = 0;
@@ -404,54 +402,26 @@ function App() {
     setAllDroppedFilenames(getAllDroppedFilenames);
 
     setAllDroppedNewFilenames(getAllDroppedNewFilenames);
+
+    // would be nice to be able to set this to 1 and take a screen shot
+    // but the result was a screen shot that was not the full size of the div.
+    // must have to wait for state to populate and get down to the builder component
+    //setCurrentBuildNavNumber(1);
+    takeScreenshot();
     //
     // pause this for x seconds so that it can take the screenshot
-    setTimeout(() => {
-      setCurrentPageNumber(3);
-    }, "3000");
+    //setTimeout(() => {
+    //setCurrentPageNumber(3);
+    //}, "3000");
   };
+  useEffect(() => {
+    if (currentPageNumber === 2) {
+      setCurrentPageNumber(3);
+    }
+  }, [screenshot]);
+
   const resetStateToBeginning = () => {
     window.location.reload();
-    /*
-    setCurrentPageNumber(1);
-
-    // remove all images and videos
-    setProductIndex(0);
-    setInputsCheckButtonPressed(false);
-    setInputsCheckButtonPressedOnce(false);
-
-    setIsElevator(true);
-    setRequiresBlankFile(false);
-
-    setInputValues({
-      client: "",
-      campaign: "",
-    });
-
-    setBintBGColor("FFFFFF");
-
-    setFilename();
-    setBlankFilename();
-
-    // dropped images and video files
-    setElevatorFile({});
-    setLfdFile({});
-    setPfdFile({});
-    setSvgFile({}); // 17
-    setStandardAdFile({}); //18
-
-    setElevatorFileError(false);
-    setLfdFileError(false);
-    setPfdFileError(false);
-    setSvgFileError(false);
-    setStandardAdFileError(false);
-
-    setAllDroppedFilenames([]);
-    setAllDroppedNewFilenames([]);
-
-    setMediaExtension();
-    setIsBlackText(true);
-    */
   };
 
   // runs when product changes to set productIndex, isElevator, isFullScreen

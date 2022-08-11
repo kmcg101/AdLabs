@@ -5,7 +5,7 @@ import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
-  border: "white dashed 2px",
+  outline: "white dashed 2px",
 };
 
 const acceptStyle = {
@@ -253,7 +253,7 @@ function DropzoneSVG(props) {
   ));
 
   const videoPreview = files.map((file) => (
-    <video key={file.name} autoplay loop style={{ width: "100%" }}>
+    <video key={file.name} autoPlay loop style={{ width: "100%" }}>
       <source src={URL.createObjectURL(files[0])} />
     </video>
   ));

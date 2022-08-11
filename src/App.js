@@ -112,6 +112,7 @@ function App() {
     setShowPopUp(false);
     setPopUpMessage("");
   };
+
   const handleContinuePopUpPress = () => {
     // this runs when just 1 asset dropped
     setLobbyAndOneAsset(true);
@@ -229,11 +230,7 @@ function App() {
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
-        //var img = new Image();
-        //img.src = dataUrl;
         setScreenshot(dataUrl);
-        // the problem may be that it isn't waiting long enough for the state to be set
-        //document.body.appendChild(img);
       })
       .catch(() => {
         console.log("there was an error");
@@ -625,7 +622,6 @@ function App() {
       });
   };
   const handleBINTColorChange = (color) => {
-    console.log("color is type ", typeof color);
     setBintBGColor(color);
   };
   const handleBlackWhiteToggleChange = () => {
@@ -777,6 +773,8 @@ function App() {
                       handleWarningMessageText={handleWarningMessageText}
                       shakeDropzoneBGImage={shakeDropzoneBGImage}
                       svgFile={svgFile}
+                      lfdFile={lfdFile}
+                      pfdFile={pfdFile}
                     />
                   </div>
                   {/* pfd */}
@@ -793,6 +791,8 @@ function App() {
                       handleDropzoneChanges={handleDropzoneChanges}
                       handleWarningMessageText={handleWarningMessageText}
                       svgFile={svgFile}
+                      lfdFile={lfdFile}
+                      pfdFile={pfdFile}
                       shakeDropzoneBGImage={shakeDropzoneBGImage}
                     />
                   </div>

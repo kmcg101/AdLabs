@@ -16,6 +16,8 @@ const PageLFD = (props) => {
   const svgFileError = props.svgFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const lfdFile = props.lfdFile;
+  const pfdFile = props.pfdFile;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
@@ -60,6 +62,8 @@ const PageLFD = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
         />
       ) : null}
       {productIndex === 4 ? (

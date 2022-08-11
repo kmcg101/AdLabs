@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneVSA";
 import background from "../assets/pvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -19,6 +19,9 @@ const P_vsa = (props) => {
 
   const pfdFileError = props.pfdFileError;
   const svgFile = props.svgFile;
+  const lfdFile = props.lfdFile;
+  const pfdFile = props.pfdFile;
+  const isLFD = false;
   const productIndex = props.productIndex;
 
   return (
@@ -32,6 +35,9 @@ const P_vsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          isLFD={isLFD}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

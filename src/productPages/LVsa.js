@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneVSA";
 import background from "../assets/lvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -16,7 +16,10 @@ const L_vsa = (props) => {
 
   const lfdFileError = props.lfdFileError;
   const svgFile = props.svgFile;
+  const lfdFile = props.lfdFile;
+  const pfdFile = props.pfdFile;
   const productIndex = props.productIndex;
+  const isLFD = true;
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
@@ -31,6 +34,9 @@ const L_vsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          isLFD={isLFD}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

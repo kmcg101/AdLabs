@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
+import captureVideoFrame from "capture-video-frame";
 import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
@@ -66,25 +67,52 @@ function DropzoneVSA(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
-  const createVSAVideo = () => {
-    ///return <img src={URL.createObjectURL(svgFile.payload[0])} style={{ width: "100%" }} alt="preview" />;
-  };
+  useEffect(() => {
+    // this keeps it from running on first render
+    if (Object.keys(pfdFile).length > 0) {
+      const el = ref.current;
+
+      const elemV = document.createElement("video");
+      elemV.style = "position: absolute; z-index: 1;";
+      elemV.id = "videoToCapture";
+      elemV.autoplay = true;
+      elemV.loop = true;
+      elemV.src = URL.createObjectURL(pfdFile.payload);
+      const container = el;
+      const options = { childList: true };
+
+      const mutationObserver = new MutationObserver((entries) => {
+        console.log("added!");
+        elemV.addEventListener("canplay", () => {
+          const capturedFrame = captureVideoFrame(elemV, "png");
+          handleDropzoneChanges("videoCapture", capturedFrame);
+          mutationObserver.disconnect();
+        });
+      });
+      mutationObserver.observe(el, { childList: true });
+
+      el.appendChild(elemV);
+    }
+  }, [pfdFile.payload]);
 
   useEffect(() => {
     if (Object.keys(pfdFile).length > 0) {
+      const elemI = document.createElement("img");
+
+      elemI.style = "position: absolute; left: 0px; z-index: 10;";
+      elemI.setAttribute("src", pfdFile.videoCapture.dataUri);
       const el = ref.current;
-      const elem = document.createElement("video");
-
-      elem.autoplay = true;
-      elem.style = `position: absolute;`;
-      elem.src = URL.createObjectURL(pfdFile.payload);
-
+      var count = el.childElementCount;
       while (el.firstChild) {
-        el.removeChild(el.firstChild);
+        el.removeChild(el.lastChild);
       }
-      el.appendChild(elem);
+
+      setTimeout(() => {
+        console.log("running");
+        el.appendChild(elemI);
+      }, 100);
     }
-  }, [pfdFile.payload]);
+  }, [pfdFile.videoCapture]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;

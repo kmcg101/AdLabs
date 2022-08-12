@@ -44,6 +44,8 @@ const PageLFD = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
         />
       ) : null}
       {productIndex === 2 ? (

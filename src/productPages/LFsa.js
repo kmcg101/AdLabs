@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneFSA_LFD";
 import background from "../assets/lfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -12,6 +12,9 @@ const L_fsa = (props) => {
   const lfdFileError = props.lfdFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
+  const lfdFile = props.lfdFile;
+  const pfdFile = props.pfdFile;
+  const isLFD = true;
 
   const lFullScreen = {
     width: "1024px",
@@ -32,6 +35,9 @@ const L_fsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          isLFD={isLFD}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

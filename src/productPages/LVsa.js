@@ -18,8 +18,8 @@ const L_vsa = (props) => {
   const svgFile = props.svgFile;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;
-  const productIndex = props.productIndex;
   const isLFD = true;
+  const productIndex = props.productIndex;
   const handleDropzoneChanges = (name, value, droppedFileType) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };

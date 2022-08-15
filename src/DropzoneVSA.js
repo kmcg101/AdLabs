@@ -139,7 +139,7 @@ function DropzoneVSA(props) {
       handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
-      handleDropzoneChanges("payload", null);
+      //handleDropzoneChanges("payload", null);
       return false;
     }
   };

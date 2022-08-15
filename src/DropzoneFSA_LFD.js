@@ -39,7 +39,6 @@ function DropzoneFSA_LFD(props) {
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
   const lfdFile = props.lfdFile;
-  const pfdFile = props.pfdFile;
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
@@ -58,6 +57,13 @@ function DropzoneFSA_LFD(props) {
 
     props.handleDropzoneChanges(name, value, "landscape");
     props.handleDropzoneChanges(name, value, "portrait");
+  };
+  const handleDropzoneChangesJustLFD = (name, value) => {
+    // this is special for VSA.  Same file always used for both so populate both
+    // dropped file type = elevator, landscape, portrait, standard, svg.
+    // this writes the name/value pair to the approprate dropped file in app.js
+
+    props.handleDropzoneChanges(name, value, "landscape");
   };
 
   function getHintString(str) {
@@ -100,7 +106,7 @@ function DropzoneFSA_LFD(props) {
         const mutationObserver = new MutationObserver((entries) => {
           elemV.addEventListener("canplay", () => {
             const capturedFrame = captureVideoFrame(elemV, "png");
-            handleDropzoneChanges("videoCapture", capturedFrame);
+            handleDropzoneChangesJustLFD("videoCapture", capturedFrame);
             mutationObserver.disconnect();
           });
         });
@@ -136,7 +142,7 @@ function DropzoneFSA_LFD(props) {
         el.appendChild(elemI);
       }, 100);
     }
-  }, [pfdFile.videoCapture]);
+  }, [lfdFile.videoCapture]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
@@ -166,7 +172,7 @@ function DropzoneFSA_LFD(props) {
       handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
-      handleDropzoneChanges("payload", null);
+      // handleDropzoneChanges("payload", null);
       return false;
     }
   };

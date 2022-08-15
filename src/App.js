@@ -559,7 +559,7 @@ function App() {
     const loadLFD = lfdSource.payload
       ? lfdSource.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_l${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
+            `${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
             result
           );
         })
@@ -569,7 +569,7 @@ function App() {
     const loadPFD = pfdSource.payload
       ? pfdSource.payload.arrayBuffer().then((result) => {
           newZip.file(
-            `${filename}_p${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
+            `${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
             result
           );
         })
@@ -681,7 +681,13 @@ function App() {
                 <div
                   data-value="2"
                   onClick={handleELPNavClick}
-                  className={`elpNavButton ${currentBuildNavNumber === 2 ? "current" : "enabled"}`}
+                  className={`elpNavButton ${
+                    currentBuildNavNumber === 2
+                      ? "current"
+                      : inputValues.product === 1 && !isElevator && Object.keys(lfdFile).length === 0
+                      ? "disabled"
+                      : "enabled"
+                  }`}
                 >
                   PFD
                 </div>
@@ -735,7 +741,6 @@ function App() {
               >
                 {/* elevator */}
                 <div
-                  // ref={isElevator ? imageRef : null}
                   id={isElevator ? "screenGrabThis" : null}
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
                 >
@@ -755,9 +760,7 @@ function App() {
                 </div>
                 {/* lfd */}
                 <div
-                  // ref={isElevator ? null : imageRef}
                   id={isElevator ? null : "screenGrabThis"}
-                  // id="screenGrabThis"
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}
                 >
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>

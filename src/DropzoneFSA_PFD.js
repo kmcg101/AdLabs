@@ -44,7 +44,7 @@ function DropzoneFSA_PFD(props) {
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
 
-  const [mediaType, setMediaType] = useState("image");
+  const [mediaType, setMediaType] = useState("video");
 
   const ref = useRef(null);
 
@@ -77,6 +77,16 @@ function DropzoneFSA_PFD(props) {
   // this is where dropped files are added
   const [files, setFiles] = useState([]);
 
+  const [pfdAcceptedString, setPfdAcceptedString] = useState("");
+
+  useEffect(() => {
+    console.log("running lfdfile.payload effect");
+    if (Object.keys(lfdFile).length > 0 && lfdFile.payload !== null) {
+      console.log("running lfdfile.payload effect step 2 ", lfdFile.payload.type);
+      setPfdAcceptedString(lfdFile.payload.type);
+    }
+  }, [lfdFile.payload]);
+
   useEffect(() => {
     // you wan this to run after drop and when lfd and pfd file state has been set
     // just running after drop will not work because state will not be set yet
@@ -84,11 +94,14 @@ function DropzoneFSA_PFD(props) {
 
     // at this point a file has been dropped in LFD and
     // both PFD and LFD files have been written to
+    console.log("running PFD change, file =  ", pfdFile);
     if (Object.keys(pfdFile).length > 0 && pfdFile.payload !== null) {
+      console.log("running PFD change step 2");
       const el = ref.current;
 
       // if this is a video, create a video tag
-      if (mediaType === "video") {
+      if (pfdFile.payload.type.includes("video")) {
+        console.log("running PFD change step 3 video");
         const elemV = document.createElement("video");
         elemV.style = "position: absolute; z-index: 1;";
         elemV.id = "videoToCapture";
@@ -109,6 +122,7 @@ function DropzoneFSA_PFD(props) {
 
         el.appendChild(elemV);
       } else {
+        console.log("running PFD change step 3 image");
         const elemI = document.createElement("img");
         elemI.style = "position: absolute; left: 0px; z-index: 10;";
         elemI.setAttribute("src", URL.createObjectURL(pfdFile.payload));
@@ -167,7 +181,7 @@ function DropzoneFSA_PFD(props) {
       handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
-      handleDropzoneChanges("payload", null);
+      // handleDropzoneChanges("payload", null);
       return false;
     }
   };
@@ -184,7 +198,7 @@ function DropzoneFSA_PFD(props) {
     maxFiles: 1,
     noClick: false,
     multiple: false,
-    accept: acceptedFileTypeString,
+    accept: pfdAcceptedString,
 
     onDropRejected: (rejectedFiles) => {
       console.log("rejected");

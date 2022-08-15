@@ -18,7 +18,6 @@ const P_hfsp = (props) => {
     zIndex: "100",
   };
 
-  const pfdFileError = props.pfdFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
 

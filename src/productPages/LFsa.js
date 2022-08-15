@@ -9,7 +9,6 @@ const L_fsa = (props) => {
     props.handleDropzoneChanges(name, value, droppedFileType);
   };
 
-  const lfdFileError = props.lfdFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
   const lfdFile = props.lfdFile;

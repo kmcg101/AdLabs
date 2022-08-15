@@ -23,8 +23,6 @@ const L_fsbi = (props) => {
     zIndex: "100",
   };
   const svgFile = props.svgFile;
-  const lfdFileError = props.lfdFileError;
-  const svgFileError = props.svgFileError;
   const productIndex = props.productIndex;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {

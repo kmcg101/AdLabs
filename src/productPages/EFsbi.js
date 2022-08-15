@@ -6,8 +6,6 @@ import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const E_fsbi = (props) => {
-  const elevatorFileError = props.elevatorFileError;
-  const svgFileError = props.svgFileError;
   const svgFile = props.svgFile;
   const elevatorFile = props.elevatorFile;
   const productIndex = props.productIndex;

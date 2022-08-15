@@ -12,9 +12,6 @@ const PageLFD = (props) => {
   const bintBGColor = props.bintBGColor;
   const isBlackText = props.isBlackText;
 
-  const lfdFileError = props.lfdFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;
@@ -27,8 +24,6 @@ const PageLFD = (props) => {
     <div className="pageContainer">
       {productIndex === 0 ? (
         <LBint
-          lfdFileError={lfdFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
@@ -39,7 +34,6 @@ const PageLFD = (props) => {
       ) : null}
       {productIndex === 1 ? (
         <LFsa
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -50,7 +44,6 @@ const PageLFD = (props) => {
       ) : null}
       {productIndex === 2 ? (
         <LHfsp
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -59,7 +52,6 @@ const PageLFD = (props) => {
       ) : null}
       {productIndex === 3 ? (
         <LVsa
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -70,8 +62,6 @@ const PageLFD = (props) => {
       ) : null}
       {productIndex === 4 ? (
         <LFsbi
-          lfdFileError={lfdFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}

@@ -15,8 +15,6 @@ const E_bint = (props) => {
   const bintBGColorPre = props.bintBGColor;
   const bintBGColor = "#" + bintBGColorPre;
   //console.log("bintBGColor = " , bintBGColor)
-  const elevatorFileError = props.elevatorFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const elevatorFile = props.elevatorFile;
   const productIndex = props.productIndex;

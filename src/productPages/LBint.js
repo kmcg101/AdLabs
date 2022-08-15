@@ -13,8 +13,6 @@ const L_bint = (props) => {
   const bintBGColorPre = props.bintBGColor;
   const bintBGColor = "#" + bintBGColorPre;
   const isBlackText = props.isBlackText;
-  const lfdFileError = props.lfdFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
 

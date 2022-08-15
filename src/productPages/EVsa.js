@@ -14,7 +14,6 @@ const vsaImage = {
 };
 
 const E_vsa = (props) => {
-  const elevatorFileError = props.elevatorFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
   const handleDropzoneChanges = (name, value, droppedFileType) => {

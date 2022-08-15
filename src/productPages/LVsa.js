@@ -14,7 +14,6 @@ const L_vsa = (props) => {
     zIndex: "100",
   };
 
-  const lfdFileError = props.lfdFileError;
   const svgFile = props.svgFile;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;

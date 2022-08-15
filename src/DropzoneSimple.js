@@ -33,22 +33,18 @@ const dzGradientDiv = {
   zIndex: "50",
 };
 
-function DropzoneElevator(props) {
+function DropzoneSimple({
+  acceptedFileTypeString,
+  svgFile,
+  elevatorFile,
+  droppedFileType,
+  productIndex,
+  shakeDropzoneBGImage,
+}) {
   /////////////////////////////  files accepted and message on mouse over
 
-  const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
-  const svgFile = props.svgFile;
-  const droppedFileType = props.droppedFileType;
-  const productIndex = props.productIndex;
-  const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
-  const elevatorFile = props.elevatorFile;
-
   const ref = useRef(null);
-
-  //const handleWarningMessageText = (txt, useIcon) => {
-  //   props.handleWarningMessageText(txt, useIcon);
-  // };
 
   function getHintString(str) {
     let newString = str.split(",");
@@ -62,13 +58,6 @@ function DropzoneElevator(props) {
   //////////////////////////////
 
   const [showHint, setShowHint] = useState(false);
-
-  // all this does is determine which preview div to display, image or video
-  const [mediaType, setMediaType] = useState("image");
-
-  // this is where dropped files are added
-  // only used for preview
-  const [files, setFiles] = useState([]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
@@ -104,14 +93,11 @@ function DropzoneElevator(props) {
       props.handleWarningMessageText("", false);
       return true;
     } else if (exists) {
-      console.log("right size");
       props.handleWarningMessageText("", false);
       return true;
     } else {
       props.handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
-      console.log("wrong size");
-      setFiles([]);
-      //handleDropzoneChanges("payload", null);
+     
 
       return false;
     }
@@ -142,40 +128,19 @@ function DropzoneElevator(props) {
       props.handleWarningMessageText("wrong file type dropped.", true);
     },
 
-    // accepted files are ones that are the correct file type.  File size is checked later
-    onDropAccepted: (acceptedFiles) => {
-      // {file, preview} is put in state of files
-      // this does not seem to put anything in state FILES.  it puts the preview in the acceptedFiles
-      setFiles(
-        acceptedFiles.map((myfile) =>
-          Object.assign(myfile, {
-            preview: URL.createObjectURL(myfile),
-          })
-        )
-      );
-
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
 
-      if (ext === "mp4") {
-        setMediaType("video");
-      } else {
-        setMediaType("image");
-      }
-
       if (ext !== "mp4") {
         // accepted files has name, type, preview blob
         const i = new Image();
         i.onload = () => {
-          console.log("i loaded");
           let reader = new FileReader();
           reader.readAsDataURL(newFile);
           reader.onload = () => {
-            console.log("reader loaded");
-
             const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
             if (droppedFileIsCorrectSize) {
               handleDropzoneChanges("name", newFile.name);
@@ -218,14 +183,11 @@ function DropzoneElevator(props) {
   );
 
   useEffect(() => {
-    console.log("starting use effect for payload");
     if (Object.keys(elevatorFile).length > 0 && elevatorFile.payload !== null) {
-      console.log("step 2: use effect for payload");
       const el = ref.current;
 
       // if this is a video, create a video tag
       if (elevatorFile.payload.type.includes("video")) {
-        console.log("step 3: this is a video");
         const elemV = document.createElement("video");
         elemV.style = "position: absolute; z-index: 1;";
         elemV.id = "videoToCapture";
@@ -249,7 +211,6 @@ function DropzoneElevator(props) {
         //   });
         // });
         // mutationObserver.observe(el, { childList: true });
-        console.log("step 6: appending");
       } else {
         const elemI = document.createElement("img");
         elemI.style = "position: absolute; left: 0px; z-index: 10;";
@@ -312,4 +273,4 @@ function DropzoneElevator(props) {
     </div>
   );
 }
-export default DropzoneElevator;
+export default DropzoneSimple;

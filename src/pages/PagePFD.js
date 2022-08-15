@@ -12,9 +12,6 @@ const PagePFD = (props) => {
   const bintBGColor = props.bintBGColor;
   const isBlackText = props.isBlackText;
 
-  const pfdFileError = props.pfdFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;
@@ -27,8 +24,6 @@ const PagePFD = (props) => {
     <div className="pageContainer">
       {productIndex === 0 ? (
         <PBint
-          pfdFileError={pfdFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
@@ -38,7 +33,6 @@ const PagePFD = (props) => {
       ) : null}
       {productIndex === 1 ? (
         <PFsa
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -49,7 +43,6 @@ const PagePFD = (props) => {
       ) : null}
       {productIndex === 2 ? (
         <PHfsp
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -58,7 +51,6 @@ const PagePFD = (props) => {
       ) : null}
       {productIndex === 3 ? (
         <PVsa
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -69,8 +61,6 @@ const PagePFD = (props) => {
       ) : null}
       {productIndex === 4 ? (
         <PFsbi
-          pfdFileError={pfdFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}

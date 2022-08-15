@@ -14,9 +14,6 @@ const PageElevator = (props) => {
   const productIndex = props.productIndex;
   const bintBGColor = props.bintBGColor;
   const isBlackText = props.isBlackText;
-  const elevatorFileError = props.elevatorFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const elevatorFile = props.elevatorFile;
 
@@ -24,8 +21,6 @@ const PageElevator = (props) => {
     <div className="pageContainer">
       {productIndex === 0 ? (
         <EBint
-          elevatorFileError={elevatorFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
@@ -38,7 +33,6 @@ const PageElevator = (props) => {
       ) : null}
       {productIndex === 1 ? (
         <EFsa
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -49,7 +43,6 @@ const PageElevator = (props) => {
       ) : null}
       {productIndex === 2 ? (
         <EHfsp
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -60,7 +53,6 @@ const PageElevator = (props) => {
       ) : null}
       {productIndex === 3 ? (
         <EVsa
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
@@ -71,8 +63,6 @@ const PageElevator = (props) => {
       ) : null}
       {productIndex === 4 ? (
         <EFsbi
-          elevatorFileError={elevatorFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}

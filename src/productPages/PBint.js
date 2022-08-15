@@ -13,8 +13,6 @@ const P_bint = (props) => {
   };
 
   const isBlackText = props.isBlackText;
-  const pfdFileError = props.pfdFileError;
-  const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
   const productIndex = props.productIndex;
 

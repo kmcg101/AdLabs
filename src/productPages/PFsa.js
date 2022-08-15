@@ -18,7 +18,6 @@ const P_fsa = (props) => {
     zIndex: "100",
   };
 
-  const pfdFileError = props.pfdFileError;
   const productIndex = props.productIndex;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;

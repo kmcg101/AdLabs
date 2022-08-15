@@ -228,10 +228,12 @@ function App() {
     // the only place that this function is called is when there are no errors
     // on page 2 and it is time to go to page 3.  Because of this it is ok
     // to have a useEffect for state value SCREENSHOT.  When it changes, go to page 3
+    // but unfortunately when moving back from 3 to 2 with numubers button and then
+    // not changing the image means that the screen shot will be retaken but not changed
+    // because the image taken is the same as the previous one.
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
-        console.log("set screenshot");
         setScreenshot(dataUrl);
       })
       .catch(() => {
@@ -404,10 +406,11 @@ function App() {
 
     setAllDroppedNewFilenames(getAllDroppedNewFilenames);
 
-    // would be nice to be able to set this to 1 and take a screen shot
-    // but the result was a screen shot that was not the full size of the div.
-    // must have to wait for state to populate and get down to the builder component
-    //setCurrentBuildNavNumber(1);
+    // there is a bug.  when using the number buttons to return from pg
+    // 3 to 2 and then hitting continue again, user can't get to page 3
+    // because you only go to page 3 after screenshot changes.  by not dropping
+    // a new file, screenshot does not change.  it just takes an image of the
+    // same div
     takeScreenshot();
     //
     // pause this for x seconds so that it can take the screenshot
@@ -750,9 +753,9 @@ function App() {
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
                 >
                   <PageElevator
-                    elevatorFileError={elevatorFileError}
-                    svgFileError={svgFileError}
-                    standardAdFileError={standardAdFileError}
+                    // elevatorFileError={elevatorFileError}
+                    // svgFileError={svgFileError}
+                    // standardAdFileError={standardAdFileError}
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
                     productIndex={productIndex}

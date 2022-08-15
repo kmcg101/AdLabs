@@ -17,7 +17,6 @@ const P_vsa = (props) => {
     top: "24px",
   };
 
-  const pfdFileError = props.pfdFileError;
   const svgFile = props.svgFile;
   const lfdFile = props.lfdFile;
   const pfdFile = props.pfdFile;

@@ -5,7 +5,6 @@ import background from "../assets/efsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const E_fsa = (props) => {
-  const elevatorFileError = props.elevatorFileError;
   const svgFile = props.svgFile;
   const elevatorFile = props.elevatorFile;
   const productIndex = props.productIndex;

@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneElevator";
 import background from "../assets/evsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -34,6 +34,7 @@ const E_vsa = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          elevatorFile={props.elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

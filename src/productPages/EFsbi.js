@@ -1,6 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneE from "../DropzoneElevator";
 import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -8,6 +9,7 @@ const E_fsbi = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const svgFileError = props.svgFileError;
   const svgFile = props.svgFile;
+  const elevatorFile = props.elevatorFile;
   const productIndex = props.productIndex;
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
@@ -28,13 +30,14 @@ const E_fsbi = (props) => {
       </div>
       <div className="eFullScreen">
         {" "}
-        <Dropzone
+        <DropzoneE
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>
@@ -46,6 +49,7 @@ const E_fsbi = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

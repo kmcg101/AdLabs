@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneE from "../DropzoneElevator";
 import blackTextImage from "../assets/ebintBlackText.png";
 import whiteTextImage from "../assets/ebintWhiteText.png";
 
@@ -17,6 +18,7 @@ const E_bint = (props) => {
   const elevatorFileError = props.elevatorFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const elevatorFile = props.elevatorFile;
   const productIndex = props.productIndex;
 
   const eBINTImage = {
@@ -56,17 +58,19 @@ const E_bint = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           svgFile={svgFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
         />
       </div>
 
       <div className="eBintAd" style={eBINTImage}>
-        <Dropzone
+        <DropzoneE
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={props.handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       </div>

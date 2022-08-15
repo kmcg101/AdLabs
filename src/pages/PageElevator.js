@@ -18,6 +18,7 @@ const PageElevator = (props) => {
   const svgFileError = props.svgFileError;
   const standardAdFileError = props.standardAdFileError;
   const svgFile = props.svgFile;
+  const elevatorFile = props.elevatorFile;
 
   return (
     <div className="pageContainer">
@@ -31,6 +32,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
@@ -41,6 +43,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
@@ -51,6 +54,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
@@ -61,6 +65,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}
@@ -72,6 +77,7 @@ const PageElevator = (props) => {
           handleWarningMessageText={props.handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
+          elevatorFile={elevatorFile}
           shakeDropzoneBGImage={props.shakeDropzoneBGImage}
         />
       ) : null}

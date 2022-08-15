@@ -224,12 +224,14 @@ function App() {
   }
 
   const takeScreenshot = () => {
+    console.log("taking screenshot");
     // the only place that this function is called is when there are no errors
     // on page 2 and it is time to go to page 3.  Because of this it is ok
     // to have a useEffect for state value SCREENSHOT.  When it changes, go to page 3
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
+        console.log("set screenshot");
         setScreenshot(dataUrl);
       })
       .catch(() => {
@@ -369,8 +371,10 @@ function App() {
         setStandardAdFileError(false);
       }, "2000");
 
+      console.log("errors = ", checkErrors);
       if (checkErrors === 0) {
         // if all filled in, always progress
+        console.log("running ok to go to 3 = ");
         okToGoToPageThree();
       } else if (!isElevator && (inputValues.product === 1 || inputValues.product === 3) && checkErrors === 1) {
         // lfsa or lvsa and 1 error, show overlay
@@ -412,6 +416,7 @@ function App() {
     //}, "3000");
   };
   useEffect(() => {
+    console.log("screenshot changed");
     if (currentPageNumber === 2) {
       setCurrentPageNumber(3);
     }
@@ -755,6 +760,7 @@ function App() {
                     handleDropzoneChanges={handleDropzoneChanges}
                     handleWarningMessageText={handleWarningMessageText}
                     svgFile={svgFile}
+                    elevatorFile={elevatorFile}
                     shakeDropzoneBGImage={shakeDropzoneBGImage}
                   />
                 </div>

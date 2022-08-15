@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
+import captureVideoFrame from "capture-video-frame";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
@@ -41,6 +42,7 @@ function Dropzone(props) {
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
+  const elevatorFile = props.elevatorFile;
 
   const ref = useRef(null);
 
@@ -109,7 +111,7 @@ function Dropzone(props) {
       props.handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
-      handleDropzoneChanges("payload", null);
+      //handleDropzoneChanges("payload", null);
 
       return false;
     }
@@ -215,20 +217,73 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  // put the map function back in here
-  const svgImagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
+  useEffect(() => {
+    console.log("starting use effect for payload");
+    if (Object.keys(elevatorFile).length > 0 && elevatorFile.payload !== null) {
+      console.log("step 2: use effect for payload");
+      const el = ref.current;
 
-  const imagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
+      // if this is a video, create a video tag
+      if (elevatorFile.payload.type.includes("video")) {
+        console.log("step 3: this is a video");
+        const elemV = document.createElement("video");
+        elemV.style = "position: absolute; z-index: 1;";
+        elemV.id = "videoToCapture";
 
-  const videoPreview = files.map((file) => (
-    <video key={file.name} loop style={{ width: "100%" }}>
-      <source src={URL.createObjectURL(files[0])} />
-    </video>
-  ));
+        elemV.src = URL.createObjectURL(elevatorFile.payload);
+        const container = el;
+        el.appendChild(elemV);
+
+        setTimeout(() => {
+          const capturedFrame = captureVideoFrame(elemV, "png");
+          handleDropzoneChanges("videoCapture", capturedFrame);
+        }, 200);
+
+        // const mutationObserver = new MutationObserver((entries) => {
+        //   console.log("step 4: video mutation obsesrver");
+        //   elemV.addEventListener("canplay", () => {
+        //     console.log("step 5: can play");
+        //     const capturedFrame = captureVideoFrame(elemV, "png");
+        //     handleDropzoneChanges("videoCapture", capturedFrame);
+        //     mutationObserver.disconnect();
+        //   });
+        // });
+        // mutationObserver.observe(el, { childList: true });
+        console.log("step 6: appending");
+      } else {
+        const elemI = document.createElement("img");
+        elemI.style = "position: absolute; left: 0px; z-index: 10;";
+        elemI.setAttribute("src", URL.createObjectURL(elevatorFile.payload));
+        const el = ref.current;
+        while (el.firstChild) {
+          el.removeChild(el.lastChild);
+        }
+        setTimeout(() => {
+          el.appendChild(elemI);
+        }, 100);
+      }
+    }
+  }, [elevatorFile.payload]);
+
+  useEffect(() => {
+    console.log("step 7: starting vid capture section");
+    if (Object.keys(elevatorFile).length > 0 && elevatorFile.payload !== null) {
+      console.log("step 8: passed capture check");
+      const elemI = document.createElement("img");
+      elemI.style = "position: absolute; left: 0px; z-index: 10;";
+      elemI.setAttribute("src", elevatorFile.videoCapture.dataUri);
+      const el = ref.current;
+      console.log("step 9: removing children");
+      while (el.firstChild) {
+        el.removeChild(el.lastChild);
+      }
+
+      setTimeout(() => {
+        console.log("step10: inside of timout after removing children");
+        el.appendChild(elemI);
+      }, 100);
+    }
+  }, [elevatorFile.videoCapture]);
 
   return (
     <div>
@@ -240,14 +295,14 @@ function Dropzone(props) {
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(files).length === 0 ? (
+            {Object.keys(elevatorFile).length === 0 ? (
               <div
                 style={dzBackgroundImage}
                 className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
               ></div>
             ) : null}
             <div ref={ref} className="dropzoneImageParent">
-              {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview}
+              {/* {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview} */}
             </div>
           </div>
 

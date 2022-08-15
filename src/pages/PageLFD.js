@@ -7,19 +7,17 @@ import LFsbi from "../productPages/LFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageLFD = (props) => {
-  const productIndex = props.productIndex;
-  const bintBGColor = props.bintBGColor;
-  const isBlackText = props.isBlackText;
-
-  const svgFile = props.svgFile;
-  const lfdFile = props.lfdFile;
-  const pfdFile = props.pfdFile;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const PageLFD = ({
+  productIndex,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  lfdFile,
+  pfdFile,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
@@ -27,17 +25,17 @@ const PageLFD = (props) => {
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 1 ? (
         <LFsa
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
         />
@@ -45,17 +43,17 @@ const PageLFD = (props) => {
       {productIndex === 2 ? (
         <LHfsp
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       ) : null}
       {productIndex === 3 ? (
         <LVsa
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
         />
@@ -63,10 +61,10 @@ const PageLFD = (props) => {
       {productIndex === 4 ? (
         <LFsbi
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       ) : null}
     </div>

@@ -13,14 +13,14 @@ const hfspMedia = {
   zIndex: "100",
 };
 
-const E_hfsp = (props) => {
-  const elevatorFileError = props.elevatorFileError;
-  const svgFile = props.svgFile;
-  const elevatorFile = props.elevatorFile;
-  const productIndex = props.productIndex;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+const E_hfsp = ({
+  svgFile,
+  elevatorFile,
+  productIndex,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   return (
     <div className="elevatorProductContainer">
       <div className="backgroundImageContainer">
@@ -31,11 +31,11 @@ const E_hfsp = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
           elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

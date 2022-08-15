@@ -5,14 +5,14 @@ import DropzoneE from "../DropzoneElevator";
 import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_fsbi = (props) => {
-  const svgFile = props.svgFile;
-  const elevatorFile = props.elevatorFile;
-  const productIndex = props.productIndex;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+const E_fsbi = ({
+  svgFile,
+  elevatorFile,
+  productIndex,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   const eFSBILogo = {
     width: "90px",
     height: "90px",
@@ -32,11 +32,11 @@ const E_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
           elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
       <div className="eFSBISVG" style={eFSBILogo}>
@@ -44,11 +44,11 @@ const E_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
           elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

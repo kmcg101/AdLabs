@@ -753,9 +753,6 @@ function App() {
                   className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
                 >
                   <PageElevator
-                    // elevatorFileError={elevatorFileError}
-                    // svgFileError={svgFileError}
-                    // standardAdFileError={standardAdFileError}
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
                     productIndex={productIndex}
@@ -774,9 +771,6 @@ function App() {
                 >
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
-                      lfdFileError={lfdFileError}
-                      svgFileError={svgFileError}
-                      standardAdFileError={standardAdFileError}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}
@@ -793,9 +787,6 @@ function App() {
 
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
                     <PagePFD
-                      pfdFileError={pfdFileError}
-                      svgFileError={svgFileError}
-                      standardAdFileError={standardAdFileError}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}

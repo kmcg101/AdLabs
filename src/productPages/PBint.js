@@ -5,16 +5,18 @@ import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_bint = (props) => {
-  const bintBGColorPre = props.bintBGColor;
-  const bintBGColor = "#" + bintBGColorPre;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
-  const isBlackText = props.isBlackText;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
+const P_bint = ({
+  pfdFile,
+  handleDropzoneChanges,
+  isBlackText,
+  svgFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  bintBGColor,
+}) => {
+  const bintBGColorPre = bintBGColor;
+  const bintBGColorLocal = "#" + bintBGColorPre;
 
   const pBint = {
     width: "672px",
@@ -46,7 +48,7 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
           svgFile={svgFile}
         />
@@ -56,10 +58,10 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

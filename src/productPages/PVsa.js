@@ -4,10 +4,15 @@ import Dropzone from "../DropzoneVSA";
 import background from "../assets/pvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_vsa = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+const P_vsa = ({
+  handleDropzoneChanges,
+  lfdFile,
+  pfdFile,
+  svgFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   const pVsaImage = {
     width: "360px",
     height: "640px",
@@ -17,11 +22,7 @@ const P_vsa = (props) => {
     top: "24px",
   };
 
-  const svgFile = props.svgFile;
-  const lfdFile = props.lfdFile;
-  const pfdFile = props.pfdFile;
   const isLFD = false;
-  const productIndex = props.productIndex;
 
   return (
     <div className="portraitProductContainer">
@@ -31,13 +32,13 @@ const P_vsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
           isLFD={isLFD}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

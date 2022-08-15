@@ -4,15 +4,17 @@ import Dropzone from "../DropzoneFSA_LFD";
 import background from "../assets/lfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_fsa = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-  const lfdFile = props.lfdFile;
-  const pfdFile = props.pfdFile;
+const L_fsa = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  productIndex,
+  lfdFile,
+  pfdFile,
+  shakeDropzoneBGImage,
+}) => {
   const isLFD = true;
 
   const lFullScreen = {
@@ -31,13 +33,13 @@ const L_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
           isLFD={isLFD}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

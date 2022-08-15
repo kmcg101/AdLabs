@@ -5,11 +5,14 @@ import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/pfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_fsbi = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const P_fsbi = ({
+  lfdFile,
+  handleDropzoneChanges,
+  svgFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   const pFSBILogo = {
     width: "200px",
     height: "200px",
@@ -27,10 +30,7 @@ const P_fsbi = (props) => {
     top: "0px",
     zIndex: "100",
   };
-  const svgFile = props.svgFile;
-  const pfdFileError = props.pfdFileError;
-  const svgFileError = props.svgFileError;
-  const productIndex = props.productIndex;
+
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
@@ -39,10 +39,10 @@ const P_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
 
@@ -51,10 +51,10 @@ const P_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

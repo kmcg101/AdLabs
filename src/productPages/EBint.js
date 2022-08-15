@@ -7,17 +7,18 @@ import whiteTextImage from "../assets/ebintWhiteText.png";
 
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_bint = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-  const isBlackText = props.isBlackText;
-  const bintBGColorPre = props.bintBGColor;
-  const bintBGColor = "#" + bintBGColorPre;
-  //console.log("bintBGColor = " , bintBGColor)
-  const svgFile = props.svgFile;
-  const elevatorFile = props.elevatorFile;
-  const productIndex = props.productIndex;
+const E_bint = ({
+  isBlackText,
+  bintBGColor,
+  svgFile,
+  elevatorFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleDropzoneChanges,
+}) => {
+  const bintBGColorPre = bintBGColor;
+  const bintBGColorLocal = "#" + bintBGColorPre;
 
   const eBINTImage = {
     width: "130px",
@@ -38,7 +39,7 @@ const E_bint = (props) => {
   };
 
   const bgStyle = {
-    backgroundColor: bintBGColor,
+    backgroundColor: bintBGColorLocal,
   };
 
   return (
@@ -53,9 +54,9 @@ const E_bint = (props) => {
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
           elevatorFile={elevatorFile}
         />
       </div>
@@ -65,11 +66,11 @@ const E_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
           elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

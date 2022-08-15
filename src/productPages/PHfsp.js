@@ -4,11 +4,7 @@ import Dropzone from "../Dropzone";
 import background from "../assets/phfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_hfsp = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const P_hfsp = ({ handleDropzoneChanges, svgFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage }) => {
   const pHalfScreen = {
     position: "absolute",
     left: "20px",
@@ -18,9 +14,6 @@ const P_hfsp = (props) => {
     zIndex: "100",
   };
 
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
@@ -29,10 +22,10 @@ const P_hfsp = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

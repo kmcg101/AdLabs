@@ -4,7 +4,15 @@ import Dropzone from "../DropzoneVSA";
 import background from "../assets/lvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_vsa = (props) => {
+const L_vsa = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  svgFile,
+  productIndex,
+  lfdFile,
+  pfdFile,
+  shakeDropzoneBGImage,
+}) => {
   const vsaImage = {
     width: "360px",
     height: "640px",
@@ -14,14 +22,8 @@ const L_vsa = (props) => {
     zIndex: "100",
   };
 
-  const svgFile = props.svgFile;
-  const lfdFile = props.lfdFile;
-  const pfdFile = props.pfdFile;
   const isLFD = true;
-  const productIndex = props.productIndex;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
@@ -30,13 +32,13 @@ const L_vsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
           isLFD={isLFD}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

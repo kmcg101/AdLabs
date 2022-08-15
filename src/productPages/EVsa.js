@@ -13,13 +13,14 @@ const vsaImage = {
   zIndex: "100",
 };
 
-const E_vsa = (props) => {
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const E_vsa = ({
+  elevatorFile,
+  svgFile,
+  productIndex,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+}) => {
   return (
     <div className="elevatorProductContainer">
       <div className="backgroundImageContainer">
@@ -30,11 +31,11 @@ const E_vsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           svgFile={svgFile}
-          elevatorFile={props.elevatorFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>
     </div>

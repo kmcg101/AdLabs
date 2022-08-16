@@ -25,13 +25,6 @@ const dzBackgroundImage = {
   position: "absolute",
   zIndex: "100",
 };
-const dzGradientDiv = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-  position: "absolute",
-  zIndex: "50",
-};
 
 function DropzoneElevator(props) {
   /////////////////////////////  files accepted and message on mouse over

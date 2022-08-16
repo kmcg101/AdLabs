@@ -25,13 +25,6 @@ const dzBackgroundImage = {
   position: "absolute",
   zIndex: "100",
 };
-const dzGradientDiv = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-  position: "absolute",
-  zIndex: "50",
-};
 
 function DropzoneFSA_PFD(props) {
   /////////////////////////////  files accepted and message on mouse over
@@ -43,8 +36,6 @@ function DropzoneFSA_PFD(props) {
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
-
-  const [mediaType, setMediaType] = useState("video");
 
   const ref = useRef(null);
 
@@ -108,7 +99,6 @@ function DropzoneFSA_PFD(props) {
         elemV.autoplay = true;
         elemV.loop = true;
         elemV.src = URL.createObjectURL(pfdFile.payload);
-        const container = el;
         const options = { childList: true };
 
         const mutationObserver = new MutationObserver((entries) => {
@@ -154,21 +144,19 @@ function DropzoneFSA_PFD(props) {
   }, [pfdFile.videoCapture]);
 
   const validateDroppedFile = (w, h) => {
-    const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
     const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
     const expectedPixelsP = DATA_PRODUCTS.data[productIndex].pixels.pPixels;
 
-    const expectedSizeE = DATA_PRODUCTS.data[productIndex].acceptedSizeText.eSizes;
     const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
-    {
-      droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
-    }
+
+    droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
+
     let acceptedSizes;
-    {
-      droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
-    }
+
+    droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
+
     const receivedPixels = w * h;
 
     const exists = Object.values(expectedPixels).includes(receivedPixels);
@@ -220,12 +208,6 @@ function DropzoneFSA_PFD(props) {
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
-
-      if (ext === "mp4") {
-        setMediaType("video");
-      } else {
-        setMediaType("image");
-      }
 
       if (ext !== "mp4") {
         console.log("not mp4 and acceptFiles = ", acceptedFiles);

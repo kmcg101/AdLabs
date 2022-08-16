@@ -1,5 +1,5 @@
 export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor) {
-  const eORl = isElevator ? "e" : "l";
+  //   const eORl = isElevator ? "e" : "l";
   const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
   const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
   const imageTagP = `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;

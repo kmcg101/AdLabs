@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";

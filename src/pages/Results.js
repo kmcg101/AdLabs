@@ -1,6 +1,5 @@
 import React from "react";
-import { isNullOrUndefined } from "util";
-import myPreview from "../assets/preview.png";
+// import { isNullOrUndefined } from "util";
 
 const screenshotImage = {
   width: "100%",
@@ -29,20 +28,6 @@ const resultsTitleTextRight = {
   marginBottom: "7px",
   fontWeight: "700",
   height: "5%",
-};
-
-const resultsTextHolder = {
-  fontFamily: "Avenir-Roman",
-  paddingLeft: "10px",
-  paddingRight: "30px",
-  fontSize: "1.3rem",
-  lineHeight: "2.1",
-  color: "white",
-  // minHeight: "37px",
-  borderRadius: "1px",
-  backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
-  boxShadow: "var(--standard-box-shadow-color)",
-  marginBottom: "20px",
 };
 
 const myColumn = {

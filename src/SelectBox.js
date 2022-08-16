@@ -4,7 +4,6 @@ import "./pages/inputs.css";
 
 function SelectBox(props) {
   const inputsCheckButtonPressed = props.inputsCheckButtonPressed;
-  const inputValues = props.inputValues;
 
   const [isValueSelected, setIsValueSelected] = useState(false);
 
@@ -18,7 +17,7 @@ function SelectBox(props) {
       background: "linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.6) 100%)",
 
       borderRadius: "0px",
-      boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
+      //boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
 
       // need to create a tr ue false to make this work
       border: inputsCheckButtonPressed && isValueSelected === false ? 0 : "1px",
@@ -32,13 +31,6 @@ function SelectBox(props) {
       color: "white",
       "&:hover": {
         background: "rgba(0,155,219,.5)",
-      },
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-
-      "&:hover": {
-        background: "black",
       },
     }),
 
@@ -72,8 +64,10 @@ function SelectBox(props) {
       ...provided,
       color: "white",
     }),
+
     singleValue: (provided, state) => ({
       ...provided,
+
       color: "white",
     }),
   };

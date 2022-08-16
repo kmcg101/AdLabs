@@ -32,7 +32,7 @@ import { ThemeProvider } from "@material-ui/core";
 
 // import { useScreenshot } from "use-screenshot-hook";
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import { toPng } from "html-to-image";
 
 import PopUp from "./PopUp";
 
@@ -88,11 +88,11 @@ function App() {
   const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
   const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
 
-  const [elevatorFileError, setElevatorFileError] = useState(false);
-  const [lfdFileError, setLfdFileError] = useState(false);
-  const [pfdFileError, setPfdFileError] = useState(false);
-  const [svgFileError, setSvgFileError] = useState(false);
-  const [standardAdFileError, setStandardAdFileError] = useState(false);
+  // const [elevatorFileError, setElevatorFileError] = useState(false);
+  // const [lfdFileError, setLfdFileError] = useState(false);
+  // const [pfdFileError, setPfdFileError] = useState(false);
+  // const [svgFileError, setSvgFileError] = useState(false);
+  // const [standardAdFileError, setStandardAdFileError] = useState(false);
 
   const [allDroppedFilenames, setAllDroppedFilenames] = useState([]);
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([]);
@@ -249,6 +249,7 @@ function App() {
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
+
       if (
         inputValues.client &&
         inputValues.campaign &&
@@ -292,7 +293,7 @@ function App() {
         if (elevatorFile.payload) {
           console.log("elevator file found");
 
-          setElevatorFileError(false);
+          //setElevatorFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -302,13 +303,13 @@ function App() {
 
           console.log("elevator file missing");
           missingFilesArray.push("elevator");
-          setElevatorFileError(true);
+          //setElevatorFileError(true);
           checkErrors++;
         }
       } else {
         if (lfdFile.payload) {
           console.log("l file found");
-          setLfdFileError(false);
+          //setLfdFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -317,14 +318,14 @@ function App() {
           }, "2000");
           console.log("l file missing");
           missingFilesArray.push("lfd");
-          setLfdFileError(true);
+          //setLfdFileError(true);
           checkErrors++;
         }
 
         if (pfdFile.payload) {
           console.log("p file found");
 
-          setPfdFileError(false);
+          //setPfdFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -333,7 +334,7 @@ function App() {
           }, "2000");
           console.log("p file missing");
           missingFilesArray.push("pfd");
-          setPfdFileError(true);
+          //setPfdFileError(true);
           checkErrors++;
         }
       }
@@ -341,7 +342,7 @@ function App() {
       // check for svg
       if (inputValues.product === 4) {
         if (svgFile.payload) {
-          setSvgFileError(false);
+          //setSvgFileError(false);
           console.log("svg file found");
         } else {
           // shake the dropzone background image
@@ -349,7 +350,7 @@ function App() {
           setTimeout(() => {
             setShakeDropzoneBGImage(false);
           }, "2000");
-          setSvgFileError(true);
+          //setSvgFileError(true);
           console.log("svg file missing");
           missingFilesArray.push("svg");
           checkErrors++;
@@ -367,13 +368,13 @@ function App() {
       //     checkErrors++;
       //   }
       // }
-      setTimeout(() => {
-        setElevatorFileError(false);
-        setLfdFileError(false);
-        setPfdFileError(false);
-        setSvgFileError(false);
-        setStandardAdFileError(false);
-      }, "2000");
+      // setTimeout(() => {
+      //   setElevatorFileError(false);
+      //   setLfdFileError(false);
+      //   setPfdFileError(false);
+      //   setSvgFileError(false);
+      //   setStandardAdFileError(false);
+      // }, "2000");
 
       console.log("errors = ", checkErrors);
       if (checkErrors === 0) {
@@ -606,9 +607,8 @@ function App() {
     ];
     const promiseArray = loadObject.map((obj) => {
       if (obj.file.payload) {
-        console.log("try ", obj.file);
         return obj.fn;
-      }
+      } else return null;
     });
 
     Promise.all(promiseArray)

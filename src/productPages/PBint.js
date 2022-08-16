@@ -35,7 +35,7 @@ const P_bint = ({
     zIndex: "100",
   };
   const bgStyle = {
-    backgroundColor: bintBGColor,
+    backgroundColor: bintBGColorLocal,
   };
 
   return (

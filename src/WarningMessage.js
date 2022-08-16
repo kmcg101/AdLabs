@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DATA_PRODUCTS from "./DATA_PRODUCTS";
 import XIcon from "./assets/icon_x.svg";
 import "./WarningMessage.css";
 

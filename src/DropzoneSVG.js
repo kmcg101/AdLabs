@@ -24,13 +24,6 @@ const dzBackgroundImage = {
   position: "absolute",
   zIndex: "100",
 };
-const dzGradientDiv = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-  position: "absolute",
-  zIndex: "50",
-};
 
 function DropzoneSVG(props) {
   /////////////////////////////  files accepted and message on mouse over
@@ -68,14 +61,11 @@ function DropzoneSVG(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
-  const createSVGImg = () => {
-    return <img src={URL.createObjectURL(svgFile.payload[0])} style={{ width: "100%" }} alt="preview" />;
-  };
   useEffect(() => {
     if (
       Object.keys(svgFile).length > 0 &&
       Object.keys(files).length === 0 &&
-      acceptedFileTypeString == "image/svg+xml"
+      acceptedFileTypeString === "image/svg+xml"
     ) {
       console.log("populate it");
       const elem = document.createElement("img");
@@ -95,21 +85,21 @@ function DropzoneSVG(props) {
     const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
-    {
-      droppedFileType === "elevator"
-        ? (expectedPixels = expectedPixelsE)
-        : droppedFileType === "landscape"
-        ? (expectedPixels = expectedPixelsL)
-        : (expectedPixels = expectedPixelsP);
-    }
+
+    droppedFileType === "elevator"
+      ? (expectedPixels = expectedPixelsE)
+      : droppedFileType === "landscape"
+      ? (expectedPixels = expectedPixelsL)
+      : (expectedPixels = expectedPixelsP);
+
     let acceptedSizes;
-    {
-      droppedFileType === "elevator"
-        ? (acceptedSizes = expectedSizeE)
-        : droppedFileType === "landscape"
-        ? (acceptedSizes = expectedSizeL)
-        : (acceptedSizes = expectedSizeP);
-    }
+
+    droppedFileType === "elevator"
+      ? (acceptedSizes = expectedSizeE)
+      : droppedFileType === "landscape"
+      ? (acceptedSizes = expectedSizeL)
+      : (acceptedSizes = expectedSizeP);
+
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
     console.log("received = ", receivedPixels);

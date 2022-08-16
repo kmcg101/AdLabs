@@ -25,13 +25,6 @@ const dzBackgroundImage = {
   position: "absolute",
   zIndex: "100",
 };
-const dzGradientDiv = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-  position: "absolute",
-  zIndex: "50",
-};
 
 function DropzoneVSA(props) {
   /////////////////////////////  files accepted and message on mouse over
@@ -78,8 +71,6 @@ function DropzoneVSA(props) {
       elemV.autoplay = true;
       elemV.loop = true;
       elemV.src = URL.createObjectURL(pfdFile.payload);
-      const container = el;
-      const options = { childList: true };
 
       const mutationObserver = new MutationObserver((entries) => {
         elemV.addEventListener("canplay", () => {
@@ -100,7 +91,6 @@ function DropzoneVSA(props) {
       elemI.style = "position: absolute; left: 0px; z-index: 10;";
       elemI.setAttribute("src", pfdFile.videoCapture.dataUri);
       const el = ref.current;
-      var count = el.childElementCount;
       while (el.firstChild) {
         el.removeChild(el.lastChild);
       }
@@ -120,13 +110,13 @@ function DropzoneVSA(props) {
     const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
-    {
-      droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
-    }
+
+    droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
+
     let acceptedSizes;
-    {
-      droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
-    }
+
+    droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
+
     const receivedPixels = w * h;
 
     const exists = Object.values(expectedPixels).includes(receivedPixels);

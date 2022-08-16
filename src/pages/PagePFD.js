@@ -27,6 +27,7 @@ const PagePFD = ({
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
+          pfdFile={pfdFile}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -45,6 +46,7 @@ const PagePFD = ({
           handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          pfdFile={pfdFile}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -64,6 +66,7 @@ const PagePFD = ({
           productIndex={productIndex}
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          pfdFile={pfdFile}
         />
       ) : null}
     </div>

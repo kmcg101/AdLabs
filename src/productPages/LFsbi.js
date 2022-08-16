@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/lfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
@@ -34,13 +34,13 @@ const L_fsbi = ({
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div style={lFullScreen} className="lFullScreen">
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
+          assetFileToChange={lfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

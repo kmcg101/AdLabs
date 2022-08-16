@@ -1,12 +1,12 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/pfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const P_fsbi = ({
-  lfdFile,
+  pfdFile,
   handleDropzoneChanges,
   svgFile,
   productIndex,
@@ -35,13 +35,13 @@ const P_fsbi = ({
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="pFullScreen" style={pFullScreen}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
+          assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

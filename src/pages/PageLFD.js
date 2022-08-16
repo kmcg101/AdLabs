@@ -28,6 +28,7 @@ const PageLFD = ({
           handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -46,6 +47,7 @@ const PageLFD = ({
           handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -65,6 +67,7 @@ const PageLFD = ({
           productIndex={productIndex}
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
         />
       ) : null}
     </div>

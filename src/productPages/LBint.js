@@ -1,6 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
@@ -10,7 +11,6 @@ const L_bint = ({
   handleDropzoneChanges,
   bintBGColor,
   isBlackText,
-  svgFile,
   productIndex,
   lfdFile,
   shakeDropzoneBGImage,
@@ -52,17 +52,16 @@ const L_bint = ({
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
-          svgFile={svgFile}
         />
       </div>
       <div style={lBint} className="lBintAd">
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
+          assetFileToChange={lfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

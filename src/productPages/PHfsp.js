@@ -1,10 +1,10 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/phfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_hfsp = ({ handleDropzoneChanges, svgFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage }) => {
+const P_hfsp = ({ handleDropzoneChanges, pfdFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage }) => {
   const pHalfScreen = {
     position: "absolute",
     left: "20px",
@@ -18,13 +18,13 @@ const P_hfsp = ({ handleDropzoneChanges, svgFile, productIndex, handleWarningMes
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="pHFSPImage" style={pHalfScreen}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
+          assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

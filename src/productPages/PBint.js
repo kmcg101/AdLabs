@@ -1,6 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
@@ -9,7 +10,6 @@ const P_bint = ({
   pfdFile,
   handleDropzoneChanges,
   isBlackText,
-  svgFile,
   productIndex,
   handleWarningMessageText,
   shakeDropzoneBGImage,
@@ -50,17 +50,16 @@ const P_bint = ({
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
-          svgFile={svgFile}
         />
       </div>
       <div className="pBintAd" style={pBint}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
+          assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../DropzoneElevator";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/evsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -15,7 +15,6 @@ const vsaImage = {
 
 const E_vsa = ({
   elevatorFile,
-  svgFile,
   productIndex,
   handleDropzoneChanges,
   handleWarningMessageText,
@@ -27,14 +26,13 @@ const E_vsa = ({
         <img alt="" className="backgroundImage" src={background}></img>
       </div>
       <div className="eVSAImage" style={vsaImage}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
+          assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../DropzoneElevator";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/ehfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -14,7 +14,6 @@ const hfspMedia = {
 };
 
 const E_hfsp = ({
-  svgFile,
   elevatorFile,
   productIndex,
   handleDropzoneChanges,
@@ -27,14 +26,13 @@ const E_hfsp = ({
         <img alt="" className="backgroundImage" src={background}></img>
       </div>
       <div className="eHFSPImage" style={hfspMedia}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
+          assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

@@ -148,7 +148,7 @@ const Results = ({
           PREVIEW
         </div>
         <div className="resultsBottomCenter" style={resultsBottomCenter}>
-          {screenshot ? <img style={screenshotImage} src={screenshot} alt="preview"></img> : null}
+          {screenshot ? <img style={screenshotImage} src={screenshot[0]} alt="preview"></img> : null}
         </div>
       </div>
     </div>

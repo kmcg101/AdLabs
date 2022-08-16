@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
-import DropzoneE from "../DropzoneElevator";
+import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/ebintBlackText.png";
 import whiteTextImage from "../assets/ebintWhiteText.png";
 
@@ -62,14 +62,13 @@ const E_bint = ({
       </div>
 
       <div className="eBintAd" style={eBINTImage}>
-        <DropzoneE
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
+          assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
-import DropzoneE from "../DropzoneElevator";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -27,15 +27,13 @@ const E_fsbi = ({
         <img alt="" className="backgroundImage" src={background}></img>
       </div>
       <div className="eFullScreen">
-        {" "}
-        <DropzoneE
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
+          assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
         />
       </div>

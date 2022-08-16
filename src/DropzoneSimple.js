@@ -25,21 +25,15 @@ const dzBackgroundImage = {
   position: "absolute",
   zIndex: "100",
 };
-const dzGradientDiv = {
-  width: "100%",
-  height: "100%",
-  backgroundImage: "linear-gradient( 180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
-  position: "absolute",
-  zIndex: "50",
-};
 
 function DropzoneSimple({
   acceptedFileTypeString,
-  svgFile,
-  elevatorFile,
+  assetFileToChange,
   droppedFileType,
   productIndex,
   shakeDropzoneBGImage,
+  handleWarningMessageText,
+  handleDropzoneChanges,
 }) {
   /////////////////////////////  files accepted and message on mouse over
 
@@ -58,6 +52,8 @@ function DropzoneSimple({
   //////////////////////////////
 
   const [showHint, setShowHint] = useState(false);
+  const [mediaType, setMediaType] = useState("image");
+  const [files, setFiles] = useState([]);
 
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
@@ -90,23 +86,15 @@ function DropzoneSimple({
     const exists = Object.values(expectedPixels).includes(receivedPixels);
 
     if (droppedFileType === "svg" || droppedFileType === "standardAd") {
-      props.handleWarningMessageText("", false);
+      handleWarningMessageText("", false);
       return true;
     } else if (exists) {
-      props.handleWarningMessageText("", false);
+      handleWarningMessageText("", false);
       return true;
     } else {
-      props.handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
-     
-
+      handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       return false;
     }
-  };
-
-  const handleDropzoneChanges = (name, value) => {
-    // dropped file type = elevator, landscape, portrait, standard, svg.
-    // this writes the name/value pair to the approprate dropped file in app.js
-    props.handleDropzoneChanges(name, value, props.droppedFileType);
   };
 
   const {
@@ -125,30 +113,41 @@ function DropzoneSimple({
 
     onDropRejected: (rejectedFiles) => {
       console.log("rejected");
-      props.handleWarningMessageText("wrong file type dropped.", true);
+      handleWarningMessageText("wrong file type dropped.", true);
     },
+    onDropAccepted: (acceptedFiles) => {
+      console.log("accepted");
 
-      // get width and height of preview
-      // this value is 0 when a file out of the accepted list is dropped
+      setFiles(
+        acceptedFiles.map((myfile) =>
+          Object.assign(myfile, {
+            preview: URL.createObjectURL(myfile),
+          })
+        )
+      );
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
 
       if (ext !== "mp4") {
-        // accepted files has name, type, preview blob
+        console.log("not mp4, is image");
+
         const i = new Image();
         i.onload = () => {
+          console.log("i loaded");
           let reader = new FileReader();
           reader.readAsDataURL(newFile);
           reader.onload = () => {
+            console.log("reader loaded");
+
             const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
             if (droppedFileIsCorrectSize) {
-              handleDropzoneChanges("name", newFile.name);
-              handleDropzoneChanges("payload", newFile);
-              handleDropzoneChanges("width", i.width);
-              handleDropzoneChanges("height", i.height);
-              handleDropzoneChanges("type", newFile.type);
-              handleDropzoneChanges("size", newFile.size);
+              handleDropzoneChanges("name", newFile.name, droppedFileType);
+              handleDropzoneChanges("payload", newFile, droppedFileType);
+              handleDropzoneChanges("width", i.width, droppedFileType);
+              handleDropzoneChanges("height", i.height, droppedFileType);
+              handleDropzoneChanges("type", newFile.type, droppedFileType);
+              handleDropzoneChanges("size", newFile.size, droppedFileType);
             }
           };
         };
@@ -160,12 +159,12 @@ function DropzoneSimple({
         video.addEventListener("canplay", (event) => {
           const droppedFileIsCorrectSize = validateDroppedFile(video.videoWidth, video.videoHeight);
           if (droppedFileIsCorrectSize) {
-            handleDropzoneChanges("payload", newFile);
-            handleDropzoneChanges("width", video.videoWidth);
-            handleDropzoneChanges("height", video.videoHeight);
-            handleDropzoneChanges("type", newFile.type);
-            handleDropzoneChanges("size", newFile.size);
-            handleDropzoneChanges("name", newFile.name);
+            handleDropzoneChanges("payload", newFile, droppedFileType);
+            handleDropzoneChanges("width", video.videoWidth, droppedFileType);
+            handleDropzoneChanges("height", video.videoHeight, droppedFileType);
+            handleDropzoneChanges("type", newFile.type, droppedFileType);
+            handleDropzoneChanges("size", newFile.size, droppedFileType);
+            handleDropzoneChanges("name", newFile.name, droppedFileType);
           }
         });
         video.src = URL.createObjectURL(newFile);
@@ -183,22 +182,24 @@ function DropzoneSimple({
   );
 
   useEffect(() => {
-    if (Object.keys(elevatorFile).length > 0 && elevatorFile.payload !== null) {
+    console.log("from first drop use effect ", assetFileToChange);
+    if (Object.keys(assetFileToChange).length > 0 && assetFileToChange.payload !== null) {
       const el = ref.current;
 
       // if this is a video, create a video tag
-      if (elevatorFile.payload.type.includes("video")) {
+      if (assetFileToChange.payload.type.includes("video")) {
+        console.log("creating video");
         const elemV = document.createElement("video");
         elemV.style = "position: absolute; z-index: 1;";
         elemV.id = "videoToCapture";
 
-        elemV.src = URL.createObjectURL(elevatorFile.payload);
+        elemV.src = URL.createObjectURL(assetFileToChange.payload);
         const container = el;
         el.appendChild(elemV);
 
         setTimeout(() => {
           const capturedFrame = captureVideoFrame(elemV, "png");
-          handleDropzoneChanges("videoCapture", capturedFrame);
+          handleDropzoneChanges("videoCapture", capturedFrame, droppedFileType);
         }, 200);
 
         // const mutationObserver = new MutationObserver((entries) => {
@@ -214,7 +215,7 @@ function DropzoneSimple({
       } else {
         const elemI = document.createElement("img");
         elemI.style = "position: absolute; left: 0px; z-index: 10;";
-        elemI.setAttribute("src", URL.createObjectURL(elevatorFile.payload));
+        elemI.setAttribute("src", URL.createObjectURL(assetFileToChange.payload));
         const el = ref.current;
         while (el.firstChild) {
           el.removeChild(el.lastChild);
@@ -224,15 +225,15 @@ function DropzoneSimple({
         }, 100);
       }
     }
-  }, [elevatorFile.payload]);
+  }, [assetFileToChange.payload]);
 
   useEffect(() => {
     console.log("step 7: starting vid capture section");
-    if (Object.keys(elevatorFile).length > 0 && elevatorFile.payload !== null) {
+    if (Object.keys(assetFileToChange).length > 0 && assetFileToChange.payload !== null) {
       console.log("step 8: passed capture check");
       const elemI = document.createElement("img");
       elemI.style = "position: absolute; left: 0px; z-index: 10;";
-      elemI.setAttribute("src", elevatorFile.videoCapture.dataUri);
+      elemI.setAttribute("src", assetFileToChange.videoCapture.dataUri);
       const el = ref.current;
       console.log("step 9: removing children");
       while (el.firstChild) {
@@ -244,7 +245,7 @@ function DropzoneSimple({
         el.appendChild(elemI);
       }, 100);
     }
-  }, [elevatorFile.videoCapture]);
+  }, [assetFileToChange.videoCapture]);
 
   return (
     <div>
@@ -256,7 +257,7 @@ function DropzoneSimple({
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(elevatorFile).length === 0 ? (
+            {Object.keys(assetFileToChange).length === 0 ? (
               <div
                 style={dzBackgroundImage}
                 className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}

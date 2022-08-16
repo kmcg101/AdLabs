@@ -230,11 +230,13 @@ function App() {
     // to have a useEffect for state value SCREENSHOT.  When it changes, go to page 3
     // but unfortunately when moving back from 3 to 2 with numubers button and then
     // not changing the image means that the screen shot will be retaken but not changed
-    // because the image taken is the same as the previous one.
+    // because the image taken is the same as the previous one.  This is fixed by adding
+    // a random number to the screenshot state so it changes with every update
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
       .then(function(dataUrl) {
-        setScreenshot(dataUrl);
+        let randomValue = Math.random();
+        setScreenshot([dataUrl, randomValue]);
       })
       .catch(() => {
         console.log("there was an error");

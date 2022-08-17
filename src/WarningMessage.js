@@ -18,10 +18,7 @@ const iconX = {
   height: "25px",
 };
 
-function WarningMessage(props) {
-  //const [warningMessageText, setWarningMessageText] = useState(props.warningMessageText);
-  const warningMessageText = props.warningMessageText;
-  const warningMessageTextShowIcon = props.warningMessageTextShowIcon;
+function WarningMessage({ warningMessageText, warningMessageTextShowIcon }) {
   const [showRedBoolean, setShowRedBoolean] = useState(false);
 
   useEffect(() => {

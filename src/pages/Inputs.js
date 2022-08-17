@@ -21,7 +21,8 @@ const useStyles = makeStyles((AppTheme) => ({
   },
 }));
 
-const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce, inputValues }) => {
+const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce }) => {
+  //const {client} = inputValues
   let DATA_PRODUCTS_ARRAY = DATA_PRODUCTS.data;
   let DATA_DURATION_ARRAY = DATA_DURATION.data;
   let DATA_COUNTRY_CODE_ARRAY = DATA_COUNTRY_CODE.data;
@@ -46,7 +47,7 @@ const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce,
         <div className="inputsLeftColumn">
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: v5.25"
+            label="CLIENT NAME: v5.26"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}

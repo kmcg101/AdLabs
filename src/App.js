@@ -85,8 +85,8 @@ function App() {
   const [standardAdFile, setStandardAdFile] = useState({}); // 16
 
   const [mediaExtensions, setMediaExtensions] = useState({}); // 17
-  const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
-  const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
+  // const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
+  // const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
 
   // const [elevatorFileError, setElevatorFileError] = useState(false);
   // const [lfdFileError, setLfdFileError] = useState(false);
@@ -115,17 +115,17 @@ function App() {
 
   const handleContinuePopUpPress = () => {
     // this runs when just 1 asset dropped
-    setLobbyAndOneAsset(true);
+    // setLobbyAndOneAsset(true);
     // handle mediaExtensions state.
     if (mediaExtensions.landscape) {
-      setLobbyAndOneAssetIsLFD(true);
+      // setLobbyAndOneAssetIsLFD(true);
       const newExtension = mediaExtensions.landscape;
       setMediaExtensions((prevState) => ({
         ...prevState,
         portrait: newExtension,
       }));
     } else {
-      setLobbyAndOneAssetIsLFD(false);
+      //  setLobbyAndOneAssetIsLFD(false);
       const newExtension = mediaExtensions.portrait;
       setMediaExtensions((prevState) => ({
         ...prevState,
@@ -262,8 +262,8 @@ function App() {
       ) {
         // setInputComplete(true);
         console.log("complete");
-        setLobbyAndOneAssetIsLFD();
-        setLobbyAndOneAsset();
+        //setLobbyAndOneAssetIsLFD();
+        //setLobbyAndOneAsset();
         handleWarningMessageText("", false);
         setInputsCheckButtonPressed(false);
 
@@ -447,6 +447,20 @@ function App() {
     effectHandleProductChange();
   }, [inputValues.product]);
 
+  // runs when product changes to set productIndex, isElevator, isFullScreen
+  const effectHandlePlattformChange = () => {
+    // clear all files and previews
+    setElevatorFile({});
+    setLfdFile({});
+    setPfdFile({});
+    setSvgFile({});
+    setStandardAdFile({});
+  };
+
+  useEffect(() => {
+    effectHandleProductChange();
+  }, [inputValues.platform]);
+
   // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
     // if this is setting elevator or lobby, change currentAdBuildingPageNumber to show either elev or lfp
@@ -513,7 +527,7 @@ function App() {
   const deliverTemplateFiles = () => {
     const eORl = isElevator ? "e" : "l";
 
-    const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
+    //const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
@@ -566,9 +580,10 @@ function App() {
 
     // if this is a lobby 1 file and the source is a pfd, pfd is the source
     // else, lfd is the source
-    const lfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD === false ? pfdFile : lfdFile;
-    const loadLFD = lfdSource.payload
-      ? lfdSource.payload.arrayBuffer().then((result) => {
+    //const lfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD === false ? pfdFile : lfdFile;
+    // i think this will be fine because you no longer have any situation where lfd or pfd are empty
+    const loadLFD = lfdFile.payload
+      ? lfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
             result
@@ -576,9 +591,9 @@ function App() {
         })
       : "";
 
-    const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
-    const loadPFD = pfdSource.payload
-      ? pfdSource.payload.arrayBuffer().then((result) => {
+    //const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
+    const loadPFD = pfdFile.payload
+      ? pfdFile.payload.arrayBuffer().then((result) => {
           newZip.file(
             `${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
             result
@@ -600,8 +615,8 @@ function App() {
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
-      { file: lfdSource, fn: loadLFD },
-      { file: pfdSource, fn: loadPFD },
+      { file: lfdFile, fn: loadLFD },
+      { file: pfdFile, fn: loadPFD },
       { file: svgFile, fn: loadSVG },
       // { file: standardAdFile, fn: loadStandardAd },
     ];

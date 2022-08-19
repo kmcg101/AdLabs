@@ -106,7 +106,6 @@ function DropzoneFSA_PFD(props) {
         const options = { childList: true };
 
         const mutationObserver = new MutationObserver((entries) => {
-          handleContinueButtonDisabled(false);
           elemV.addEventListener("canplay", () => {
             const capturedFrame = captureVideoFrame(elemV, "png");
             handleDropzoneChanges("videoCapture", capturedFrame);
@@ -144,6 +143,7 @@ function DropzoneFSA_PFD(props) {
       }
 
       setTimeout(() => {
+        handleContinueButtonDisabled(false);
         el.appendChild(elemI);
       }, 100);
     }

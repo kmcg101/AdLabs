@@ -97,7 +97,6 @@ function DropzoneFSA_LFD(props) {
 
         const mutationObserver = new MutationObserver((entries) => {
           elemV.addEventListener("canplay", () => {
-            handleContinueButtonDisabled(false);
             const capturedFrame = captureVideoFrame(elemV, "png");
             handleDropzoneChangesJustLFD("videoCapture", capturedFrame);
             mutationObserver.disconnect();
@@ -133,6 +132,7 @@ function DropzoneFSA_LFD(props) {
       }
 
       setTimeout(() => {
+        handleContinueButtonDisabled(false);
         el.appendChild(elemI);
       }, 100);
     }

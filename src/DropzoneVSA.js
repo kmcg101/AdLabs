@@ -75,7 +75,6 @@ function DropzoneVSA(props, handleContinueButtonDisabled) {
 
       const mutationObserver = new MutationObserver((entries) => {
         elemV.addEventListener("canplay", () => {
-          handleContinueButtonDisabled(false);
           const capturedFrame = captureVideoFrame(elemV, "png");
           handleDropzoneChanges("videoCapture", capturedFrame);
           mutationObserver.disconnect();

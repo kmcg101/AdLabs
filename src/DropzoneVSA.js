@@ -26,9 +26,9 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function DropzoneVSA(props, handleContinueButtonDisabled) {
+function DropzoneVSA(props) {
   /////////////////////////////  files accepted and message on mouse over
-
+  const handleContinueButtonDisabled = props.handleContinueButtonDisabled;
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
   const lfdFile = props.lfdFile;

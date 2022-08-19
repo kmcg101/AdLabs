@@ -47,7 +47,7 @@ const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce 
         <div className="inputsLeftColumn">
           <TextBox
             value={props.inputValues.client}
-            label="CLIENT NAME: Dev v5.26"
+            label="CLIENT NAME: Dev v5.31"
             varID="client"
             handleAnyInputsChange={handleAnyInputsChange}
             inputsCheckButtonPressed={inputsCheckButtonPressed}

@@ -26,7 +26,7 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function DropzoneVSA(props) {
+function DropzoneVSA(props, handleContinueButtonDisabled) {
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
@@ -63,6 +63,7 @@ function DropzoneVSA(props) {
   useEffect(() => {
     // this keeps it from running on first render
     if (Object.keys(pfdFile).length > 0 && pfdFile.payload !== null) {
+      handleContinueButtonDisabled(true);
       const el = ref.current;
 
       const elemV = document.createElement("video");
@@ -74,6 +75,7 @@ function DropzoneVSA(props) {
 
       const mutationObserver = new MutationObserver((entries) => {
         elemV.addEventListener("canplay", () => {
+          handleContinueButtonDisabled(false);
           const capturedFrame = captureVideoFrame(elemV, "png");
           handleDropzoneChanges("videoCapture", capturedFrame);
           mutationObserver.disconnect();
@@ -96,6 +98,7 @@ function DropzoneVSA(props) {
       }
 
       setTimeout(() => {
+        handleContinueButtonDisabled(false);
         el.appendChild(elemI);
       }, 100);
     }

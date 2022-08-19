@@ -14,6 +14,7 @@ const P_bint = ({
   handleWarningMessageText,
   shakeDropzoneBGImage,
   bintBGColor,
+  handleContinueButtonDisabled,
 }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
@@ -50,6 +51,7 @@ const P_bint = ({
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="pBintAd" style={pBint}>
@@ -61,6 +63,7 @@ const P_bint = ({
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

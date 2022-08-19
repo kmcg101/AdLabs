@@ -11,6 +11,7 @@ const E_fsa = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="elevatorProductContainer">
@@ -24,6 +25,7 @@ const E_fsa = ({
           svgFile={svgFile}
           assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="backgroundImageContainer">

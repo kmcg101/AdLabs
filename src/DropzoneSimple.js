@@ -34,6 +34,7 @@ function DropzoneSimple({
   shakeDropzoneBGImage,
   handleWarningMessageText,
   handleDropzoneChanges,
+  handleContinueButtonDisabled,
 }) {
   /////////////////////////////  files accepted and message on mouse over
 
@@ -173,7 +174,9 @@ function DropzoneSimple({
   );
 
   useEffect(() => {
+    // disable continue button
     if (Object.keys(assetFileToChange).length > 0 && assetFileToChange.payload !== null) {
+      handleContinueButtonDisabled(true);
       const el = ref.current;
 
       // if this is a video, create a video tag
@@ -210,6 +213,8 @@ function DropzoneSimple({
           el.removeChild(el.lastChild);
         }
         setTimeout(() => {
+          // enable continue button
+          handleContinueButtonDisabled(false);
           el.appendChild(elemI);
         }, 100);
       }
@@ -227,6 +232,8 @@ function DropzoneSimple({
       }
 
       setTimeout(() => {
+        // enable continue button.
+        handleContinueButtonDisabled(false);
         el.appendChild(elemI);
       }, 100);
     }

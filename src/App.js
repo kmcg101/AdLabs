@@ -46,6 +46,7 @@ function App() {
   //const imageRef = useRef(null);
   const [screenshot, setScreenshot] = useState(); // 2
 
+  const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   // nav while dropping files 1 or 2 for l p.
@@ -111,6 +112,10 @@ function App() {
     setCurrentPageNumber(2);
     setShowPopUp(false);
     setPopUpMessage("");
+  };
+
+  const handleContinueButtonDisabled = (bool) => {
+    setContinueButtonDisabled(bool);
   };
 
   const handleContinuePopUpPress = () => {
@@ -779,6 +784,7 @@ function App() {
                     svgFile={svgFile}
                     elevatorFile={elevatorFile}
                     shakeDropzoneBGImage={shakeDropzoneBGImage}
+                    handleContinueButtonDisabled={handleContinueButtonDisabled}
                   />
                 </div>
                 {/* lfd */}
@@ -798,6 +804,7 @@ function App() {
                       svgFile={svgFile}
                       lfdFile={lfdFile}
                       pfdFile={pfdFile}
+                      handleContinueButtonDisabled={handleContinueButtonDisabled}
                     />
                   </div>
                   {/* pfd */}
@@ -814,6 +821,7 @@ function App() {
                       lfdFile={lfdFile}
                       pfdFile={pfdFile}
                       shakeDropzoneBGImage={shakeDropzoneBGImage}
+                      handleContinueButtonDisabled={handleContinueButtonDisabled}
                     />
                   </div>
                 </div>
@@ -870,6 +878,7 @@ function App() {
             <ContinueButton
               currentPageNumber={currentPageNumber}
               handleContinueButtonPressed={handleContinueButtonPressed}
+              continueButtonDisabled={continueButtonDisabled}
             ></ContinueButton>
           </div>
         </div>

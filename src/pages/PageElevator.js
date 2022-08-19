@@ -16,6 +16,7 @@ const PageElevator = ({
   isBlackText,
   svgFile,
   elevatorFile,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="pageContainer">
@@ -29,6 +30,7 @@ const PageElevator = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -39,6 +41,7 @@ const PageElevator = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -49,6 +52,7 @@ const PageElevator = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -59,6 +63,7 @@ const PageElevator = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -69,6 +74,7 @@ const PageElevator = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

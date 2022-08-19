@@ -28,21 +28,21 @@ const dzBackgroundImage = {
 
 function DropzoneFSA_LFD(props) {
   /////////////////////////////  files accepted and message on mouse over
-
+  const handleContinueButtonDisabled = (bool) => {
+    props.handleContinueButtonDisabled(bool);
+  };
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
   const lfdFile = props.lfdFile;
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
+  const handleWarningMessageText = props.handleWarningMessageText;
 
   const [mediaType, setMediaType] = useState("image");
 
   const ref = useRef(null);
 
-  const handleWarningMessageText = (txt, useIcon) => {
-    props.handleWarningMessageText(txt, useIcon);
-  };
   const handleDropzoneChanges = (name, value) => {
     // this is special for VSA.  Same file always used for both so populate both
     // dropped file type = elevator, landscape, portrait, standard, svg.
@@ -83,6 +83,7 @@ function DropzoneFSA_LFD(props) {
     // at this point a file has been dropped in LFD and
     // both PFD and LFD files have been written to
     if (Object.keys(lfdFile).length > 0 && lfdFile.payload !== null) {
+      handleContinueButtonDisabled(true);
       const el = ref.current;
 
       // if this is a video, create a video tag
@@ -96,6 +97,7 @@ function DropzoneFSA_LFD(props) {
 
         const mutationObserver = new MutationObserver((entries) => {
           elemV.addEventListener("canplay", () => {
+            handleContinueButtonDisabled(false);
             const capturedFrame = captureVideoFrame(elemV, "png");
             handleDropzoneChangesJustLFD("videoCapture", capturedFrame);
             mutationObserver.disconnect();
@@ -113,6 +115,7 @@ function DropzoneFSA_LFD(props) {
           el.removeChild(el.lastChild);
         }
         setTimeout(() => {
+          handleContinueButtonDisabled(false);
           el.appendChild(elemI);
         }, 100);
       }

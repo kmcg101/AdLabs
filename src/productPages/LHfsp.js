@@ -4,7 +4,14 @@ import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/lhfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex, lfdFile, shakeDropzoneBGImage }) => {
+const L_hfsp = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  productIndex,
+  lfdFile,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const lHalfScreen = {
     position: "absolute",
     left: "279px",
@@ -26,6 +33,7 @@ const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex,
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

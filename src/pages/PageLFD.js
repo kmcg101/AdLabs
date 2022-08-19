@@ -17,6 +17,7 @@ const PageLFD = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="pageContainer">
@@ -29,6 +30,7 @@ const PageLFD = ({
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -39,6 +41,7 @@ const PageLFD = ({
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -48,6 +51,7 @@ const PageLFD = ({
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -58,6 +62,7 @@ const PageLFD = ({
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -68,6 +73,7 @@ const PageLFD = ({
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

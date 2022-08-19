@@ -16,6 +16,7 @@ const E_bint = ({
   handleWarningMessageText,
   shakeDropzoneBGImage,
   handleDropzoneChanges,
+  handleContinueButtonDisabled,
 }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
@@ -70,6 +71,7 @@ const E_bint = ({
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

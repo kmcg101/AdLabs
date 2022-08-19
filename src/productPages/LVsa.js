@@ -12,6 +12,7 @@ const L_vsa = ({
   lfdFile,
   pfdFile,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const vsaImage = {
     width: "360px",
@@ -39,6 +40,7 @@ const L_vsa = ({
           pfdFile={pfdFile}
           isLFD={isLFD}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

@@ -39,6 +39,10 @@ function DropzoneFSA_PFD(props) {
 
   const ref = useRef(null);
 
+  const handleContinueButtonDisabled = (bool) => {
+    props.handleContinueButtonDisabled(bool);
+  };
+
   const handleWarningMessageText = (txt, useIcon) => {
     props.handleWarningMessageText(txt, useIcon);
   };
@@ -73,7 +77,6 @@ function DropzoneFSA_PFD(props) {
   useEffect(() => {
     console.log("running lfdfile.payload effect");
     if (Object.keys(lfdFile).length > 0 && lfdFile.payload !== null) {
-      console.log("running lfdfile.payload effect step 2 ", lfdFile.payload.type);
       setPfdAcceptedString(lfdFile.payload.type);
     }
   }, [lfdFile.payload]);
@@ -85,8 +88,9 @@ function DropzoneFSA_PFD(props) {
 
     // at this point a file has been dropped in LFD and
     // both PFD and LFD files have been written to
-    console.log("running PFD change, file =  ", pfdFile);
+
     if (Object.keys(pfdFile).length > 0 && pfdFile.payload !== null) {
+      handleContinueButtonDisabled(true);
       console.log("running PFD change step 2");
       const el = ref.current;
 
@@ -102,6 +106,7 @@ function DropzoneFSA_PFD(props) {
         const options = { childList: true };
 
         const mutationObserver = new MutationObserver((entries) => {
+          handleContinueButtonDisabled(false);
           elemV.addEventListener("canplay", () => {
             const capturedFrame = captureVideoFrame(elemV, "png");
             handleDropzoneChanges("videoCapture", capturedFrame);
@@ -121,6 +126,7 @@ function DropzoneFSA_PFD(props) {
           el.removeChild(el.lastChild);
         }
         setTimeout(() => {
+          handleContinueButtonDisabled(false);
           el.appendChild(elemI);
         }, 100);
       }

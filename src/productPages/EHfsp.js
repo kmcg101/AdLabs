@@ -19,6 +19,7 @@ const E_hfsp = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="elevatorProductContainer">
@@ -34,6 +35,7 @@ const E_hfsp = ({
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

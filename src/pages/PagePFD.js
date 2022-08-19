@@ -17,6 +17,7 @@ const PagePFD = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="pageContainer">
@@ -28,6 +29,7 @@ const PagePFD = ({
           handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
@@ -38,6 +40,7 @@ const PagePFD = ({
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
@@ -47,6 +50,7 @@ const PagePFD = ({
           productIndex={productIndex}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
@@ -57,6 +61,7 @@ const PagePFD = ({
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           lfdFile={lfdFile}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
@@ -67,6 +72,7 @@ const PagePFD = ({
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

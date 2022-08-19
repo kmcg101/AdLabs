@@ -12,6 +12,7 @@ const E_fsbi = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const eFSBILogo = {
     width: "90px",
@@ -35,6 +36,7 @@ const E_fsbi = ({
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="eFSBISVG" style={eFSBILogo}>
@@ -47,6 +49,7 @@ const E_fsbi = ({
           svgFile={svgFile}
           elevatorFile={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

@@ -4,7 +4,14 @@ import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/phfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_hfsp = ({ handleDropzoneChanges, pfdFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage }) => {
+const P_hfsp = ({
+  handleDropzoneChanges,
+  pfdFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const pHalfScreen = {
     position: "absolute",
     left: "20px",
@@ -26,6 +33,7 @@ const P_hfsp = ({ handleDropzoneChanges, pfdFile, productIndex, handleWarningMes
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

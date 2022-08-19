@@ -12,6 +12,7 @@ const L_fsbi = ({
   productIndex,
   lfdFile,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const lFSBILogo = {
     width: "160px",
@@ -42,6 +43,7 @@ const L_fsbi = ({
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="lFSBISVG" style={lFSBILogo}>
@@ -53,6 +55,7 @@ const L_fsbi = ({
           droppedFileType="svg"
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

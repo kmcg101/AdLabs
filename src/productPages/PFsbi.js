@@ -12,6 +12,7 @@ const P_fsbi = ({
   productIndex,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const pFSBILogo = {
     width: "200px",
@@ -43,6 +44,7 @@ const P_fsbi = ({
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
 
@@ -55,6 +57,7 @@ const P_fsbi = ({
           droppedFileType="svg"
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

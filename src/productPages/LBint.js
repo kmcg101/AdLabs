@@ -14,6 +14,7 @@ const L_bint = ({
   productIndex,
   lfdFile,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
@@ -63,6 +64,7 @@ const L_bint = ({
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

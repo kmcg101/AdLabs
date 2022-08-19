@@ -19,6 +19,7 @@ const E_vsa = ({
   handleDropzoneChanges,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   return (
     <div className="elevatorProductContainer">
@@ -34,6 +35,7 @@ const E_vsa = ({
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

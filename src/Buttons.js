@@ -51,12 +51,10 @@ const useStyles = makeStyles((AppTheme) => ({
   },
 }));
 
-export const ContinueButton = (props) => {
-  const currentPageNumber = props.currentPageNumber;
-  const handleContinueButtonPressed = props.handleContinueButtonPressed;
+export const ContinueButton = ({ currentPageNumber, handleContinueButtonPressed, continueButtonDisabled }) => {
   const classes = useStyles();
   return (
-    <Button onClick={handleContinueButtonPressed} className={classes.continueButton}>
+    <Button disabled={continueButtonDisabled} onClick={handleContinueButtonPressed} className={classes.continueButton}>
       {currentPageNumber === 3 ? "CREATE AD FILES" : currentPageNumber === 4 ? "CREATE NEW AD" : "CONTINUE"}
     </Button>
   );

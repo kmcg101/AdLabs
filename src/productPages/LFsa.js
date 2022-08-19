@@ -14,6 +14,7 @@ const L_fsa = ({
   lfdFile,
   pfdFile,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const isLFD = true;
 
@@ -40,6 +41,7 @@ const L_fsa = ({
           pfdFile={pfdFile}
           isLFD={isLFD}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

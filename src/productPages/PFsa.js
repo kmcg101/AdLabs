@@ -12,6 +12,7 @@ const P_fsa = ({
   productIndex,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const pFullScreen = {
     width: "720px",
@@ -39,6 +40,7 @@ const P_fsa = ({
           pfdFile={pfdFile}
           isLFD={isLFD}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

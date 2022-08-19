@@ -12,6 +12,7 @@ const P_vsa = ({
   productIndex,
   handleWarningMessageText,
   shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
 }) => {
   const pVsaImage = {
     width: "360px",
@@ -39,6 +40,7 @@ const P_vsa = ({
           pfdFile={pfdFile}
           isLFD={isLFD}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

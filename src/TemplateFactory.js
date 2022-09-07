@@ -692,6 +692,9 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
 				
                 playContent() {
+
+                var slotduration = this.scheduleItem.slot.duration;
+                var transitionTime = slotduration * 1000 - 350;
 				
 				let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
 				let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
@@ -717,7 +720,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 					bintbackground.style.animationName = "fadeOut";
 					bintbackground.style.animationDuration = ".3s";
 
-                }, 14650);
+                }, transitionTime);
 
                 }
             });

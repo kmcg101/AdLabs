@@ -792,14 +792,12 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				background-color: #2c3030;
             }
 			
-			.portrait .${filename} .media_frame1 {
-                position: absolute;
-				display: none;
-            }
+			
 			
 			.portrait .${filename} .media {
 				height: 100%;
 				box-shadow:	0vw 0vw 2vw rgba(0,0,0,.4);
+                object-fit: contain;
             }
         </style>
 		<div class='${filename} media_frame1'>

@@ -10,14 +10,12 @@ function SelectBox(props) {
   const styles = {
     control: (provided, state) => ({
       ...provided,
-      // fontSize: "4.5rem",
-      // lineHeight: "3.5rem",
+
       color: "white",
       height: "28px",
       background: "linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.6) 100%)",
 
       borderRadius: "0px",
-      //boxShadow: "0px 4px 9.4px 0.6px rgba(0, 0, 0, 0.33)",
 
       // need to create a tr ue false to make this work
       border: inputsCheckButtonPressed && isValueSelected === false ? 0 : "1px",

@@ -791,6 +791,10 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 height: 75%;
 				background-color: #2c3030;
             }
+            .portrait .${filename} .media_frame1 {
+                position: absolute;
+				display: none;
+            }
 			
 			
 			

@@ -1,4 +1,4 @@
-// git add .
+// git add . asdf
 // git remote add origin git@github.com:kmcg101/app4.git
 // git commit -m 'after splitting table to bottom'
 // git push origin master
@@ -195,13 +195,7 @@ function App() {
   // creates an array of all the new file names of files that were dropped
 
   const getAllDroppedNewFilenames = () => {
-    return [
-      getNewNameForDroppedFile(elevatorFile.name, "e"),
-      getNewNameForDroppedFile(lfdFile.name, "l"),
-      getNewNameForDroppedFile(pfdFile.name, "p"),
-      getNewNameForDroppedFile(svgFile.name, "svg"),
-      getNewNameForDroppedFile(standardAdFile.name, "standardAd"),
-    ];
+    return [getNewNameForDroppedFile(elevatorFile.name, "e"), getNewNameForDroppedFile(lfdFile.name, "l"), getNewNameForDroppedFile(pfdFile.name, "p"), getNewNameForDroppedFile(svgFile.name, "svg"), getNewNameForDroppedFile(standardAdFile.name, "standardAd")];
   };
   // creates an array of all names of files that were dropped.
   const getAllDroppedFilenames = () => {
@@ -255,16 +249,7 @@ function App() {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
 
-      if (
-        inputValues.client &&
-        inputValues.campaign &&
-        onlyLettersAndNumbers(inputValues.client) &&
-        onlyLettersAndNumbers(inputValues.campaign) &&
-        inputValues.product !== undefined &&
-        inputValues.countryCode &&
-        inputValues.platform &&
-        inputValues.duration
-      ) {
+      if (inputValues.client && inputValues.campaign && onlyLettersAndNumbers(inputValues.client) && onlyLettersAndNumbers(inputValues.campaign) && inputValues.product !== undefined && inputValues.countryCode && inputValues.platform && inputValues.duration) {
         // setInputComplete(true);
         console.log("complete");
         //setLobbyAndOneAssetIsLFD();
@@ -576,10 +561,7 @@ function App() {
 
     const loadElevator = elevatorFile.payload
       ? elevatorFile.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`,
-            result
-          );
+          newZip.file(`${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`, result);
         })
       : "";
 
@@ -589,20 +571,14 @@ function App() {
     // i think this will be fine because you no longer have any situation where lfd or pfd are empty
     const loadLFD = lfdFile.payload
       ? lfdFile.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
-            result
-          );
+          newZip.file(`${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`, result);
         })
       : "";
 
     //const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
     const loadPFD = pfdFile.payload
       ? pfdFile.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
-            result
-          );
+          newZip.file(`${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`, result);
         })
       : "";
 
@@ -675,13 +651,7 @@ function App() {
     <ThemeProvider theme={AppTheme}>
       <CssBaseline />
       <div className="bgImageContainer">
-        {showPopUp ? (
-          <PopUp
-            popUpMessage={popUpMessage}
-            handleBackPopUpPress={handleBackPopUpPress}
-            handleContinuePopUpPress={handleContinuePopUpPress}
-          />
-        ) : null}
+        {showPopUp ? <PopUp popUpMessage={popUpMessage} handleBackPopUpPress={handleBackPopUpPress} handleContinuePopUpPress={handleContinuePopUpPress} /> : null}
         {currentPageNumber === 4 ? (
           <>
             <ConfirmationScreen />
@@ -693,43 +663,20 @@ function App() {
         <div className="appContainer">
           <div className="topSub">
             {currentPageNumber !== 4 ? <Filename inputValues={inputValues} /> : null}
-            {currentPageNumber !== 4 ? (
-              <WarningMessage
-                warningMessageText={warningMessageText}
-                warningMessageTextShowIcon={warningMessageTextShowIcon}
-              />
-            ) : null}
+            {currentPageNumber !== 4 ? <WarningMessage warningMessageText={warningMessageText} warningMessageTextShowIcon={warningMessageTextShowIcon} /> : null}
             {currentPageNumber === 2 && !isElevator ? (
               <div className="elpNavigatorContainer">
-                <div
-                  data-value="1"
-                  onClick={handleELPNavClick}
-                  className={`elpNavButton ${currentBuildNavNumber === 1 ? "current" : "enabled"}`}
-                >
+                <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 1 ? "current" : "enabled"}`}>
                   LFD
                 </div>
-                <div
-                  data-value="2"
-                  onClick={handleELPNavClick}
-                  className={`elpNavButton ${
-                    currentBuildNavNumber === 2
-                      ? "current"
-                      : inputValues.product === 1 && !isElevator && Object.keys(lfdFile).length === 0
-                      ? "disabled"
-                      : "enabled"
-                  }`}
-                >
+                <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? "current" : inputValues.product === 1 && !isElevator && Object.keys(lfdFile).length === 0 ? "disabled" : "enabled"}`}>
                   PFD
                 </div>
               </div>
             ) : null}
 
             {currentPageNumber === 2 && inputValues.product === 0 ? (
-              <BlackWhiteToggleButton
-                handleBINTColorChange={handleBINTColorChange}
-                bintBGColor={bintBGColor}
-                handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}
-              >
+              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}>
                 {" "}
               </BlackWhiteToggleButton>
             ) : null}
@@ -742,38 +689,17 @@ function App() {
 
             {currentPageNumber !== 4 ? (
               <div className={`inputsPage page ${currentPageNumber !== 1 ? "hide" : ""}`}>
-                <Inputs
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAnyInputsChange={handleAnyInputsChange}
-                  inputsCheckButtonPressed={inputsCheckButtonPressed}
-                  inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-                />
+                <Inputs productIndex={productIndex} inputValues={inputValues} handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce} />
               </div>
             ) : null}
 
             {/* PAGE 2 */}
 
-            <div
-              className={`adBuildingPage page ${
-                isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"
-              } ${currentPageNumber !== 2 ? "hide" : ""}`}
-            >
+            <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"} ${currentPageNumber !== 2 ? "hide" : ""}`}>
               {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
-              <div
-                className={`adBuildingPageContent ${
-                  currentPageNumber === 2 && isElevator === true
-                    ? "elevator"
-                    : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1
-                    ? "landscape"
-                    : "portrait"
-                }`}
-              >
+              <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
                 {/* elevator */}
-                <div
-                  id={isElevator ? "screenGrabThis" : null}
-                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
-                >
+                <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
                   <PageElevator
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
@@ -788,10 +714,7 @@ function App() {
                   />
                 </div>
                 {/* lfd */}
-                <div
-                  id={isElevator ? null : "screenGrabThis"}
-                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}
-                >
+                <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
                       isBlackText={isBlackText}
@@ -849,37 +772,19 @@ function App() {
           <div className="navSub">
             {currentPageNumber !== 4 ? (
               <div className="buttonsHolder">
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={1}
-                  className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>
                   1
                 </div>
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={2}
-                  className={`circleButton ${
-                    currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"
-                  }`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>
                   2
                 </div>
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={4}
-                  className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>
                   3
                 </div>
               </div>
             ) : null}
 
-            <ContinueButton
-              currentPageNumber={currentPageNumber}
-              handleContinueButtonPressed={handleContinueButtonPressed}
-              continueButtonDisabled={continueButtonDisabled}
-            ></ContinueButton>
+            <ContinueButton currentPageNumber={currentPageNumber} handleContinueButtonPressed={handleContinueButtonPressed} continueButtonDisabled={continueButtonDisabled}></ContinueButton>
           </div>
         </div>
       </div>

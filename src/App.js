@@ -1,4 +1,4 @@
-// git add . asdf
+// git add . jkl
 // git remote add origin git@github.com:kmcg101/app4.git
 // git commit -m 'after splitting table to bottom'
 // git push origin master

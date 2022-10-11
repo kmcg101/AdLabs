@@ -227,6 +227,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 .${filename} .media {
                     position: absolute;
                     width: 100%;
+                    object-fit: contain;
                 }
                 
                 .edu700 .${filename} .media {
@@ -803,6 +804,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				box-shadow:	0vw 0vw 2vw rgba(0,0,0,.4);
                 object-fit: contain;
             }
+            
         </style>
 		<div class='${filename} media_frame1'>
             ${mediaExtensions.landscape === "mp4" ? videoTagL : imageTagL}

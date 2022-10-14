@@ -229,7 +229,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     width: 100%;
                     object-fit: contain;
                 }
-                
               
                 .edu700 .${filename} .media {
                     position: absolute;

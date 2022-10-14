@@ -227,13 +227,13 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 .${filename} .media {
                     position: absolute;
                     width: 100%;
-                    object-fit: contain;
+                    
                 }
               
                 .edu700 .${filename} .media {
                     position: absolute;
-                    width: "640px";
-                    height: "480px";
+                    width: 640px;
+                    height: 480px;
                 }
             </style>
     

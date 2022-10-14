@@ -230,10 +230,11 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     object-fit: contain;
                 }
                 
+              
                 .edu700 .${filename} .media {
                     position: absolute;
-                    width: 100%;
-                    object-fit: contain;
+                    width: "640px";
+                    height: "480px";
                 }
             </style>
     

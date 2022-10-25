@@ -224,16 +224,23 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     width: 100%;
                     height: 100%;
                 }
+                
+			    .elevator .standard-template.e-fsa .layer-3 {
+                    height: 100%;
+                }
+
                 .${filename} .media {
                     position: absolute;
                     width: 100%;
+                    object-fit: contain;
                     
                 }
               
                 .edu700 .${filename} .media {
                     position: absolute;
-                    width: 640px;
-                    height: 480px;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
                 }
             </style>
     

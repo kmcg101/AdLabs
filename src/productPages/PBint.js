@@ -1,22 +1,23 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_bint = (props) => {
-  const bintBGColorPre = props.bintBGColor;
-  const bintBGColor = "#" + bintBGColorPre;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
-  const isBlackText = props.isBlackText;
-  const pfdFileError = props.pfdFileError;
-  const standardAdFileError = props.standardAdFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
+const P_bint = ({
+  pfdFile,
+  handleDropzoneChanges,
+  isBlackText,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  bintBGColor,
+  handleContinueButtonDisabled,
+}) => {
+  const bintBGColorPre = bintBGColor;
+  const bintBGColorLocal = "#" + bintBGColorPre;
 
   const pBint = {
     width: "672px",
@@ -35,7 +36,7 @@ const P_bint = (props) => {
     zIndex: "100",
   };
   const bgStyle = {
-    backgroundColor: bintBGColor,
+    backgroundColor: bintBGColorLocal,
   };
 
   return (
@@ -48,20 +49,21 @@ const P_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
-          svgFile={svgFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="pBintAd" style={pBint}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={pfdFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

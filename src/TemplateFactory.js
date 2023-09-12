@@ -1,5 +1,5 @@
 export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor) {
-  const eORl = isElevator ? "e" : "l";
+  //   const eORl = isElevator ? "e" : "l";
   const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
   const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
   const imageTagP = `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
@@ -224,15 +224,23 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     width: 100%;
                     height: 100%;
                 }
+                
+			    .elevator .standard-template.e-fsa .layer-3 {
+                    height: 100%;
+                }
+
                 .${filename} .media {
                     position: absolute;
                     width: 100%;
+                    object-fit: contain;
+                    
                 }
-                
+              
                 .edu700 .${filename} .media {
                     position: absolute;
-                    width: 640px;
-                    height: 480px;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
                 }
             </style>
     
@@ -692,6 +700,9 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
 				
                 playContent() {
+
+                var slotduration = this.scheduleItem.slot.duration;
+                var transitionTime = slotduration * 1000 - 350;
 				
 				let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
 				let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
@@ -717,7 +728,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 					bintbackground.style.animationName = "fadeOut";
 					bintbackground.style.animationDuration = ".3s";
 
-                }, 14650);
+                }, transitionTime);
 
                 }
             });
@@ -788,16 +799,19 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 height: 75%;
 				background-color: #2c3030;
             }
-			
-			.portrait .${filename} .media_frame1 {
+            .portrait .${filename} .media_frame1 {
                 position: absolute;
 				display: none;
             }
 			
+			
+			
 			.portrait .${filename} .media {
 				height: 100%;
 				box-shadow:	0vw 0vw 2vw rgba(0,0,0,.4);
+                object-fit: contain;
             }
+            
         </style>
 		<div class='${filename} media_frame1'>
             ${mediaExtensions.landscape === "mp4" ? videoTagL : imageTagL}

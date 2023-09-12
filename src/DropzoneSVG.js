@@ -25,7 +25,7 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function Dropzone(props) {
+function DropzoneSVG(props) {
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
@@ -37,9 +37,9 @@ function Dropzone(props) {
 
   const ref = useRef(null);
 
-  //const handleWarningMessageText = (txt, useIcon) => {
-  //   props.handleWarningMessageText(txt, useIcon);
-  // };
+  const handleWarningMessageText = (txt, useIcon) => {
+    props.handleWarningMessageText(txt, useIcon);
+  };
 
   function getHintString(str) {
     let newString = str.split(",");
@@ -61,6 +61,21 @@ function Dropzone(props) {
   // only used for preview
   const [files, setFiles] = useState([]);
 
+  useEffect(() => {
+    if (
+      Object.keys(svgFile).length > 0 &&
+      Object.keys(files).length === 0 &&
+      acceptedFileTypeString === "image/svg+xml"
+    ) {
+      console.log("populate it");
+      const elem = document.createElement("img");
+      elem.src = URL.createObjectURL(svgFile.payload);
+      const el = ref.current;
+      el.appendChild(elem);
+    }
+    // create an img with svgFile.payload as the source
+  }, [svgFile.payload]);
+
   const validateDroppedFile = (w, h) => {
     const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
     const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
@@ -70,21 +85,21 @@ function Dropzone(props) {
     const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
-    {
-      droppedFileType === "elevator"
-        ? (expectedPixels = expectedPixelsE)
-        : droppedFileType === "landscape"
-        ? (expectedPixels = expectedPixelsL)
-        : (expectedPixels = expectedPixelsP);
-    }
+
+    droppedFileType === "elevator"
+      ? (expectedPixels = expectedPixelsE)
+      : droppedFileType === "landscape"
+      ? (expectedPixels = expectedPixelsL)
+      : (expectedPixels = expectedPixelsP);
+
     let acceptedSizes;
-    {
-      droppedFileType === "elevator"
-        ? (acceptedSizes = expectedSizeE)
-        : droppedFileType === "landscape"
-        ? (acceptedSizes = expectedSizeL)
-        : (acceptedSizes = expectedSizeP);
-    }
+
+    droppedFileType === "elevator"
+      ? (acceptedSizes = expectedSizeE)
+      : droppedFileType === "landscape"
+      ? (acceptedSizes = expectedSizeL)
+      : (acceptedSizes = expectedSizeP);
+
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
     console.log("received = ", receivedPixels);
@@ -92,16 +107,17 @@ function Dropzone(props) {
     const exists = Object.values(expectedPixels).includes(receivedPixels);
 
     if (droppedFileType === "svg" || droppedFileType === "standardAd") {
-      props.handleWarningMessageText("", false);
+      handleWarningMessageText("", false);
       return true;
     } else if (exists) {
       console.log("right size");
-      props.handleWarningMessageText("", false);
+      handleWarningMessageText("", false);
       return true;
     } else {
-      props.handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
+      handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
+
       handleDropzoneChanges("payload", null);
 
       return false;
@@ -130,11 +146,13 @@ function Dropzone(props) {
 
     onDropRejected: (rejectedFiles) => {
       console.log("rejected");
-      props.handleWarningMessageText("wrong file type dropped.", true);
+      handleWarningMessageText("wrong file type dropped.", true);
     },
 
     // accepted files are ones that are the correct file type.  File size is checked later
     onDropAccepted: (acceptedFiles) => {
+      console.log("1 files ", files);
+      console.log("1 accepted ", acceptedFiles);
       // {file, preview} is put in state of files
       // this does not seem to put anything in state FILES.  it puts the preview in the acceptedFiles
       setFiles(
@@ -144,6 +162,8 @@ function Dropzone(props) {
           })
         )
       );
+      console.log("2 files ", files);
+      console.log("2 accepted ", acceptedFiles);
 
       // get width and height of preview
       // this value is 0 when a file out of the accepted list is dropped
@@ -158,7 +178,10 @@ function Dropzone(props) {
       }
 
       if (ext !== "mp4") {
+        console.log("not mp4 and acceptFiles = ", acceptedFiles);
         // accepted files has name, type, preview blob
+        console.log("not mp4 and files = ", files);
+        // files is still zero
         const i = new Image();
         i.onload = () => {
           console.log("i loaded");
@@ -169,6 +192,8 @@ function Dropzone(props) {
 
             const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
             if (droppedFileIsCorrectSize) {
+              console.log("image and correct");
+
               handleDropzoneChanges("name", newFile.name);
               handleDropzoneChanges("payload", newFile);
               handleDropzoneChanges("width", i.width);
@@ -218,7 +243,7 @@ function Dropzone(props) {
   ));
 
   const videoPreview = files.map((file) => (
-    <video key={file.name} loop style={{ width: "100%" }}>
+    <video key={file.name} autoPlay loop style={{ width: "100%" }}>
       <source src={URL.createObjectURL(files[0])} />
     </video>
   ));
@@ -250,4 +275,4 @@ function Dropzone(props) {
     </div>
   );
 }
-export default Dropzone;
+export default DropzoneSVG;

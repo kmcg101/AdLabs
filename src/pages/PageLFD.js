@@ -7,70 +7,73 @@ import LFsbi from "../productPages/LFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageLFD = (props) => {
-  const productIndex = props.productIndex;
-  const bintBGColor = props.bintBGColor;
-  const isBlackText = props.isBlackText;
-
-  const lfdFileError = props.lfdFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
-  const svgFile = props.svgFile;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const PageLFD = ({
+  productIndex,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  lfdFile,
+  pfdFile,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <LBint
-          lfdFileError={lfdFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
         <LFsa
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
         <LHfsp
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
         <LVsa
-          lfdFileError={lfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
         <LFsbi
-          lfdFileError={lfdFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

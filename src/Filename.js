@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React from "react";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 function Filename(props) {

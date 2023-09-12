@@ -1,18 +1,19 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_fsbi = (props) => {
-  const elevatorFileError = props.elevatorFileError;
-  const svgFileError = props.svgFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+const E_fsbi = ({
+  svgFile,
+  elevatorFile,
+  productIndex,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const eFSBILogo = {
     width: "90px",
     height: "90px",
@@ -27,15 +28,15 @@ const E_fsbi = (props) => {
         <img alt="" className="backgroundImage" src={background}></img>
       </div>
       <div className="eFullScreen">
-        {" "}
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="eFSBISVG" style={eFSBILogo}>
@@ -43,10 +44,12 @@ const E_fsbi = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

@@ -7,72 +7,74 @@ import EFsbi from "../productPages/EFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageElevator = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-  const productIndex = props.productIndex;
-  const bintBGColor = props.bintBGColor;
-  const isBlackText = props.isBlackText;
-  const elevatorFileError = props.elevatorFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
-  const svgFile = props.svgFile;
-
+const PageElevator = ({
+  shakeDropzoneBGImage,
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  productIndex,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  elevatorFile,
+  handleContinueButtonDisabled,
+}) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <EBint
-          elevatorFileError={elevatorFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
         <EFsa
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
         <EHfsp
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
         <EVsa
-          elevatorFileError={elevatorFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
         <EFsbi
-          elevatorFileError={elevatorFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          elevatorFile={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

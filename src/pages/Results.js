@@ -1,6 +1,5 @@
 import React from "react";
-import { isNullOrUndefined } from "util";
-import myPreview from "../assets/preview.png";
+// import { isNullOrUndefined } from "util";
 
 const screenshotImage = {
   width: "100%",
@@ -31,20 +30,6 @@ const resultsTitleTextRight = {
   height: "5%",
 };
 
-const resultsTextHolder = {
-  fontFamily: "Avenir-Roman",
-  paddingLeft: "10px",
-  paddingRight: "30px",
-  fontSize: "1.3rem",
-  lineHeight: "2.1",
-  color: "white",
-  // minHeight: "37px",
-  borderRadius: "1px",
-  backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%)",
-  boxShadow: "var(--standard-box-shadow-color)",
-  marginBottom: "20px",
-};
-
 const myColumn = {
   display: "flex",
   flexDirection: "column",
@@ -72,27 +57,24 @@ const resultsTextHolderScroll = {
   scrollbarColor: "green",
   scrollbarWidth: "thin",
 };
+const ulStyle = {
+  listStyleType: "none",
+};
 
-const Results = (props) => {
-  const inputValues = props.inputValues;
-  const filename = props.filename;
-  const blankFilename = props.blankFilename;
-  const requiresBlankFile = props.requiresBlankFile;
-  const screenshot = props.screenshot;
-
-  const bintBGColor = props.bintBGColor;
-  const productIndex = props.productIndex;
-  const isBlackText = props.isBlackText;
-
-  const allDroppedFilenames = props.allDroppedFilenames;
-  const allDroppedNewFilenames = props.allDroppedNewFilenames;
-
+const Results = ({
+  inputValues,
+  filename,
+  blankFilename,
+  requiresBlankFile,
+  screenshot,
+  bintBGColor,
+  productIndex,
+  isBlackText,
+  allDroppedFilenames,
+  allDroppedNewFilenames,
+}) => {
   const allDroppedFilenamesFiltered = allDroppedFilenames.filter((val) => val !== undefined);
   const allDroppedNewFilenamesFiltered = allDroppedNewFilenames.filter((val) => val !== undefined);
-
-  const ulStyle = {
-    listStyleType: "none",
-  };
 
   const listOfDroppedFiles = allDroppedFilenamesFiltered.map((items) => (
     <li key={items} style={ulStyle}>
@@ -109,7 +91,7 @@ const Results = (props) => {
   const listOfInput = (
     <div>
       <ul style={ulStyle}>
-        <li>{listOfDroppedFiles}</li>
+        {listOfDroppedFiles}
         {productIndex === 0 ? <li>#{bintBGColor}</li> : null}
         {productIndex === 0 && isBlackText === true ? <li>Black</li> : null}
         {productIndex === 0 && isBlackText === false ? <li>White</li> : null}
@@ -151,7 +133,7 @@ const Results = (props) => {
           PREVIEW
         </div>
         <div className="resultsBottomCenter" style={resultsBottomCenter}>
-          {screenshot ? <img style={screenshotImage} src={screenshot} alt="preview"></img> : null}
+          {screenshot ? <img style={screenshotImage} src={screenshot[0]} alt="preview"></img> : null}
         </div>
       </div>
     </div>

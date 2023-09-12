@@ -1,14 +1,17 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/phfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_hfsp = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const P_hfsp = ({
+  handleDropzoneChanges,
+  pfdFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const pHalfScreen = {
     position: "absolute",
     left: "20px",
@@ -18,22 +21,19 @@ const P_hfsp = (props) => {
     zIndex: "100",
   };
 
-  const pfdFileError = props.pfdFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-
   return (
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="pHFSPImage" style={pHalfScreen}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={pfdFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

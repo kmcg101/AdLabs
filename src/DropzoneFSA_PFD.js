@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
+import captureVideoFrame from "capture-video-frame";
 import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
@@ -25,21 +26,35 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function Dropzone(props) {
+function DropzoneFSA_PFD(props) {
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
-  const svgFile = props.svgFile;
+  const lfdFile = props.lfdFile;
+  const pfdFile = props.pfdFile;
   const droppedFileType = props.droppedFileType;
   const productIndex = props.productIndex;
   const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
 
   const ref = useRef(null);
 
-  //const handleWarningMessageText = (txt, useIcon) => {
-  //   props.handleWarningMessageText(txt, useIcon);
-  // };
+  const handleContinueButtonDisabled = (bool) => {
+    props.handleContinueButtonDisabled(bool);
+  };
+
+  const handleWarningMessageText = (txt, useIcon) => {
+    props.handleWarningMessageText(txt, useIcon);
+  };
+  const handleDropzoneChanges = (name, value) => {
+    // this is special for VSA.  Same file always used for both so populate both
+    // dropped file type = elevator, landscape, portrait, standard, svg.
+    // this writes the name/value pair to the approprate dropped file in app.js
+
+    // this is PFD so it only changes the pfdFile state.
+    //props.handleDropzoneChanges(name, value, "landscape");
+    props.handleDropzoneChanges(name, value, "portrait");
+  };
 
   function getHintString(str) {
     let newString = str.split(",");
@@ -54,64 +69,115 @@ function Dropzone(props) {
 
   const [showHint, setShowHint] = useState(false);
 
-  // all this does is determine which preview div to display, image or video
-  const [mediaType, setMediaType] = useState("image");
-
   // this is where dropped files are added
-  // only used for preview
   const [files, setFiles] = useState([]);
 
+  const [pfdAcceptedString, setPfdAcceptedString] = useState("");
+
+  useEffect(() => {
+    console.log("running lfdfile.payload effect");
+    if (Object.keys(lfdFile).length > 0 && lfdFile.payload !== null) {
+      setPfdAcceptedString(lfdFile.payload.type);
+    }
+  }, [lfdFile.payload]);
+
+  useEffect(() => {
+    // you wan this to run after drop and when lfd and pfd file state has been set
+    // just running after drop will not work because state will not be set yet
+    // this keeps it from running on first render
+
+    // at this point a file has been dropped in LFD and
+    // both PFD and LFD files have been written to
+
+    if (Object.keys(pfdFile).length > 0 && pfdFile.payload !== null) {
+      handleContinueButtonDisabled(true);
+      console.log("running PFD change step 2");
+      const el = ref.current;
+
+      // if this is a video, create a video tag
+      if (pfdFile.payload.type.includes("video")) {
+        console.log("running PFD change step 3 video");
+        const elemV = document.createElement("video");
+        elemV.style = "position: absolute; z-index: 1;";
+        elemV.id = "videoToCapture";
+        elemV.autoplay = true;
+        elemV.loop = true;
+        elemV.src = URL.createObjectURL(pfdFile.payload);
+        const options = { childList: true };
+
+        const mutationObserver = new MutationObserver((entries) => {
+          elemV.addEventListener("canplay", () => {
+            const capturedFrame = captureVideoFrame(elemV, "png");
+            handleDropzoneChanges("videoCapture", capturedFrame);
+            mutationObserver.disconnect();
+          });
+        });
+        mutationObserver.observe(el, { childList: true });
+
+        el.appendChild(elemV);
+      } else {
+        console.log("running PFD change step 3 image");
+        const elemI = document.createElement("img");
+        elemI.style = "position: absolute; left: 0px; z-index: 10;";
+        elemI.setAttribute("src", URL.createObjectURL(pfdFile.payload));
+        const el = ref.current;
+        while (el.firstChild) {
+          el.removeChild(el.lastChild);
+        }
+        setTimeout(() => {
+          handleContinueButtonDisabled(false);
+          el.appendChild(elemI);
+        }, 100);
+      }
+    }
+  }, [pfdFile.payload]);
+
+  useEffect(() => {
+    if (Object.keys(pfdFile).length > 0 && pfdFile.payload !== null) {
+      const elemI = document.createElement("img");
+      elemI.style = "position: absolute; left: 0px; z-index: 10;";
+      elemI.setAttribute("src", pfdFile.videoCapture.dataUri);
+      const el = ref.current;
+      while (el.firstChild) {
+        el.removeChild(el.lastChild);
+      }
+
+      setTimeout(() => {
+        handleContinueButtonDisabled(false);
+        el.appendChild(elemI);
+      }, 100);
+    }
+  }, [pfdFile.videoCapture]);
+
   const validateDroppedFile = (w, h) => {
-    const expectedPixelsE = DATA_PRODUCTS.data[productIndex].pixels.ePixels;
     const expectedPixelsL = DATA_PRODUCTS.data[productIndex].pixels.lPixels;
     const expectedPixelsP = DATA_PRODUCTS.data[productIndex].pixels.pPixels;
 
-    const expectedSizeE = DATA_PRODUCTS.data[productIndex].acceptedSizeText.eSizes;
     const expectedSizeL = DATA_PRODUCTS.data[productIndex].acceptedSizeText.lSizes;
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
-    {
-      droppedFileType === "elevator"
-        ? (expectedPixels = expectedPixelsE)
-        : droppedFileType === "landscape"
-        ? (expectedPixels = expectedPixelsL)
-        : (expectedPixels = expectedPixelsP);
-    }
+
+    droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
+
     let acceptedSizes;
-    {
-      droppedFileType === "elevator"
-        ? (acceptedSizes = expectedSizeE)
-        : droppedFileType === "landscape"
-        ? (acceptedSizes = expectedSizeL)
-        : (acceptedSizes = expectedSizeP);
-    }
+
+    droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
+
     const receivedPixels = w * h;
-    console.log("expected = ", expectedPixels);
-    console.log("received = ", receivedPixels);
 
     const exists = Object.values(expectedPixels).includes(receivedPixels);
 
-    if (droppedFileType === "svg" || droppedFileType === "standardAd") {
-      props.handleWarningMessageText("", false);
-      return true;
-    } else if (exists) {
+    if (exists) {
       console.log("right size");
-      props.handleWarningMessageText("", false);
+      handleWarningMessageText("", false);
       return true;
     } else {
-      props.handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
+      handleWarningMessageText(`dropped file is wrong size. Requred dimensions: ${acceptedSizes}`, true);
       console.log("wrong size");
       setFiles([]);
-      handleDropzoneChanges("payload", null);
-
+      // handleDropzoneChanges("payload", null);
       return false;
     }
-  };
-
-  const handleDropzoneChanges = (name, value) => {
-    // dropped file type = elevator, landscape, portrait, standard, svg.
-    // this writes the name/value pair to the approprate dropped file in app.js
-    props.handleDropzoneChanges(name, value, props.droppedFileType);
   };
 
   const {
@@ -126,17 +192,17 @@ function Dropzone(props) {
     maxFiles: 1,
     noClick: false,
     multiple: false,
-    accept: acceptedFileTypeString,
+    accept: pfdAcceptedString,
 
     onDropRejected: (rejectedFiles) => {
       console.log("rejected");
-      props.handleWarningMessageText("wrong file type dropped.", true);
+      handleWarningMessageText("wrong file type dropped.", true);
     },
 
     // accepted files are ones that are the correct file type.  File size is checked later
     onDropAccepted: (acceptedFiles) => {
-      // {file, preview} is put in state of files
-      // this does not seem to put anything in state FILES.  it puts the preview in the acceptedFiles
+      // clear out any populated videos
+
       setFiles(
         acceptedFiles.map((myfile) =>
           Object.assign(myfile, {
@@ -145,20 +211,15 @@ function Dropzone(props) {
         )
       );
 
-      // get width and height of preview
-      // this value is 0 when a file out of the accepted list is dropped
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
       const ext = nameArray[1];
 
-      if (ext === "mp4") {
-        setMediaType("video");
-      } else {
-        setMediaType("image");
-      }
-
       if (ext !== "mp4") {
+        console.log("not mp4 and acceptFiles = ", acceptedFiles);
         // accepted files has name, type, preview blob
+        console.log("not mp4 and files = ", files);
+        // files is still zero
         const i = new Image();
         i.onload = () => {
           console.log("i loaded");
@@ -169,6 +230,8 @@ function Dropzone(props) {
 
             const droppedFileIsCorrectSize = validateDroppedFile(i.width, i.height);
             if (droppedFileIsCorrectSize) {
+              console.log("image and correct");
+
               handleDropzoneChanges("name", newFile.name);
               handleDropzoneChanges("payload", newFile);
               handleDropzoneChanges("width", i.width);
@@ -208,21 +271,6 @@ function Dropzone(props) {
     [isDragAccept, isDragReject]
   );
 
-  // put the map function back in here
-  const svgImagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
-
-  const imagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
-
-  const videoPreview = files.map((file) => (
-    <video key={file.name} loop style={{ width: "100%" }}>
-      <source src={URL.createObjectURL(files[0])} />
-    </video>
-  ));
-
   return (
     <div>
       <div
@@ -233,15 +281,13 @@ function Dropzone(props) {
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(files).length === 0 ? (
+            {Object.keys(lfdFile).length + Object.keys(pfdFile).length === 0 ? (
               <div
                 style={dzBackgroundImage}
                 className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
               ></div>
             ) : null}
-            <div ref={ref} className="dropzoneImageParent">
-              {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview}
-            </div>
+            <div ref={ref} className="dropzoneImageParent"></div>
           </div>
 
           <input {...getInputProps()} />
@@ -250,4 +296,4 @@ function Dropzone(props) {
     </div>
   );
 }
-export default Dropzone;
+export default DropzoneFSA_PFD;

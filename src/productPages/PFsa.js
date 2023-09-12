@@ -1,14 +1,19 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneFSA_PFD";
 import background from "../assets/pfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_fsa = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-  const svgFile = props.svgFile;
+const P_fsa = ({
+  lfdFile,
+  pfdFile,
+  handleDropzoneChanges,
+  svgFile,
+  productIndex,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const pFullScreen = {
     width: "720px",
     height: "960px",
@@ -18,8 +23,7 @@ const P_fsa = (props) => {
     zIndex: "100",
   };
 
-  const pfdFileError = props.pfdFileError;
-  const productIndex = props.productIndex;
+  const isLFD = false;
 
   return (
     <div className="portraitProductContainer">
@@ -29,10 +33,14 @@ const P_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          isLFD={isLFD}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

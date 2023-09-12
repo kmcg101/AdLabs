@@ -51,12 +51,10 @@ const useStyles = makeStyles((AppTheme) => ({
   },
 }));
 
-export const ContinueButton = (props) => {
-  const currentPageNumber = props.currentPageNumber;
-  const handleContinueButtonPressed = props.handleContinueButtonPressed;
+export const ContinueButton = ({ currentPageNumber, handleContinueButtonPressed, continueButtonDisabled }) => {
   const classes = useStyles();
   return (
-    <Button onClick={handleContinueButtonPressed} className={classes.continueButton}>
+    <Button disabled={continueButtonDisabled} onClick={handleContinueButtonPressed} className={classes.continueButton}>
       {currentPageNumber === 3 ? "CREATE AD FILES" : currentPageNumber === 4 ? "CREATE NEW AD" : "CONTINUE"}
     </Button>
   );
@@ -78,30 +76,30 @@ export const BlackWhiteToggleButton = (props) => {
   };
 
   const handleBINTColorChange = (e) => {
-    const validCharactersArray = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-    ];
+    // const validCharactersArray = [
+    //   "a",
+    //   "b",
+    //   "c",
+    //   "d",
+    //   "e",
+    //   "f",
+    //   "A",
+    //   "B",
+    //   "C",
+    //   "D",
+    //   "E",
+    //   "F",
+    //   "0",
+    //   "1",
+    //   "2",
+    //   "3",
+    //   "4",
+    //   "5",
+    //   "6",
+    //   "7",
+    //   "8",
+    //   "9",
+    // ];
 
     props.handleBINTColorChange(e.target.value);
   };

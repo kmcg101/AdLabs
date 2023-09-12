@@ -1,17 +1,22 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import Dropzone from "../DropzoneFSA_LFD";
 import background from "../assets/lfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_fsa = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
-  const lfdFileError = props.lfdFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
+const L_fsa = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  productIndex,
+  lfdFile,
+  pfdFile,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
+  const isLFD = true;
 
   const lFullScreen = {
     width: "1024px",
@@ -29,10 +34,14 @@ const L_fsa = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          isLFD={isLFD}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

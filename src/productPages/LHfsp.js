@@ -1,10 +1,17 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/lhfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_hfsp = (props) => {
+const L_hfsp = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  productIndex,
+  lfdFile,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const lHalfScreen = {
     position: "absolute",
     left: "279px",
@@ -14,24 +21,19 @@ const L_hfsp = (props) => {
     zIndex: "100",
   };
 
-  const lfdFileError = props.lfdFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
-      <div class="lHFSPImage" style={lHalfScreen}>
-        <Dropzone
+      <div className="lHFSPImage" style={lHalfScreen}>
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={lfdFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

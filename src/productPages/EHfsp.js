@@ -1,6 +1,6 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/ehfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
@@ -13,27 +13,29 @@ const hfspMedia = {
   zIndex: "100",
 };
 
-const E_hfsp = (props) => {
-  const elevatorFileError = props.elevatorFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
+const E_hfsp = ({
+  elevatorFile,
+  productIndex,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   return (
     <div className="elevatorProductContainer">
       <div className="backgroundImageContainer">
         <img alt="" className="backgroundImage" src={background}></img>
       </div>
       <div className="eHFSPImage" style={hfspMedia}>
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={elevatorFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

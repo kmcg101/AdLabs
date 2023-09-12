@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DATA_PRODUCTS from "./DATA_PRODUCTS";
 import XIcon from "./assets/icon_x.svg";
 import "./WarningMessage.css";
 
@@ -19,10 +18,7 @@ const iconX = {
   height: "25px",
 };
 
-function WarningMessage(props) {
-  //const [warningMessageText, setWarningMessageText] = useState(props.warningMessageText);
-  const warningMessageText = props.warningMessageText;
-  const warningMessageTextShowIcon = props.warningMessageTextShowIcon;
+function WarningMessage({ warningMessageText, warningMessageTextShowIcon }) {
   const [showRedBoolean, setShowRedBoolean] = useState(false);
 
   useEffect(() => {

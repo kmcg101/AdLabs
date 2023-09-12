@@ -1,22 +1,23 @@
 import React from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_bint = (props) => {
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
-  const bintBGColorPre = props.bintBGColor;
-  const bintBGColor = "#" + bintBGColorPre;
-  const isBlackText = props.isBlackText;
-  const lfdFileError = props.lfdFileError;
-  const standardAdFileError = props.standardAdFileError;
-  const svgFile = props.svgFile;
-  const productIndex = props.productIndex;
+const L_bint = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  bintBGColor,
+  isBlackText,
+  productIndex,
+  lfdFile,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
+  const bintBGColorPre = bintBGColor;
+  const bintBGColorLocal = "#" + bintBGColorPre;
 
   const lBint = {
     top: "22px",
@@ -36,7 +37,7 @@ const L_bint = (props) => {
     zIndex: "100",
   };
   const bgStyle = {
-    backgroundColor: bintBGColor,
+    backgroundColor: bintBGColorLocal,
   };
 
   return (
@@ -50,20 +51,20 @@ const L_bint = (props) => {
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
-          svgFile={svgFile}
         />
       </div>
       <div style={lBint} className="lBintAd">
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={lfdFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

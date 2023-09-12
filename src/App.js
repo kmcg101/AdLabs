@@ -1,4 +1,4 @@
-// git add .
+// git add . jkl
 // git remote add origin git@github.com:kmcg101/app4.git
 // git commit -m 'after splitting table to bottom'
 // git push origin master
@@ -12,7 +12,7 @@ import { getManifestFile, getBlankManifest, getBlankHTML } from "./Utilities";
 import { getHTMLFile } from "./TemplateFactory";
 import ConfirmationScreen from "./ConfirmationScreen";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./nav.css";
 import JSZip from "jszip";
@@ -32,7 +32,7 @@ import { ThemeProvider } from "@material-ui/core";
 
 // import { useScreenshot } from "use-screenshot-hook";
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import { toPng } from "html-to-image";
 
 import PopUp from "./PopUp";
 
@@ -46,6 +46,7 @@ function App() {
   //const imageRef = useRef(null);
   const [screenshot, setScreenshot] = useState(); // 2
 
+  const [continueButtonDisabled, setContinueButtonDisabled] = useState(false);
   // increases as user hits continue
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   // nav while dropping files 1 or 2 for l p.
@@ -85,14 +86,14 @@ function App() {
   const [standardAdFile, setStandardAdFile] = useState({}); // 16
 
   const [mediaExtensions, setMediaExtensions] = useState({}); // 17
-  const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
-  const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
+  // const [lobbyAndOneAsset, setLobbyAndOneAsset] = useState(); //29
+  // const [lobbyAndOneAssetIsLFD, setLobbyAndOneAssetIsLFD] = useState(); //30
 
-  const [elevatorFileError, setElevatorFileError] = useState(false);
-  const [lfdFileError, setLfdFileError] = useState(false);
-  const [pfdFileError, setPfdFileError] = useState(false);
-  const [svgFileError, setSvgFileError] = useState(false);
-  const [standardAdFileError, setStandardAdFileError] = useState(false);
+  // const [elevatorFileError, setElevatorFileError] = useState(false);
+  // const [lfdFileError, setLfdFileError] = useState(false);
+  // const [pfdFileError, setPfdFileError] = useState(false);
+  // const [svgFileError, setSvgFileError] = useState(false);
+  // const [standardAdFileError, setStandardAdFileError] = useState(false);
 
   const [allDroppedFilenames, setAllDroppedFilenames] = useState([]);
   const [allDroppedNewFilenames, setAllDroppedNewFilenames] = useState([]);
@@ -112,19 +113,24 @@ function App() {
     setShowPopUp(false);
     setPopUpMessage("");
   };
+
+  const handleContinueButtonDisabled = (bool) => {
+    setContinueButtonDisabled(bool);
+  };
+
   const handleContinuePopUpPress = () => {
     // this runs when just 1 asset dropped
-    setLobbyAndOneAsset(true);
+    // setLobbyAndOneAsset(true);
     // handle mediaExtensions state.
     if (mediaExtensions.landscape) {
-      setLobbyAndOneAssetIsLFD(true);
+      // setLobbyAndOneAssetIsLFD(true);
       const newExtension = mediaExtensions.landscape;
       setMediaExtensions((prevState) => ({
         ...prevState,
         portrait: newExtension,
       }));
     } else {
-      setLobbyAndOneAssetIsLFD(false);
+      //  setLobbyAndOneAssetIsLFD(false);
       const newExtension = mediaExtensions.portrait;
       setMediaExtensions((prevState) => ({
         ...prevState,
@@ -189,13 +195,7 @@ function App() {
   // creates an array of all the new file names of files that were dropped
 
   const getAllDroppedNewFilenames = () => {
-    return [
-      getNewNameForDroppedFile(elevatorFile.name, "e"),
-      getNewNameForDroppedFile(lfdFile.name, "l"),
-      getNewNameForDroppedFile(pfdFile.name, "p"),
-      getNewNameForDroppedFile(svgFile.name, "svg"),
-      getNewNameForDroppedFile(standardAdFile.name, "standardAd"),
-    ];
+    return [getNewNameForDroppedFile(elevatorFile.name, "e"), getNewNameForDroppedFile(lfdFile.name, "l"), getNewNameForDroppedFile(pfdFile.name, "p"), getNewNameForDroppedFile(svgFile.name, "svg"), getNewNameForDroppedFile(standardAdFile.name, "standardAd")];
   };
   // creates an array of all names of files that were dropped.
   const getAllDroppedFilenames = () => {
@@ -223,12 +223,23 @@ function App() {
   }
 
   const takeScreenshot = () => {
-    htmlToImage.toPng(document.getElementById("screenGrabThis")).then(function(dataUrl) {
-      var img = new Image();
-      //img.src = dataUrl;
-      setScreenshot(dataUrl);
-      //document.body.appendChild(img);
-    });
+    console.log("taking screenshot");
+    // the only place that this function is called is when there are no errors
+    // on page 2 and it is time to go to page 3.  Because of this it is ok
+    // to have a useEffect for state value SCREENSHOT.  When it changes, go to page 3
+    // but unfortunately when moving back from 3 to 2 with numubers button and then
+    // not changing the image means that the screen shot will be retaken but not changed
+    // because the image taken is the same as the previous one.  This is fixed by adding
+    // a random number to the screenshot state so it changes with every update
+    htmlToImage
+      .toPng(document.getElementById("screenGrabThis"))
+      .then(function(dataUrl) {
+        let randomValue = Math.random();
+        setScreenshot([dataUrl, randomValue]);
+      })
+      .catch(() => {
+        console.log("there was an error");
+      });
   };
 
   const handleContinueButtonPressed = () => {
@@ -237,20 +248,12 @@ function App() {
     if (currentPageNumber === 1) {
       // moving from inputs to Elevator or LFD
       // check if all values filled in
-      if (
-        inputValues.client &&
-        inputValues.campaign &&
-        onlyLettersAndNumbers(inputValues.client) &&
-        onlyLettersAndNumbers(inputValues.campaign) &&
-        inputValues.product !== undefined &&
-        inputValues.countryCode &&
-        inputValues.platform &&
-        inputValues.duration
-      ) {
+
+      if (inputValues.client && inputValues.campaign && onlyLettersAndNumbers(inputValues.client) && onlyLettersAndNumbers(inputValues.campaign) && inputValues.product !== undefined && inputValues.countryCode && inputValues.platform && inputValues.duration) {
         // setInputComplete(true);
         console.log("complete");
-        setLobbyAndOneAssetIsLFD();
-        setLobbyAndOneAsset();
+        //setLobbyAndOneAssetIsLFD();
+        //setLobbyAndOneAsset();
         handleWarningMessageText("", false);
         setInputsCheckButtonPressed(false);
 
@@ -270,11 +273,6 @@ function App() {
       // this runs when landing on the RESULTS  page.
 
       // check if all dropboxes have been filled
-      // would be nice to be able to set this to 1 and take a screen shot
-      // but the result was a screen shot that was not hte full size of the div.
-      // must have to wait for state to populate and get down to the builder component
-      //setCurrentBuildNavNumber(1);
-      takeScreenshot();
 
       // check if proper files dropped
       let checkErrors = 0;
@@ -285,7 +283,7 @@ function App() {
         if (elevatorFile.payload) {
           console.log("elevator file found");
 
-          setElevatorFileError(false);
+          //setElevatorFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -295,13 +293,13 @@ function App() {
 
           console.log("elevator file missing");
           missingFilesArray.push("elevator");
-          setElevatorFileError(true);
+          //setElevatorFileError(true);
           checkErrors++;
         }
       } else {
         if (lfdFile.payload) {
           console.log("l file found");
-          setLfdFileError(false);
+          //setLfdFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -310,14 +308,14 @@ function App() {
           }, "2000");
           console.log("l file missing");
           missingFilesArray.push("lfd");
-          setLfdFileError(true);
+          //setLfdFileError(true);
           checkErrors++;
         }
 
         if (pfdFile.payload) {
           console.log("p file found");
 
-          setPfdFileError(false);
+          //setPfdFileError(false);
         } else {
           // shake the dropzone background image
           setShakeDropzoneBGImage(true);
@@ -326,7 +324,7 @@ function App() {
           }, "2000");
           console.log("p file missing");
           missingFilesArray.push("pfd");
-          setPfdFileError(true);
+          //setPfdFileError(true);
           checkErrors++;
         }
       }
@@ -334,7 +332,7 @@ function App() {
       // check for svg
       if (inputValues.product === 4) {
         if (svgFile.payload) {
-          setSvgFileError(false);
+          //setSvgFileError(false);
           console.log("svg file found");
         } else {
           // shake the dropzone background image
@@ -342,7 +340,7 @@ function App() {
           setTimeout(() => {
             setShakeDropzoneBGImage(false);
           }, "2000");
-          setSvgFileError(true);
+          //setSvgFileError(true);
           console.log("svg file missing");
           missingFilesArray.push("svg");
           checkErrors++;
@@ -360,16 +358,18 @@ function App() {
       //     checkErrors++;
       //   }
       // }
-      setTimeout(() => {
-        setElevatorFileError(false);
-        setLfdFileError(false);
-        setPfdFileError(false);
-        setSvgFileError(false);
-        setStandardAdFileError(false);
-      }, "2000");
+      // setTimeout(() => {
+      //   setElevatorFileError(false);
+      //   setLfdFileError(false);
+      //   setPfdFileError(false);
+      //   setSvgFileError(false);
+      //   setStandardAdFileError(false);
+      // }, "2000");
 
+      console.log("errors = ", checkErrors);
       if (checkErrors === 0) {
         // if all filled in, always progress
+        console.log("running ok to go to 3 = ");
         okToGoToPageThree();
       } else if (!isElevator && (inputValues.product === 1 || inputValues.product === 3) && checkErrors === 1) {
         // lfsa or lvsa and 1 error, show overlay
@@ -398,54 +398,28 @@ function App() {
     setAllDroppedFilenames(getAllDroppedFilenames);
 
     setAllDroppedNewFilenames(getAllDroppedNewFilenames);
+
+    // there is a bug.  when using the number buttons to return from pg
+    // 3 to 2 and then hitting continue again, user can't get to page 3
+    // because you only go to page 3 after screenshot changes.  by not dropping
+    // a new file, screenshot does not change.  it just takes an image of the
+    // same div
+    takeScreenshot();
     //
     // pause this for x seconds so that it can take the screenshot
-    setTimeout(() => {
-      setCurrentPageNumber(3);
-    }, "500");
+    //setTimeout(() => {
+    //setCurrentPageNumber(3);
+    //}, "3000");
   };
+  useEffect(() => {
+    console.log("screenshot changed");
+    if (currentPageNumber === 2) {
+      setCurrentPageNumber(3);
+    }
+  }, [screenshot]);
+
   const resetStateToBeginning = () => {
     window.location.reload();
-    /*
-    setCurrentPageNumber(1);
-
-    // remove all images and videos
-    setProductIndex(0);
-    setInputsCheckButtonPressed(false);
-    setInputsCheckButtonPressedOnce(false);
-
-    setIsElevator(true);
-    setRequiresBlankFile(false);
-
-    setInputValues({
-      client: "",
-      campaign: "",
-    });
-
-    setBintBGColor("FFFFFF");
-
-    setFilename();
-    setBlankFilename();
-
-    // dropped images and video files
-    setElevatorFile({});
-    setLfdFile({});
-    setPfdFile({});
-    setSvgFile({}); // 17
-    setStandardAdFile({}); //18
-
-    setElevatorFileError(false);
-    setLfdFileError(false);
-    setPfdFileError(false);
-    setSvgFileError(false);
-    setStandardAdFileError(false);
-
-    setAllDroppedFilenames([]);
-    setAllDroppedNewFilenames([]);
-
-    setMediaExtension();
-    setIsBlackText(true);
-    */
   };
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
@@ -462,6 +436,20 @@ function App() {
   useEffect(() => {
     effectHandleProductChange();
   }, [inputValues.product]);
+
+  // runs when product changes to set productIndex, isElevator, isFullScreen
+  const effectHandlePlattformChange = () => {
+    // clear all files and previews
+    setElevatorFile({});
+    setLfdFile({});
+    setPfdFile({});
+    setSvgFile({});
+    setStandardAdFile({});
+  };
+
+  useEffect(() => {
+    effectHandleProductChange();
+  }, [inputValues.platform]);
 
   // handler for all inputs
   const handleAnyInputsChange = (name, value) => {
@@ -483,6 +471,8 @@ function App() {
   /////////////////////////////////////////////////
 
   const handleDropzoneChanges = (name, value, droppedFileType) => {
+    // if svg and lobby, get reference to the other svg
+
     // droppedFileType = elevator, landscape, portrait, svg, standardAd
     if (droppedFileType === "svg") {
       setSvgFile((prevState) => ({
@@ -527,7 +517,7 @@ function App() {
   const deliverTemplateFiles = () => {
     const eORl = isElevator ? "e" : "l";
 
-    const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
+    //const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
@@ -571,32 +561,24 @@ function App() {
 
     const loadElevator = elevatorFile.payload
       ? elevatorFile.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`,
-            result
-          );
+          newZip.file(`${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`, result);
         })
       : "";
 
     // if this is a lobby 1 file and the source is a pfd, pfd is the source
     // else, lfd is the source
-    const lfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD === false ? pfdFile : lfdFile;
-    const loadLFD = lfdSource.payload
-      ? lfdSource.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_l${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`,
-            result
-          );
+    //const lfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD === false ? pfdFile : lfdFile;
+    // i think this will be fine because you no longer have any situation where lfd or pfd are empty
+    const loadLFD = lfdFile.payload
+      ? lfdFile.payload.arrayBuffer().then((result) => {
+          newZip.file(`${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`, result);
         })
       : "";
 
-    const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
-    const loadPFD = pfdSource.payload
-      ? pfdSource.payload.arrayBuffer().then((result) => {
-          newZip.file(
-            `${filename}_p${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`,
-            result
-          );
+    //const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
+    const loadPFD = pfdFile.payload
+      ? pfdFile.payload.arrayBuffer().then((result) => {
+          newZip.file(`${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`, result);
         })
       : "";
 
@@ -614,16 +596,15 @@ function App() {
 
     const loadObject = [
       { file: elevatorFile, fn: loadElevator },
-      { file: lfdSource, fn: loadLFD },
-      { file: pfdSource, fn: loadPFD },
+      { file: lfdFile, fn: loadLFD },
+      { file: pfdFile, fn: loadPFD },
       { file: svgFile, fn: loadSVG },
       // { file: standardAdFile, fn: loadStandardAd },
     ];
     const promiseArray = loadObject.map((obj) => {
       if (obj.file.payload) {
-        console.log("try ", obj.file);
         return obj.fn;
-      }
+      } else return null;
     });
 
     Promise.all(promiseArray)
@@ -647,7 +628,6 @@ function App() {
       });
   };
   const handleBINTColorChange = (color) => {
-    console.log("color is type ", typeof color);
     setBintBGColor(color);
   };
   const handleBlackWhiteToggleChange = () => {
@@ -671,13 +651,7 @@ function App() {
     <ThemeProvider theme={AppTheme}>
       <CssBaseline />
       <div className="bgImageContainer">
-        {showPopUp ? (
-          <PopUp
-            popUpMessage={popUpMessage}
-            handleBackPopUpPress={handleBackPopUpPress}
-            handleContinuePopUpPress={handleContinuePopUpPress}
-          />
-        ) : null}
+        {showPopUp ? <PopUp popUpMessage={popUpMessage} handleBackPopUpPress={handleBackPopUpPress} handleContinuePopUpPress={handleContinuePopUpPress} /> : null}
         {currentPageNumber === 4 ? (
           <>
             <ConfirmationScreen />
@@ -689,37 +663,20 @@ function App() {
         <div className="appContainer">
           <div className="topSub">
             {currentPageNumber !== 4 ? <Filename inputValues={inputValues} /> : null}
-            {currentPageNumber !== 4 ? (
-              <WarningMessage
-                warningMessageText={warningMessageText}
-                warningMessageTextShowIcon={warningMessageTextShowIcon}
-              />
-            ) : null}
+            {currentPageNumber !== 4 ? <WarningMessage warningMessageText={warningMessageText} warningMessageTextShowIcon={warningMessageTextShowIcon} /> : null}
             {currentPageNumber === 2 && !isElevator ? (
               <div className="elpNavigatorContainer">
-                <div
-                  data-value="1"
-                  onClick={handleELPNavClick}
-                  className={`elpNavButton ${currentBuildNavNumber === 1 ? "current" : "enabled"}`}
-                >
+                <div data-value="1" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 1 ? "current" : "enabled"}`}>
                   LFD
                 </div>
-                <div
-                  data-value="2"
-                  onClick={handleELPNavClick}
-                  className={`elpNavButton ${currentBuildNavNumber === 2 ? "current" : "enabled"}`}
-                >
+                <div data-value="2" onClick={handleELPNavClick} className={`elpNavButton ${currentBuildNavNumber === 2 ? "current" : inputValues.product === 1 && !isElevator && Object.keys(lfdFile).length === 0 ? "disabled" : "enabled"}`}>
                   PFD
                 </div>
               </div>
             ) : null}
 
             {currentPageNumber === 2 && inputValues.product === 0 ? (
-              <BlackWhiteToggleButton
-                handleBINTColorChange={handleBINTColorChange}
-                bintBGColor={bintBGColor}
-                handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}
-              >
+              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}>
                 {" "}
               </BlackWhiteToggleButton>
             ) : null}
@@ -732,43 +689,18 @@ function App() {
 
             {currentPageNumber !== 4 ? (
               <div className={`inputsPage page ${currentPageNumber !== 1 ? "hide" : ""}`}>
-                <Inputs
-                  productIndex={productIndex}
-                  inputValues={inputValues}
-                  handleAnyInputsChange={handleAnyInputsChange}
-                  inputsCheckButtonPressed={inputsCheckButtonPressed}
-                  inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce}
-                />
+                <Inputs productIndex={productIndex} inputValues={inputValues} handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce} />
               </div>
             ) : null}
 
             {/* PAGE 2 */}
 
-            <div
-              className={`adBuildingPage page ${
-                isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"
-              } ${currentPageNumber !== 2 ? "hide" : ""}`}
-            >
+            <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"} ${currentPageNumber !== 2 ? "hide" : ""}`}>
               {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
-              <div
-                className={`adBuildingPageContent ${
-                  currentPageNumber === 2 && isElevator === true
-                    ? "elevator"
-                    : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1
-                    ? "landscape"
-                    : "portrait"
-                }`}
-              >
+              <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
                 {/* elevator */}
-                <div
-                  // ref={isElevator ? imageRef : null}
-                  id={isElevator ? "screenGrabThis" : null}
-                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}
-                >
+                <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
                   <PageElevator
-                    elevatorFileError={elevatorFileError}
-                    svgFileError={svgFileError}
-                    standardAdFileError={standardAdFileError}
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
                     productIndex={productIndex}
@@ -776,21 +708,15 @@ function App() {
                     handleDropzoneChanges={handleDropzoneChanges}
                     handleWarningMessageText={handleWarningMessageText}
                     svgFile={svgFile}
+                    elevatorFile={elevatorFile}
                     shakeDropzoneBGImage={shakeDropzoneBGImage}
+                    handleContinueButtonDisabled={handleContinueButtonDisabled}
                   />
                 </div>
                 {/* lfd */}
-                <div
-                  // ref={isElevator ? null : imageRef}
-                  id={isElevator ? null : "screenGrabThis"}
-                  // id="screenGrabThis"
-                  className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}
-                >
+                <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
-                      lfdFileError={lfdFileError}
-                      svgFileError={svgFileError}
-                      standardAdFileError={standardAdFileError}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}
@@ -799,15 +725,15 @@ function App() {
                       handleWarningMessageText={handleWarningMessageText}
                       shakeDropzoneBGImage={shakeDropzoneBGImage}
                       svgFile={svgFile}
+                      lfdFile={lfdFile}
+                      pfdFile={pfdFile}
+                      handleContinueButtonDisabled={handleContinueButtonDisabled}
                     />
                   </div>
                   {/* pfd */}
 
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
                     <PagePFD
-                      pfdFileError={pfdFileError}
-                      svgFileError={svgFileError}
-                      standardAdFileError={standardAdFileError}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}
@@ -815,7 +741,10 @@ function App() {
                       handleDropzoneChanges={handleDropzoneChanges}
                       handleWarningMessageText={handleWarningMessageText}
                       svgFile={svgFile}
+                      lfdFile={lfdFile}
+                      pfdFile={pfdFile}
                       shakeDropzoneBGImage={shakeDropzoneBGImage}
+                      handleContinueButtonDisabled={handleContinueButtonDisabled}
                     />
                   </div>
                 </div>
@@ -843,36 +772,19 @@ function App() {
           <div className="navSub">
             {currentPageNumber !== 4 ? (
               <div className="buttonsHolder">
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={1}
-                  className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={1} className={`circleButton ${currentPageNumber === 1 ? "current" : "enabled"}`}>
                   1
                 </div>
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={2}
-                  className={`circleButton ${
-                    currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"
-                  }`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={2} className={`circleButton ${currentPageNumber === 2 ? "current" : currentPageNumber > 2 ? "enabled" : "disabled"}`}>
                   2
                 </div>
-                <div
-                  onClick={circleButtonClickHandler}
-                  dataindex={4}
-                  className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}
-                >
+                <div onClick={circleButtonClickHandler} dataindex={4} className={`circleButton ${currentPageNumber === 3 ? "current" : "disabled"}`}>
                   3
                 </div>
               </div>
             ) : null}
 
-            <ContinueButton
-              currentPageNumber={currentPageNumber}
-              handleContinueButtonPressed={handleContinueButtonPressed}
-            ></ContinueButton>
+            <ContinueButton currentPageNumber={currentPageNumber} handleContinueButtonPressed={handleContinueButtonPressed} continueButtonDisabled={continueButtonDisabled}></ContinueButton>
           </div>
         </div>
       </div>

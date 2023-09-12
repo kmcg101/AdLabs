@@ -1,10 +1,19 @@
 import React from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../Dropzone";
+import DropzoneSimple from "../DropzoneSimple";
+import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/lfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_fsbi = (props) => {
+const L_fsbi = ({
+  handleWarningMessageText,
+  handleDropzoneChanges,
+  svgFile,
+  productIndex,
+  lfdFile,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   const lFSBILogo = {
     width: "160px",
     height: "160px",
@@ -21,38 +30,32 @@ const L_fsbi = (props) => {
     top: "0px",
     zIndex: "100",
   };
-  const svgFile = props.svgFile;
-  const lfdFileError = props.lfdFileError;
-  const svgFileError = props.svgFileError;
-  const productIndex = props.productIndex;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
 
   return (
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div style={lFullScreen} className="lFullScreen">
-        <Dropzone
+        <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          assetFileToChange={lfdFile}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
       <div className="lFSBISVG" style={lFSBILogo}>
-        <Dropzone
+        <DropzoneSVG
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
     </div>

@@ -7,69 +7,72 @@ import PFsbi from "../productPages/PFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PagePFD = (props) => {
-  const productIndex = props.productIndex;
-  const bintBGColor = props.bintBGColor;
-  const isBlackText = props.isBlackText;
-
-  const pfdFileError = props.pfdFileError;
-  const svgFileError = props.svgFileError;
-  const standardAdFileError = props.standardAdFileError;
-  const svgFile = props.svgFile;
-
-  const handleDropzoneChanges = (name, value, droppedFileType) => {
-    props.handleDropzoneChanges(name, value, droppedFileType);
-  };
-
+const PagePFD = ({
+  productIndex,
+  bintBGColor,
+  isBlackText,
+  svgFile,
+  lfdFile,
+  pfdFile,
+  handleDropzoneChanges,
+  handleWarningMessageText,
+  shakeDropzoneBGImage,
+  handleContinueButtonDisabled,
+}) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <PBint
-          pfdFileError={pfdFileError}
-          standardAdFileError={standardAdFileError}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 1 ? (
         <PFsa
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 2 ? (
         <PHfsp
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 3 ? (
         <PVsa
-          pfdFileError={pfdFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          lfdFile={lfdFile}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
       {productIndex === 4 ? (
         <PFsbi
-          pfdFileError={pfdFileError}
-          svgFileError={svgFileError}
           handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={props.handleWarningMessageText}
+          handleWarningMessageText={handleWarningMessageText}
           productIndex={productIndex}
           svgFile={svgFile}
-          shakeDropzoneBGImage={props.shakeDropzoneBGImage}
+          shakeDropzoneBGImage={shakeDropzoneBGImage}
+          pfdFile={pfdFile}
+          handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       ) : null}
     </div>

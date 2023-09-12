@@ -1,4 +1,4 @@
-export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor) {
+export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText) {
   //   const eORl = isElevator ? "e" : "l";
   const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
   const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
@@ -7,6 +7,9 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
   const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtensions.elevator}" type="video/mp4"></video>`;
   const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtensions.landscape}" type="video/mp4"></video>`;
   const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtensions.portrait}" type="video/mp4"></video>`;
+
+  const textColor = isBlackText ? "black" : "white";
+  const bgColor = isBlackText ? "white" : "black";
 
   const playContentVideoE = `var myThis = this;
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
@@ -141,6 +144,22 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 class extends baseAdTemplate {
                     constructor(parentElement) {
                         super(parentElement);
+                    }
+
+                    prepContent(){ 
+                        const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
+                   
+                        const myBG = myLayer2.querySelector(".cmsContainer"); 
+                        const myCopy = myLayer2.querySelector(".copy"); 
+                        const myHeadline = myLayer2.querySelector(".headline"); 
+                        const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
+                        const myUnderline = myLayer2.querySelector(".underline"); 
+                        
+                        myCopy.style.color="${textColor}"; 
+                        myHeadline.style.color="${textColor}"; 
+                        mySubHeadline.style.color="${textColor}"; 
+                        myUnderline.style.color="${textColor}"; 
+                        myBG.style.backgroundColor="${bgColor}";  
                     }
                     
                     playContent() {
@@ -697,6 +716,21 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
             class extends baseAdTemplate {
                 constructor(parentElement) {
                     super(parentElement);
+                }
+
+                prepContent(){ 
+                    const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
+                   
+                    const myBG = myLayer2.querySelector(".cmsContainer"); 
+                    const myCopy = myLayer2.querySelector(".copy"); 
+                    const myHeadline = myLayer2.querySelector(".headline"); 
+                    const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
+                    const myUnderline = myLayer2.querySelector(".underline"); 
+                    myCopy.style.color="${textColor}"; 
+                    myHeadline.style.color="${textColor}"; 
+                    mySubHeadline.style.color="${textColor}"; 
+                    myUnderline.style.color="${textColor}"; 
+                    myBG.style.backgroundColor="${bgColor}";  
                 }
 				
                 playContent() {

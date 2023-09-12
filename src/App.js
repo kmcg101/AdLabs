@@ -346,25 +346,6 @@ function App() {
           checkErrors++;
         }
       }
-      // check for standard ad
-      // if (inputValues.product === 0) {
-      //   if (standardAdFile.payload) {
-      //     setStandardAdFileError(false);
-      //     console.log("standard ad file found");
-      //   } else {
-      //     setStandardAdFileError(true);
-      //     console.log("standard ad file missing");
-      //     missingFilesArray.push("standard ad");
-      //     checkErrors++;
-      //   }
-      // }
-      // setTimeout(() => {
-      //   setElevatorFileError(false);
-      //   setLfdFileError(false);
-      //   setPfdFileError(false);
-      //   setSvgFileError(false);
-      //   setStandardAdFileError(false);
-      // }, "2000");
 
       console.log("errors = ", checkErrors);
       if (checkErrors === 0) {
@@ -406,10 +387,6 @@ function App() {
     // same div
     takeScreenshot();
     //
-    // pause this for x seconds so that it can take the screenshot
-    //setTimeout(() => {
-    //setCurrentPageNumber(3);
-    //}, "3000");
   };
   useEffect(() => {
     console.log("screenshot changed");
@@ -521,7 +498,7 @@ function App() {
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor);
+    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });

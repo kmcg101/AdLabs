@@ -10,6 +10,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 
   const textColor = isBlackText ? "black" : "white";
   const bgColor = isBlackText ? "white" : "black";
+  const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
 
   const playContentVideoE = `var myThis = this;
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
@@ -154,12 +155,14 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         const myHeadline = myLayer2.querySelector(".headline"); 
                         const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
                         const myUnderline = myLayer2.querySelector(".underline"); 
+                        const myLogo = myLayer2.querySelector(".partnerImage"); 
                         
                         myCopy.style.color="${textColor}"; 
                         myHeadline.style.color="${textColor}"; 
                         mySubHeadline.style.color="${textColor}"; 
                         myUnderline.style.color="${textColor}"; 
-                        myBG.style.backgroundColor="${bgColor}";  
+                        myBG.style.backgroundColor="#${bintBGColor}"; 
+                        myLogo.style.filter="${logoFilter}";
                     }
                     
                     playContent() {
@@ -725,12 +728,16 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     const myCopy = myLayer2.querySelector(".copy"); 
                     const myHeadline = myLayer2.querySelector(".headline"); 
                     const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
-                    const myUnderline = myLayer2.querySelector(".underline"); 
+                    const myUnderline = myLayer2.querySelector(".underline");
+                    const myLogo = myLayer2.querySelector(".partnerImage"); 
+
+
                     myCopy.style.color="${textColor}"; 
                     myHeadline.style.color="${textColor}"; 
                     mySubHeadline.style.color="${textColor}"; 
                     myUnderline.style.color="${textColor}"; 
-                    myBG.style.backgroundColor="${bgColor}";  
+                    myBG.style.backgroundColor="#${bintBGColor}";
+                    myLogo.style.filter="${logoFilter}";
                 }
 				
                 playContent() {

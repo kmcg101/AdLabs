@@ -60,7 +60,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     z-index: 1;
                     width: 100%;
                     height: 100%;
-                    background: #${bintBGColor};
+                    
                 }
                 
                 .${filename} .media_frame1 {
@@ -148,22 +148,54 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     }
 
                     prepContent(){ 
-                        const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
+                    const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
                    
-                        const myBG = myLayer2.querySelector(".cmsContainer"); 
-                        const myCopy = myLayer2.querySelector(".copy"); 
-                        const myHeadline = myLayer2.querySelector(".headline"); 
-                        const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
-                        const myUnderline = myLayer2.querySelector(".underline"); 
-                        const myLogo = myLayer2.querySelector(".partnerImage"); 
-                        
-                        myCopy.style.color="${textColor}"; 
-                        myHeadline.style.color="${textColor}"; 
-                        mySubHeadline.style.color="${textColor}"; 
-                        myUnderline.style.color="${textColor}"; 
-                        myBG.style.backgroundColor="#${bintBGColor}"; 
-                        myLogo.style.filter="${logoFilter}";
-                    }
+                    const myBG = this.scheduleItem.template.element.querySelector(".content_background");
+                    const myCopy = myLayer2.querySelector(".copy"); 
+                    const myHeadline = myLayer2.querySelector(".headline"); 
+                    const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
+                    const myUnderline = myLayer2.querySelector(".underline");
+                    const myLogo = myLayer2.querySelector(".partnerImage");
+                     try{
+                            myCopy.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .copy")
+                        }
+                        try{
+                            myHeadline.style.color="${textColor}"; 
+                        }
+                        catch (error){
+                            //console.log("d110 error .headline")
+                        }
+                        try{
+                            mySubHeadline.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .subHeadline")
+                        }
+                        try{
+                            myUnderline.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .underline")
+                        }
+                       
+                         try{
+                            myBG.style.display="block";
+                            myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
+
+                        }
+                        catch (error){
+                            //console.log("d110 error bg2 gradient")
+                        }
+                         try{
+                            myLogo.style.filter="${logoFilter}";
+                        }
+                        catch (error){
+                            //console.log("d110 error provider logo")
+                        } 
+                }
                     
                     playContent() {
                         var slotduration = this.scheduleItem.slot.duration;
@@ -580,7 +612,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 z-index: 1;
                 width: 100%;
                 height: 100%;
-				background: #${bintBGColor};
+				
 				
             }
 			
@@ -724,20 +756,51 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 prepContent(){ 
                     const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
                    
-                    const myBG = myLayer2.querySelector(".cmsContainer"); 
+                    const myBG = this.scheduleItem.template.element.querySelector(".content_background");
                     const myCopy = myLayer2.querySelector(".copy"); 
                     const myHeadline = myLayer2.querySelector(".headline"); 
                     const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
                     const myUnderline = myLayer2.querySelector(".underline");
-                    const myLogo = myLayer2.querySelector(".partnerImage"); 
+                    const myLogo = myLayer2.querySelector(".partnerImage");
+                     try{
+                            myCopy.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .copy")
+                        }
+                        try{
+                            myHeadline.style.color="${textColor}"; 
+                        }
+                        catch (error){
+                            //console.log("d110 error .headline")
+                        }
+                        try{
+                            mySubHeadline.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .subHeadline")
+                        }
+                        try{
+                            myUnderline.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .underline")
+                        }
+                       
+                         try{
+                            myBG.style.display="block";
+                            myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
 
-
-                    myCopy.style.color="${textColor}"; 
-                    myHeadline.style.color="${textColor}"; 
-                    mySubHeadline.style.color="${textColor}"; 
-                    myUnderline.style.color="${textColor}"; 
-                    myBG.style.backgroundColor="#${bintBGColor}";
-                    myLogo.style.filter="${logoFilter}";
+                        }
+                        catch (error){
+                            //console.log("d110 error bg2 gradient")
+                        }
+                         try{
+                            myLogo.style.filter="${logoFilter}";
+                        }
+                        catch (error){
+                            //console.log("d110 error provider logo")
+                        } 
                 }
 				
                 playContent() {

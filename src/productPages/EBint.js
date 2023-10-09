@@ -7,17 +7,7 @@ import whiteTextImage from "../assets/ebintWhiteText.png";
 
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_bint = ({
-  isBlackText,
-  bintBGColor,
-  svgFile,
-  elevatorFile,
-  productIndex,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  handleDropzoneChanges,
-  handleContinueButtonDisabled,
-}) => {
+const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage, handleDropzoneChanges, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -37,6 +27,7 @@ const E_bint = ({
     position: "absolute",
     overflow: "hidden",
     zIndex: "100",
+    outline: "1px white solid",
   };
 
   const bgStyle = {
@@ -50,7 +41,7 @@ const E_bint = ({
       </div>
 
       <div style={eStandardAd} className="eStandardAd">
-        <Dropzone
+        {/* <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
@@ -59,10 +50,10 @@ const E_bint = ({
           svgFile={svgFile}
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           elevatorFile={elevatorFile}
-        />
+        /> */}
       </div>
 
-      <div className="eBintAd" style={eBINTImage}>
+      <div className={`ebintAd ${noBintImages === true ? "hide" : ""}`} style={eBINTImage}>
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}

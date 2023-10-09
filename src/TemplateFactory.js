@@ -1,16 +1,46 @@
-export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText) {
+export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages) {
   //   const eORl = isElevator ? "e" : "l";
-  const imageTagE = `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
-  const imageTagL = `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
-  const imageTagP = `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
+  const imageTagE = noBintImages ? "" : `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
+  const imageTagL = noBintImages ? "" : `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
+  const imageTagP = noBintImages ? "" : `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
 
   const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtensions.elevator}" type="video/mp4"></video>`;
   const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtensions.landscape}" type="video/mp4"></video>`;
   const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtensions.portrait}" type="video/mp4"></video>`;
 
   const textColor = isBlackText ? "black" : "white";
-  const bgColor = isBlackText ? "white" : "black";
   const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
+
+  // e bint with no image moves the bottom to 0, with image it must manipulate the infobar
+  const eBintPlayContentTop = noBintImages
+    ? ` this.scheduleItem.template.element.querySelector('.layer-2').style.bottom="0";`
+    : `let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
+        infobar.style.animationName = "infobarHide";
+        infobar.style.animationDuration = ".4s";`;
+
+  // e bint with no image does not have to close infobar, with image does
+  const eBintCloseInfobar = noBintImages
+    ? ""
+    : ` // infobar.style.animationName = "infobarShow";
+        // infobar.style.animationDuration = ".3s";`;
+
+  const additionalCodeForBintNoImage = !noBintImages
+    ? ""
+    : `
+                    const myWidgetB = this.scheduleItem.template.element.querySelector(".widget_background");
+                    const myWidgetC = this.scheduleItem.template.element.querySelector(".widget_container");
+                    try{
+                        myWidgetB.style.display="flex";
+                    }
+                    catch (error){
+                        // console.log("d114 error widgetB")
+                    } 
+                    try{
+                        myWidgetC.style.display="flex";
+                    }
+                    catch (error){
+                        // console.log("d114 error widgetC")
+                    }`;
 
   const playContentVideoE = `var myThis = this;
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
@@ -60,6 +90,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     z-index: 1;
                     width: 100%;
                     height: 100%;
+                    background:  #${bintBGColor};
                     
                 }
                 
@@ -148,15 +179,18 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     }
 
                     prepContent(){ 
-                    const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
-                   
-                    const myBG = this.scheduleItem.template.element.querySelector(".content_background");
-                    const myCopy = myLayer2.querySelector(".copy"); 
-                    const myHeadline = myLayer2.querySelector(".headline"); 
-                    const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
-                    const myUnderline = myLayer2.querySelector(".underline");
-                    const myLogo = myLayer2.querySelector(".partnerImage");
-                     try{
+                        const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
+                    
+                        const myBG = this.scheduleItem.template.element.querySelector(".content_background");
+                        const myCopy = myLayer2.querySelector(".copy"); 
+                        const myHeadline = myLayer2.querySelector(".headline"); 
+                        const mySubHeadline = myLayer2.querySelector(".headlineSubText");
+                        const myFooter = myLayer2.querySelector(".footer"); 
+                        const myUnderline = myLayer2.querySelector(".underline");
+                        const myLogo = myLayer2.querySelector(".partnerImage");
+                        const myFooterImage = myLayer2.querySelector(".footerImage");
+
+                        try{
                             myCopy.style.color="${textColor}";
                         }
                         catch (error){
@@ -175,13 +209,19 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                             //console.log("d110 error .subHeadline")
                         }
                         try{
-                            myUnderline.style.color="${textColor}";
+                            myFooter.style.color="${textColor}";
+                        }
+                        catch (error){
+                            //console.log("d110 error .subHeadline")
+                        }
+                        try{
+                            myUnderline.style.filter="${logoFilter}";
                         }
                         catch (error){
                             //console.log("d110 error .underline")
                         }
-                       
-                         try{
+                        
+                        try{
                             myBG.style.display="block";
                             myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
 
@@ -189,22 +229,30 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         catch (error){
                             //console.log("d110 error bg2 gradient")
                         }
-                         try{
+                        try{
                             myLogo.style.filter="${logoFilter}";
                         }
                         catch (error){
                             //console.log("d110 error provider logo")
                         } 
-                }
+                        try{
+                            myFooterImage.style.filter="${logoFilter}";
+                        }
+                        catch (error){
+                            //console.log("d110 error provider logo")
+                        }
+
+                        ${additionalCodeForBintNoImage};
+                    
+                    }
                     
                     playContent() {
+                        ${eBintPlayContentTop}
                         var slotduration = this.scheduleItem.slot.duration;
                         var transitionTime = slotduration * 1000 - 350;
                         
                         let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
-                        let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
                         let bintbackground = this.scheduleItem.template.element.querySelector('#bint_background');
-                        let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
                         
                         if(common.edu700Service.isEdu700()){
                             //do nothing
@@ -216,8 +264,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                             bintbackground.style.animationDuration = ".2s";
                         }
                     
-                        infobar.style.animationName = "infobarHide";
-                        infobar.style.animationDuration = ".4s";
                     
                         setTimeout(function () {
                             
@@ -239,8 +285,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                                 bintbackground.style.animationDelay = ".2s";
                             }
                             
-                            infobar.style.animationName = "infobarShow";
-                            infobar.style.animationDuration = ".3s";
+                            ${eBintCloseInfobar}
         
                         }, transitionTime);
     
@@ -612,7 +657,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 z-index: 1;
                 width: 100%;
                 height: 100%;
-				
+				background:  #${bintBGColor};
 				
             }
 			
@@ -754,53 +799,68 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
 
                 prepContent(){ 
-                    const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
-                   
+                    const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2");
                     const myBG = this.scheduleItem.template.element.querySelector(".content_background");
                     const myCopy = myLayer2.querySelector(".copy"); 
                     const myHeadline = myLayer2.querySelector(".headline"); 
-                    const mySubHeadline = myLayer2.querySelector(".subHeadline"); 
+                    const mySubHeadline = myLayer2.querySelector(".headlineSubText");
+                    const myFooter = myLayer2.querySelector(".footer"); 
                     const myUnderline = myLayer2.querySelector(".underline");
                     const myLogo = myLayer2.querySelector(".partnerImage");
-                     try{
-                            myCopy.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .copy")
-                        }
-                        try{
-                            myHeadline.style.color="${textColor}"; 
-                        }
-                        catch (error){
-                            //console.log("d110 error .headline")
-                        }
-                        try{
-                            mySubHeadline.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .subHeadline")
-                        }
-                        try{
-                            myUnderline.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .underline")
-                        }
-                       
-                         try{
-                            myBG.style.display="block";
-                            myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
+                    const myFooterImage = myLayer2.querySelector(".footerImage");
 
-                        }
-                        catch (error){
-                            //console.log("d110 error bg2 gradient")
-                        }
-                         try{
-                            myLogo.style.filter="${logoFilter}";
-                        }
-                        catch (error){
-                            //console.log("d110 error provider logo")
-                        } 
+                    try{
+                        myCopy.style.color="${textColor}";
+                    }
+                    catch (error){
+                        //console.log("d110 error .copy")
+                    }
+                    try{
+                        myHeadline.style.color="${textColor}"; 
+                    }
+                    catch (error){
+                        //console.log("d110 error .headline")
+                    }
+                    try{
+                        mySubHeadline.style.color="${textColor}";
+                    }
+                    catch (error){
+                        //console.log("d110 error .subHeadline")
+                    }
+                    try{
+                        myFooter.style.color="${textColor}";
+                    }
+                    catch (error){
+                        //console.log("d110 error .subHeadline")
+                    }
+                    try{
+                        myUnderline.style.filter="${logoFilter}";
+                    }
+                    catch (error){
+                        //console.log("d110 error .underline")
+                    }
+                       
+                    try{
+                        myBG.style.display="block";
+                        myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
+
+                    }
+                    catch (error){
+                        //console.log("d110 error bg2 gradient")
+                    }
+                    try{
+                        myLogo.style.filter="${logoFilter}";
+                    }
+                    catch (error){
+                        //console.log("d110 error provider logo")
+                    } 
+                    try{
+                        myFooterImage.style.filter="${logoFilter}";
+                    }
+                    catch (error){
+                        //console.log("d110 error provider logo")
+                    }
+                    ${additionalCodeForBintNoImage}; 
                 }
 				
                 playContent() {

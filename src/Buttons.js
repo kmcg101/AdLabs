@@ -74,33 +74,11 @@ export const BlackWhiteToggleButton = (props) => {
   const handleBlackWhiteToggleChange = () => {
     props.handleBlackWhiteToggleChange();
   };
+  const handleNoImagesToggleChange = () => {
+    props.handleNoImagesToggleChange();
+  };
 
   const handleBINTColorChange = (e) => {
-    // const validCharactersArray = [
-    //   "a",
-    //   "b",
-    //   "c",
-    //   "d",
-    //   "e",
-    //   "f",
-    //   "A",
-    //   "B",
-    //   "C",
-    //   "D",
-    //   "E",
-    //   "F",
-    //   "0",
-    //   "1",
-    //   "2",
-    //   "3",
-    //   "4",
-    //   "5",
-    //   "6",
-    //   "7",
-    //   "8",
-    //   "9",
-    // ];
-
     props.handleBINTColorChange(e.target.value);
   };
 
@@ -110,25 +88,15 @@ export const BlackWhiteToggleButton = (props) => {
     <div className="bintColorPickerContainer">
       {/* toggle button for bint white/black text  */}
       <div className="bintColorPickerBG">
-        <FormControlLabel
-          className="bintColorPickerInner"
-          control={<Switch onChange={handleBlackWhiteToggleChange} color="default" />}
-          labelPlacement="start"
-          size="small"
-          label="TEXT"
-        />
+        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleBlackWhiteToggleChange} />} labelPlacement="start" size="small" label="TEXT" />
       </div>
       {/* bint bg color text input */}
       <div className={`bintColorPickerBG color ${classes.colorPickerContainer}`}>
-        #
-        <input
-          className={classes.colorPickerInput}
-          type="text"
-          name="bintBgColor"
-          value={bintBGColor}
-          maxLength="6"
-          onChange={handleBINTColorChange}
-        ></input>
+        #<input className={classes.colorPickerInput} type="text" name="bintBgColor" value={bintBGColor} maxLength="6" onChange={handleBINTColorChange}></input>
+      </div>
+      {/* toggle button for bint image  */}
+      <div className="bintColorPickerBG">
+        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="Image?" />
       </div>
     </div>
   );

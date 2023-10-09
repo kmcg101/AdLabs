@@ -6,16 +6,7 @@ import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_bint = ({
-  pfdFile,
-  handleDropzoneChanges,
-  isBlackText,
-  productIndex,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  bintBGColor,
-  handleContinueButtonDisabled,
-}) => {
+const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, productIndex, handleWarningMessageText, shakeDropzoneBGImage, bintBGColor, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -34,6 +25,7 @@ const P_bint = ({
     left: "24px",
     top: "256px",
     zIndex: "100",
+    outline: "1px white solid",
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,
@@ -45,16 +37,16 @@ const P_bint = ({
         <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
       <div className="pStandardAd" style={pStandardAd}>
-        <Dropzone
+        {/* <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
           handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        /> */}
       </div>
-      <div className="pBintAd" style={pBint}>
+      <div className={`pBintAd ${noBintImages === true ? "hide" : ""}`} style={pBint}>
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}

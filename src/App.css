@@ -181,6 +181,17 @@ html {
 .adBuildingPageInner.hide {
   display: none;
 }
+.ebintAd.hide {
+  display: none;
+}
+
+.lBintAd.hide {
+  display: none;
+}
+
+.pBintAd.hide {
+  display: none;
+}
 
 .platformButton {
   border-radius: 5px;

@@ -6,16 +6,7 @@ import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_bint = ({
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  bintBGColor,
-  isBlackText,
-  productIndex,
-  lfdFile,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, noBintImages, isBlackText, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -35,6 +26,7 @@ const L_bint = ({
     height: "432px",
     position: "absolute",
     zIndex: "100",
+    outline: "1px white solid",
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,
@@ -47,15 +39,15 @@ const L_bint = ({
       </div>
 
       <div className="lStandardAd" style={lStandardAd}>
-        <Dropzone
+        {/* <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
-        />
+        /> */}
       </div>
-      <div style={lBint} className="lBintAd">
+      <div style={lBint} className={`lBintAd ${noBintImages === true ? "hide" : ""}`}>
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}

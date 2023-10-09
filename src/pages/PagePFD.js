@@ -7,22 +7,12 @@ import PFsbi from "../productPages/PFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PagePFD = ({
-  productIndex,
-  bintBGColor,
-  isBlackText,
-  svgFile,
-  lfdFile,
-  pfdFile,
-  handleDropzoneChanges,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+const PagePFD = ({ productIndex, bintBGColor, noBintImages, isBlackText, svgFile, lfdFile, pfdFile, handleDropzoneChanges, handleWarningMessageText, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <PBint
+          noBintImages={noBintImages}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
@@ -33,47 +23,14 @@ const PagePFD = ({
         />
       ) : null}
       {productIndex === 1 ? (
-        <PFsa
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          lfdFile={lfdFile}
-          pfdFile={pfdFile}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <PFsa handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} shakeDropzoneBGImage={shakeDropzoneBGImage} lfdFile={lfdFile} pfdFile={pfdFile} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
-      {productIndex === 2 ? (
-        <PHfsp
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          pfdFile={pfdFile}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
-      ) : null}
+      {productIndex === 2 ? <PHfsp handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} shakeDropzoneBGImage={shakeDropzoneBGImage} pfdFile={pfdFile} handleContinueButtonDisabled={handleContinueButtonDisabled} /> : null}
       {productIndex === 3 ? (
-        <PVsa
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          lfdFile={lfdFile}
-          pfdFile={pfdFile}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <PVsa handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} shakeDropzoneBGImage={shakeDropzoneBGImage} lfdFile={lfdFile} pfdFile={pfdFile} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
       {productIndex === 4 ? (
-        <PFsbi
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          svgFile={svgFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          pfdFile={pfdFile}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <PFsbi handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} svgFile={svgFile} shakeDropzoneBGImage={shakeDropzoneBGImage} pfdFile={pfdFile} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
     </div>
   );

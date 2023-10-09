@@ -71,7 +71,7 @@ function App() {
   const [showPopUp, setShowPopUp] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
-  const [bintBGColor, setBintBGColor] = useState("FFFFFF");
+  const [bintBGColor, setBintBGColor] = useState("000000");
 
   const [shakeDropzoneBGImage, setShakeDropzoneBGImage] = useState(false);
 
@@ -100,7 +100,8 @@ function App() {
 
   const [mediaExtension, setMediaExtension] = useState();
 
-  const [isBlackText, setIsBlackText] = useState(true);
+  const [noBintImages, setNoBintImages] = useState(false);
+  const [isBlackText, setIsBlackText] = useState(false);
 
   const handleWarningMessageText = (txt, showIcon) => {
     setWarningMessageText(txt);
@@ -271,15 +272,15 @@ function App() {
       }
     } else if (currentPageNumber === 2) {
       // this runs when landing on the RESULTS  page.
-
       // check if all dropboxes have been filled
-
       // check if proper files dropped
       let checkErrors = 0;
       let missingFilesArray = [];
 
       // check for primary files
-      if (isElevator) {
+      if (noBintImages) {
+        // no need to check for images
+      } else if (isElevator) {
         if (elevatorFile.payload) {
           console.log("elevator file found");
 
@@ -498,14 +499,14 @@ function App() {
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText);
+    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });
 
     // manifest file
     //valM is the text of the manifest template passed from TemplateCreator
-    var contentM = getManifestFile(filename, isElevator, mediaExtensions);
+    var contentM = getManifestFile(noBintImages, filename, isElevator, mediaExtensions, noBintImages);
     var blobM = new Blob([contentM], {
       type: "text/plain;charset=utf-8",
     });
@@ -610,6 +611,14 @@ function App() {
   const handleBlackWhiteToggleChange = () => {
     setIsBlackText((prevIsBlackText) => !prevIsBlackText);
   };
+  const handleNoImagesToggleChange = () => {
+    setNoBintImages((prevNoBintImages) => !prevNoBintImages);
+    // clear out all dropped images
+    effectHandlePlattformChange();
+
+    console.log("changed");
+  };
+
   const config = {
     angle: "142",
     spread: "360",
@@ -653,7 +662,7 @@ function App() {
             ) : null}
 
             {currentPageNumber === 2 && inputValues.product === 0 ? (
-              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}>
+              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange} handleNoImagesToggleChange={handleNoImagesToggleChange}>
                 {" "}
               </BlackWhiteToggleButton>
             ) : null}
@@ -678,6 +687,7 @@ function App() {
                 {/* elevator */}
                 <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
                   <PageElevator
+                    noBintImages={noBintImages}
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
                     productIndex={productIndex}
@@ -694,6 +704,7 @@ function App() {
                 <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
+                      noBintImages={noBintImages}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}
@@ -711,6 +722,7 @@ function App() {
 
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
                     <PagePFD
+                      noBintImages={noBintImages}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
                       productIndex={productIndex}

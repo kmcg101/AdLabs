@@ -7,21 +7,12 @@ import EFsbi from "../productPages/EFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageElevator = ({
-  shakeDropzoneBGImage,
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  productIndex,
-  bintBGColor,
-  isBlackText,
-  svgFile,
-  elevatorFile,
-  handleContinueButtonDisabled,
-}) => {
+const PageElevator = ({ shakeDropzoneBGImage, handleWarningMessageText, handleDropzoneChanges, productIndex, bintBGColor, noBintImages, isBlackText, svgFile, elevatorFile, handleContinueButtonDisabled }) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <EBint
+          noBintImages={noBintImages}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}
           handleDropzoneChanges={handleDropzoneChanges}
@@ -34,48 +25,16 @@ const PageElevator = ({
         />
       ) : null}
       {productIndex === 1 ? (
-        <EFsa
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <EFsa handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} svgFile={svgFile} elevatorFile={elevatorFile} shakeDropzoneBGImage={shakeDropzoneBGImage} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
       {productIndex === 2 ? (
-        <EHfsp
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <EHfsp handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} svgFile={svgFile} elevatorFile={elevatorFile} shakeDropzoneBGImage={shakeDropzoneBGImage} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
       {productIndex === 3 ? (
-        <EVsa
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <EVsa handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} svgFile={svgFile} elevatorFile={elevatorFile} shakeDropzoneBGImage={shakeDropzoneBGImage} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
       {productIndex === 4 ? (
-        <EFsbi
-          handleDropzoneChanges={handleDropzoneChanges}
-          handleWarningMessageText={handleWarningMessageText}
-          productIndex={productIndex}
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          handleContinueButtonDisabled={handleContinueButtonDisabled}
-        />
+        <EFsbi handleDropzoneChanges={handleDropzoneChanges} handleWarningMessageText={handleWarningMessageText} productIndex={productIndex} svgFile={svgFile} elevatorFile={elevatorFile} shakeDropzoneBGImage={shakeDropzoneBGImage} handleContinueButtonDisabled={handleContinueButtonDisabled} />
       ) : null}
     </div>
   );

@@ -49,12 +49,11 @@ function TextBox(props) {
         <div className="">
           {/* <input className={`standardText ${inputsCheckButtonPressed && valueIsValid === false ? "textInputErrorShake" : inputsCheckButtonPressedOnce && valueIsValid === false ?  "textInputErrorOutline" : allGoodCharacters ? "" : "textInputErrorOutline"}` */}
           <input
-            className={`standardText ${
-              inputsCheckButtonPressed && allGoodCharacters === false ? "textInputErrorShake" : ""
-            } ${inputsCheckButtonPressed && valueIsValid === false ? "textInputErrorShake" : ""} ${
-              inputsCheckButtonPressedOnce && valueIsValid === false ? "textInputErrorOutline" : ""
-            } ${allGoodCharacters === false ? "textInputErrorOutline" : ""} `}
+            className={`standardText ${inputsCheckButtonPressed && allGoodCharacters === false ? "textInputErrorShake" : ""} ${inputsCheckButtonPressed && valueIsValid === false ? "textInputErrorShake" : ""} ${inputsCheckButtonPressedOnce && valueIsValid === false ? "textInputErrorOutline" : ""} ${
+              allGoodCharacters === false ? "textInputErrorOutline" : ""
+            } `}
             type="text"
+            autoComplete="off"
             name={props.varID}
             value={props.value}
             onChange={handleAnyInputsChange}

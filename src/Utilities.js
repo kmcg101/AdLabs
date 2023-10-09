@@ -17,7 +17,7 @@ export const getFilename = (inputValues, isFS, product) => {
   return `${clientName}_${duration}_${desc}_${countryCode}${fsValue}_${eORl}-${product}`;
 };
 
-export function getManifestFile(filename, isElevator, mediaExtensions) {
+export function getManifestFile(noBintImages, filename, isElevator, mediaExtensions) {
   const filenameString = filename ? filename.toString() : "";
   const videoOrImageE = mediaExtensions.elevator === "mp4" ? "video" : "image";
   const videoOrImageL = mediaExtensions.landscape === "mp4" ? "video" : "image";
@@ -25,9 +25,10 @@ export function getManifestFile(filename, isElevator, mediaExtensions) {
 
   const svgManifestEntry = filenameString.includes("-fsbi") ? `,"advertising/${filename}.svg"` : "";
 
-  const mediaManifestEntry = isElevator
-    ? `"advertising/${filename}_e${videoOrImageE}.${mediaExtensions.elevator}"`
-    : `"advertising/${filename}_l${videoOrImageL}.${mediaExtensions.landscape}" ,"advertising/${filename}_p${videoOrImageP}.${mediaExtensions.portrait}"`;
+  let mediaManifestEntry = "";
+  if (!noBintImages) {
+    mediaManifestEntry = isElevator ? `"advertising/${filename}_e${videoOrImageE}.${mediaExtensions.elevator}"` : `"advertising/${filename}_l${videoOrImageL}.${mediaExtensions.landscape}" ,"advertising/${filename}_p${videoOrImageP}.${mediaExtensions.portrait}"`;
+  }
 
   return `
     {

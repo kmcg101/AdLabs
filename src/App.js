@@ -100,7 +100,7 @@ function App() {
 
   const [mediaExtension, setMediaExtension] = useState();
 
-  const [noBintImages, setNoBintImages] = useState(false);
+  const [noBintImages, setNoBintImages] = useState(true);
   const [isBlackText, setIsBlackText] = useState(false);
 
   const handleWarningMessageText = (txt, showIcon) => {
@@ -493,7 +493,7 @@ function App() {
   // * zip 'em up
 
   const deliverTemplateFiles = () => {
-    const eORl = isElevator ? "e" : "l";
+    // const eORl = isElevator ? "e" : "l";
 
     //const finalStandardAdFilename = `${inputValues.client}_${inputValues.duration}_${inputValues.campaign}_${inputValues.countryCode}_${eORl}-stnd`;
 
@@ -599,6 +599,7 @@ function App() {
       .then((e) => {
         console.log("finished");
         // if success, show final screen
+        // final screen will always say 'downloading' and no way to see when finished.
         setCurrentPageNumber(4);
       })
       .catch((e) => {
@@ -617,20 +618,6 @@ function App() {
     effectHandlePlattformChange();
 
     console.log("changed");
-  };
-
-  const config = {
-    angle: "142",
-    spread: "360",
-    startVelocity: "58",
-    elementCount: "113",
-    dragFriction: "0.15",
-    duration: "8270",
-    stagger: 3,
-    width: "10px",
-    height: "10px",
-    perspective: "590px",
-    colors: ["#f00", "#0f0", "#00f"],
   };
 
   return (

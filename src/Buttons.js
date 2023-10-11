@@ -88,15 +88,15 @@ export const BlackWhiteToggleButton = (props) => {
     <div className="bintColorPickerContainer">
       {/* toggle button for bint white/black text  */}
       <div className="bintColorPickerBG">
-        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleBlackWhiteToggleChange} />} labelPlacement="start" size="small" label="TEXT" />
+        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleBlackWhiteToggleChange} />} labelPlacement="start" size="small" label="text" />
       </div>
       {/* bint bg color text input */}
       <div className={`bintColorPickerBG color ${classes.colorPickerContainer}`}>
         #<input className={classes.colorPickerInput} type="text" name="bintBgColor" value={bintBGColor} maxLength="6" onChange={handleBINTColorChange}></input>
       </div>
       {/* toggle button for bint image  */}
-      <div className="bintColorPickerBG">
-        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="Image?" />
+      <div className="bintColorPickerBG" id="imageNoImageToggle">
+        <FormControlLabel className="bintColorPickerInner" control={<Switch defaultChecked="true" onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="image" />
       </div>
     </div>
   );

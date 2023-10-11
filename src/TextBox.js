@@ -53,7 +53,7 @@ function TextBox(props) {
               allGoodCharacters === false ? "textInputErrorOutline" : ""
             } `}
             type="text"
-            autoComplete="off"
+            autoComplete="on"
             name={props.varID}
             value={props.value}
             onChange={handleAnyInputsChange}

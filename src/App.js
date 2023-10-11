@@ -100,7 +100,7 @@ function App() {
 
   const [mediaExtension, setMediaExtension] = useState();
 
-  const [noBintImages, setNoBintImages] = useState(true);
+  const [noBintImages, setNoBintImages] = useState(false);
   const [isBlackText, setIsBlackText] = useState(false);
 
   const handleWarningMessageText = (txt, showIcon) => {

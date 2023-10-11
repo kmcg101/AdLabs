@@ -45,7 +45,7 @@ const Inputs = (props, { inputsCheckButtonPressed, inputsCheckButtonPressedOnce 
     <div>
       <div className="inputsFullPage">
         <div className="inputsLeftColumn">
-          <TextBox value={props.inputValues.client} label="CLIENT NAME: Dev v5.40" varID="client" handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce} />
+          <TextBox value={props.inputValues.client} label="CLIENT NAME: (prod 1023)" varID="client" handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce} />
           <TextBox value={props.inputValues.campaign} label="DESCRIPTOR:" varID="campaign" handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} inputsCheckButtonPressedOnce={inputsCheckButtonPressedOnce} />
 
           <SelectBox value={props.inputValues.platform} isError={false} options={DATA_PLATFORM_ARRAY} label="NETWORK:" varID="platform" handleAnyInputsChange={handleAnyInputsChange} inputsCheckButtonPressed={inputsCheckButtonPressed} />

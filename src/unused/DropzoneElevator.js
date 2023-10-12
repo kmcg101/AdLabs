@@ -6,7 +6,7 @@ import captureVideoFrame from "capture-video-frame";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
-  outline: "white dashed 2px",
+  outline: "#f5f5f5 dashed 2px",
 };
 
 const acceptStyle = {
@@ -73,19 +73,11 @@ function DropzoneElevator(props) {
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
     {
-      droppedFileType === "elevator"
-        ? (expectedPixels = expectedPixelsE)
-        : droppedFileType === "landscape"
-        ? (expectedPixels = expectedPixelsL)
-        : (expectedPixels = expectedPixelsP);
+      droppedFileType === "elevator" ? (expectedPixels = expectedPixelsE) : droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
     }
     let acceptedSizes;
     {
-      droppedFileType === "elevator"
-        ? (acceptedSizes = expectedSizeE)
-        : droppedFileType === "landscape"
-        ? (acceptedSizes = expectedSizeL)
-        : (acceptedSizes = expectedSizeP);
+      droppedFileType === "elevator" ? (acceptedSizes = expectedSizeE) : droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
     }
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
@@ -116,15 +108,7 @@ function DropzoneElevator(props) {
     props.handleDropzoneChanges(name, value, props.droppedFileType);
   };
 
-  const {
-    acceptedFiles,
-    fileRejections,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     maxFiles: 1,
     noClick: false,
     multiple: false,
@@ -280,20 +264,11 @@ function DropzoneElevator(props) {
 
   return (
     <div>
-      <div
-        className="dropzoneImageGrandParent"
-        onMouseEnter={() => setShowHint(true)}
-        onMouseLeave={() => setShowHint(false)}
-      >
+      <div className="dropzoneImageGrandParent" onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(elevatorFile).length === 0 ? (
-              <div
-                style={dzBackgroundImage}
-                className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
-              ></div>
-            ) : null}
+            {Object.keys(elevatorFile).length === 0 ? <div style={dzBackgroundImage} className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}></div> : null}
             <div ref={ref} className="dropzoneImageParent">
               {/* {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview} */}
             </div>

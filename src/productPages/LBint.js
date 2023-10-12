@@ -26,7 +26,7 @@ const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, 
     height: "432px",
     position: "absolute",
     zIndex: "100",
-    outline: "1px white solid",
+    outline: "1px #f5f5f5 solid",
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,

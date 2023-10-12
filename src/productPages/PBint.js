@@ -25,7 +25,7 @@ const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, pro
     left: "24px",
     top: "256px",
     zIndex: "100",
-    outline: "1px white solid",
+    outline: "1px #f5f5f5 solid",
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,

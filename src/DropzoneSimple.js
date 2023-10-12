@@ -6,7 +6,7 @@ import captureVideoFrame from "capture-video-frame";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
-  outline: "white dashed 2px",
+  outline: "#f5f5f5 dashed 2px",
 };
 
 const acceptStyle = {
@@ -26,16 +26,7 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function DropzoneSimple({
-  acceptedFileTypeString,
-  assetFileToChange,
-  droppedFileType,
-  productIndex,
-  shakeDropzoneBGImage,
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  handleContinueButtonDisabled,
-}) {
+function DropzoneSimple({ acceptedFileTypeString, assetFileToChange, droppedFileType, productIndex, shakeDropzoneBGImage, handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
@@ -65,19 +56,11 @@ function DropzoneSimple({
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
 
-    droppedFileType === "elevator"
-      ? (expectedPixels = expectedPixelsE)
-      : droppedFileType === "landscape"
-      ? (expectedPixels = expectedPixelsL)
-      : (expectedPixels = expectedPixelsP);
+    droppedFileType === "elevator" ? (expectedPixels = expectedPixelsE) : droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
 
     let acceptedSizes;
 
-    droppedFileType === "elevator"
-      ? (acceptedSizes = expectedSizeE)
-      : droppedFileType === "landscape"
-      ? (acceptedSizes = expectedSizeL)
-      : (acceptedSizes = expectedSizeP);
+    droppedFileType === "elevator" ? (acceptedSizes = expectedSizeE) : droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
 
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
@@ -97,15 +80,7 @@ function DropzoneSimple({
     }
   };
 
-  const {
-    acceptedFiles,
-    fileRejections,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     maxFiles: 1,
     noClick: false,
     multiple: false,
@@ -241,20 +216,11 @@ function DropzoneSimple({
 
   return (
     <div>
-      <div
-        className="dropzoneImageGrandParent"
-        onMouseEnter={() => setShowHint(true)}
-        onMouseLeave={() => setShowHint(false)}
-      >
+      <div className="dropzoneImageGrandParent" onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(assetFileToChange).length === 0 ? (
-              <div
-                style={dzBackgroundImage}
-                className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
-              ></div>
-            ) : null}
+            {Object.keys(assetFileToChange).length === 0 ? <div style={dzBackgroundImage} className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}></div> : null}
             <div ref={ref} className="dropzoneImageParent"></div>
           </div>
 

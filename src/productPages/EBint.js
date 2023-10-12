@@ -27,7 +27,7 @@ const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile,
     position: "absolute",
     overflow: "hidden",
     zIndex: "100",
-    outline: "1px white solid",
+    outline: "1px #f5f5f5 solid",
   };
 
   const bgStyle = {

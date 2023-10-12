@@ -6,7 +6,7 @@ import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
-  outline: "white dashed 2px",
+  outline: "#f5f5f5 dashed 2px",
 };
 
 const acceptStyle = {
@@ -145,15 +145,7 @@ function DropzoneVSA(props) {
     props.handleDropzoneChanges(name, value, "portrait");
   };
 
-  const {
-    acceptedFiles,
-    fileRejections,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     maxFiles: 1,
     noClick: false,
     multiple: false,
@@ -206,20 +198,11 @@ function DropzoneVSA(props) {
 
   return (
     <div>
-      <div
-        className="dropzoneImageGrandParent"
-        onMouseEnter={() => setShowHint(true)}
-        onMouseLeave={() => setShowHint(false)}
-      >
+      <div className="dropzoneImageGrandParent" onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(lfdFile).length + Object.keys(pfdFile).length === 0 ? (
-              <div
-                style={dzBackgroundImage}
-                className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
-              ></div>
-            ) : null}
+            {Object.keys(lfdFile).length + Object.keys(pfdFile).length === 0 ? <div style={dzBackgroundImage} className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}></div> : null}
             <div ref={ref} className="dropzoneImageParent">
               {/* {videoPreview} */}
             </div>

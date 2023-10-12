@@ -5,7 +5,7 @@ import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
 
 const baseStyle = {
-  outline: "white dashed 2px",
+  outline: "#f5f5f5 dashed 2px",
 };
 
 const acceptStyle = {
@@ -62,11 +62,7 @@ function DropzoneSVG(props) {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    if (
-      Object.keys(svgFile).length > 0 &&
-      Object.keys(files).length === 0 &&
-      acceptedFileTypeString === "image/svg+xml"
-    ) {
+    if (Object.keys(svgFile).length > 0 && Object.keys(files).length === 0 && acceptedFileTypeString === "image/svg+xml") {
       console.log("populate it");
       const elem = document.createElement("img");
       elem.src = URL.createObjectURL(svgFile.payload);
@@ -86,19 +82,11 @@ function DropzoneSVG(props) {
     const expectedSizeP = DATA_PRODUCTS.data[productIndex].acceptedSizeText.pSizes;
     let expectedPixels;
 
-    droppedFileType === "elevator"
-      ? (expectedPixels = expectedPixelsE)
-      : droppedFileType === "landscape"
-      ? (expectedPixels = expectedPixelsL)
-      : (expectedPixels = expectedPixelsP);
+    droppedFileType === "elevator" ? (expectedPixels = expectedPixelsE) : droppedFileType === "landscape" ? (expectedPixels = expectedPixelsL) : (expectedPixels = expectedPixelsP);
 
     let acceptedSizes;
 
-    droppedFileType === "elevator"
-      ? (acceptedSizes = expectedSizeE)
-      : droppedFileType === "landscape"
-      ? (acceptedSizes = expectedSizeL)
-      : (acceptedSizes = expectedSizeP);
+    droppedFileType === "elevator" ? (acceptedSizes = expectedSizeE) : droppedFileType === "landscape" ? (acceptedSizes = expectedSizeL) : (acceptedSizes = expectedSizeP);
 
     const receivedPixels = w * h;
     console.log("expected = ", expectedPixels);
@@ -130,15 +118,7 @@ function DropzoneSVG(props) {
     props.handleDropzoneChanges(name, value, props.droppedFileType);
   };
 
-  const {
-    acceptedFiles,
-    fileRejections,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     maxFiles: 1,
     noClick: false,
     multiple: false,
@@ -234,13 +214,9 @@ function DropzoneSVG(props) {
   );
 
   // put the map function back in here
-  const svgImagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
+  const svgImagePreview = files.map((file) => <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />);
 
-  const imagePreview = files.map((file) => (
-    <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />
-  ));
+  const imagePreview = files.map((file) => <img key={file.name} src={URL.createObjectURL(files[0])} style={{ width: "100%" }} alt="preview" />);
 
   const videoPreview = files.map((file) => (
     <video key={file.name} autoPlay loop style={{ width: "100%" }}>
@@ -250,20 +226,11 @@ function DropzoneSVG(props) {
 
   return (
     <div>
-      <div
-        className="dropzoneImageGrandParent"
-        onMouseEnter={() => setShowHint(true)}
-        onMouseLeave={() => setShowHint(false)}
-      >
+      <div className="dropzoneImageGrandParent" onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
         {showHint ? <div className="dropzoneHint">{acceptedFileTypeMessageString}</div> : null}
         <div {...getRootProps({ style })} className="dropZone">
           <div className="droppedImageHolder">
-            {Object.keys(files).length === 0 ? (
-              <div
-                style={dzBackgroundImage}
-                className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}
-              ></div>
-            ) : null}
+            {Object.keys(files).length === 0 ? <div style={dzBackgroundImage} className={`dzBackgroundImage ${shakeDropzoneBGImage ? "shakeIt" : ""}`}></div> : null}
             <div ref={ref} className="dropzoneImageParent">
               {mediaType === "video" ? videoPreview : droppedFileType === "svg" ? svgImagePreview : imagePreview}
             </div>

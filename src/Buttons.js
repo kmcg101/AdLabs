@@ -83,6 +83,7 @@ export const BlackWhiteToggleButton = (props) => {
   };
 
   const bintBGColor = props.bintBGColor;
+  const noBintImages = props.noBintImages;
 
   return (
     <div className="bintColorPickerContainer">
@@ -96,7 +97,7 @@ export const BlackWhiteToggleButton = (props) => {
       </div>
       {/* toggle button for bint image  */}
       <div className="bintColorPickerBG" id="imageNoImageToggle">
-        <FormControlLabel className="bintColorPickerInner" control={<Switch defaultChecked="true" onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="image" />
+        <FormControlLabel className="bintColorPickerInner" control={<Switch checked={!noBintImages} onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="image" />
       </div>
     </div>
   );

@@ -649,7 +649,7 @@ function App() {
             ) : null}
 
             {currentPageNumber === 2 && inputValues.product === 0 ? (
-              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange} handleNoImagesToggleChange={handleNoImagesToggleChange}>
+              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} noBintImages={noBintImages} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange} handleNoImagesToggleChange={handleNoImagesToggleChange}>
                 {" "}
               </BlackWhiteToggleButton>
             ) : null}

@@ -12,6 +12,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
   const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
 
   const bintBGColorString = defaultBintBGColor ? "unset" : `#${bintBGColor}`;
+  const opaqueBGString = defaultBintBGColor ? "" : `myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor});"`;
 
   // e bint with no image moves the bottom to 0, with image it must manipulate the infobar
   const eBintPlayContentTop = noBintImages
@@ -225,7 +226,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         
                         try{
                             myBG.style.display="block";
-                            myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
+                            ${opaqueBGString}
 
                         }
                         catch (error){
@@ -844,8 +845,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                        
                     try{
                         myBG.style.display="block";
-                        myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor})";
-
+                        ${opaqueBGString}
                     }
                     catch (error){
                         //console.log("d110 error bg2 gradient")

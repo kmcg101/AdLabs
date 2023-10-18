@@ -1,4 +1,4 @@
-export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages) {
+export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages, defaultBintBGColor) {
   //   const eORl = isElevator ? "e" : "l";
   const imageTagE = noBintImages ? "" : `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
   const imageTagL = noBintImages ? "" : `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
@@ -10,6 +10,8 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 
   const textColor = isBlackText ? "black" : "white";
   const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
+
+  const bintBGColorString = defaultBintBGColor ? "unset" : `#${bintBGColor}`;
 
   // e bint with no image moves the bottom to 0, with image it must manipulate the infobar
   const eBintPlayContentTop = noBintImages
@@ -90,7 +92,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                     z-index: 1;
                     width: 100%;
                     height: 100%;
-                    background:  #${bintBGColor};
+                    background:  ${bintBGColorString};
                     
                 }
                 
@@ -657,7 +659,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 z-index: 1;
                 width: 100%;
                 height: 100%;
-				background:  #${bintBGColor};
+				background:  ${bintBGColorString};
 				
             }
 			

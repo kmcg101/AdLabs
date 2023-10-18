@@ -72,6 +72,7 @@ function App() {
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("000000");
+  const [defaultBintBGColor, setDefaultBintBGColor] = useState(false);
 
   const [shakeDropzoneBGImage, setShakeDropzoneBGImage] = useState(false);
 
@@ -499,7 +500,7 @@ function App() {
 
     // HTML file
     // valH is the text of the html template passed from TemplateCreator
-    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages);
+    let contentH = getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages, defaultBintBGColor);
     let blobH = new Blob([contentH], {
       type: "text/plain;charset=utf-8",
     });
@@ -616,6 +617,11 @@ function App() {
     setNoBintImages((prevNoBintImages) => !prevNoBintImages);
     // clear out all dropped images
     effectHandlePlattformChange();
+  };
+  const handleDefaultBintBGColorChange = () => {
+    setDefaultBintBGColor((prevDefaultBintBGColor) => !prevDefaultBintBGColor);
+    setIsBlackText(false);
+    setBintBGColor("000000");
 
     console.log("changed");
   };
@@ -649,7 +655,16 @@ function App() {
             ) : null}
 
             {currentPageNumber === 2 && inputValues.product === 0 ? (
-              <BlackWhiteToggleButton handleBINTColorChange={handleBINTColorChange} noBintImages={noBintImages} bintBGColor={bintBGColor} handleBlackWhiteToggleChange={handleBlackWhiteToggleChange} handleNoImagesToggleChange={handleNoImagesToggleChange}>
+              <BlackWhiteToggleButton
+                handleDefaultBintBGColorChange={handleDefaultBintBGColorChange}
+                handleBINTColorChange={handleBINTColorChange}
+                isBlackText={isBlackText}
+                noBintImages={noBintImages}
+                defaultBintBGColor={defaultBintBGColor}
+                bintBGColor={bintBGColor}
+                handleBlackWhiteToggleChange={handleBlackWhiteToggleChange}
+                handleNoImagesToggleChange={handleNoImagesToggleChange}
+              >
                 {" "}
               </BlackWhiteToggleButton>
             ) : null}

@@ -81,23 +81,30 @@ export const BlackWhiteToggleButton = (props) => {
   const handleBINTColorChange = (e) => {
     props.handleBINTColorChange(e.target.value);
   };
-
+  const handleDefaultBintBGColorChange = (e) => {
+    props.handleDefaultBintBGColorChange(e.target.value);
+  };
+  const defaultBintBGColor = props.defaultBintBGColor;
   const bintBGColor = props.bintBGColor;
   const noBintImages = props.noBintImages;
+  const isBlackText = props.isBlackText;
 
   return (
     <div className="bintColorPickerContainer">
       {/* toggle button for bint white/black text  */}
       <div className="bintColorPickerBG">
-        <FormControlLabel className="bintColorPickerInner" control={<Switch onChange={handleBlackWhiteToggleChange} />} labelPlacement="start" size="small" label="text" />
+        <FormControlLabel className="bintColorPickerInner" control={<Switch checked={isBlackText} disabled={defaultBintBGColor} onChange={handleBlackWhiteToggleChange} />} labelPlacement="start" size="small" label="text" />
       </div>
       {/* bint bg color text input */}
       <div className={`bintColorPickerBG color ${classes.colorPickerContainer}`}>
-        #<input className={classes.colorPickerInput} type="text" name="bintBgColor" value={bintBGColor} maxLength="6" onChange={handleBINTColorChange}></input>
+        #<input className={classes.colorPickerInput} type="text" name="bintBgColor" disabled={defaultBintBGColor} value={bintBGColor} maxLength="6" onChange={handleBINTColorChange}></input>
       </div>
       {/* toggle button for bint image  */}
       <div className="bintColorPickerBG" id="imageNoImageToggle">
         <FormControlLabel className="bintColorPickerInner" control={<Switch checked={!noBintImages} onChange={handleNoImagesToggleChange} />} labelPlacement="start" size="small" label="image" />
+      </div>
+      <div className="bintColorPickerBG" id="defaultBintBackgroundColor">
+        <FormControlLabel className="bintColorPickerInner" control={<Switch checked={defaultBintBGColor} onChange={handleDefaultBintBGColorChange} />} labelPlacement="start" size="small" label="default bg" />
       </div>
     </div>
   );

@@ -417,7 +417,7 @@ function App() {
   }, [inputValues.product]);
 
   // runs when product changes to set productIndex, isElevator, isFullScreen
-  const effectHandlePlattformChange = () => {
+  const effectHandlePlatformChange = () => {
     // clear all files and previews
     setElevatorFile({});
     setLfdFile({});
@@ -616,7 +616,25 @@ function App() {
   const handleNoImagesToggleChange = () => {
     setNoBintImages((prevNoBintImages) => !prevNoBintImages);
     // clear out all dropped images
-    effectHandlePlattformChange();
+    effectHandlePlatformChange();
+    setElevatorFile({});
+    setLfdFile({});
+    setPfdFile({});
+
+    // clear out dropzoneImageParent
+    const eToClear = document.querySelector(".ebintAd .dropzoneImageParent");
+    const lToClear = document.querySelector(".lBintAd .dropzoneImageParent");
+    const pToClear = document.querySelector(".pBintAd .dropzoneImageParent");
+
+    while (eToClear.firstChild) {
+      eToClear.removeChild(eToClear.lastChild);
+    }
+    while (lToClear.firstChild) {
+      lToClear.removeChild(lToClear.lastChild);
+    }
+    while (pToClear.firstChild) {
+      pToClear.removeChild(pToClear.lastChild);
+    }
   };
   const handleDefaultBintBGColorChange = () => {
     setDefaultBintBGColor((prevDefaultBintBGColor) => !prevDefaultBintBGColor);

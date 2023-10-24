@@ -40,18 +40,7 @@ const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile,
         <img alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
 
-      <div style={eStandardAd} className="eStandardAd">
-        {/* <Dropzone
-          acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
-          handleDropzoneChanges={handleDropzoneChanges}
-          droppedFileType="standardAd"
-          productIndex={productIndex}
-          handleWarningMessageText={handleWarningMessageText}
-          svgFile={svgFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          elevatorFile={elevatorFile}
-        /> */}
-      </div>
+      <div style={eStandardAd} className="eStandardAd"></div>
 
       <div className={`ebintAd ${noBintImages === true ? "hide" : ""}`} style={eBINTImage}>
         <DropzoneSimple

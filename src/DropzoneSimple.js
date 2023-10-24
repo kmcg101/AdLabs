@@ -168,17 +168,6 @@ function DropzoneSimple({ acceptedFileTypeString, assetFileToChange, droppedFile
           const capturedFrame = captureVideoFrame(elemV, "png");
           handleDropzoneChanges("videoCapture", capturedFrame, droppedFileType);
         }, 200);
-
-        // const mutationObserver = new MutationObserver((entries) => {
-        //   console.log("step 4: video mutation obsesrver");
-        //   elemV.addEventListener("canplay", () => {
-        //     console.log("step 5: can play");
-        //     const capturedFrame = captureVideoFrame(elemV, "png");
-        //     handleDropzoneChanges("videoCapture", capturedFrame);
-        //     mutationObserver.disconnect();
-        //   });
-        // });
-        // mutationObserver.observe(el, { childList: true });
       } else {
         const elemI = document.createElement("img");
         elemI.style = "position: absolute; left: 0px; z-index: 10;";

@@ -99,17 +99,19 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 
                 .${filename} .media_frame1 {
                     position: absolute;
-                    font-size: 7vw;
+                    display: flex;
+                    justify-content: center;
+                    
                     top: 1.8%;
-                    right: 1.4%;
+                    right: 0;
                     left:unset;
                     z-index: 1;
-                    width: 20.312%;
-                    height: 95.209%;
+                    width: 23.6%;
+                    height: 98.2%;
                 }
                 
                 .${filename} .media {
-                    height: 100%;
+                    height: 97.2%;
                     width: auto;
                     object-fit: cover;
                     box-shadow: 0 0 2vw rgba(0, 0, 0, .3);
@@ -663,17 +665,13 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 			.${filename} .media_frame1 {
                 position: absolute;
 				display: flex;
-				flex-direction: column;
 				justify-content: center;
-				align-items: center;
-				font-size: 6vw;
-				color: red;
-                top: 0%;
-                right: 0%;
+                top: 3.1%;
+                right: 0;
 				left: unset;
                 z-index: 14;
 				width: 18.4%;
-                height: 94.5%;
+                height: 88.9%;
 				animation-fill-mode: both;
             }
 			
@@ -683,8 +681,13 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
             }
 			
 			.${filename} .media {
-                // height: 93.2%;
 				width: auto;
+				box-shadow: 0 0 2vw rgba(0, 0, 0, .3);
+            }
+            .landscape .${filename} .media {
+                height: 100%;
+			    width: auto;
+                object-fit: contain;
 				box-shadow: 0 0 2vw rgba(0, 0, 0, .3);
             }
 			
@@ -925,8 +928,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				font-size: 7vw;
-				color: red;
+				
                 top: 0%;
                 left: 20%;
                 z-index: 14;
@@ -952,8 +954,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				font-size: 7vw;
-				color: red;
+				
                 top: 0%;
                 left: 0%;
                 z-index: 14;

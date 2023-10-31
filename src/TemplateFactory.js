@@ -666,7 +666,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 position: absolute;
 				display: flex;
 				justify-content: center;
-                top: 3.1%;
+                top: 3.0%;
                 right: 0;
 				left: unset;
                 z-index: 14;

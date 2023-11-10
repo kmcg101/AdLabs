@@ -1362,7 +1362,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 var slotduration = this.scheduleItem.slot.duration;
                 var transitionTime = (slotduration * 1000) * (1/3);
 				
-				console.log("new versiion you snarl");
 				
 				let logo = this.scheduleItem.template.element.querySelector('#primary_logo');
 				let logo_container = this.scheduleItem.template.element.querySelector('#primary_logo_container');
@@ -1376,10 +1375,9 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 			
 				
 				if (common.displayService && common.displayService.isPortrait()){
-					console.log("portrait you snitch");
 					logo_container.innerHTML = logo_sponsor_p.innerHTML;
+                    logo_container.style.justifyContent='center';
 				}else{
-					console.log("lands you snitch");
 					logo_container.innerHTML = logo_sponsor_l.innerHTML;
 				}
 				
@@ -1392,8 +1390,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				
 				setTimeout(function () {
 				
-							console.log(mediaframe_1);
-							console.log(mediaframe_2);
+						
 							
                             mediaframe_1.style.animationName = "fadeOutScale";
                             mediaframe_1.style.animationDuration = ".33s";

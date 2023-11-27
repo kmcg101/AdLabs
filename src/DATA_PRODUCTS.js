@@ -27,7 +27,7 @@ const labels = [
     label: "hfsp",
     isFS: false,
     requiresBlankFile: true,
-    acceptedSizeText: { eSizes: "620x278", lSizes: "982x433", pSizes: "672x610" },
+    acceptedSizeText: { eSizes: "620x278", lSizes: "982x432", pSizes: "672x610" },
     pixels: { ePixels: [172360], lPixels: [425206], pPixels: [409920] },
   },
   {

@@ -4,20 +4,13 @@ import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/lhfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_hfsp = ({
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  productIndex,
-  lfdFile,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   const lHalfScreen = {
     position: "absolute",
     left: "279px",
     top: "22px",
     width: "982px",
-    height: "433px",
+    height: "432px",
     zIndex: "100",
   };
 

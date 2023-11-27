@@ -28,7 +28,7 @@ const labels = [
     isFS: false,
     requiresBlankFile: true,
     acceptedSizeText: { eSizes: "620x278", lSizes: "982x432", pSizes: "672x610" },
-    pixels: { ePixels: [172360], lPixels: [425206], pPixels: [409920] },
+    pixels: { ePixels: [172360], lPixels: [424224], pPixels: [409920] },
   },
   {
     keyindex: 3,

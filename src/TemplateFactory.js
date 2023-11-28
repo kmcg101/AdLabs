@@ -403,7 +403,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
         </style>
 
         <div id="mediaframe_1" class='${filename} media_frame1'>
-            <img class='media' src ="/advertising/${filename}_eimage.${mediaExtensions.elevator}">
+            ${mediaExtensions.elevator === "mp4" ? videoTagE : imageTagE}
         </div>
     <script>
         common.methods.registerAdScript("${filename}",
@@ -413,6 +413,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
                 playContent() {
                     let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
+                    ${mediaExtensions.elevator === "mp4" ? playContentVideoE : ""}
                 }
             });
     </script>
@@ -866,34 +867,34 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				
                 playContent() {
 
-                var slotduration = this.scheduleItem.slot.duration;
-                var transitionTime = slotduration * 1000 - 350;
+                    var slotduration = this.scheduleItem.slot.duration;
+                    var transitionTime = slotduration * 1000 - 350;
+                    
+                    let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
+                    let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
+                    let bintbackground = this.scheduleItem.template.element.querySelector('#bint_background');
+                    
+                    mediaframe_1.style.animationName = "fadeInScale";
+                    mediaframe_1.style.animationDuration = ".25s";
+                                
+                    mediaframe_2.style.animationName = "fadeInScale";
+                    mediaframe_2.style.animationDuration = ".25s";
+                    
+                    bintbackground.style.animationName = "fadeInSwipeContent";
+                    bintbackground.style.animationDuration = ".2s";
 				
-				let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
-				let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
-				let bintbackground = this.scheduleItem.template.element.querySelector('#bint_background');
-				
-				mediaframe_1.style.animationName = "fadeInScale";
-                mediaframe_1.style.animationDuration = ".25s";
-							
-				mediaframe_2.style.animationName = "fadeInScale";
-                mediaframe_2.style.animationDuration = ".25s";
-				
-				bintbackground.style.animationName = "fadeInSwipeContent";
-                bintbackground.style.animationDuration = ".2s";
-				
-				setTimeout(function () {
-					
-					mediaframe_1.style.animationName = "fadeOut";
-					mediaframe_1.style.animationDuration = ".3s";
-					
-					mediaframe_2.style.animationName = "fadeOut";
-					mediaframe_2.style.animationDuration = ".3s";
-					
-					bintbackground.style.animationName = "fadeOut";
-					bintbackground.style.animationDuration = ".3s";
+                    setTimeout(function () {
+                        
+                        mediaframe_1.style.animationName = "fadeOut";
+                        mediaframe_1.style.animationDuration = ".3s";
+                        
+                        mediaframe_2.style.animationName = "fadeOut";
+                        mediaframe_2.style.animationDuration = ".3s";
+                        
+                        bintbackground.style.animationName = "fadeOut";
+                        bintbackground.style.animationDuration = ".3s";
 
-                }, transitionTime);
+                    }, transitionTime);
 
                 }
             });
@@ -1010,7 +1011,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 <body class="adbodystyle">
     <div class="ad-sponsor ${filename}" data-widget-id="${filename}" data-version="0.1.5">
         <style>
-            /* this is the size of the entire ad, defaults to landscape lfd*/
+            
             .${filename} {
                 position: absolute;
                 top: 0%;
@@ -1074,11 +1075,11 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 		
 		
         <div class='${filename} media_frame1'>
-            ${imageTagL}
+            ${mediaExtensions.landscape === "mp4" ? videoTagL : imageTagL}
         </div>
 		
 		<div class='${filename} media_frame2'>
-            ${imageTagP}
+            ${mediaExtensions.portrait === "mp4" ? videoTagP : imageTagP}
         </div>
 
    
@@ -1093,7 +1094,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
 				
                 playContent() {
-
+                    ${mediaExtensions.landscape === "mp4" ? playContentVideoL : ""}
                 }
             });
     </script>

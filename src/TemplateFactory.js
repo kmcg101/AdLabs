@@ -397,7 +397,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
             
             .${filename} .media{
                 width: 96.5%;
-                height: auto;
+                height: 96.2%;
                 box-shadow:	0vw 0vw 2vw rgba(0,0,0,.4);
             }
         </style>

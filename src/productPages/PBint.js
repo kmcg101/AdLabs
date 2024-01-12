@@ -37,14 +37,14 @@ const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, pro
         <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
       <div className="pStandardAd" style={pStandardAd}>
-        {/* <Dropzone
+        <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
           handleContinueButtonDisabled={handleContinueButtonDisabled}
-        /> */}
+        />
       </div>
       <div className={`pBintAd ${noBintImages === true ? "hide" : ""}`} style={pBint}>
         <DropzoneSimple

@@ -4,6 +4,7 @@ import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
+import pWidgetImage from "../assets/pWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, productIndex, handleWarningMessageText, shakeDropzoneBGImage, bintBGColor, handleContinueButtonDisabled }) => {
@@ -46,6 +47,11 @@ const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, pro
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
+
+      <div className={`pBintAd ${noBintImages === false ? "hide" : ""}`} style={pBint}>
+        <img src={pWidgetImage} alt="back"></img>
+      </div>
+
       <div className={`pBintAd ${noBintImages === true ? "hide" : ""}`} style={pBint}>
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
@@ -58,6 +64,7 @@ const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, pro
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
+
     </div>
   );
 };

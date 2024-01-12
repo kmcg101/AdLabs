@@ -4,7 +4,7 @@ import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/ebintBlackText.png";
 import whiteTextImage from "../assets/ebintWhiteText.png";
-
+import eWidgetImage from "../assets/eWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage, handleDropzoneChanges, handleContinueButtonDisabled }) => {
@@ -39,9 +39,6 @@ const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile,
       <div style={bgStyle} className="backgroundImageContainer">
         <img alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
       </div>
-
-
-
       <div style={eStandardAd} className="eStandardAd">
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
@@ -53,7 +50,13 @@ const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile,
           shakeDropzoneBGImage={shakeDropzoneBGImage}
           elevatorFile={elevatorFile}
         />
+
       </div>
+
+      <div className={`ebintAd ${noBintImages === false ? "hide" : ""}`} style={eBINTImage}>
+        <img src={eWidgetImage} alt="back"></img>
+      </div>
+
 
       <div className={`ebintAd ${noBintImages === true ? "hide" : ""}`} style={eBINTImage}>
         <DropzoneSimple

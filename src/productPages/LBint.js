@@ -4,6 +4,7 @@ import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
 import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
+import lWidgetImage from "../assets/lWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
 const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, noBintImages, isBlackText, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
@@ -46,6 +47,9 @@ const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, 
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
         />
+      </div>
+      <div className={`lBintAd ${noBintImages === false ? "hide" : ""}`} style={lBint}>
+        <img src={lWidgetImage} alt="back"></img>
       </div>
       <div style={lBint} className={`lBintAd ${noBintImages === true ? "hide" : ""}`}>
         <DropzoneSimple

@@ -7,7 +7,7 @@ import whiteTextImage from "../assets/pbintWhiteText.png";
 import pWidgetImage from "../assets/pWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, productIndex, handleWarningMessageText, shakeDropzoneBGImage, bintBGColor, handleContinueButtonDisabled }) => {
+const P_bint = ({ bintBGOpacity, pfdFile, handleDropzoneChanges, noBintImages, isBlackText, productIndex, handleWarningMessageText, shakeDropzoneBGImage, bintBGColor, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -30,12 +30,22 @@ const P_bint = ({ pfdFile, handleDropzoneChanges, noBintImages, isBlackText, pro
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,
+    opacity: bintBGOpacity,
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0
   };
+  const bgImage = {
+    position: "relative",
+    zIndex: 100
+  }
 
   return (
     <div className="portraitProductContainer">
-      <div style={bgStyle} className="backgroundImageContainer">
-        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+      <div className="backgroundImageContainer">
+        <img style={bgImage} alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+        <div style={bgStyle} className='backgroundColorContainer'></div>
       </div>
       <div className="pStandardAd" style={pStandardAd}>
         <Dropzone

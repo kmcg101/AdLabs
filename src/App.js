@@ -72,6 +72,7 @@ function App() {
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("000000");
+  const [bintBGOpacity, setBintBGOpacity] = useState(1);
   const [defaultBintBGColor, setDefaultBintBGColor] = useState(false);
 
   const [shakeDropzoneBGImage, setShakeDropzoneBGImage] = useState(false);
@@ -235,7 +236,7 @@ function App() {
     // a random number to the screenshot state so it changes with every update
     htmlToImage
       .toPng(document.getElementById("screenGrabThis"))
-      .then(function(dataUrl) {
+      .then(function (dataUrl) {
         let randomValue = Math.random();
         setScreenshot([dataUrl, randomValue]);
       })
@@ -540,8 +541,8 @@ function App() {
 
     const loadElevator = elevatorFile.payload
       ? elevatorFile.payload.arrayBuffer().then((result) => {
-          newZip.file(`${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`, result);
-        })
+        newZip.file(`${filename}_e${mediaExtensions.elevator === "mp4" ? "video" : "image"}.${mediaExtensions.elevator}`, result);
+      })
       : "";
 
     // if this is a lobby 1 file and the source is a pfd, pfd is the source
@@ -550,21 +551,21 @@ function App() {
     // i think this will be fine because you no longer have any situation where lfd or pfd are empty
     const loadLFD = lfdFile.payload
       ? lfdFile.payload.arrayBuffer().then((result) => {
-          newZip.file(`${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`, result);
-        })
+        newZip.file(`${filename}_l${mediaExtensions.landscape === "mp4" ? "video" : "image"}.${mediaExtensions.landscape}`, result);
+      })
       : "";
 
     //const pfdSource = lobbyAndOneAsset && lobbyAndOneAssetIsLFD ? lfdFile : pfdFile;
     const loadPFD = pfdFile.payload
       ? pfdFile.payload.arrayBuffer().then((result) => {
-          newZip.file(`${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`, result);
-        })
+        newZip.file(`${filename}_p${mediaExtensions.portrait === "mp4" ? "video" : "image"}.${mediaExtensions.portrait}`, result);
+      })
       : "";
 
     const loadSVG = svgFile.payload
       ? svgFile.payload.arrayBuffer().then((result) => {
-          newZip.file(`${filename}.svg`, result);
-        })
+        newZip.file(`${filename}.svg`, result);
+      })
       : "";
 
     // const loadStandardAd = standardAdFile.payload
@@ -593,7 +594,7 @@ function App() {
           newZip.file(`${blankFilename}.manifest`, blobBM);
         }
 
-        newZip.generateAsync({ type: "blob" }).then(function(content) {
+        newZip.generateAsync({ type: "blob" }).then(function (content) {
           saveAs(content, `${filename}.zip`);
         });
       })
@@ -607,7 +608,14 @@ function App() {
         console.log("zip error");
       });
   };
+
+  // next step is to set opacity to .5 when setting to default background
+  // and setting back to 1 when unsetting default bg
+
+
+
   const handleBINTColorChange = (color) => {
+    console.log("changed")
     setBintBGColor(color);
   };
   const handleBlackWhiteToggleChange = () => {
@@ -637,11 +645,13 @@ function App() {
     }
   };
   const handleDefaultBintBGColorChange = () => {
+    console.log("changed");
+
+    defaultBintBGColor ? setBintBGOpacity(1) : setBintBGOpacity(.2);
     setDefaultBintBGColor((prevDefaultBintBGColor) => !prevDefaultBintBGColor);
     setIsBlackText(false);
     setBintBGColor("000000");
 
-    console.log("changed");
   };
 
   return (
@@ -700,13 +710,14 @@ function App() {
             ) : null}
 
             {/* PAGE 2 */}
-
+            {/* put the bintBGOpacity context here */}
             <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"} ${currentPageNumber !== 2 ? "hide" : ""}`}>
               {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
               <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
                 {/* elevator */}
                 <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
                   <PageElevator
+                    bintBGOpacity={bintBGOpacity}
                     noBintImages={noBintImages}
                     isBlackText={isBlackText}
                     bintBGColor={bintBGColor}
@@ -724,6 +735,7 @@ function App() {
                 <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
                     <PageLFD
+                      bintBGOpacity={bintBGOpacity}
                       noBintImages={noBintImages}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}
@@ -742,6 +754,7 @@ function App() {
 
                   <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
                     <PagePFD
+                      bintBGOpacity={bintBGOpacity}
                       noBintImages={noBintImages}
                       isBlackText={isBlackText}
                       bintBGColor={bintBGColor}

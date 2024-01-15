@@ -7,11 +7,12 @@ import EFsbi from "../productPages/EFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageElevator = ({ shakeDropzoneBGImage, handleWarningMessageText, handleDropzoneChanges, productIndex, bintBGColor, noBintImages, isBlackText, svgFile, elevatorFile, handleContinueButtonDisabled }) => {
+const PageElevator = ({ bintBGOpacity, shakeDropzoneBGImage, handleWarningMessageText, handleDropzoneChanges, productIndex, bintBGColor, noBintImages, isBlackText, svgFile, elevatorFile, handleContinueButtonDisabled }) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <EBint
+          bintBGOpacity={bintBGOpacity}
           noBintImages={noBintImages}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}

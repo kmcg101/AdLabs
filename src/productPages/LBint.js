@@ -7,7 +7,7 @@ import whiteTextImage from "../assets/lbintWhiteText.png";
 import lWidgetImage from "../assets/lWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, noBintImages, isBlackText, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
+const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges, bintBGColor, noBintImages, isBlackText, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -31,12 +31,22 @@ const L_bint = ({ handleWarningMessageText, handleDropzoneChanges, bintBGColor, 
   };
   const bgStyle = {
     backgroundColor: bintBGColorLocal,
+    opacity: bintBGOpacity,
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0
   };
+  const bgImage = {
+    position: "relative",
+    zIndex: 100
+  }
 
   return (
     <div className="landscapeProductContainer">
-      <div style={bgStyle} className="backgroundImageContainer">
-        <img alt="" className="backgroundImageContainer" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+      <div className="backgroundImageContainer">
+        <img style={bgImage} alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+        <div style={bgStyle} className='backgroundColorContainer'></div>
       </div>
 
       <div className="lStandardAd" style={lStandardAd}>

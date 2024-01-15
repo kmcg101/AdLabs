@@ -7,9 +7,10 @@ import whiteTextImage from "../assets/ebintWhiteText.png";
 import eWidgetImage from "../assets/eWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage, handleDropzoneChanges, handleContinueButtonDisabled }) => {
+const E_bint = ({ bintBGOpacity, noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage, handleDropzoneChanges, handleContinueButtonDisabled }) => {
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
+
 
   const eBINTImage = {
     width: "130px",
@@ -32,12 +33,22 @@ const E_bint = ({ noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile,
 
   const bgStyle = {
     backgroundColor: bintBGColorLocal,
+    opacity: bintBGOpacity,
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0
   };
+  const bgImage = {
+    position: "relative",
+    zIndex: 100
+  }
 
   return (
     <div className="elevatorProductContainer">
-      <div style={bgStyle} className="backgroundImageContainer">
-        <img alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+      <div className="backgroundImageContainer">
+        <img alt="" style={bgImage} className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+        <div style={bgStyle} className='backgroundColorContainer'></div>
       </div>
       <div style={eStandardAd} className="eStandardAd">
         <Dropzone

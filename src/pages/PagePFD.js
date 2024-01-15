@@ -7,11 +7,12 @@ import PFsbi from "../productPages/PFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PagePFD = ({ productIndex, bintBGColor, noBintImages, isBlackText, svgFile, lfdFile, pfdFile, handleDropzoneChanges, handleWarningMessageText, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
+const PagePFD = ({ bintBGOpacity, productIndex, bintBGColor, noBintImages, isBlackText, svgFile, lfdFile, pfdFile, handleDropzoneChanges, handleWarningMessageText, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <PBint
+          bintBGOpacity={bintBGOpacity}
           noBintImages={noBintImages}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}

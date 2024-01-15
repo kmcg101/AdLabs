@@ -7,11 +7,12 @@ import LFsbi from "../productPages/LFsbi";
 
 import "../productPages/pageAndProductStyle.css";
 
-const PageLFD = ({ productIndex, bintBGColor, noBintImages, isBlackText, svgFile, lfdFile, pfdFile, handleDropzoneChanges, handleWarningMessageText, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
+const PageLFD = ({ bintBGOpacity, productIndex, bintBGColor, noBintImages, isBlackText, svgFile, lfdFile, pfdFile, handleDropzoneChanges, handleWarningMessageText, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
   return (
     <div className="pageContainer">
       {productIndex === 0 ? (
         <LBint
+          bintBGOpacity={bintBGOpacity}
           noBintImages={noBintImages}
           isBlackText={isBlackText}
           bintBGColor={bintBGColor}

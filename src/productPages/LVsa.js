@@ -1,19 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../DropzoneVSA";
+import DropzoneVSA from "../DropzoneVSA";
 import background from "../assets/lvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const L_vsa = ({
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  svgFile,
-  productIndex,
-  lfdFile,
-  pfdFile,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function L_vsa({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
   const vsaImage = {
     width: "360px",
     height: "640px",
@@ -29,17 +21,12 @@ const L_vsa = ({
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="lVSAImage" style={vsaImage}>
-        <Dropzone
+        <DropzoneVSA
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
-          lfdFile={lfdFile}
-          pfdFile={pfdFile}
-          isLFD={isLFD}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
+
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -47,4 +34,4 @@ const L_vsa = ({
   );
 };
 
-export default L_vsa;
+

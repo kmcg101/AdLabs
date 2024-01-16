@@ -41,7 +41,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { BlackWhiteToggleButton, ContinueButton, BackButton } from "./Buttons";
 import { AppTheme } from "./MaterialTheme";
 
-function App() {
+export const OpacityContext = React.createContext();
+
+export default function App() {
+  const [bintBGOpacity, setBintBGOpacity] = useState(1);
   // for screen shots
   //const imageRef = useRef(null);
   const [screenshot, setScreenshot] = useState(); // 2
@@ -72,7 +75,6 @@ function App() {
   const [popUpMessage, setPopUpMessage] = useState("test message");
 
   const [bintBGColor, setBintBGColor] = useState("000000");
-  const [bintBGOpacity, setBintBGOpacity] = useState(1);
   const [defaultBintBGColor, setDefaultBintBGColor] = useState(false);
 
   const [shakeDropzoneBGImage, setShakeDropzoneBGImage] = useState(false);
@@ -710,66 +712,38 @@ function App() {
             ) : null}
 
             {/* PAGE 2 */}
-            {/* put the bintBGOpacity context here */}
-            <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"} ${currentPageNumber !== 2 ? "hide" : ""}`}>
-              {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
-              <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
-                {/* elevator */}
-                <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
-                  <PageElevator
-                    bintBGOpacity={bintBGOpacity}
-                    noBintImages={noBintImages}
-                    isBlackText={isBlackText}
-                    bintBGColor={bintBGColor}
-                    productIndex={productIndex}
-                    inputValues={inputValues}
-                    handleDropzoneChanges={handleDropzoneChanges}
-                    handleWarningMessageText={handleWarningMessageText}
-                    svgFile={svgFile}
-                    elevatorFile={elevatorFile}
-                    shakeDropzoneBGImage={shakeDropzoneBGImage}
-                    handleContinueButtonDisabled={handleContinueButtonDisabled}
-                  />
-                </div>
-                {/* lfd */}
-                <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
-                  <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
-                    <PageLFD
-                      bintBGOpacity={bintBGOpacity}
-                      noBintImages={noBintImages}
-                      isBlackText={isBlackText}
-                      bintBGColor={bintBGColor}
-                      productIndex={productIndex}
-                      inputValues={inputValues}
+            <div className={`adBuildingPageContent ${currentPageNumber === 2 && isElevator === true ? "elevator" : currentPageNumber === 2 && isElevator === false && currentBuildNavNumber === 1 ? "landscape" : "portrait"}`}>
+              <div className={`adBuildingPage page ${isElevator === true ? "elevator" : isElevator === false ? "landscape" : "portrait"} ${currentPageNumber !== 2 ? "hide" : ""}`}>
+                {/* when this classname is set to e l or p, that's what sets the h and w of the div which contains all building elements*/}
+                <OpacityContext.Provider value={{ bintBGOpacity, isBlackText, noBintImages, bintBGColor, productIndex, svgFile, shakeDropzoneBGImage, elevatorFile, lfdFile, pfdFile }}>
+                  {/* elevator */}
+                  <div id={isElevator ? "screenGrabThis" : null} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator ? "" : "hide"}`}>
+                    <PageElevator
                       handleDropzoneChanges={handleDropzoneChanges}
                       handleWarningMessageText={handleWarningMessageText}
-                      shakeDropzoneBGImage={shakeDropzoneBGImage}
-                      svgFile={svgFile}
-                      lfdFile={lfdFile}
-                      pfdFile={pfdFile}
                       handleContinueButtonDisabled={handleContinueButtonDisabled}
                     />
                   </div>
-                  {/* pfd */}
+                  {/* lfd */}
+                  <div id={isElevator ? null : "screenGrabThis"} className={`adBuildingPageInner ${currentPageNumber === 2 && isElevator === false ? "" : "hide"}`}>
+                    <div className={`adBuildingPageInner ${currentBuildNavNumber === 2 ? "hide" : ""}`}>
+                      <PageLFD
+                        handleDropzoneChanges={handleDropzoneChanges}
+                        handleWarningMessageText={handleWarningMessageText}
+                        handleContinueButtonDisabled={handleContinueButtonDisabled}
+                      />
+                    </div>
+                    {/* pfd */}
 
-                  <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
-                    <PagePFD
-                      bintBGOpacity={bintBGOpacity}
-                      noBintImages={noBintImages}
-                      isBlackText={isBlackText}
-                      bintBGColor={bintBGColor}
-                      productIndex={productIndex}
-                      inputValues={inputValues}
-                      handleDropzoneChanges={handleDropzoneChanges}
-                      handleWarningMessageText={handleWarningMessageText}
-                      svgFile={svgFile}
-                      lfdFile={lfdFile}
-                      pfdFile={pfdFile}
-                      shakeDropzoneBGImage={shakeDropzoneBGImage}
-                      handleContinueButtonDisabled={handleContinueButtonDisabled}
-                    />
+                    <div className={`adBuildingPageInner ${currentBuildNavNumber === 1 ? "hide" : ""}`}>
+                      <PagePFD
+                        handleDropzoneChanges={handleDropzoneChanges}
+                        handleWarningMessageText={handleWarningMessageText}
+                        handleContinueButtonDisabled={handleContinueButtonDisabled}
+                      />
+                    </div>
                   </div>
-                </div>
+                </OpacityContext.Provider>
               </div>
             </div>
 
@@ -810,8 +784,8 @@ function App() {
           </div>
         </div>
       </div>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
-export default App;
+

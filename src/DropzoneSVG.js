@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
+import { OpacityContext } from "./App"
 
 const baseStyle = {
   outline: "#f5f5f5 dashed 2px",
@@ -26,14 +27,13 @@ const dzBackgroundImage = {
 };
 
 function DropzoneSVG(props) {
+  const { productIndex, shakeDropzoneBGImage, svgFile } = useContext(OpacityContext);
+
   /////////////////////////////  files accepted and message on mouse over
 
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
-  const svgFile = props.svgFile;
   const droppedFileType = props.droppedFileType;
-  const productIndex = props.productIndex;
-  const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
 
   const ref = useRef(null);
 
@@ -43,7 +43,7 @@ function DropzoneSVG(props) {
 
   function getHintString(str) {
     let newString = str.split(",");
-    let stringArrayMap = newString.map(function(value) {
+    let stringArrayMap = newString.map(function (value) {
       let split = value.split("/");
       return split[1];
     });

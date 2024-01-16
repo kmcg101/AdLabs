@@ -1,21 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../DropzoneFSA_LFD";
 import background from "../assets/lfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const L_fsa = ({
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  bintBGColor,
-  isBlackText,
-  svgFile,
-  productIndex,
-  lfdFile,
-  pfdFile,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function L_fsa({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
   const isLFD = true;
 
   const lFullScreen = {
@@ -33,14 +23,9 @@ const L_fsa = ({
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
-          svgFile={svgFile}
-          lfdFile={lfdFile}
-          pfdFile={pfdFile}
-          isLFD={isLFD}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
+
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -48,4 +33,3 @@ const L_fsa = ({
   );
 };
 
-export default L_fsa;

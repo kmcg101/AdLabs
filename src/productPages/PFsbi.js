@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/pfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const P_fsbi = ({
-  pfdFile,
-  handleDropzoneChanges,
-  svgFile,
-  productIndex,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function P_fsbi({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { pfdFile } = useContext(OpacityContext);
   const pFSBILogo = {
     width: "200px",
     height: "200px",
@@ -39,11 +33,9 @@ const P_fsbi = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -52,11 +44,8 @@ const P_fsbi = ({
         <DropzoneSVG
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -64,4 +53,4 @@ const P_fsbi = ({
   );
 };
 
-export default P_fsbi;
+

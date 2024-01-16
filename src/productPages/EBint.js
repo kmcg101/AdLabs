@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
@@ -7,7 +7,12 @@ import whiteTextImage from "../assets/ebintWhiteText.png";
 import eWidgetImage from "../assets/eWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_bint = ({ bintBGOpacity, noBintImages, isBlackText, bintBGColor, svgFile, elevatorFile, productIndex, handleWarningMessageText, shakeDropzoneBGImage, handleDropzoneChanges, handleContinueButtonDisabled }) => {
+import { OpacityContext } from "../App"
+
+
+export default function E_bint({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { bintBGOpacity, isBlackText, noBintImages, bintBGColor, elevatorFile } = useContext(OpacityContext);
+
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -55,11 +60,7 @@ const E_bint = ({ bintBGOpacity, noBintImages, isBlackText, bintBGColor, svgFile
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
           droppedFileType="standardAd"
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
-          svgFile={svgFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
-          elevatorFile={elevatorFile}
         />
 
       </div>
@@ -73,11 +74,9 @@ const E_bint = ({ bintBGOpacity, noBintImages, isBlackText, bintBGColor, svgFile
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -85,4 +84,3 @@ const E_bint = ({ bintBGOpacity, noBintImages, isBlackText, bintBGColor, svgFile
   );
 };
 
-export default E_bint;

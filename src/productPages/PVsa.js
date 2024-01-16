@@ -1,19 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../DropzoneVSA";
+import DropzoneVSA from "../DropzoneVSA";
 import background from "../assets/pvsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const P_vsa = ({
-  handleDropzoneChanges,
-  lfdFile,
-  pfdFile,
-  svgFile,
-  productIndex,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function P_vsa({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { bintBGOpacity, isBlackText, noBintImages, bintBGColor, lfdFile, pfdFile } = useContext(OpacityContext);
   const pVsaImage = {
     width: "360px",
     height: "640px",
@@ -29,17 +22,12 @@ const P_vsa = ({
     <div className="portraitProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div className="pVSAImage" style={pVsaImage}>
-        <Dropzone
+        <DropzoneVSA
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
-          svgFile={svgFile}
-          lfdFile={lfdFile}
-          pfdFile={pfdFile}
-          isLFD={isLFD}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
+
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -47,4 +35,3 @@ const P_vsa = ({
   );
 };
 
-export default P_vsa;

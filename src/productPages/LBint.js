@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
@@ -6,8 +6,10 @@ import blackTextImage from "../assets/lbintBlackText.png";
 import whiteTextImage from "../assets/lbintWhiteText.png";
 import lWidgetImage from "../assets/lWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges, bintBGColor, noBintImages, isBlackText, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
+export default function L_bint({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { bintBGOpacity, isBlackText, noBintImages, bintBGColor, lfdFile } = useContext(OpacityContext);
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -45,7 +47,7 @@ const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges
   return (
     <div className="landscapeProductContainer">
       <div className="backgroundImageContainer">
-        <img style={bgImage} alt="" className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
+        <img alt="" style={bgImage} className="backgroundImage" src={isBlackText ? blackTextImage : whiteTextImage}></img>
         <div style={bgStyle} className='backgroundColorContainer'></div>
       </div>
 
@@ -53,7 +55,6 @@ const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
         />
@@ -65,11 +66,9 @@ const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -77,4 +76,4 @@ const L_bint = ({ bintBGOpacity, handleWarningMessageText, handleDropzoneChanges
   );
 };
 
-export default L_bint;
+

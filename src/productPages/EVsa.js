@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/evsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+
+import { OpacityContext } from "../App"
 
 const vsaImage = {
   width: "234px",
@@ -13,14 +15,12 @@ const vsaImage = {
   zIndex: "100",
 };
 
-const E_vsa = ({
-  elevatorFile,
-  productIndex,
+export default function E_vsa({
   handleDropzoneChanges,
   handleWarningMessageText,
-  shakeDropzoneBGImage,
   handleContinueButtonDisabled,
-}) => {
+}) {
+  const { elevatorFile } = useContext(OpacityContext);
   return (
     <div className="elevatorProductContainer">
       <div className="backgroundImageContainer">
@@ -30,11 +30,9 @@ const E_vsa = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -42,4 +40,3 @@ const E_vsa = ({
   );
 };
 
-export default E_vsa;

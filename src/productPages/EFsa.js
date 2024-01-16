@@ -1,30 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../DropzoneSimple";
 import background from "../assets/efsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_fsa = ({
-  svgFile,
-  elevatorFile,
-  productIndex,
+import { OpacityContext } from "../App"
+
+export default function E_fsa({
   handleDropzoneChanges,
   handleWarningMessageText,
-  shakeDropzoneBGImage,
   handleContinueButtonDisabled,
-}) => {
+}) {
+  const { elevatorFile } = useContext(OpacityContext);
   return (
     <div className="elevatorProductContainer">
       <div className="eFullScreen">
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
-          svgFile={svgFile}
           assetFileToChange={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -35,4 +31,4 @@ const E_fsa = ({
   );
 };
 
-export default E_fsa;
+

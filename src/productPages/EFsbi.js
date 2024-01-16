@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/efsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
 
-const E_fsbi = ({
-  svgFile,
-  elevatorFile,
-  productIndex,
+import { OpacityContext } from "../App"
+
+export default function E_fsbi({
+
   handleDropzoneChanges,
   handleWarningMessageText,
-  shakeDropzoneBGImage,
   handleContinueButtonDisabled,
-}) => {
+}) {
+  const { elevatorFile } = useContext(OpacityContext);
   const eFSBILogo = {
     width: "90px",
     height: "90px",
@@ -31,11 +31,9 @@ const E_fsbi = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -43,12 +41,8 @@ const E_fsbi = ({
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
-          svgFile={svgFile}
-          elevatorFile={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -56,4 +50,4 @@ const E_fsbi = ({
   );
 };
 
-export default E_fsbi;
+

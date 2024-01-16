@@ -7,6 +7,7 @@
   box-sizing: border-box;
   /* font-size: 62.5%; */
 }
+
 html {
   font-size: 100%;
 }
@@ -80,6 +81,7 @@ html {
   top: 0px;
   transform: scale(0.5);
 }
+
 .topSub .logoContainer img {
   width: 100%;
   height: 100%;
@@ -156,17 +158,19 @@ html {
   height: 100%;
 }
 
-.adBuildingPage .adBuildingPageContent.elevator {
+.adBuildingPageContent.elevator {
   width: 640px;
   height: 480px;
   transform: scale(0.82);
 }
-.adBuildingPage .adBuildingPageContent.landscape {
+
+.adBuildingPageContent.landscape {
   width: 1280px;
   height: 720px;
   transform: scale(0.5527);
 }
-.adBuildingPage .adBuildingPageContent.portrait {
+
+.adBuildingPageContent.portrait {
   width: 720px;
   height: 1280px;
   transform: scale(0.3109);
@@ -178,9 +182,11 @@ html {
   display: flex;
   justify-content: center;
 }
+
 .adBuildingPageInner.hide {
   display: none;
 }
+
 .ebintAd.hide {
   display: none;
 }

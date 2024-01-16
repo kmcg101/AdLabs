@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import Dropzone from "../Dropzone";
 import DropzoneSimple from "../DropzoneSimple";
@@ -6,8 +6,10 @@ import blackTextImage from "../assets/pbintBlackText.png";
 import whiteTextImage from "../assets/pbintWhiteText.png";
 import pWidgetImage from "../assets/pWidgetImage.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const P_bint = ({ bintBGOpacity, pfdFile, handleDropzoneChanges, noBintImages, isBlackText, productIndex, handleWarningMessageText, shakeDropzoneBGImage, bintBGColor, handleContinueButtonDisabled }) => {
+export default function P_bint({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { bintBGOpacity, isBlackText, noBintImages, bintBGColor, pfdFile } = useContext(OpacityContext);
   const bintBGColorPre = bintBGColor;
   const bintBGColorLocal = "#" + bintBGColorPre;
 
@@ -51,7 +53,6 @@ const P_bint = ({ bintBGOpacity, pfdFile, handleDropzoneChanges, noBintImages, i
         <Dropzone
           acceptedFileTypeString={DROPZONE_DATA.data.videoOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="standardAd"
           handleContinueButtonDisabled={handleContinueButtonDisabled}
@@ -66,11 +67,9 @@ const P_bint = ({ bintBGOpacity, pfdFile, handleDropzoneChanges, noBintImages, i
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -79,4 +78,4 @@ const P_bint = ({ bintBGOpacity, pfdFile, handleDropzoneChanges, noBintImages, i
   );
 };
 
-export default P_bint;
+

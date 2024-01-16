@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import bgImage from "./assets/dropzoneBGImage.png";
 import captureVideoFrame from "capture-video-frame";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
+
+import { OpacityContext } from "./App"
+
 
 const baseStyle = {
   outline: "#f5f5f5 dashed 2px",
@@ -26,15 +29,18 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function DropzoneSimple({ acceptedFileTypeString, assetFileToChange, droppedFileType, productIndex, shakeDropzoneBGImage, handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+export default function DropzoneSimple({ acceptedFileTypeString, assetFileToChange, droppedFileType, handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
   /////////////////////////////  files accepted and message on mouse over
+
+  const { productIndex, shakeDropzoneBGImage } = useContext(OpacityContext);
+
 
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
   const ref = useRef(null);
 
   function getHintString(str) {
     let newString = str.split(",");
-    let stringArrayMap = newString.map(function(value) {
+    let stringArrayMap = newString.map(function (value) {
       let split = value.split("/");
       return split[1];
     });
@@ -219,4 +225,3 @@ function DropzoneSimple({ acceptedFileTypeString, assetFileToChange, droppedFile
     </div>
   );
 }
-export default DropzoneSimple;

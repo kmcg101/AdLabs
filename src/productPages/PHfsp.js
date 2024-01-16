@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/phfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const P_hfsp = ({
-  handleDropzoneChanges,
-  pfdFile,
-  productIndex,
-  handleWarningMessageText,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function P_hfsp({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { pfdFile } = useContext(OpacityContext);
   const pHalfScreen = {
     position: "absolute",
     left: "20px",
@@ -28,11 +23,9 @@ const P_hfsp = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="portrait"
           assetFileToChange={pfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -40,4 +33,4 @@ const P_hfsp = ({
   );
 };
 
-export default P_hfsp;
+

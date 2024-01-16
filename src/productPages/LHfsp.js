@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/lhfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex, lfdFile, shakeDropzoneBGImage, handleContinueButtonDisabled }) => {
+export default function L_hfsp({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { lfdFile } = useContext(OpacityContext);
   const lHalfScreen = {
     position: "absolute",
     left: "279px",
@@ -21,11 +23,9 @@ const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex,
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -33,4 +33,4 @@ const L_hfsp = ({ handleWarningMessageText, handleDropzoneChanges, productIndex,
   );
 };
 
-export default L_hfsp;
+

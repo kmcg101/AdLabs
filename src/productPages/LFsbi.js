@@ -1,19 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import DropzoneSVG from "../DropzoneSVG";
 import background from "../assets/lfsbi.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+import { OpacityContext } from "../App"
 
-const L_fsbi = ({
-  handleWarningMessageText,
-  handleDropzoneChanges,
-  svgFile,
-  productIndex,
-  lfdFile,
-  shakeDropzoneBGImage,
-  handleContinueButtonDisabled,
-}) => {
+export default function L_fsbi({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
+  const { lfdFile } = useContext(OpacityContext);
   const lFSBILogo = {
     width: "160px",
     height: "160px",
@@ -38,11 +32,9 @@ const L_fsbi = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
           assetFileToChange={lfdFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -50,11 +42,8 @@ const L_fsbi = ({
         <DropzoneSVG
           acceptedFileTypeString={DROPZONE_DATA.data.svgOnly}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="svg"
-          svgFile={svgFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -62,4 +51,3 @@ const L_fsbi = ({
   );
 };
 
-export default L_fsbi;

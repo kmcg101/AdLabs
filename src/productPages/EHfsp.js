@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
 import DropzoneSimple from "../DropzoneSimple";
 import background from "../assets/ehfsp.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
+
+import { OpacityContext } from "../App"
 
 const hfspMedia = {
   position: "absolute",
@@ -13,14 +15,14 @@ const hfspMedia = {
   zIndex: "100",
 };
 
-const E_hfsp = ({
-  elevatorFile,
-  productIndex,
+export default function E_hfsp({
+
   handleDropzoneChanges,
   handleWarningMessageText,
-  shakeDropzoneBGImage,
+
   handleContinueButtonDisabled,
-}) => {
+}) {
+  const { elevatorFile } = useContext(OpacityContext);
   return (
     <div className="elevatorProductContainer">
       <div className="backgroundImageContainer">
@@ -30,11 +32,9 @@ const E_hfsp = ({
         <DropzoneSimple
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
-          productIndex={productIndex}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"
           assetFileToChange={elevatorFile}
-          shakeDropzoneBGImage={shakeDropzoneBGImage}
           handleContinueButtonDisabled={handleContinueButtonDisabled}
         />
       </div>
@@ -42,4 +42,3 @@ const E_hfsp = ({
   );
 };
 
-export default E_hfsp;

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useContext } from "react";
 import { useDropzone } from "react-dropzone";
 import "./dropzone.css";
 import captureVideoFrame from "capture-video-frame";
 import bgImage from "./assets/dropzoneBGImage.png";
 import DATA_PRODUCTS from "./DATA_PRODUCTS";
+import { OpacityContext } from "./App"
 
 const baseStyle = {
   outline: "#f5f5f5 dashed 2px",
@@ -26,17 +27,16 @@ const dzBackgroundImage = {
   zIndex: "100",
 };
 
-function DropzoneFSA_LFD(props) {
+export default function DropzoneFSA_LFD(props) {
   /////////////////////////////  files accepted and message on mouse over
+  const { productIndex, shakeDropzoneBGImage, lfdFile } = useContext(OpacityContext);
   const handleContinueButtonDisabled = (bool) => {
     props.handleContinueButtonDisabled(bool);
   };
   const acceptedFileTypeString = props.acceptedFileTypeString;
   const acceptedFileTypeMessageString = getHintString(acceptedFileTypeString);
-  const lfdFile = props.lfdFile;
   const droppedFileType = props.droppedFileType;
-  const productIndex = props.productIndex;
-  const shakeDropzoneBGImage = props.shakeDropzoneBGImage;
+
   const handleWarningMessageText = props.handleWarningMessageText;
 
   const [mediaType, setMediaType] = useState("image");
@@ -61,7 +61,7 @@ function DropzoneFSA_LFD(props) {
 
   function getHintString(str) {
     let newString = str.split(",");
-    let stringArrayMap = newString.map(function(value) {
+    let stringArrayMap = newString.map(function (value) {
       let split = value.split("/");
       return split[1];
     });
@@ -274,4 +274,4 @@ function DropzoneFSA_LFD(props) {
     </div>
   );
 }
-export default DropzoneFSA_LFD;
+

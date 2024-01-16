@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "./pageAndProductStyle.css";
-import Dropzone from "../DropzoneFSA_LFD";
+import DropzoneFSA_LFD from "../DropzoneFSA_LFD";
 import background from "../assets/lfsa.png";
 import DROPZONE_DATA from "../DROPZONE_DATA";
-import { OpacityContext } from "../App"
+
 
 export default function L_fsa({ handleWarningMessageText, handleDropzoneChanges, handleContinueButtonDisabled }) {
   const isLFD = true;
@@ -20,7 +20,7 @@ export default function L_fsa({ handleWarningMessageText, handleDropzoneChanges,
     <div className="landscapeProductContainer">
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div style={lFullScreen} className="lFullScreen">
-        <Dropzone
+        <DropzoneFSA_LFD
           acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={handleWarningMessageText}

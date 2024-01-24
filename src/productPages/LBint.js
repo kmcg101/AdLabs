@@ -21,6 +21,17 @@ export default function L_bint({ handleWarningMessageText, handleDropzoneChanges
     position: "absolute",
     zIndex: "100",
   };
+  const lBintWidget = {
+    top: "0px",
+    left: "1058px",
+    width: "216px",
+    height: "640px",
+    position: "absolute",
+    zIndex: "100",
+  };
+  const bintWidgetImage = {
+    width: "100%",
+  }
 
   const lStandardAd = {
     top: "22px",
@@ -59,8 +70,8 @@ export default function L_bint({ handleWarningMessageText, handleDropzoneChanges
           droppedFileType="standardAd"
         />
       </div>
-      <div className={`lBintAd ${noBintImages === false ? "hide" : ""}`} style={lBint}>
-        <img src={lWidgetImage} alt="back"></img>
+      <div className={`lBintAd ${noBintImages === false ? "hide" : ""}`} style={lBintWidget}>
+        <img style={bintWidgetImage} src={lWidgetImage} alt="back"></img>
       </div>
       <div style={lBint} className={`lBintAd ${noBintImages === true ? "hide" : ""}`}>
         <DropzoneSimple

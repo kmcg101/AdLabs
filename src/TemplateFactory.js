@@ -1,35 +1,35 @@
 export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex, bintBGColor, isBlackText, noBintImages, defaultBintBGColor) {
-  //   const eORl = isElevator ? "e" : "l";
-  const imageTagE = noBintImages ? "" : `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
-  const imageTagL = noBintImages ? "" : `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
-  const imageTagP = noBintImages ? "" : `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
+    //   const eORl = isElevator ? "e" : "l";
+    const imageTagE = noBintImages ? "" : `<img id="media_image_e" class="media" src="/advertising/${filename}_eimage.${mediaExtensions.elevator}"></img>`;
+    const imageTagL = noBintImages ? "" : `<img id="media_image_l" class="media" src="/advertising/${filename}_limage.${mediaExtensions.landscape}"></img>`;
+    const imageTagP = noBintImages ? "" : `<img id="media_image_p" class="media" src="/advertising/${filename}_pimage.${mediaExtensions.portrait}"></img>`;
 
-  const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtensions.elevator}" type="video/mp4"></video>`;
-  const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtensions.landscape}" type="video/mp4"></video>`;
-  const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtensions.portrait}" type="video/mp4"></video>`;
+    const videoTagE = `<video id="media_video_e" class="media" muted src="/advertising/${filename}_evideo.${mediaExtensions.elevator}" type="video/mp4"></video>`;
+    const videoTagL = `<video id="media_video_l" class="media" muted src="/advertising/${filename}_lvideo.${mediaExtensions.landscape}" type="video/mp4"></video>`;
+    const videoTagP = `<video id="media_video_p" class="media" muted src="/advertising/${filename}_pvideo.${mediaExtensions.portrait}" type="video/mp4"></video>`;
 
-  const textColor = isBlackText ? "black" : "white";
-  const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
+    const textColor = isBlackText ? "black" : "white";
+    const logoFilter = isBlackText ? "brightness(0%)" : "brightness(0%) invert(100%)";
 
-  const bintBGColorString = defaultBintBGColor ? "unset" : `#${bintBGColor}`;
-  const opaqueBGString = defaultBintBGColor ? "" : `myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor});"`;
+    const bintBGColorString = defaultBintBGColor ? "unset" : `#${bintBGColor}`;
+    const opaqueBGString = defaultBintBGColor ? "" : `myBG.style.backgroundImage="linear-gradient(transparent, #${bintBGColor});"`;
 
-  // e bint with no image moves the bottom to 0, with image it must manipulate the infobar
-  const eBintPlayContentTop = noBintImages
-    ? ` this.scheduleItem.template.element.querySelector('.layer-2').style.bottom="0";`
-    : `let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
+    // e bint with no image moves the bottom to 0, with image it must manipulate the infobar
+    const eBintPlayContentTop = noBintImages
+        ? ` this.scheduleItem.template.element.querySelector('.layer-2').style.bottom="0";`
+        : `let infobar = this.scheduleItem.template.element.querySelector('#infobar_container');
         infobar.style.animationName = "infobarHide";
         infobar.style.animationDuration = ".4s";`;
 
-  // e bint with no image does not have to close infobar, with image does
-  const eBintCloseInfobar = noBintImages
-    ? ""
-    : ` // infobar.style.animationName = "infobarShow";
+    // e bint with no image does not have to close infobar, with image does
+    const eBintCloseInfobar = noBintImages
+        ? ""
+        : ` // infobar.style.animationName = "infobarShow";
         // infobar.style.animationDuration = ".3s";`;
 
-  const additionalCodeForBintNoImage = !noBintImages
-    ? ""
-    : `
+    const additionalCodeForBintNoImage = !noBintImages
+        ? ""
+        : `
                     const myWidgetB = this.scheduleItem.template.element.querySelector(".widget_background");
                     const myWidgetC = this.scheduleItem.template.element.querySelector(".widget_container");
                     try{
@@ -45,12 +45,12 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         // console.log("d114 error widgetC")
                     }`;
 
-  const playContentVideoE = `var myThis = this;
+    const playContentVideoE = `var myThis = this;
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
         if (vid) {
             vid.play();   
         }`;
-  const playContentVideoL = `
+    const playContentVideoL = `
             let vid_l = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_l');
             let vid_p = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_p');
             var myThis = this;
@@ -67,7 +67,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 }
             }
         `;
-  const E_BINT = `<!DOCTYPE html>
+    const E_BINT = `<!DOCTYPE html>
     <html>
     
     <head>
@@ -298,7 +298,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
     
     </html>`;
 
-  const E_FSA = `<!DOCTYPE html>
+    const E_FSA = `<!DOCTYPE html>
     <html>
     <head>
     <body class="adbodystyle">
@@ -363,7 +363,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
     </body>
     </html>`;
 
-  const E_HFSP = `<!DOCTYPE html>
+    const E_HFSP = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -421,7 +421,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 </body>
 </html>`;
 
-  const E_VSA = `<!DOCTYPE html>
+    const E_VSA = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -491,7 +491,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 </body>
 </html>`;
 
-  const E_FSBI = `<!DOCTYPE html>
+    const E_FSBI = `<!DOCTYPE html>
 <html>
 <head>
 <body class="adbodystyle">
@@ -633,7 +633,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 </body>
 </html>`;
 
-  const L_BINT = `<!DOCTYPE html>
+    const L_BINT = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -904,7 +904,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 
 </html>`;
 
-  const L_FSA = `<!DOCTYPE html>
+    const L_FSA = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -1003,7 +1003,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 </html>
 `;
 
-  const L_HFSP = `<!DOCTYPE html>
+    const L_HFSP = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -1103,7 +1103,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 
 </html>
 `;
-  const L_VSA = `
+    const L_VSA = `
     <!DOCTYPE html>
 <html>
 
@@ -1218,7 +1218,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 
 </html>
 `;
-  const L_FSBI = `<!DOCTYPE html>
+    const L_FSBI = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -1347,7 +1347,7 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 		</div>
 		
 		<div id="sponsor_logo_p" class="sponsor_logo_p">
-			<img style='position: relative; max-height:5vh; left:22%' src="/advertising/${filename}.svg">
+			<img style='position: relative; max-height:5vh;' src="/advertising/${filename}.svg">
 		</div>
 
     <script>
@@ -1410,12 +1410,12 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 </html>
 `;
 
-  const productArrayE = [E_BINT, E_FSA, E_HFSP, E_VSA, E_FSBI];
-  const productArrayL = [L_BINT, L_FSA, L_HFSP, L_VSA, L_FSBI];
+    const productArrayE = [E_BINT, E_FSA, E_HFSP, E_VSA, E_FSBI];
+    const productArrayL = [L_BINT, L_FSA, L_HFSP, L_VSA, L_FSBI];
 
-  const currentArray = isElevator ? productArrayE : productArrayL;
+    const currentArray = isElevator ? productArrayE : productArrayL;
 
-  let returnValue = currentArray[productIndex];
+    let returnValue = currentArray[productIndex];
 
-  return returnValue;
+    return returnValue;
 }

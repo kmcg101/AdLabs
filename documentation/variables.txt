@@ -1,0 +1,49 @@
+<PopUp (no children, self contained with handlers in app.js.  cound handler be put in component?)
+	popUpMessage
+	handleBackPopUpPress
+	handleContinuePopUpPress
+/>
+<ConfirmationScreen />
+
+<Filename
+	inputValues 3
+/>
+<WarningMessage
+	warningMessageText
+	warningMessageTextShowIcon
+/>
+<BlackWhiteToggleButton
+	handleDefaultBintBGColorChange
+	handleBINTColorChange
+	isBlackText 2
+	noBintImages
+	defaultBintBGColor 
+	bintBGColor 2
+	handleBlackWhiteToggleChange
+	handleNoImagesToggleChange
+/>	
+<Inputs 
+	productIndex 2
+	inputValues 3
+	handleAnyInputsChange
+	inputsCheckButtonPressed
+	inputsCheckButtonPressedOnce
+/>
+<Results
+	allDroppedFilenames
+	allDroppedNewFilenames
+	filename
+	blankFilename
+	requiresBlankFile
+	bintBGColor 2
+	productIndex 2
+	isBlackText 2
+	inputValues 3
+	screenshot
+/>
+<ContinueButton 
+	currentPageNumber
+	handleContinueButtonPressed
+	continueButtonDisabled
+</ContinueButton>
+

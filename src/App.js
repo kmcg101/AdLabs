@@ -173,8 +173,11 @@ export default function App() {
 
     const baseFilename = getFilename(inputValues, eORl, DATA_PRODUCTS.data[productIndex].label);
 
+    // all you are doing here is grabbing the extension.  
+    // namesplit[length]
+
     const nameSplit = typeof filenameString === "undefined" ? "" : filenameString.split(".");
-    const ext = nameSplit[1];
+    const ext = nameSplit[nameSplit.length - 1];
     const videoOrImageString = ext === "mp4" ? "video" : "image";
     let returnValue = "";
 

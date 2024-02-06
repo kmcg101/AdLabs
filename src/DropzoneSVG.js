@@ -149,7 +149,7 @@ function DropzoneSVG(props) {
       // this value is 0 when a file out of the accepted list is dropped
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
-      const ext = nameArray[1];
+      const ext = nameArray[nameArray.length - 1];
 
       if (ext === "mp4") {
         setMediaType("video");

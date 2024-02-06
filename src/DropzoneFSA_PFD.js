@@ -205,7 +205,7 @@ export default function DropzoneFSA_PFD(props) {
 
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
-      const ext = nameArray[1];
+      const ext = nameArray[nameArray.length - 1];
 
       if (ext !== "mp4") {
         console.log("not mp4 and acceptFiles = ", acceptedFiles);

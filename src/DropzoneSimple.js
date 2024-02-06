@@ -105,7 +105,7 @@ export default function DropzoneSimple({ acceptedFileTypeString, assetFileToChan
       );
       const newFile = acceptedFiles[0];
       const nameArray = newFile.name.split(".");
-      const ext = nameArray[1];
+      const ext = nameArray[nameArray.length - 1];
 
       if (ext !== "mp4") {
         const i = new Image();

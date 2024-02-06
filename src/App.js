@@ -169,6 +169,7 @@ export default function App() {
   };
 
   const getNewNameForDroppedFile = (filenameString, typeString) => {
+    console.log("d101 running")
     const eORl = inputValues.platform === "elevator" ? "e" : "l";
 
     const baseFilename = getFilename(inputValues, eORl, DATA_PRODUCTS.data[productIndex].label);
@@ -178,6 +179,7 @@ export default function App() {
 
     const nameSplit = typeof filenameString === "undefined" ? "" : filenameString.split(".");
     const ext = nameSplit[nameSplit.length - 1];
+    console.log("d101 nameSplit = ", nameSplit);
     const videoOrImageString = ext === "mp4" ? "video" : "image";
     let returnValue = "";
 
@@ -488,10 +490,11 @@ export default function App() {
     }
     // svg, standardAd, elevator, landscape, portrait
     if (name === "name") {
+      console.log("running split")
       const splitValue = value.split(".");
       setMediaExtensions((prevState) => ({
         ...prevState,
-        [droppedFileType]: splitValue[1],
+        [droppedFileType]: splitValue[splitValue.length - 1],
       }));
     }
   };

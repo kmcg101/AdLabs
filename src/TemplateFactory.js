@@ -183,65 +183,27 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         const myLayer2 = this.scheduleItem.template.element.querySelector(".layer-2"); 
                     
                         const myBG = this.scheduleItem.template.element.querySelector(".content_background");
-                        const myCopy = myLayer2.querySelector(".copy"); 
-                        const myHeadline = myLayer2.querySelector(".headline"); 
-                        const mySubHeadline = myLayer2.querySelector(".headlineSubText");
-                        const myFooter = myLayer2.querySelector(".footer"); 
-                        const myUnderline = myLayer2.querySelector(".underline");
-                        const myLogo = myLayer2.querySelector(".partnerImage");
-                        const myFooterImage = myLayer2.querySelector(".footerImage");
+                        const textDivs = myLayer2.querySelectorAll(".textDiv");
+                        const svgDivs = myLayer2.querySelectorAll(".svgDiv");
+                        const underlineDivs = myLayer2.querySelectorAll(".underlineDiv")
 
-                        try{
-                            myCopy.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .copy")
-                        }
-                        try{
-                            myHeadline.style.color="${textColor}"; 
-                        }
-                        catch (error){
-                            //console.log("d110 error .headline")
-                        }
-                        try{
-                            mySubHeadline.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .subHeadline")
-                        }
-                        try{
-                            myFooter.style.color="${textColor}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .subHeadline")
-                        }
-                        try{
-                            myUnderline.style.filter="${logoFilter}";
-                        }
-                        catch (error){
-                            //console.log("d110 error .underline")
-                        }
-                        
+                        textDivs.forEach(function (element) {
+                                element.style.color = "${textColor}";
+                        });
+                        underlineDivs.forEach(function (element) {
+                            element.style.filter = "${logoFilter}";
+                        });
+                        svgDivs.forEach(function (element) {
+                            element.style.filter = "${logoFilter}";
+                        });
                         try{
                             myBG.style.display="block";
                             ${opaqueBGString}
-
                         }
                         catch (error){
                             //console.log("d110 error bg2 gradient")
                         }
-                        try{
-                            myLogo.style.filter="${logoFilter}";
-                        }
-                        catch (error){
-                            //console.log("d110 error provider logo")
-                        } 
-                        try{
-                            myFooterImage.style.filter="${logoFilter}";
-                        }
-                        catch (error){
-                            //console.log("d110 error provider logo")
-                        }
+                       
 
                         ${additionalCodeForBintNoImage};
                     

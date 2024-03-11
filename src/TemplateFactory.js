@@ -541,7 +541,8 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
         </style>
 
         <div id="mediaframe_1" class='media_frame1'>
-            ${imageTagE}
+           
+             ${mediaExtensions.elevator === "mp4" ? videoTagE : imageTagE}
         </div>
 
         <div id="sponsor_logo_e" class="sponsor_logo_e">
@@ -1257,17 +1258,15 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
         }
 			
         </style>
-        <div id="mediaframe_1" class='media_frame1'>
-		
-           ${imageTagL}
-		   
+       
+        <div class='${filename} media_frame1'>
+            ${mediaExtensions.landscape === "mp4" ? videoTagL : imageTagL}
         </div>
 		
-		<div id="mediaframe_2" class='media_frame2'>
-		
-            ${imageTagP}
-		  
+		<div class='${filename} media_frame2'>
+            ${mediaExtensions.portrait === "mp4" ? videoTagP : imageTagP}
         </div>
+
 		
 		<div id="sponsor_logo_l" class="sponsor_logo_l">
 			<img style='max-height:9vh' src="/advertising/${filename}.svg">

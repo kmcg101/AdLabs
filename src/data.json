@@ -17,7 +17,6 @@
       "allowVideo": false,
       "isDisabled": true
     },
-
     {
       "keyindex": 1,
       "product": "e-fsa",
@@ -34,7 +33,6 @@
       "allowImage": true,
       "allowVideo": true
     },
-
     {
       "keyindex": 2,
       "product": "e-hfsp",
@@ -51,7 +49,6 @@
       "allowImage": true,
       "allowVideo": true
     },
-
     {
       "keyindex": 3,
       "product": "e-vsa",
@@ -68,7 +65,6 @@
       "allowImage": true,
       "allowVideo": true
     },
-
     {
       "keyindex": 4,
       "product": "e-fsbi",
@@ -83,7 +79,7 @@
       "isElevator": true,
       "requiresBlankFile": true,
       "allowImage": true,
-      "allowVideo": false
+      "allowVideo": true
     }
   ],
   "durationOptions": [
@@ -156,7 +152,6 @@
       "format": "E",
       "imageURL": "images/e_fsa.jpg"
     },
-
     {
       "keyindex": 2,
       "screen": "Elevator",
@@ -197,7 +192,6 @@
       "format": "L",
       "imageURL": "images/l_fsa.jpg"
     },
-
     {
       "keyindex": 7,
       "screen": "Lobby",

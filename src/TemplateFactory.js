@@ -45,15 +45,29 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         // console.log("d114 error widgetC")
                     }`;
 
-    const playContentVideoE = `var myThis = this;
+    const playContentVideoE = `
         let vid = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_e');
         if (vid) {
             vid.play();   
-        }`;
+        };`
+    const eFSBI700DeleteVideo = `
+        var thisClass = this
+        setTimeout(function () {
+            thisClass.scheduleItem.edu700Videos.forEach(vid => {
+                common.edu700Service.removeVideo(vid)
+                    .then(() => {
+                        
+                    })
+                    .catch(error => {
+                        if (error) {
+                            console.error(error);
+                        }
+                    });
+            });
+        }, 4600)`
     const playContentVideoL = `
             let vid_l = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_l');
             let vid_p = this.element.querySelector('[data-slot-id="' + this._slot + '"] #media_video_p');
-            var myThis = this;
             
             if (common.displayService && common.displayService.isPortrait()) {
             
@@ -65,8 +79,8 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                 if (vid_l) {
                     vid_l.play();   
                 }
-            }
-        `;
+            };
+        `
     const E_BINT = `<!DOCTYPE html>
     <html>
     
@@ -472,7 +486,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
             .${filename} .media_frame1 {
                 position: absolute;
                 font-size: 7vw;
-                color: red;
                 top: 0%;
                 left: 0%;
                 z-index: 14;
@@ -484,7 +497,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
             .${filename} .media {
                 position: absolute;
                 font-size: 7vw;
-                color: red;
                 top: 0%;
                 left: 0%;
                 z-index: 14;
@@ -541,7 +553,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
         </style>
 
         <div id="mediaframe_1" class='media_frame1'>
-           
              ${mediaExtensions.elevator === "mp4" ? videoTagE : imageTagE}
         </div>
 
@@ -571,11 +582,14 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
                         logo_container.innerHTML = logo_sponsor_e.innerHTML;
 
                         if (common.edu700Service.isEdu700()) {
+                            ${mediaExtensions.elevator === "mp4" ? eFSBI700DeleteVideo : ""}
                             //no trans
                         } else {
                             mediaframe_1.style.animationName = "fadeInScale";
                             mediaframe_1.style.animationDuration = ".25s";
+                            ${mediaExtensions.elevator === "mp4" ? playContentVideoE : ""}
                         }
+                        
 
                         setTimeout(function () {
 
@@ -1170,7 +1184,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				flex-direction: column;
 				align-items: center;
 				font-size: 7vw;
-				color: red;
                 top: 0%;
                 left: 20%;
                 z-index: 14;
@@ -1204,7 +1217,6 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				flex-direction: column;
 				align-items: center;
 				font-size: 7vw;
-				color: red;
                 top: 0%;
                 left: 0%;
                 z-index: 14;
@@ -1286,39 +1298,37 @@ export function getHTMLFile(filename, isElevator, mediaExtensions, productIndex,
 				
                 playContent() {
 
-                var slotduration = this.scheduleItem.slot.duration;
-                var transitionTime = (slotduration * 1000) * (1/3);
-				
-				
-				let logo = this.scheduleItem.template.element.querySelector('#primary_logo');
-				let logo_container = this.scheduleItem.template.element.querySelector('#primary_logo_container');
-                //let logo_container = this.scheduleItem.template.element.querySelector('#building_logo');
-				
-				let logo_sponsor_l = this.scheduleItem.template.element.querySelector('#sponsor_logo_l');
-				let logo_sponsor_p = this.scheduleItem.template.element.querySelector('#sponsor_logo_p');
-				
-				let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
-				let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
+                    var slotduration = this.scheduleItem.slot.duration;
+                    var transitionTime = (slotduration * 1000) * (1/3);
+                    
+                    
+                    let logo = this.scheduleItem.template.element.querySelector('#primary_logo');
+                    let logo_container = this.scheduleItem.template.element.querySelector('#primary_logo_container');
+                    //let logo_container = this.scheduleItem.template.element.querySelector('#building_logo');
+                    
+                    let logo_sponsor_l = this.scheduleItem.template.element.querySelector('#sponsor_logo_l');
+                    let logo_sponsor_p = this.scheduleItem.template.element.querySelector('#sponsor_logo_p');
+                    
+                    let mediaframe_1 = this.scheduleItem.template.element.querySelector('#mediaframe_1');
+                    let mediaframe_2 = this.scheduleItem.template.element.querySelector('#mediaframe_2');
 			
 				
-				if (common.displayService && common.displayService.isPortrait()){
-					logo_container.innerHTML = logo_sponsor_p.innerHTML;
-                    logo_container.style.justifyContent='center';
-				}else{
-					logo_container.innerHTML = logo_sponsor_l.innerHTML;
-				}
+                    if (common.displayService && common.displayService.isPortrait()){
+                        logo_container.innerHTML = logo_sponsor_p.innerHTML;
+                        logo_container.style.justifyContent='center';
+                    }else{
+                        logo_container.innerHTML = logo_sponsor_l.innerHTML;
+                    }
 				
-				mediaframe_1.style.animationName = "fadeInScale";
-                mediaframe_1.style.animationDuration = ".25s";
-							
-				mediaframe_2.style.animationName = "fadeInScale";
-                mediaframe_2.style.animationDuration = ".25s";
+                    mediaframe_1.style.animationName = "fadeInScale";
+                    mediaframe_1.style.animationDuration = ".25s";
+                                
+                    mediaframe_2.style.animationName = "fadeInScale";
+                    mediaframe_2.style.animationDuration = ".25s";
+                    ${mediaExtensions.landscape === "mp4" ? playContentVideoL : ""}
 				
 				
 				setTimeout(function () {
-				
-						
-							
                             mediaframe_1.style.animationName = "fadeOutScale";
                             mediaframe_1.style.animationDuration = ".33s";
 							

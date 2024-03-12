@@ -29,7 +29,7 @@ export default function E_fsbi({
       </div>
       <div className="eFullScreen">
         <DropzoneSimple
-          acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
+          acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="elevator"

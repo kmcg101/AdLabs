@@ -30,7 +30,7 @@ export default function L_fsbi({ handleWarningMessageText, handleDropzoneChanges
       <img alt="" className="backgroundImageContainer" src={background}></img>
       <div style={lFullScreen} className="lFullScreen">
         <DropzoneSimple
-          acceptedFileTypeString={DROPZONE_DATA.data.imageOnly}
+          acceptedFileTypeString={DROPZONE_DATA.data.imageAndVideo}
           handleDropzoneChanges={handleDropzoneChanges}
           handleWarningMessageText={handleWarningMessageText}
           droppedFileType="landscape"
